@@ -28,8 +28,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.14.x
-      - name: Run Install & build
+      - name: Run Install & build storybook
         run : |
           npm i 
           npm run build-storybook
           ls -al
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: ap-northeast-2
+      - name: upload build directory to s3
+        run: aws s3 cp storybook-static s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }} --recursive --acl public-read
