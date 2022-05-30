@@ -40,4 +40,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
           aws-region: ap-northeast-2
       - name: upload build directory to s3
-        run: aws s3 cp storybook-static s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }} --recursive
+        run: |
+          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --exclude "*.js" --delete
+          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --include "*.js" --content-type "application/javascript"
+          aws cloudfront create-invalidation \
+              --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }}\
+              --paths "/
