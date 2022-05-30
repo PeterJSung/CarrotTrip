@@ -1,0 +1,48 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Story Book Build
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'ci-test/*'
+    paths: 
+      - "frontend/**"
+      - ".github/**"
+      - "!backend/**"
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+ build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependency
+        run: git fetch --unshallow --tags
+      - name: Use Node.js 16.14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.14.x
+      - name: Run Install & build storybook
+        run : |
+          npm i 
+          npm run build-storybook
+          ls -al
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: ap-northeast-2
+      - name: upload build directory to s3
+        run: |
+          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --exclude "*.js" --delete
+          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --include "*.js" --content-type "application/javascript"
+          aws cloudfront create-invalidation \
+              --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }}\
+              --paths "/*"/
