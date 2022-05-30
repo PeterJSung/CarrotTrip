@@ -1,9 +1,10 @@
+import { Box } from "@mui/system";
 import { Route, Routes } from "react-router-dom";
 
 const App = (): JSX.Element => {
   return (
     <Routes>
-      <Route path='/' element={<div>This page is Lending Page with / path!</div>} />
+      <Route path='/' element={<Box>Test</Box>} />
     </Routes>
   );
 };

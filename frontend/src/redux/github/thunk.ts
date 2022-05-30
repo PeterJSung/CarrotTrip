@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
-import { RootState } from '@/redux/rootReducer';
+import { RootState } from 'redux/rootReducer';
 import { GithubAction } from './reducer';
-import { getUserProfile } from '../../api/github';
+import { getUserProfile } from 'api/github';
 import { getUserProfileAsync } from './actions';
 
 // ThunkAction 의 Generics 에는 다음 값들을 순서대로 넣어줍니다.
