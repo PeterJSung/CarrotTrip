@@ -6,9 +6,7 @@ import KakaoMapNowLocationBtn from './NowLocationBtn';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'Basic/KakaoMap/Kakaomapnowlocationbtn',
-    component: KakaoMapNowLocationBtn
+    component: KakaoMapNowLocationBtn,
 } as ComponentMeta<typeof KakaoMapNowLocationBtn>;
 
-export const kakaomapnowlocationbtn = () => (
-    <KakaoMapNowLocationBtn onClick={action('kakaomapnowlocationbtn click')} />
-);
+export const kakaomapnowlocationbtn = () => <KakaoMapNowLocationBtn onClick={action('kakaomapnowlocationbtn click')} />;

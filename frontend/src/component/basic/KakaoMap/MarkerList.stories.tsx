@@ -6,17 +6,14 @@ import { PropsWithChildren } from 'react';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'Basic/KakaoMap/Kakaomapmarkerlist',
-    component: KakaoMapMarkerList
+    component: KakaoMapMarkerList,
 } as ComponentMeta<typeof KakaoMapMarkerList>;
 const defaultLat = 37.5666805;
 const defaultLng = 126.9784147;
 
 const DefaultMap = (props: PropsWithChildren<any>): JSX.Element => {
     return (
-        <Map
-            center={{ lat: defaultLat, lng: defaultLng }}
-            style={{ width: '100%', height: '350px' }}
-        >
+        <Map center={{ lat: defaultLat, lng: defaultLng }} style={{ width: '100%', height: '350px' }}>
             {props.children}
         </Map>
     );
@@ -32,14 +29,14 @@ export const kakaomapmarkerlist = () => {
                         id: 1,
                         lat: defaultLat,
                         lng: defaultLng,
-                        src: 'test'
+                        src: 'test',
                     },
                     {
                         id: 2,
                         lat: defaultLat + 0.01,
                         lng: defaultLng + 0.01,
-                        src: 'test2'
-                    }
+                        src: 'test2',
+                    },
                 ]}
             />
         </DefaultMap>

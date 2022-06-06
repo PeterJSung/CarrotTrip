@@ -16,14 +16,8 @@ const KakaoMap = (props: KaKaoMapProps): JSX.Element => {
     const markers: MarkerInfo[] = [];
     return (
         <>
-            <Map
-                center={{ lat, lng }}
-                style={{ width: '100%', height: '100%' }}
-            >
-                <KakaoMapMarkerList
-                    onClick={props.onClickMarker}
-                    markers={markers}
-                />
+            <Map center={{ lat, lng }} style={{ width: '100%', height: '100%' }}>
+                <KakaoMapMarkerList onClick={props.onClickMarker} markers={markers} />
             </Map>
             <KakaoMapNowLocationBtn onClick={props.onClickPosReset} />
         </>

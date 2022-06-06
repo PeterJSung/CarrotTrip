@@ -32,9 +32,7 @@ export interface KakaoMapNowLocationBtnProps {
     onClick: () => void;
 }
 
-const KakaoMapNowLocationBtn = (
-    props: KakaoMapNowLocationBtnProps
-): JSX.Element => {
+const KakaoMapNowLocationBtn = (props: KakaoMapNowLocationBtnProps): JSX.Element => {
     return (
         <LocationButton onClick={props.onClick}>
             <LocationIcon />

@@ -12,14 +12,14 @@ import { getUserProfileAsync } from './actions';
   4. thunk 함수 내부에서 디스패치 할 수 있는 액션들의 타입
 */
 export const getUserProfileThunk = (username: string): ThunkAction<void, RootState, null, GithubAction> => {
-  return async dispatch => {
-    const { request, success, failure } = getUserProfileAsync;
-    dispatch(request());
-    try {
-      const userProfile = await getUserProfile(username);
-      dispatch(success(userProfile));
-    } catch (e: any) {
-      dispatch(failure(e));
-    }
-  };
-}
+    return async (dispatch) => {
+        const { request, success, failure } = getUserProfileAsync;
+        dispatch(request());
+        try {
+            const userProfile = await getUserProfile(username);
+            dispatch(success(userProfile));
+        } catch (e: any) {
+            dispatch(failure(e));
+        }
+    };
+};
