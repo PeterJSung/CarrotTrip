@@ -42,6 +42,11 @@
     "build-storybook": "build-storybook -s public",
     "pretty": "prettier --write \"./src/**/*.{ts,tsx,json,js,jsx}\""
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run pretty"
+    }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
