@@ -2,7 +2,7 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 export interface KakaoMapMarkerListProps {
     markers: MarkerInfo[]
-    onClick: (id: string) => void
+    onClick: (id: number) => void
 }
 
 export interface MarkerInfo {
@@ -13,14 +13,13 @@ export interface MarkerInfo {
 }
 
 const KakaoMapMarkerList = (props: KakaoMapMarkerListProps): JSX.Element => {
-
     return (
         <>
             {
                 props.markers.map((eachMarker) => {
-                    <MapMarker key={eachMarker.id} position={{ lat: eachMarker.lat, lng: eachMarker.lng }}>
-                        <div style={{ color: "#000" }}>Hello World!</div>
-                    </MapMarker>
+                    return (<MapMarker key={eachMarker.id} position={{ lat: eachMarker.lat, lng: eachMarker.lng }} onClick={console.log}>
+                        
+                    </MapMarker>)
                 })
             }
         </>
