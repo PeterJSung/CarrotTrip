@@ -1,0 +1,14 @@
+{
+    "license": "MIT",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {},
+    "husky": {
+        "hooks": {
+            "pre-commit": "echo 'test'"
+        }
+    },
+    "dependencies": {
+        "husky": "^4.3.0"
+    }
+}
