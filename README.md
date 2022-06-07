@@ -7,3 +7,6 @@
 ### react 등 사용.
 
 ## backend
+### 환경
+- Java8
+- Gradle 7.x
