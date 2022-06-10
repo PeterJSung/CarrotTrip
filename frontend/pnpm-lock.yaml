@@ -26,6 +26,7 @@ specifiers:
   '@types/styled-components': ^5.1.25
   axios: ^0.26.1
   babel-plugin-named-exports-order: ^0.0.2
+  husky: ^8.0.1
   immer: ^9.0.12
   prettier: ^2.6.2
   prop-types: ^15.8.1
@@ -88,6 +89,7 @@ devDependencies:
   '@types/react-dom': 18.0.5
   '@types/styled-components': 5.1.25
   babel-plugin-named-exports-order: 0.0.2
+  husky: 8.0.1
   prettier: 2.6.2
   prop-types: 15.8.1
   webpack: 5.72.1
@@ -9983,6 +9985,12 @@ packages:
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
