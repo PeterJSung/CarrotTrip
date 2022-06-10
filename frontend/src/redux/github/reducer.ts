@@ -1,9 +1,9 @@
 import { ActionType, createReducer } from 'typesafe-actions';
 import { AsyncState, getInitialAsyncState } from 'redux/common';
 import { GithubProfileActions } from './actions';
-import { GithubProfile } from 'api/github';
 import * as actions from './actions';
 import { produce } from 'immer';
+import { GithubProfile } from 'vo/github';
 
 export type GithubAction = ActionType<typeof actions>;
 

@@ -6,6 +6,7 @@ specifiers:
   '@mui/icons-material': ^5.6.2
   '@mui/material': ^5.6.4
   '@mui/system': ^5.8.2
+  '@reduxjs/toolkit': ^1.8.2
   '@storybook/addon-actions': ^6.5.6
   '@storybook/addon-essentials': ^6.5.6
   '@storybook/addon-interactions': ^6.5.6
@@ -35,7 +36,6 @@ specifiers:
   react-redux: ^8.0.0
   react-router-dom: ^6.3.0
   react-scripts: 5.0.1
-  redux: ^4.1.2
   redux-promise: ^0.6.0
   redux-thunk: ^2.4.1
   styled-components: ^5.3.5
@@ -51,17 +51,17 @@ dependencies:
   '@mui/icons-material': 5.8.2_whnat34vlcbwglqswv244dyi7u
   '@mui/material': 5.8.2_eyysfasz5ra4hl45gmtiyjby5m
   '@mui/system': 5.8.2_la5n77skbpvvwgr5mo4udsckfq
+  '@reduxjs/toolkit': 1.8.2_thunyjspsylz6iliyoygaytnnq
   axios: 0.26.1
   immer: 9.0.14
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-kakao-maps-sdk: 1.1.0_sfoxds7t5ydpegc3knd667wn6m
-  react-redux: 8.0.2_x7rvsxqezdkyrrrm3g6wkjag24
+  react-redux: 8.0.2_n4pdh6gaf4wau5hynihcjs3tu4
   react-router-dom: 6.3.0_sfoxds7t5ydpegc3knd667wn6m
   react-scripts: 5.0.1_f5tyg2hqzhr3cpuyblpeihdfja
-  redux: 4.2.0
   redux-promise: 0.6.0
-  redux-thunk: 2.4.1_redux@4.2.0
+  redux-thunk: 2.4.1
   styled-components: 5.3.5_sfoxds7t5ydpegc3knd667wn6m
   styled-reset: 4.4.1_styled-components@5.3.5
   typesafe-actions: 5.1.0
@@ -3433,6 +3433,25 @@ packages:
 
   /@popperjs/core/2.11.5:
     resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
+    dev: false
+
+  /@reduxjs/toolkit/1.8.2_thunyjspsylz6iliyoygaytnnq:
+    resolution: {integrity: sha512-CtPw5TkN1pHRigMFCOS/0qg3b/yfPV5qGCsltVnIz7bx4PKTJlGHYfIxm97qskLknMzuGfjExaYdXJ77QTL0vg==}
+    peerDependencies:
+      react: ^16.9.0 || ^17.0.0 || ^18
+      react-redux: ^7.2.1 || ^8.0.0-beta
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+    dependencies:
+      immer: 9.0.14
+      react: 17.0.2
+      react-redux: 8.0.2_n4pdh6gaf4wau5hynihcjs3tu4
+      redux: 4.2.0
+      redux-thunk: 2.4.1_redux@4.2.0
+      reselect: 4.1.6
     dev: false
 
   /@rollup/plugin-babel/5.3.1_htuoz4qbte7ljizhfebtr3zcpy:
@@ -13722,7 +13741,7 @@ packages:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}
     dev: true
 
-  /react-redux/8.0.2_x7rvsxqezdkyrrrm3g6wkjag24:
+  /react-redux/8.0.2_n4pdh6gaf4wau5hynihcjs3tu4:
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -13752,7 +13771,6 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-is: 18.1.0
-      redux: 4.2.0
       use-sync-external-store: 1.1.0_react@17.0.2
     dev: false
 
@@ -14015,6 +14033,12 @@ packages:
       is-promise: 2.2.2
     dev: false
 
+  /redux-thunk/2.4.1:
+    resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
+    peerDependencies:
+      redux: ^4
+    dev: false
+
   /redux-thunk/2.4.1_redux@4.2.0:
     resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
     peerDependencies:
@@ -14216,6 +14240,10 @@ packages:
 
   /requires-port/1.0.0:
     resolution: {integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=}
+
+  /reselect/4.1.6:
+    resolution: {integrity: sha512-ZovIuXqto7elwnxyXbBtCPo9YFEr3uJqj2rRbcOOog1bmu2Ag85M4hixSwFWyaBMKXNgvPaJ9OSu9SkBPIeJHQ==}
+    dev: false
 
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}

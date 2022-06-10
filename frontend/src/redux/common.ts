@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { AnyAction } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch, AnyAction } from '@reduxjs/toolkit';
 import { RootState } from './rootReducer';
 
 type AppDispatch = ThunkDispatch<RootState, any, AnyAction>;
@@ -29,5 +28,9 @@ export const useThunk = <T extends any[]>(
 
 export interface AsyncState<T> {
     asyncInfo: AsyncInfo;
+    data: T;
+}
+
+export interface SyncState<T> {
     data: T;
 }

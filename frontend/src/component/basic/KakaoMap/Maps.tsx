@@ -1,17 +1,17 @@
-import { Map, ZoomControl } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
+import { Gps } from 'vo/gps';
 import KakaoMapMarkerList, { MarkerInfo } from './MarkerList';
 import KakaoMapNowLocationBtn from './NowLocationBtn';
 
 export interface KaKaoMapProps {
-    lat?: number;
-    lng?: number;
+    gpsInfo: Gps | null;
     onClickPosReset: () => void;
     onClickMarker: (id: number) => void;
 }
 
 const KakaoMap = (props: KaKaoMapProps): JSX.Element => {
-    const lat = props.lat ?? 37.5666805;
-    const lng = props.lng ?? 126.9784147;
+    const lat = props.gpsInfo ? props.gpsInfo.lat : 37.5666805;
+    const lng = props.gpsInfo ? props.gpsInfo.lng : 126.9784147;
     const onClick = () => {};
     const markers: MarkerInfo[] = [];
     return (
