@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 const MyButton = (): JSX.Element => {
-    return (<Button>Test</Button>);
+    return <Button>Test</Button>;
 };
 
 export default MyButton;

@@ -1,9 +1,8 @@
-import { useDispatch } from "react-redux";
-import { AnyAction } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { RootState } from "./rootReducer";
+import { useDispatch } from 'react-redux';
+import { ThunkAction, ThunkDispatch, AnyAction } from '@reduxjs/toolkit';
+import { RootState } from './rootReducer';
 
-type AppDispatch = ThunkDispatch<RootState, any, AnyAction>; 
+type AppDispatch = ThunkDispatch<RootState, any, AnyAction>;
 
 export interface AsyncInfo {
     loading: boolean;
@@ -14,18 +13,24 @@ export interface AsyncInfo {
 export const getInitialAsyncState = (): AsyncInfo => ({
     loading: false,
     loaded: false,
-    error: null
-})
+    error: null,
+});
 
-export const useThunk = <T extends any[]>(thunkFunction: (...args: T) => ThunkAction<void, RootState, null, AnyAction>) => {
+export const useThunk = <T extends any[]>(
+    thunkFunction: (...args: T) => ThunkAction<void, RootState, null, AnyAction>,
+) => {
     const dispatch: AppDispatch = useDispatch();
-    
+
     return async (...args: T) => {
-        await dispatch(thunkFunction(...args))
+        await dispatch(thunkFunction(...args));
     };
-}
+};
 
 export interface AsyncState<T> {
-    asyncInfo: AsyncInfo,
-    data: T
+    asyncInfo: AsyncInfo;
+    data: T;
+}
+
+export interface SyncState<T> {
+    data: T;
 }
