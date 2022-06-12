@@ -5,7 +5,6 @@ specifiers:
   '@emotion/styled': ^11.8.1
   '@mui/icons-material': ^5.6.2
   '@mui/material': ^5.6.4
-  '@mui/system': ^5.8.2
   '@reduxjs/toolkit': ^1.8.2
   '@storybook/addon-actions': ^6.5.6
   '@storybook/addon-essentials': ^6.5.6
@@ -21,6 +20,7 @@ specifiers:
   '@testing-library/react': ^12.0.0
   '@testing-library/user-event': ^12.0.0
   '@types/jest': ^27.5.1
+  '@types/lodash': ^4.14.182
   '@types/node': ^16.11.36
   '@types/react': ^18.0.9
   '@types/react-dom': ^18.0.5
@@ -28,6 +28,7 @@ specifiers:
   axios: ^0.26.1
   babel-plugin-named-exports-order: ^0.0.2
   immer: ^9.0.12
+  lodash: ^4.17.21
   prettier: ^2.6.2
   prop-types: ^15.8.1
   react: ^17.0.2
@@ -50,10 +51,10 @@ dependencies:
   '@emotion/styled': 11.8.1_4vt67uom3g7lvs2fw6pg4v4tgy
   '@mui/icons-material': 5.8.2_whnat34vlcbwglqswv244dyi7u
   '@mui/material': 5.8.2_eyysfasz5ra4hl45gmtiyjby5m
-  '@mui/system': 5.8.2_la5n77skbpvvwgr5mo4udsckfq
   '@reduxjs/toolkit': 1.8.2_thunyjspsylz6iliyoygaytnnq
   axios: 0.26.1
   immer: 9.0.14
+  lodash: 4.17.21
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-kakao-maps-sdk: 1.1.0_sfoxds7t5ydpegc3knd667wn6m
@@ -83,6 +84,7 @@ devDependencies:
   '@testing-library/react': 12.1.5_sfoxds7t5ydpegc3knd667wn6m
   '@testing-library/user-event': 12.8.3
   '@types/jest': 27.5.1
+  '@types/lodash': 4.14.182
   '@types/node': 16.11.36
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.5

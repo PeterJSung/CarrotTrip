@@ -7,16 +7,16 @@ import { Gps } from 'vo/gps';
 
 export type GpsAction = ActionType<typeof actions>;
 
-export type GpsState = SyncState<Gps | null>;
+export type GpsState = SyncState<Gps | undefined>;
 
 const initialState: GpsState = {
-    data: null,
+    data: undefined,
 };
 
 const github = createReducer<GpsState, GpsAction>(initialState, {
-    [GpsActions.GPS_UPDATE]: (state) =>
+    [GpsActions.GPS_UPDATE]: (state, action) =>
         produce(state, (draft) => {
-            draft.data = state.data;
+            draft.data = action.payload;
         }),
 });
 
