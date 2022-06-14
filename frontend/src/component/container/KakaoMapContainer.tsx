@@ -1,16 +1,18 @@
 import { Box } from '@mui/material';
+import { useDebounce } from 'common/customhook';
 import KakaoMap from 'component/basic/KakaoMap/Maps';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
 import { gpsSelector, updateGpsThunk } from 'redux/gps';
+import { DEFAULT_GPS, Gps } from 'vo/gps';
 
-const getGeoLocationInfo = (cb: (lat: number, lng: number) => Promise<void>) => {
+const getGeoLocationInfo = (cb: (gpsData: Gps) => void) => {
     const options: PositionOptions = { timeout: 6000 };
     navigator.geolocation &&
         navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                await cb(position.coords.latitude, position.coords.longitude);
+            (position) => {
+                cb({ lat: position.coords.latitude, lng: position.coords.longitude });
             },
             console.error,
             options,
@@ -18,20 +20,25 @@ const getGeoLocationInfo = (cb: (lat: number, lng: number) => Promise<void>) => 
 };
 
 const KakaoMapContainer = (): JSX.Element => {
-    const curGps = useSelector(gpsSelector);
-    const updateGps = useThunk(updateGpsThunk);
+    const [gpsState, setGpsState] = useState<Gps>(DEFAULT_GPS);
+    const debounceGps = useDebounce<Gps>(gpsState, 500); // 디바운스가 꼭필요한지?? 사실잘모르겠음 gps 리셋버튼을 자주누르는것도 아니기때문
+    const updateGpsState = useThunk(updateGpsThunk);
     useEffect(() => {
-        getGeoLocationInfo(updateGps);
+        getGeoLocationInfo(setGpsState);
     }, []);
 
     const resetPosClick = useCallback(() => {
         // timeout at 60000 milliseconds (60 seconds)
-        getGeoLocationInfo(updateGps);
-    }, [updateGps]);
-    console.log(curGps);
+        getGeoLocationInfo(setGpsState);
+    }, [setGpsState]);
+
+    useEffect(() => {
+        updateGpsState(debounceGps.lat, debounceGps.lng);
+    }, [debounceGps]);
+
     return (
         <Box width="100%" height="100%" position="relative">
-            <KakaoMap gpsInfo={curGps} onClickMarker={() => {}} onClickPosReset={resetPosClick} />
+            <KakaoMap gpsInfo={gpsState} onClickMarker={() => {}} onClickPosReset={resetPosClick} />
         </Box>
     );
 };

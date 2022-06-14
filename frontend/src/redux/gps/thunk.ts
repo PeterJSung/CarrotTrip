@@ -13,7 +13,6 @@ import { Gps } from 'vo/gps';
 */
 export const updateGpsThunk = (lat: number, lng: number): ThunkAction<void, RootState, null, GpsAction> => {
     return async (dispatch) => {
-        console.log(`UPdate Gps Thunk Called ${lat}, ${lng}`);
         const nextGps: Gps = {
             lat,
             lng,
