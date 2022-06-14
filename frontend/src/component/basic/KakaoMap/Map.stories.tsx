@@ -1,9 +1,9 @@
-import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import KakaoMap, { KaKaoMapProps } from './Maps';
 import { Box, Typography } from '@mui/material';
+import { action } from '@storybook/addon-actions';
+import { ComponentMeta, Story } from '@storybook/react';
 import { PropsWithChildren } from 'react';
-import { getDummyState } from 'stories/common.stories';
+import { DEFAULT_GPS } from 'vo/gps';
+import KakaoMap from './Maps';
 
 const defaultSize: number = 350;
 
@@ -23,23 +23,9 @@ export default {
     title: 'Basic/KakaoMap/Kakaomap',
     component: KakaoMap,
     argTypes: {
-        storyBookLat: getGeoArgs('latitude', 37.5666805),
-        storyBookLng: getGeoArgs('longitude', 126.9784147),
+        storyBookLat: getGeoArgs('latitude', DEFAULT_GPS.lat),
+        storyBookLng: getGeoArgs('longitude', DEFAULT_GPS.lng),
     },
-    /*
-    argTypes: {
-        gpsInfo: {
-            name: 'Gps Info',
-            description: 'it is Gps Info Object Set',
-            //lng: getGeoArgs('longitude', 126.9784147),
-            //position: { control: 'select', options: ['north', 'south', 'east', 'west'] },
-        },
-    },
-    /*
-    argTypes: {
-        lat: getGeoArgs('latitude', 37.5666805),
-        lng: getGeoArgs('longitude', 126.9784147),
-    },*/
 } as ComponentMeta<typeof KakaoMap>;
 
 const DefaultContainer = (props: PropsWithChildren<any>): JSX.Element => {
