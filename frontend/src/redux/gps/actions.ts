@@ -5,4 +5,4 @@ export enum GpsActions {
     GPS_UPDATE = 'GPS/GPS_UPDATE',
 }
 
-export const getGpsAsync = createAction(GpsActions.GPS_UPDATE)<Gps>();
+export const gpsUpdate = createAction(GpsActions.GPS_UPDATE)<Gps>();

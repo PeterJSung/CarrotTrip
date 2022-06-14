@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
-import { getGpsAsync } from './actions';
+import { gpsUpdate } from './actions';
 import { GpsAction } from './reducer';
 import { Gps } from 'vo/gps';
 
@@ -11,12 +11,12 @@ import { Gps } from 'vo/gps';
   3. Extra Argument (https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument)
   4. thunk 함수 내부에서 디스패치 할 수 있는 액션들의 타입
 */
-export const getUserProfileThunk = (lat: number, lng: number): ThunkAction<void, RootState, null, GpsAction> => {
+export const updateGpsThunk = (lat: number, lng: number): ThunkAction<void, RootState, null, GpsAction> => {
     return async (dispatch) => {
         const nextGps: Gps = {
             lat,
             lng,
         };
-        dispatch(getGpsAsync(nextGps));
+        await dispatch(gpsUpdate(nextGps));
     };
 };
