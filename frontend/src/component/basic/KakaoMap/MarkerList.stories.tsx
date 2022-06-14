@@ -20,26 +20,24 @@ const DefaultMap = (props: PropsWithChildren<any>): JSX.Element => {
     );
 };
 
-export const kakaomapmarkerlist = () => {
-    return (
-        <DefaultMap>
-            <KakaoMapMarkerList
-                onClick={action('Kakao map marker Click')}
-                markers={[
-                    {
-                        id: 1,
-                        lat: defaultLat,
-                        lng: defaultLng,
-                        src: 'test',
-                    },
-                    {
-                        id: 2,
-                        lat: defaultLat + 0.01,
-                        lng: defaultLng + 0.01,
-                        src: 'test2',
-                    },
-                ]}
-            />
-        </DefaultMap>
-    );
-};
+export const kakaomapmarkerlist = () => (
+    <DefaultMap>
+        <KakaoMapMarkerList
+            onClick={action('Kakao map marker Click')}
+            markers={[
+                {
+                    id: 1,
+                    lat: defaultLat,
+                    lng: defaultLng,
+                    src: 'test',
+                },
+                {
+                    id: 2,
+                    lat: defaultLat + 0.01,
+                    lng: defaultLng + 0.01,
+                    src: 'test2',
+                },
+            ]}
+        />
+    </DefaultMap>
+);
