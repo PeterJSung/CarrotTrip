@@ -23,8 +23,8 @@ export default {
     title: 'Basic/KakaoMap/Kakaomap',
     component: KakaoMap,
     argTypes: {
-        storyBookLat: getGeoArgs('latitude', DEFAULT_GPS.lat),
-        storyBookLng: getGeoArgs('longitude', DEFAULT_GPS.lng),
+        storyBookLat: getGeoArgs('위도', DEFAULT_GPS.lat),
+        storyBookLng: getGeoArgs('경도', DEFAULT_GPS.lng),
     },
 } as ComponentMeta<typeof KakaoMap>;
 
