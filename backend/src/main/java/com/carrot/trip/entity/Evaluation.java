@@ -17,8 +17,8 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MEMBER_ID")
-    private String memberId;
+    @Column(name = "MEMBER_NICKNAME")
+    private String memberNickname;
 
     @Column(name = "TOURIST_ATTRACTION_ID")
     private String touristAttractionId;

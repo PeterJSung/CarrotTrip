@@ -20,6 +20,9 @@ public class TouristAttractionTaste {
     @Column(name = "TOURIST_ATTRACTION_ID")
     private String touristAttractionId;
 
+    @Column(name = "MEMBER_NICKNAME")
+    private String memberNickname;
+
     @Column(name = "TASTE_CODE")
     private String tasteCode;
 }

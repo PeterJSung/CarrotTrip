@@ -68,4 +68,19 @@ public class MemberController {
 
         return memberService.createMember(user);
     }
+
+    // 회원가입
+    @GetMapping("/join/isExistNickname")
+    public Response<Boolean> idCheck(@RequestBody Map<String, String> user) {
+
+        if(memberService.isExistUserByNickname(user.get("nickName"))){
+            return Response.ok(true);
+        }
+
+        else {
+            return Response.ok(false);
+        }
+    }
+
+
 }
