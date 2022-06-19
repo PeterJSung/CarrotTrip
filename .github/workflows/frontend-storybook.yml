@@ -40,7 +40,10 @@ jobs:
           pwd
           ls -al
           cd ./node_modules
+          cd ./.bin
           ls -al
+          cat ./react-scripts
+          cd ..
           cd ..
           pnpm run build-storybook --debug-webpack
           ls -al
