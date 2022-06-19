@@ -1,6 +1,9 @@
 package com.carrot.trip.controller;
 
+import com.carrot.trip.common.Response;
 import com.carrot.trip.dto.EvaluationDTO;
+import com.carrot.trip.dto.MemberFavoriteCategoriesDTO;
+import com.carrot.trip.dto.MemberFavoriteCategoryDTO;
 import com.carrot.trip.dto.TouristAttractionTasteDTO;
 import com.carrot.trip.service.EvaluationService;
 import lombok.AllArgsConstructor;
@@ -28,6 +31,18 @@ public class EvaluationController {
     @PostMapping("/evaluation/taste/touristAttraction")
     public TouristAttractionTasteDTO createTasteTouristAttraction(@RequestBody TouristAttractionTasteDTO tatDTO) {
         return evaluationService.createTouristAttractionTaste(tatDTO);
+    }
+
+    // 평가 : 사용자의 선호하는 관광지 카테고리(관광지 타입) 설정
+    @PostMapping("/evaluation/category")
+    public Response<Boolean> createFavoriteCategory(@RequestBody MemberFavoriteCategoriesDTO memberFavoriteCategoriesDTO) {
+        for (int i = 0; i < memberFavoriteCategoriesDTO.getCategoryCodes().size(); i++) {
+            evaluationService.createMemberFavoriteCategory(MemberFavoriteCategoryDTO.builder()
+                    .memberNickname(memberFavoriteCategoriesDTO.getMemberNickname())
+                    .categoryCode(memberFavoriteCategoriesDTO.getCategoryCodes().get(i))
+                    .build());
+        }
+        return  Response.ok(true);
     }
 
 }

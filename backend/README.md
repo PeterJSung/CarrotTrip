@@ -100,7 +100,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 {
     "memberNickname" : "태호",
     "touristAttractionId" : "1",
-    "tasteCode" : "A0001"
+    "tasteCode" : "모험적인"
 }
 ```
 #### Response
@@ -108,6 +108,31 @@ X-AUTH-TOKEN: {JWT TOKEN}
 {
     "memberNickname" : "태호",
     "touristAttractionId" : "1",
-    "tasteCode" : "A0001"
+    "tasteCode" : "모험적인"
+}
+```
+tasteCode: 조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적
+
+## 3. 사용자 선호 카테고리 페이지 (Onboarding_03)
+###  3.1 사용자의 선호 관광지 타입 등록 (관광지, 문화시설, 행사/공연/축제, 여행코스, 레포츠, 숙박, 쇼핑, 음식점)
+#### URI
+``POST`` ``/api/evaluation/category``
+#### Header
+Content-Type: application/json
+
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Request
+```json
+{
+  "memberNickname" : "정민",
+  "categoryCodes" : ["관광지", "문화시설", "행사/공연/축제", "여행코스"]
+}
+```
+#### Response
+```json
+{
+    "statusCode": "OK",
+    "message": "SUCCESS",
+    "data": true
 }
 ```
