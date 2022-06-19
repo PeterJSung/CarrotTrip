@@ -15,8 +15,8 @@ type InputPropOverrides = {
 const getGeoArgs = (name: string, defaultValue: number) => ({
     control: 'number',
     type: 'number',
-    name,
     defaultValue,
+    name,
 });
 
 export default {
