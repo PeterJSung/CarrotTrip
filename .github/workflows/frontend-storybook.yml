@@ -6,9 +6,9 @@ name: Story Book Build
 on:
   push:
     branches:
-      - 'main'
-      - 'ci-test/*'
-    paths: 
+      - "main"
+      - "ci-test/*"
+    paths:
       - "frontend/**"
       - ".github/**"
       - "!backend/**"
@@ -18,7 +18,7 @@ defaults:
     working-directory: frontend
 
 jobs:
- build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: 16.14.x
       - name: Run Install & build storybook
-        run : |
+        run: |
           npm i 
           npm run build-storybook
           ls -al

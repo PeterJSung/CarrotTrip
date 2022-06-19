@@ -1,6 +1,6 @@
 import { Box, ButtonBase, Typography } from '@mui/material';
 import styled from 'styled-components';
-import { SelectBoxVO } from './selectBoxvo';
+import { SelectBoxVO } from './signupconstants';
 
 export type SelectSquareBoxProps = {
     onClick: (id: string) => void;
@@ -32,11 +32,12 @@ const BlackPanel = styled(Box)`
     top: 0;
     bottom: 0;
     background-color: black;
-    opacity: 0.5;
     z-index: 1;
 `;
 
 const CHECKED_SIZE = 1;
+const CHECKED_DIM_OP = 0.77;
+const UNCHECKED_DIM_OP = 0.2;
 
 const CheckedWrapper = styled(Box)`
     position: absolute;
@@ -70,13 +71,15 @@ const SelectSquareBox = (props: SelectSquareBoxProps): JSX.Element => {
             onClick={() => props.onClick('1')}
         >
             {props.checked && (
-                <>
-                    <CheckedWrapper>
-                        <Vsvg />
-                    </CheckedWrapper>
-                    <BlackPanel />
-                </>
+                <CheckedWrapper>
+                    <Vsvg />
+                </CheckedWrapper>
             )}
+            <BlackPanel
+                style={{
+                    opacity: props.checked ? CHECKED_DIM_OP : UNCHECKED_DIM_OP,
+                }}
+            />
             <TextTypo>{props.title}</TextTypo>
         </ButtonWrapper>
     );
