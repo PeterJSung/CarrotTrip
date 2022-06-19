@@ -11,7 +11,7 @@ POST http://localhost:8080/api/join
 Content-Type: application/json
 
 {
-  "nickname" : "가입시켜주세요",
+  "nickname" : "가입시켜주세요22",
   "password" : "000000",
   "mbti" : "INTJ"
 }
@@ -28,12 +28,12 @@ Content-Type: application/json
 ### 1.4 토큰 테스트용 API (토큰이 정상인지 테스트하기 위한 API임)
 GET http://localhost:8080/api/user/test
 Content-Type: application/json
-X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDgxMDMxLCJleHAiOjE2NTU1Njc0MzF9.Ew8wA-gt7EBomyaNJLNvyy5EWyKx-V5500wH1EgmTT8
 
 ### 2.1 특정 관광지에 대한 별점, 코멘트 등록
 POST http://localhost:8080/api/evaluation/score
 Content-Type: application/json
-X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDgxMDMxLCJleHAiOjE2NTU1Njc0MzF9.Ew8wA-gt7EBomyaNJLNvyy5EWyKx-V5500wH1EgmTT8
 
 {
   "memberNickname" : "태호",
@@ -42,7 +42,7 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
   "comments" : "좋아요~"
 }
 
-### 2.2 특정 관광지에 대한 성향 등록
+### 2.2 특정 관광지에 대한 성향 등록 (조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적)
 POST http://localhost:8080/api/evaluation/taste/touristAttraction
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
@@ -50,5 +50,25 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 {
   "memberNickname" : "태호",
   "touristAttractionId" : "1",
-  "tasteCode" : "A0001"
+  "tasteCode" : "열정적인"
+}
+
+### 3.1 사용자의 선호 관광지 타입 등록 (관광지, 문화시설, 행사/공연/축제, 여행코스, 레포츠, 숙박, 쇼핑, 음식점)
+POST http://localhost:8080/api/evaluation/category
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+{
+  "memberNickname" : "정민",
+  "categoryCodes" : ["관광지", "문화시설", "행사/공연/축제", "여행코스"]
+}
+
+### 4.1 특정 사용자 대한 성향 등록 (조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적)
+POST http://localhost:8080/api/evaluation/taste/member
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+{
+  "memberNickname" : "정민",
+  "tasteCodes" : ["조용한", "활기있는", "모험적인"]
 }

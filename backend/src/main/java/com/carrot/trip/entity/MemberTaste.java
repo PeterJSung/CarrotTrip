@@ -17,8 +17,8 @@ public class MemberTaste {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MEMBER_ID")
-    private String memberId;
+    @Column(name = "MEMBER_NICKNAME")
+    private String memberNickname;
 
     @Column(name = "TASTE_CODE")
     private String tasteCode;
