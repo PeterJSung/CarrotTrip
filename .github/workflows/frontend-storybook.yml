@@ -37,6 +37,11 @@ jobs:
           pnpm --version
           node --version
           pnpm i 
+          pwd
+          ls -al
+          cd ./node_modules
+          ls -al
+          cd ..
           pnpm run build-storybook
           ls -al
       - name: Configure AWS credentials
