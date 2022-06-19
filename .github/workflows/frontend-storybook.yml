@@ -29,11 +29,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.14.x
-      - uses: pnpm/action-setup@v7.1.6
+      - uses: pnpm/action-setup@v2.2.2
         with:
           version: 7.1.6
       - name: Run Install & build storybook
         run: |
+          pnpm --version
+          node --version
           pnpm i 
           pnpm run build-storybook
           ls -al
