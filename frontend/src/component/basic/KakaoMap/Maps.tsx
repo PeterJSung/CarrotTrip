@@ -1,7 +1,5 @@
 import { DEFAULT_MAP_LEVEL } from 'common/constants';
-import { useDebounce } from 'common/customhook';
-import { useRef } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import { Gps } from 'vo/gps';
 import KakaoMapMarkerList, { MarkerInfo } from './MarkerList';

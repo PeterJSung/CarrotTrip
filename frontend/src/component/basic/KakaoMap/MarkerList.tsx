@@ -1,4 +1,4 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { MapMarker } from 'react-kakao-maps-sdk';
 
 export interface KakaoMapMarkerListProps {
     markers: MarkerInfo[];
