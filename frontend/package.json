@@ -99,13 +99,6 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "prettier": "^2.6.2",
     "prop-types": "^15.8.1",
-    "webpack": "^5.9.0"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "react"
-      ]
-    }
+    "webpack": "^5.72.1"
   }
 }

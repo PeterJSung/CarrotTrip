@@ -42,7 +42,7 @@ jobs:
           cd ./node_modules
           ls -al
           cd ..
-          pnpm run build-storybook
+          pnpm run build-storybook --debug-webpack
           ls -al
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
