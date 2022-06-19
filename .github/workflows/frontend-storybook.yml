@@ -6,9 +6,10 @@ name: Story Book Build
 on:
   push:
     branches:
-      - 'main'
-      - 'ci-test/*'
-    paths: 
+      - "main"
+      - "ci-test/*"
+      - signup-component4to6
+    paths:
       - "frontend/**"
       - ".github/**"
       - "!backend/**"
@@ -18,7 +19,7 @@ defaults:
     working-directory: frontend
 
 jobs:
- build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,10 +29,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.14.x
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.1.6
       - name: Run Install & build storybook
-        run : |
-          npm i 
-          npm run build-storybook
+        run: |
+          pnpm i 
+          pnpm run build-storybook
           ls -al
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,10 +43,3 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
           aws-region: ap-northeast-2
-      - name: upload build directory to s3
-        run: |
-          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --exclude "*.js" --delete
-          aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --include "*.js" --content-type "application/javascript"
-          aws cloudfront create-invalidation \
-              --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }}\
-              --paths "/*"/

@@ -1,6 +1,6 @@
 import { Box, ButtonBase, Typography } from '@mui/material';
 import styled from 'styled-components';
-import { SelectBoxVO } from './selectBoxvo';
+import { SelectBoxVO } from './signupconstants';
 
 export type SelectSquareBoxProps = {
     onClick: (id: string) => void;

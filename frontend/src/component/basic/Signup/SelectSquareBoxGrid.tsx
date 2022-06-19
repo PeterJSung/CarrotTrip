@@ -1,8 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { SelectBoxVO } from './selectBoxvo';
 import SelectSquareBox from './SelectSquareBox';
+import { SelectBoxVO } from './signupconstants';
 
 const SPACE: number = 0.5;
 

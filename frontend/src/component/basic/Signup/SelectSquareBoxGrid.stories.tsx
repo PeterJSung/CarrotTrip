@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, Story } from '@storybook/react';
 import { PropsWithChildren } from 'react';
-import { SelectBoxVO } from './selectBoxvo';
 import SelectSquareBoxGrid from './SelectSquareBoxGrid';
+import { SelectBoxVO } from './signupconstants';
 
 const generateDummyData = (count: number): SelectBoxVO[] => {
     const ret: SelectBoxVO[] = [];
