@@ -1,12 +1,10 @@
 import { Box, ButtonBase, Typography } from '@mui/material';
 import styled from 'styled-components';
+import { SelectBoxVO } from './selectBoxvo';
 
-export interface SelectBoxProps {
-    title: string;
-    src: string;
-    checked: boolean;
+export type SelectSquareBoxProps = {
     onClick: (id: string) => void;
-}
+} & SelectBoxVO;
 
 const ButtonWrapper = styled(ButtonBase)`
     position: relative !important;
@@ -63,7 +61,7 @@ const Vsvg = (): JSX.Element => (
     </svg>
 );
 
-const SelectBox = (props: SelectBoxProps): JSX.Element => {
+const SelectSquareBox = (props: SelectSquareBoxProps): JSX.Element => {
     return (
         <ButtonWrapper
             style={{
@@ -84,4 +82,4 @@ const SelectBox = (props: SelectBoxProps): JSX.Element => {
     );
 };
 
-export default SelectBox;
+export default SelectSquareBox;

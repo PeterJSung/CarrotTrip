@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import SelectBox from './SelectBox';
+import SelectSquareBox from './SelectSquareBox';
 
 export default {
-    title: 'Basic/Signup/SelectBox',
-    component: SelectBox,
+    title: 'Basic/Signup/SelectSquareBox',
+    component: SelectSquareBox,
     argTypes: {
         title: {
             name: '텍스트 타이틀',
@@ -22,12 +22,12 @@ export default {
             },
         },
     },
-} as ComponentMeta<typeof SelectBox>;
+} as ComponentMeta<typeof SelectSquareBox>;
 
-const selectBoxTemplate: ComponentStory<typeof SelectBox> = (props) => <SelectBox {...props} />;
+const selectSquareBoxTemplate: ComponentStory<typeof SelectSquareBox> = (props) => <SelectSquareBox {...props} />;
 
-export const selectBox = selectBoxTemplate.bind({});
-selectBox.args = {
+export const selectSquareBox = selectSquareBoxTemplate.bind({});
+selectSquareBox.args = {
     src: 'https://picsum.photos/800',
     title: '바다',
     onClick: action('Select Box Click'),
