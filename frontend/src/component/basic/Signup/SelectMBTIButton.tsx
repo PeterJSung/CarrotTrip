@@ -1,11 +1,11 @@
 import { ButtonBase, Typography } from '@mui/material';
 import styled from 'styled-components';
-import { MBTITYPE } from './signupconstants';
+import { MBTI_TYPE } from './signupconstants';
 
 export interface SelectMBTIButtonProps {
-    type: MBTITYPE;
+    type: MBTI_TYPE;
     checked: boolean;
-    onClick: (mbti: MBTITYPE) => void;
+    onClick: (mbti: MBTI_TYPE) => void;
 }
 
 const MBTIBase = styled(ButtonBase)`

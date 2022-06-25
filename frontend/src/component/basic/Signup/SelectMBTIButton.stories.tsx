@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import SelectMBTIButton from './SelectMBTIButton';
-import { MBTITYPE } from './signupconstants';
+import { MBTI_LIST } from './signupconstants';
 
-const mbtiKeys = Object.values(MBTITYPE);
-console.log(mbtiKeys);
 export default {
     title: 'Basic/Signup/SelectMBTIButton',
     component: SelectMBTIButton,
@@ -18,10 +16,10 @@ export default {
         type: {
             control: {
                 type: 'select',
-                options: mbtiKeys,
+                options: MBTI_LIST,
             },
             name: 'MBTI 선택',
-            defaultValue: mbtiKeys[0],
+            defaultValue: MBTI_LIST[0],
         },
     },
 } as ComponentMeta<typeof SelectMBTIButton>;
