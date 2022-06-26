@@ -1,5 +1,6 @@
 import { Box, Button, LinearProgress, styled } from '@mui/material';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
+import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
 import { debounce } from 'lodash';
 import { useRef, useState } from 'react';
 import Slider, { Settings } from 'react-slick';
@@ -25,6 +26,13 @@ const sliderSetting: Settings = {
     slidesToScroll: 1,
     speed: PAGEING_TIME,
 };
+
+const OnBoardingBox = styled(Box)`
+    & > div {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+`;
 
 const SignupPage = (): JSX.Element => {
     const [idx, setIdx] = useState<number>(0);
@@ -53,24 +61,9 @@ const SignupPage = (): JSX.Element => {
             <SignupPageHeader onClick={onNextClick} isSkip={true} />
             <Box flexGrow="1">
                 <Slider ref={sliderRef} {...sliderSetting}>
-                    <Box bgcolor={'red'}>
-                        <h3>1</h3>
-                    </Box>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
+                    <OnBoardingBox>
+                        <SignupOnBoard1Layout />
+                    </OnBoardingBox>
                 </Slider>
             </Box>
             <Box height="7.5%" padding="0rem 1.5rem 1.5rem">

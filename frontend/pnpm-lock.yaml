@@ -2549,7 +2549,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       '@types/react': 18.0.14
-      clsx: 1.1.0
+      clsx: 1.1.1
       focus-lock: 0.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -7307,7 +7307,6 @@ packages:
   /clsx/1.1.1:
     resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
     engines: {node: '>=6'}
-    dev: false
 
   /co/4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
