@@ -12,19 +12,24 @@ const ChipBase = styled(Chip)`
 `;
 
 const CheckedChip = styled(ChipBase)`
-    background-color: #fef32f !important;
     color: #191919 !important;
 `;
 
 const UnCheckedChip = styled(ChipBase)`
-    background-color: #f3f5f7 !important;
     color: #6d6d6d !important;
 `;
 
 const SelectChip = (props: SelectChipProps): JSX.Element => {
     const SelectRender = props.checked ? CheckedChip : UnCheckedChip;
     return (
-        <SelectRender variant="filled" size="small" label={props.title} clickable onClick={() => props.onClick(1)} />
+        <SelectRender
+            color={props.checked ? 'secondary' : 'info'}
+            variant="filled"
+            size="small"
+            label={props.title}
+            clickable
+            onClick={() => props.onClick(1)}
+        />
     );
 };
 

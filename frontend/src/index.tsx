@@ -1,17 +1,21 @@
-import ReactDOM from 'react-dom';
+import { ThemeProvider } from '@mui/material/styles';
 import App from 'component/App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import store from 'redux/rootStore';
-import { BrowserRouter } from 'react-router-dom';
 import GlobalStyles from 'globalstyle';
+import globalTheme from 'globaltheme';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import store from 'redux/rootStore';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <Provider store={store}>
-        <GlobalStyles />
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <ThemeProvider theme={globalTheme}>
+            <GlobalStyles />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root'),
 );
