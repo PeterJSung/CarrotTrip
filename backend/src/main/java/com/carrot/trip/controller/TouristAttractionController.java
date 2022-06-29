@@ -47,7 +47,6 @@ public class TouristAttractionController {
                 Arrays.asList(1,3,4,5,6,7,8,1,2,3,4,5,6),
                 Arrays.asList(8,5,5,3,2,1,1,7,6,5,5,3,2)));
 
-
         return "" + res;
     }
 
