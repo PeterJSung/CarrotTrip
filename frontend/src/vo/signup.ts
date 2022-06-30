@@ -1,3 +1,3 @@
-export interface IdRetrieve {
+export interface IdRetrieveReq {
     nickName: string;
 }

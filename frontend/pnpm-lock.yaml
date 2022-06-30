@@ -42,6 +42,7 @@ specifiers:
   redux-promise: ^0.6.0
   redux-thunk: ^2.4.1
   slick-carousel: ^1.8.1
+  storybook-addon-mock: ^2.4.1
   styled-components: ^5.3.5
   styled-reset: ^4.3.4
   typesafe-actions: ^5.1.0
@@ -98,6 +99,7 @@ devDependencies:
   babel-plugin-named-exports-order: 0.0.2
   prettier: 2.7.1
   prop-types: 15.8.1
+  storybook-addon-mock: 2.4.1_sfoxds7t5ydpegc3knd667wn6m
   webpack: 5.73.0
 
 packages:
@@ -11874,6 +11876,11 @@ packages:
     hasBin: true
     dev: true
 
+  /mock-xmlhttprequest/7.0.4:
+    resolution: {integrity: sha512-hA0fIHy/74p5DE0rdmrpU0sV1U+gnWTcgShWequGRLy0L1eT+zY0ozFukawpLaxMwIA+orRcqFRElYwT+5p81A==}
+    engines: {node: '>=10.0.0'}
+    dev: true
+
   /move-concurrently/1.0.1:
     resolution: {integrity: sha512-hdrFxZOycD/g6A6SoI2bB5NA/5NEqD0569+S47WZhPvm46sD50ZHdYaFmnua5lndde9rCHGjmfK7Z8BuCt/PcQ==}
     dependencies:
@@ -12484,7 +12491,11 @@ packages:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
 
   /path-to-regexp/0.1.7:
-    resolution: {integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=}
+    resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
+
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
+    dev: true
 
   /path-type/1.1.0:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
@@ -13778,6 +13789,17 @@ packages:
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
+  /react-json-editor-ajrm/2.5.13_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-uYRJFzY34w7coLxeWPFZGyQpWdBKK5e8R9jBZTJ5gAFp3WuGVG2DdGZ8oJKOVJy0hqkxS9DzJIzGmmxHHQ9afA==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
+    dependencies:
+      '@babel/runtime': 7.18.3
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: true
+
   /react-kakao-maps-sdk/1.1.1_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-x7UEBC0qedBZOBJvCXUoxT4p6iH4t4lj8MKgo2QwGPJUsTi4njbhWDY2HYlNty7a42q1kL8gzeYouJjbg1ylAA==}
     peerDependencies:
@@ -14982,6 +15004,22 @@ packages:
 
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
+    dev: true
+
+  /storybook-addon-mock/2.4.1_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-Ytj6cyXJf5qq479lKDrVl612/zf6+EFVWs/dm97etIMl4RMDPBJcZvjuoBccY52MM0PZkiAXZd9YxsYo05uZyA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@storybook/addons': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/api': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/components': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
+      mock-xmlhttprequest: 7.0.4
+      path-to-regexp: 6.2.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-json-editor-ajrm: 2.5.13_sfoxds7t5ydpegc3knd667wn6m
     dev: true
 
   /stream-browserify/2.0.2:
