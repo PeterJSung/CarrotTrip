@@ -1,8 +1,11 @@
 import { Box, TextField, Typography } from '@mui/material';
 import { getUserExist } from 'api/idretrieve';
 import { debounce } from 'lodash';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
+import { useThunk } from 'redux/common';
+import { updateInfo1 } from 'redux/signupInfo';
 import styled from 'styled-components';
+import { SignupInfo1Data } from 'vo/signup';
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -34,31 +37,78 @@ const NickNameInfoTypo = styled(Typography)`
 const nickNameLabel = '닉네임';
 const passwordLabel = '비밀번호';
 const passwordConfirmLabel = '비밀번호 확인';
-
+type InputLayoutType = SignupInfo1Data & { exist: boolean };
 const SignupOnBoard1Layout = (): JSX.Element => {
-    const [nStr, setNStr] = useState<string>('');
-    const [exist, setExist] = useState<boolean>(false);
+    const [data, setData] = useState<InputLayoutType>({
+        nickName: '',
+        pw: '',
+        pwConfirm: '',
+        exist: false,
+    });
+
+    const updateSignupInfo = useThunk(updateInfo1);
+
+    const updateDataCB = (nextData: InputLayoutType) => {
+        if (nextData.nickName !== '' && nextData.pw !== '' && nextData.pwConfirm !== '') {
+            updateSignupInfo({
+                disp: {
+                    buttonText: '다음',
+                    isEnabled: true,
+                },
+                userInfo: nextData,
+            });
+        }
+        setData(nextData);
+    };
 
     const nickNameChange = useCallback(
         debounce(async (e: any) => {
             const currentUserName: string = e.target.value;
             const isExist = await getUserExist(currentUserName);
-            setNStr(currentUserName);
-            setExist(isExist);
+            updateDataCB({ ...data, nickName: currentUserName, exist: isExist });
         }, 250),
         [],
     );
 
-    console.log(`Render ${nStr} ${exist}`);
+    const passwordChange = useCallback(
+        debounce(async (e: any) => {
+            updateDataCB({ ...data, pw: e.target.value });
+        }, 250),
+        [],
+    );
+
+    const passwordConfirmChange = useCallback(
+        debounce(async (e: any) => {
+            updateDataCB({ ...data, pwConfirm: e.target.value });
+        }, 250),
+        [],
+    );
+
+    useEffect(() => {
+        updateSignupInfo({
+            disp: {
+                buttonText: '다음',
+                isEnabled: false,
+            },
+            userInfo: data,
+        });
+    }, []);
+
+    console.log(`Render Call`);
     return (
         <Wrapper>
             <NickNameTypo>닉네임을 알려주세요</NickNameTypo>
             <NickNameInfoTypo>닉네임은 마이페이지에서 변경 가능해요.</NickNameInfoTypo>
             <TextField label={nickNameLabel} variant="outlined" onChange={nickNameChange} />
-            <TextField label={passwordLabel} variant="outlined" type="password" />
-            <TextField label={passwordConfirmLabel} variant="outlined" type="password" />
+            <TextField label={passwordLabel} variant="outlined" type="password" onChange={passwordChange} />
+            <TextField
+                label={passwordConfirmLabel}
+                variant="outlined"
+                type="password"
+                onChange={passwordConfirmChange}
+            />
         </Wrapper>
     );
 };
 
-export default SignupOnBoard1Layout;
+export default memo(SignupOnBoard1Layout);

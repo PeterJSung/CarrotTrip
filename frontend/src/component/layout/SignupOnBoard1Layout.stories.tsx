@@ -1,4 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
+import { ID_EXIST_URL } from 'api/idretrieve';
 import { getDummyState } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupOnBoard1Layout from './SignupOnBoard1Layout';
@@ -14,7 +15,7 @@ export const signupOnBoard1Layout = () => <SignupOnBoard1Layout />;
 signupOnBoard1Layout.parameters = {
     mockData: [
         {
-            url: URL,
+            url: ID_EXIST_URL,
             method: 'GET',
             status: 200,
             response: {

@@ -3,7 +3,9 @@ import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
 import { debounce } from 'lodash';
 import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Slider, { Settings } from 'react-slick';
+import { singupInfo1, singupInfo2, singupInfo3, singupInfo4, singupInfo5, singupInfo6 } from 'redux/signupInfo';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const SEQ_COUNT: number = 6;
@@ -37,6 +39,14 @@ const OnBoardingBox = styled(Box)`
 const SignupPage = (): JSX.Element => {
     const [idx, setIdx] = useState<number>(0);
     const sliderRef = useRef<Slider>(null);
+
+    const infoArr = [];
+    infoArr.push(useSelector(singupInfo1));
+    infoArr.push(useSelector(singupInfo2));
+    infoArr.push(useSelector(singupInfo3));
+    infoArr.push(useSelector(singupInfo4));
+    infoArr.push(useSelector(singupInfo5));
+    infoArr.push(useSelector(singupInfo6));
 
     const onNextClick = debounce((next: boolean) => {
         if (next && idx + 1 !== SEQ_COUNT) {
