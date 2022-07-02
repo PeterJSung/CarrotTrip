@@ -1,4 +1,4 @@
-import { TFunction, useTranslation } from 'react-i18next';
+import { TFunction } from 'react-i18next';
 
 export type SelectBoxVO = {
     src: string;
@@ -7,6 +7,7 @@ export type SelectBoxVO = {
 export interface SelectChipVO {
     title: string;
     checked: boolean;
+    code: number;
 }
 
 export enum M_ONE_TYPE {
@@ -58,21 +59,19 @@ const i18n_REF = [
     '자연친화적인',
 ];
 
-interface ImpresssionInfo {
-    code: number;
-    text: string;
-}
-
-export const getImpressionInfo = (t: TFunction): ImpresssionInfo[] => {
+export const getImpressionInfo = (t: TFunction): SelectChipVO[] => {
     // TODO : it need to import i18n component
     console.log(t('test'));
-    const ret: ImpresssionInfo[] = [];
+    console.log(t('test_with_variable', { name: '성정민' }));
+    const ret: SelectChipVO[] = [];
     // it`ll be start index 1
     i18n_REF.forEach((eachData, index) => {
         ret.push({
+            checked: false,
             code: index + 1,
-            text: eachData, //it`ll be converted from i18n
+            title: eachData, //it`ll be converted from i18n
         });
     });
+    console.log(ret);
     return ret;
 };

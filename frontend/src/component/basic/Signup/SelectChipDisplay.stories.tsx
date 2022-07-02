@@ -21,6 +21,7 @@ const generateDummyData = (count: number, checked: boolean): SelectChipVO[] => {
     for (let i = 0; i < count; i++) {
         ret.push({
             checked,
+            code: i + 1,
             title: testStringArr[i],
         });
     }

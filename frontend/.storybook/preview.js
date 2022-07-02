@@ -2,6 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import Globalstyle from '../src/globalstyle';
 import globaltheme from '../src/globaltheme';
+import '../src/i18n';
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
