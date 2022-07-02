@@ -21,7 +21,7 @@ export interface SignupMBTIContainerProps {
     onMBTIChange: (result: string) => void;
 }
 
-const SignupMBTIContainer = (props: SignupMBTIContainerProps): JSX.Element => {
+const SignupMBTIContainer = ({ onMBTIChange }: SignupMBTIContainerProps): JSX.Element => {
     const [first, setFirst] = useState<M_ONE_TYPE>();
     const [second, setSecond] = useState<M_TWO_TYPE>();
     const [third, setThird] = useState<M_THR_TYPE>();
@@ -41,11 +41,11 @@ const SignupMBTIContainer = (props: SignupMBTIContainerProps): JSX.Element => {
 
     useEffect(() => {
         const resultMBTI: string = (first ?? '') + (second ?? '') + (third ?? '') + (four ?? '');
-        props.onMBTIChange(resultMBTI);
-    }, [first, second, third, four]);
+        onMBTIChange(resultMBTI);
+    }, [first, second, third, four, onMBTIChange]);
 
     return (
-        <Grid container justifyContent="space-around">
+        <Grid container justifyContent="space-between">
             <SelectMBTIButtonGrid type={M_ONE_VALUES} selected={first} onClick={onClick} />
             <SelectMBTIButtonGrid type={M_TWO_VALUES} selected={second} onClick={onClick} />
             <SelectMBTIButtonGrid type={M_THR_VALUES} selected={third} onClick={onClick} />

@@ -8,7 +8,7 @@ export type SignupOnboardAction = ActionType<typeof actions>;
 
 const getDefaultData = (): SignUpDisplayData => ({
     buttonText: '',
-    isDisable: true,
+    isDisable: false,
 });
 
 export type SignupOnboardState = SyncState<{

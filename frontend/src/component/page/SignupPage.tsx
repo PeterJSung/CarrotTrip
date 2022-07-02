@@ -1,6 +1,7 @@
 import { Box, Button, LinearProgress, styled } from '@mui/material';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
+import SignupOnBoard6Layout from 'component/layout/SignupOnBoard6Layout';
 import { debounce } from 'lodash';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -31,6 +32,8 @@ const sliderSetting: Settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: PAGEING_TIME,
+    swipe: false,
+    draggable: false,
 };
 
 const OnBoardingBox = styled(Box)`
@@ -63,9 +66,10 @@ const SignupPage = (): JSX.Element => {
     infoArr.push(useSelector(singupInfo6));
 
     const disp = infoArr[idx].disp;
-    const isDisable = !isPossibleSkip(idx) && disp.isDisable; // disable 이며 skip 이 불가능할때
+    const forceSkip = isPossibleSkip(idx);
+    const isDisable = !forceSkip && disp.isDisable; // disable 이며 skip 이 불가능할때
     const btnText = infoArr[idx].disp.buttonText;
-    console.log(infoArr[idx].disp);
+
     const onNextClick = debounce((next: boolean) => {
         if (next && idx + 1 !== SEQ_COUNT) {
             setIdx(idx + 1);
@@ -91,6 +95,21 @@ const SignupPage = (): JSX.Element => {
                 <Slider ref={sliderRef} {...sliderSetting}>
                     <OnBoardingBox>
                         <SignupOnBoard1Layout />
+                    </OnBoardingBox>
+                    <OnBoardingBox>
+                        <div>2</div>
+                    </OnBoardingBox>
+                    <OnBoardingBox>
+                        <div>3</div>
+                    </OnBoardingBox>
+                    <OnBoardingBox>
+                        <div>4</div>
+                    </OnBoardingBox>
+                    <OnBoardingBox>
+                        <div>5</div>
+                    </OnBoardingBox>
+                    <OnBoardingBox>
+                        <SignupOnBoard6Layout />
                     </OnBoardingBox>
                 </Slider>
             </Box>
