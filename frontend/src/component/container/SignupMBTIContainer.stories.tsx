@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
 import { getDummyState } from 'stories/common.stories';
 import SignupMBTIContainer from './SignupMBTIContainer';
@@ -9,4 +10,4 @@ export default {
     decorators: [(story) => getDummyState(story())],
 } as ComponentMeta<typeof SignupMBTIContainer>;
 
-export const signupMBTIContainer = () => <SignupMBTIContainer />;
+export const signupMBTIContainer = () => <SignupMBTIContainer onMBTIChange={action('MBTI Change')} />;

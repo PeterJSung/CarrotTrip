@@ -40,7 +40,9 @@ export const updateInfo5 = (data: CombinedSignupData<any>): ThunkAction<void, Ro
     };
 };
 
-export const updateInfo6 = (data: CombinedSignupData<any>): ThunkAction<void, RootState, null, SignupOnboardAction> => {
+export const updateInfo6 = (
+    data: CombinedSignupData<string>,
+): ThunkAction<void, RootState, null, SignupOnboardAction> => {
     return async (dispatch) => {
         await dispatch(signupInfo6UpdateAction(data));
     };

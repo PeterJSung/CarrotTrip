@@ -11,17 +11,17 @@ import {
     M_TWO_TYPE,
     M_TWO_VALUES,
 } from 'component/basic/Signup/signupconstants';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const includeTarget = <T extends MBTI_TYPE>(origin: T[], cmp: MBTI_TYPE): boolean => {
     return origin.includes(cmp as unknown as T);
 };
 
 export interface SignupMBTIContainerProps {
-    onClick: () => void;
+    onMBTIChange: (result: string) => void;
 }
 
-const SignupMBTIContainer = (): JSX.Element => {
+const SignupMBTIContainer = (props: SignupMBTIContainerProps): JSX.Element => {
     const [first, setFirst] = useState<M_ONE_TYPE>();
     const [second, setSecond] = useState<M_TWO_TYPE>();
     const [third, setThird] = useState<M_THR_TYPE>();
@@ -38,6 +38,11 @@ const SignupMBTIContainer = (): JSX.Element => {
             setFour(mbtiType as M_FOR_TYPE);
         }
     }, []);
+
+    useEffect(() => {
+        const resultMBTI: string = (first ?? '') + (second ?? '') + (third ?? '') + (four ?? '');
+        props.onMBTIChange(resultMBTI);
+    }, [first, second, third, four]);
 
     return (
         <Grid container justifyContent="space-around">

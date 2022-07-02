@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from '@mui/material';
 import { getUserExist } from 'api/idretrieve';
 import { debounce } from 'lodash';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useThunk } from 'redux/common';
 import { updateInfo1 } from 'redux/signupInfo';
 import styled from 'styled-components';
@@ -53,7 +53,7 @@ const SignupOnBoard1Layout = (): JSX.Element => {
             updateSignupInfo({
                 disp: {
                     buttonText: '다음',
-                    isEnabled: true,
+                    isDisable: nextData.exist,
                 },
                 userInfo: nextData,
             });
@@ -61,40 +61,30 @@ const SignupOnBoard1Layout = (): JSX.Element => {
         setData(nextData);
     };
 
-    const nickNameChange = useCallback(
-        debounce(async (e: any) => {
-            const currentUserName: string = e.target.value;
-            const isExist = await getUserExist(currentUserName);
-            updateDataCB({ ...data, nickName: currentUserName, exist: isExist });
-        }, 250),
-        [],
-    );
+    const nickNameChange = debounce(async (e: any) => {
+        const currentUserName: string = e.target.value;
+        const isExist = await getUserExist(currentUserName);
+        updateDataCB({ ...data, nickName: currentUserName, exist: isExist });
+    }, 250);
 
-    const passwordChange = useCallback(
-        debounce(async (e: any) => {
-            updateDataCB({ ...data, pw: e.target.value });
-        }, 250),
-        [],
-    );
+    const passwordChange = debounce(async (e: any) => {
+        updateDataCB({ ...data, pw: e.target.value });
+    }, 250);
 
-    const passwordConfirmChange = useCallback(
-        debounce(async (e: any) => {
-            updateDataCB({ ...data, pwConfirm: e.target.value });
-        }, 250),
-        [],
-    );
+    const passwordConfirmChange = debounce(async (e: any) => {
+        updateDataCB({ ...data, pwConfirm: e.target.value });
+    }, 250);
 
     useEffect(() => {
         updateSignupInfo({
             disp: {
                 buttonText: '다음',
-                isEnabled: false,
+                isDisable: true,
             },
             userInfo: data,
         });
     }, []);
 
-    console.log(`Render Call`);
     return (
         <Wrapper>
             <NickNameTypo>닉네임을 알려주세요</NickNameTypo>

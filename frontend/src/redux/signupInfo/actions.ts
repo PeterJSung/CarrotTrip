@@ -17,4 +17,4 @@ export const signupInfo2UpdateAction = createAction(SignUpInfoActions.UPDATE_INF
 export const signupInfo3UpdateAction = createAction(SignUpInfoActions.UPDATE_INFO3)<CombinedSignupData<any>>();
 export const signupInfo4UpdateAction = createAction(SignUpInfoActions.UPDATE_INFO4)<CombinedSignupData<any>>();
 export const signupInfo5UpdateAction = createAction(SignUpInfoActions.UPDATE_INFO5)<CombinedSignupData<any>>();
-export const signupInfo6UpdateAction = createAction(SignUpInfoActions.UPDATE_INFO6)<CombinedSignupData<any>>();
+export const signupInfo6UpdateAction = createAction(SignUpInfoActions.UPDATE_INFO6)<CombinedSignupData<string>>();

@@ -4,7 +4,7 @@ export interface IdRetrieveReq {
 
 export interface SignUpDisplayData {
     buttonText: string;
-    isEnabled: boolean;
+    isDisable: boolean;
 }
 
 export interface SignupInfo1Data {

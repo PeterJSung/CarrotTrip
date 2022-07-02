@@ -8,7 +8,7 @@ export type SignupOnboardAction = ActionType<typeof actions>;
 
 const getDefaultData = (): SignUpDisplayData => ({
     buttonText: '',
-    isEnabled: false,
+    isDisable: true,
 });
 
 export type SignupOnboardState = SyncState<{
@@ -17,7 +17,7 @@ export type SignupOnboardState = SyncState<{
     signupInfo3: CombinedSignupData<any>;
     signupInfo4: CombinedSignupData<any>;
     signupInfo5: CombinedSignupData<any>;
-    signupInfo6: CombinedSignupData<any>;
+    signupInfo6: CombinedSignupData<string | undefined>;
 }>;
 
 const initialState: SignupOnboardState = {
