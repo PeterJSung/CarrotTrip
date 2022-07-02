@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -33,10 +34,14 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class OpenAPIService {
-    public LocationOpenApiResponseDTO openAPICall() throws URISyntaxException, JsonProcessingException {
+
+    @Value("${openapi.secretkey}")
+    private  String secretKey;
+
+    public LocationOpenApiResponseDTO openAPICall(Double x, Double y) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
-        String secretKey = "";
-        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=" + secretKey + "&mapX=127.1625892&mapY=37.4587305&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";
+
+        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
         URI uri = new URI(url);
 
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);

@@ -73,5 +73,14 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
   "tasteCodes" : ["조용한", "활기있는", "모험적인"]
 }
 
+### 5.1 위치기반 관광지 리스트 조회
+GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+
 ### 공공 데이터 API 테스트 (시크릿키는 담당개발자에게 문의하시오)
 GET http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey={SecretKey}&mapX=127.1625892&mapY=37.4587305&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=당근여행&_type=json&numOfRows=2&pageNo=1
+
+### 피어슨 상관계수 테스트
+GET http://localhost:8080/api/touristAttraction/pearsons/test
