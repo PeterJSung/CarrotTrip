@@ -9,6 +9,7 @@ const generateDummyData = (count: number): SelectBoxVO[] => {
     const ret: SelectBoxVO[] = [];
     for (let i = 0; i < count; i++) {
         ret.push({
+            code: i,
             checked: false,
             src: 'https://picsum.photos/800',
             title: `제목${i}`,

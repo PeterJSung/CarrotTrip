@@ -16,14 +16,26 @@ export interface SignupPageHeaderProps {
     isSkip: boolean;
 }
 
+const SkipTypoWrapper = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1rem;
+`;
+
 const SignupPageHeader = (props: SignupPageHeaderProps): JSX.Element => {
-    console.log('header rerender');
     return (
         <Box display="flex" flexDirection="row" justifyContent="space-between">
             <BackButton onClick={() => props.onClick(false)}>
                 <BackIcon />
             </BackButton>
-            {props.isSkip ? <Typography>넘어가기</Typography> : <></>}
+            {props.isSkip ? (
+                <SkipTypoWrapper onClick={() => props.onClick(true)}>
+                    <Typography>넘어가기</Typography>
+                </SkipTypoWrapper>
+            ) : (
+                <></>
+            )}
         </Box>
     );
 };

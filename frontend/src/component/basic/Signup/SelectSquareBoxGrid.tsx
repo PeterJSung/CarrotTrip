@@ -9,7 +9,7 @@ const SPACE: number = 0.5;
 export interface SelectSquareBoxGridProps {
     colCount: number;
     data: SelectBoxVO[];
-    onClick: (id: string) => void;
+    onClick: (id: number) => void;
 }
 
 const SelectSquareBoxGrid = (props: SelectSquareBoxGridProps): JSX.Element => {
@@ -25,13 +25,13 @@ const SelectSquareBoxGrid = (props: SelectSquareBoxGridProps): JSX.Element => {
     const RowContainer = styled(Grid)`
         justify-content: space-between;
         &:not(:last-child) {
-            margin-bottom: ${SPACE}rem;
+            margin-bottom: ${SPACE + 0.5}rem;
         }
     `;
 
     const ItemContainer = styled(Box)`
-        width: calc((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount});
-        height: calc((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount});
+        width: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
+        height: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
         display: inline-block;
     `;
 

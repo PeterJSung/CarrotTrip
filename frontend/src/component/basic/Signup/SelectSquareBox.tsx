@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { SelectBoxVO } from './signupconstants';
 
 export type SelectSquareBoxProps = {
-    onClick: (id: string) => void;
+    onClick: (id: number) => void;
 } & SelectBoxVO;
 
 const ButtonWrapper = styled(ButtonBase)`
@@ -68,7 +68,7 @@ const SelectSquareBox = (props: SelectSquareBoxProps): JSX.Element => {
             style={{
                 backgroundImage: `url(${props.src})`,
             }}
-            onClick={() => props.onClick('1')}
+            onClick={() => props.onClick(props.code)}
         >
             {props.checked && (
                 <CheckedWrapper>

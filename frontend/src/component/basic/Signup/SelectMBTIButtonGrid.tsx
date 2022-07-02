@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import { memo } from 'react';
 import styled from 'styled-components';
 import SelectMBTIButton from './SelectMBTIButton';
@@ -17,15 +17,14 @@ const ButtonWrapper = styled(Box)`
 `;
 
 const SelectMBTIButtonGrid = <T extends MBTI_TYPE>(props: SelectMBTIButtonProps<T>): JSX.Element => {
-    console.log(`rerender ${JSON.stringify(props.type)}`);
     return (
-        <Grid item direction="column" display="flex">
+        <Box flexDirection="column" display="flex">
             {props.type.map((type) => (
                 <ButtonWrapper key={type}>
                     <SelectMBTIButton type={type} checked={type == props.selected} onClick={props.onClick} />
                 </ButtonWrapper>
             ))}
-        </Grid>
+        </Box>
     );
 };
 

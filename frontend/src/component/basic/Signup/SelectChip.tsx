@@ -28,7 +28,7 @@ const SelectChip = (props: SelectChipProps): JSX.Element => {
             size="small"
             label={props.title}
             clickable
-            onClick={() => props.onClick(1)}
+            onClick={() => props.onClick(props.code)}
         />
     );
 };

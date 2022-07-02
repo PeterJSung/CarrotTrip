@@ -1,0 +1,4 @@
+{
+    "test": "It is Test Data",
+    "test_with_variable": "Welcome, {{name}}!"
+}

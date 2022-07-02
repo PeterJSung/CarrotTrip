@@ -8,7 +8,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/preset-create-react-app",
-    "storybook-addon-mock/register"
+    "@storybook/addon-viewport/register",
+    "storybook-addon-mock/register",
   ],
   "framework": "@storybook/react",
   "core": {
