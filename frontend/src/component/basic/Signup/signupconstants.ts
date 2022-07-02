@@ -41,7 +41,22 @@ export type MBTI_TYPE = typeof MBTI_LIST[number];
 export const MBTI_LEN: number = 4;
 
 // it`ll be replace transition code
-const i18n_REF = [
+interface PlaceRefInfo {
+    translateKey: string;
+    code: number;
+}
+const i18n_PLACE_REF: PlaceRefInfo[] = [
+    { code: 1, translateKey: '상관없음' },
+    { code: 2, translateKey: '관광지' },
+    { code: 3, translateKey: '문화시설' },
+    { code: 4, translateKey: '축제공연' },
+    { code: 5, translateKey: '여행코스' },
+    { code: 6, translateKey: '레포츠' },
+    { code: 7, translateKey: '숙박' },
+    { code: 8, translateKey: '쇼핑' },
+    { code: 9, translateKey: '음식점' },
+];
+const i18n_IMPRESSION_REF = [
     '조용한',
     '차분한',
     '활기있는',
@@ -61,17 +76,29 @@ const i18n_REF = [
 
 export const getImpressionInfo = (t: TFunction): SelectChipVO[] => {
     // TODO : it need to import i18n component
-    console.log(t('test'));
-    console.log(t('test_with_variable', { name: '성정민' }));
     const ret: SelectChipVO[] = [];
     // it`ll be start index 1
-    i18n_REF.forEach((eachData, index) => {
+    i18n_IMPRESSION_REF.forEach((eachData, index) => {
         ret.push({
             checked: false,
             code: index + 1,
             title: eachData, //it`ll be converted from i18n
         });
     });
-    console.log(ret);
+    return ret;
+};
+
+export const getPlaceInfo = (t: TFunction): SelectBoxVO[] => {
+    // TODO : it need to import i18n component
+    const ret: SelectBoxVO[] = [];
+    // code need to setup
+    i18n_PLACE_REF.forEach((eachData) => {
+        ret.push({
+            src: 'https://picsum.photos/800', // it`ll be replace
+            checked: false,
+            code: eachData.code,
+            title: eachData.translateKey, //it`ll be converted from i18n
+        });
+    });
     return ret;
 };

@@ -1,16 +1,18 @@
 import { Box, Button, LinearProgress, styled } from '@mui/material';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
-import SignupOnBoard6Layout from 'component/layout/SignupOnBoard6Layout';
+import SignupOnBoard3Layout from 'component/layout/SignupOnBoard3Layout';
+import SignupOnBoard4Layout from 'component/layout/SignupOnBoard4Layout';
+import SignupOnBoard5Layout from 'component/layout/SignupOnBoard5Layout';
 import { debounce } from 'lodash';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Slider, { Settings } from 'react-slick';
-import { singupInfo1, singupInfo2, singupInfo3, singupInfo4, singupInfo5, singupInfo6 } from 'redux/signupInfo';
+import { singupInfo1, singupInfo2, singupInfo3, singupInfo4, singupInfo5 } from 'redux/signupInfo';
 import { CombinedSignupData } from 'vo/signup';
 import DefaultPageContainer from './DefaultPageContainer';
 
-const SEQ_COUNT: number = 6;
+const SEQ_COUNT: number = 5;
 const PAGEING_TIME: number = 80;
 const ClickButton = styled(Button)`
     width: 100%;
@@ -44,7 +46,7 @@ const OnBoardingBox = styled(Box)`
 `;
 
 const isPossibleSkip = (idx: number) => {
-    const skipPage = [1, 5];
+    const skipPage = [1, 4];
     for (const i of skipPage) {
         if (idx === i) {
             return true;
@@ -63,7 +65,6 @@ const SignupPage = (): JSX.Element => {
     infoArr.push(useSelector(singupInfo3));
     infoArr.push(useSelector(singupInfo4));
     infoArr.push(useSelector(singupInfo5));
-    infoArr.push(useSelector(singupInfo6));
 
     const disp = infoArr[idx].disp;
     const forceSkip = isPossibleSkip(idx);
@@ -90,7 +91,7 @@ const SignupPage = (): JSX.Element => {
                 variant="determinate"
                 value={(100 * (idx + 1)) / SEQ_COUNT}
             />
-            <SignupPageHeader onClick={onNextClick} isSkip={true} />
+            <SignupPageHeader onClick={onNextClick} isSkip={forceSkip} />
             <Box flexGrow="1">
                 <Slider ref={sliderRef} {...sliderSetting}>
                     <OnBoardingBox>
@@ -100,21 +101,18 @@ const SignupPage = (): JSX.Element => {
                         <div>2</div>
                     </OnBoardingBox>
                     <OnBoardingBox>
-                        <div>3</div>
+                        <SignupOnBoard3Layout />
                     </OnBoardingBox>
                     <OnBoardingBox>
-                        <div>4</div>
+                        <SignupOnBoard4Layout />
                     </OnBoardingBox>
                     <OnBoardingBox>
-                        <div>5</div>
-                    </OnBoardingBox>
-                    <OnBoardingBox>
-                        <SignupOnBoard6Layout />
+                        <SignupOnBoard5Layout />
                     </OnBoardingBox>
                 </Slider>
             </Box>
             <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
-                <ClickButton disabled={isDisable} onClick={() => onNextClick(true)}>
+                <ClickButton disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
                 </ClickButton>
             </Box>

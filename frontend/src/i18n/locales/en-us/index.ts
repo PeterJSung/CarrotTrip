@@ -1,2 +1,4 @@
-import data from './data.json';
-export default data;
+import translation from './translation.json';
+export default {
+    translation,
+};
