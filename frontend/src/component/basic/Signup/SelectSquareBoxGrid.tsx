@@ -17,7 +17,7 @@ const SelectSquareBoxGrid = (props: SelectSquareBoxGridProps): JSX.Element => {
     const [width, setWidth] = useState<number>(0);
     const gridRef = useRef<HTMLDivElement>(null);
     let idx = 0;
-
+    const appendMargin = SPACE / props.colCount;
     useEffect(() => {
         gridRef.current && setWidth(gridRef.current.clientWidth);
     }, []);
@@ -25,13 +25,13 @@ const SelectSquareBoxGrid = (props: SelectSquareBoxGridProps): JSX.Element => {
     const RowContainer = styled(Grid)`
         justify-content: space-between;
         &:not(:last-child) {
-            margin-bottom: ${SPACE + 0.5}rem;
+            margin-bottom: ${SPACE + appendMargin}rem;
         }
     `;
 
     const ItemContainer = styled(Box)`
-        width: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
-        height: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
+        width: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - ${appendMargin}rem);
+        height: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - ${appendMargin}rem);
         display: inline-block;
     `;
 

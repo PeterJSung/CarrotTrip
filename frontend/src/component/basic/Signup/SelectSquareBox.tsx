@@ -1,5 +1,7 @@
 import { Box, ButtonBase, Typography } from '@mui/material';
 import styled from 'styled-components';
+import BlackPanel from '../common/BlackPanel';
+import Checker from '../common/Checker';
 import { SelectBoxVO } from './signupconstants';
 
 export type SelectSquareBoxProps = {
@@ -25,42 +27,12 @@ const TextTypo = styled(Typography)`
     z-index: 3;
 `;
 
-const BlackPanel = styled(Box)`
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: black;
-    z-index: 1;
-`;
-
-const CHECKED_SIZE = 1;
-const CHECKED_DIM_OP = 0.77;
-const UNCHECKED_DIM_OP = 0.2;
-
 const CheckedWrapper = styled(Box)`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    width: ${CHECKED_SIZE}rem;
-    height: ${CHECKED_SIZE}rem;
-    border-radius: 0.17rem;
-    background-color: black;
-    z-index: 3;
+    z-index: 4;
 `;
-
-const Vsvg = (): JSX.Element => (
-    <svg
-        width={9 * CHECKED_SIZE}
-        height={6 * CHECKED_SIZE}
-        viewBox="0 0 12 8"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path d="M1 3.5L4.5 7L10.5 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-);
 
 const SelectSquareBox = (props: SelectSquareBoxProps): JSX.Element => {
     return (
@@ -70,16 +42,10 @@ const SelectSquareBox = (props: SelectSquareBoxProps): JSX.Element => {
             }}
             onClick={() => props.onClick(props.code)}
         >
-            {props.checked && (
-                <CheckedWrapper>
-                    <Vsvg />
-                </CheckedWrapper>
-            )}
-            <BlackPanel
-                style={{
-                    opacity: props.checked ? CHECKED_DIM_OP : UNCHECKED_DIM_OP,
-                }}
-            />
+            <CheckedWrapper>
+                <Checker checked={props.checked} />
+            </CheckedWrapper>
+            <BlackPanel black={props.checked} />
             <TextTypo>{props.title}</TextTypo>
         </ButtonWrapper>
     );
