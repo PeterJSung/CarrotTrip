@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import ExpandedCard from './ExpandedCard';
+import ExpandableBanner from './ExpandableBanner';
 
 export default {
-    title: 'Container/ExpandedCard',
-    component: ExpandedCard,
+    title: 'Container/ExpandableBanner',
+    component: ExpandableBanner,
     argTypes: {
         upperText: {
             name: '제목',
@@ -24,11 +24,11 @@ export default {
             },
         },
     },
-} as ComponentMeta<typeof ExpandedCard>;
+} as ComponentMeta<typeof ExpandableBanner>;
 
-const expandedCardTemplate: ComponentStory<typeof ExpandedCard> = (props) => <ExpandedCard {...props} />;
+const expandableBannerTemplate: ComponentStory<typeof ExpandableBanner> = (props) => <ExpandableBanner {...props} />;
 
-export const expandedCard = expandedCardTemplate.bind({});
-expandedCard.args = {
+export const expandableBanner = expandableBannerTemplate.bind({});
+expandableBanner.args = {
     onClick: action('Expand Click'),
 };

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import BlackPanel from '../basic/common/BlackPanel';
 import Checker from '../basic/common/Checker';
 
-export interface ExpandedCardProps {
+export interface ExpandableBannerProps {
     isFilled: boolean;
     upperText: string;
     lowerText: string;
@@ -73,7 +73,7 @@ const CheckerWrapper = styled(Box)`
     z-index: 1;
 `;
 
-const ExpandedCard = (props: ExpandedCardProps): JSX.Element => {
+const ExpandableBanner = (props: ExpandableBannerProps): JSX.Element => {
     const [isExtand, setIsExtand] = useState<boolean>(false);
 
     const height = `${isExtand ? EXPANDED_HEIGHT : DEFAULT_HEIGHT}rem`;
@@ -122,4 +122,4 @@ const ExpandedCard = (props: ExpandedCardProps): JSX.Element => {
     );
 };
 
-export default ExpandedCard;
+export default ExpandableBanner;
