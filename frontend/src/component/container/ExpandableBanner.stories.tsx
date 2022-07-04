@@ -18,6 +18,10 @@ export default {
             type: 'boolean',
             name: 'Check 여부',
         },
+        isExpand: {
+            type: 'boolean',
+            name: 'Expand 여부',
+        },
         onClick: {
             table: {
                 disable: true,
@@ -26,7 +30,11 @@ export default {
     },
 } as ComponentMeta<typeof ExpandableBanner>;
 
-const expandableBannerTemplate: ComponentStory<typeof ExpandableBanner> = (props) => <ExpandableBanner {...props} />;
+const expandableBannerTemplate: ComponentStory<typeof ExpandableBanner> = (props) => (
+    <ExpandableBanner {...props}>
+        <p>애니메이션 적용이 안됩니다. 확장 애니메이션은 SignupBanner Conatiner 를 참조하세요</p>
+    </ExpandableBanner>
+);
 
 export const expandableBanner = expandableBannerTemplate.bind({});
 expandableBanner.args = {

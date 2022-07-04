@@ -1,10 +1,11 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Collapse, Typography } from '@mui/material';
-import { ElementType, useState } from 'react';
+import { Box, Card, CardActionArea, CardMedia, Collapse, Typography } from '@mui/material';
+import { ElementType, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import BlackPanel from '../basic/common/BlackPanel';
 import Checker from '../basic/common/Checker';
 
 export interface ExpandableBannerProps {
+    isExpand: boolean;
     isFilled: boolean;
     upperText: string;
     lowerText: string;
@@ -73,50 +74,36 @@ const CheckerWrapper = styled(Box)`
     z-index: 1;
 `;
 
-const ExpandableBanner = (props: ExpandableBannerProps): JSX.Element => {
-    const [isExtand, setIsExtand] = useState<boolean>(false);
+const ExpandableBanner = (props: PropsWithChildren<ExpandableBannerProps>): JSX.Element => {
+    const isExpand = props.isExpand;
+    const isFilled = props.isFilled;
+    const upperText = props.upperText;
+    const lowerText = props.lowerText;
+    const height = `${isExpand ? EXPANDED_HEIGHT : DEFAULT_HEIGHT}rem`;
 
-    const height = `${isExtand ? EXPANDED_HEIGHT : DEFAULT_HEIGHT}rem`;
-
-    const onClick = () => {
-        setIsExtand(!isExtand);
-    };
-    console.log(`Rerender ${JSON.stringify(props)}`);
+    console.log(`Rerender Expanable`);
     return (
         <CardWrapper>
             <CardClickable
-                onClick={() => onClick()}
+                onClick={() => props.onClick()}
                 style={{
                     height,
                 }}
             >
-                <BlackPanel black={isExtand} />
+                <BlackPanel black={isExpand} />
                 <CardImage component="img" image="https://picsum.photos/800" />
                 <BannerWrapper>
                     <TextWrapper>
-                        <TypoUpperText>{props.upperText}</TypoUpperText>
-                        <TypoLowerText>{props.lowerText}</TypoLowerText>
+                        <TypoUpperText>{upperText}</TypoUpperText>
+                        <TypoLowerText>{lowerText}</TypoLowerText>
                     </TextWrapper>
                     <CheckerWrapper>
-                        <Checker checked={props.isFilled && !isExtand} />
+                        <Checker checked={isFilled && !isExpand} />
                     </CheckerWrapper>
                 </BannerWrapper>
             </CardClickable>
-            <Collapse in={isExtand} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <Typography paragraph>Method:</Typography>
-                    <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10 minutes.
-                    </Typography>
-                    <Typography paragraph>
-                        Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add
-                        chicken, shrimp and chorizo, and cook, stirring occasionally until lightly browned, 6 to 8
-                        minutes. Transfer shrimp to a large plate and set aside, leaving chicken and chorizo in the pan.
-                        Add pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook, stirring often
-                        until thickened and fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2 cups
-                        chicken broth; bring to a boil.
-                    </Typography>
-                </CardContent>
+            <Collapse in={isExpand} timeout="auto" unmountOnExit>
+                {props.children}
             </Collapse>
         </CardWrapper>
     );
