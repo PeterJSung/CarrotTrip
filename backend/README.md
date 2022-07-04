@@ -125,7 +125,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ```json
 {
   "memberNickname" : "정민",
-  "categoryCodes" : ["관광지", "문화시설", "행사/공연/축제", "여행코스"]
+  "categoryCodes" : [12, 14]
 }
 ```
 #### Response
@@ -136,6 +136,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
     "data": true
 }
 ```
+코드 별 코드네임은 CategoryCode.java 참조
 
 ## 4. 특정 사용자 대한 성향 등록 페이지 (Onboarding_05)
 ###  4.1 특정 사용자 대한 성향 등록 (조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적)
@@ -149,7 +150,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ```json
 {
   "memberNickname" : "정민",
-  "tasteCodes" : ["조용한", "활기있는", "모험적인"]
+  "tasteCodes" : [1, 2, 4]
 }
 ```
 #### Response
@@ -160,3 +161,4 @@ X-AUTH-TOKEN: {JWT TOKEN}
     "data": true
 }
 ```
+코드 별 코드네임은 TasteCode.java 참조
