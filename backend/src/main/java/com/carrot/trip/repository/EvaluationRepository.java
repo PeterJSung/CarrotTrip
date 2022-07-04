@@ -13,6 +13,13 @@ public interface EvaluationRepository  extends JpaRepository<Evaluation, Long> {
 
     ArrayList<Evaluation> findAll();
 
+    ArrayList<Evaluation> findByMemberNickname(String memberNickname);
+
+    ArrayList<Evaluation> findByMemberNicknameAndApiIdIn(String memberNickname, ArrayList<Long> apiIds);
+
+    ArrayList<Evaluation> findByApiId(Long apiId);
+
+
 //    @Transactional
 //    @Modifying(clearAutomatically = true)
 //    @Query("UPDATE Member m set m.accountMoney = ?2, m.point = ?3 where m.nickname = ?1")

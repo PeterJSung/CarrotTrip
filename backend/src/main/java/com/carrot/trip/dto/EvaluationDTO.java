@@ -11,7 +11,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EvaluationDTO {
     private String memberNickname;
-    private String touristAttractionId;
+    private Long apiId;
     private Integer score;
     private String comments;
 }

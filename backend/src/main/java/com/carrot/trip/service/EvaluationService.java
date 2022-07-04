@@ -26,7 +26,7 @@ public class EvaluationService {
     public EvaluationDTO createEvaluation(EvaluationDTO evaluationDTO) {
         evaluationRepository.save(Evaluation.builder()
                 .memberNickname(evaluationDTO.getMemberNickname())
-                .touristAttractionId(evaluationDTO.getTouristAttractionId())
+                .apiId(evaluationDTO.getApiId())
                 .score(evaluationDTO.getScore())
                 .comments(evaluationDTO.getComments())
                 .build());
