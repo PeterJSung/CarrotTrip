@@ -9,9 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EvaluationDTO {
-    private String memberNickname;
-    private Long apiId;
-    private Integer score;
-    private String comments;
+public class DummyDTO {
+    private Long contentId;
+    private String name;
+    private String address;
+    private String thumbnail1;
+    private String thumbnail2;
 }

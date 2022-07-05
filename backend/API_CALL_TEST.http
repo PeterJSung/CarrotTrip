@@ -37,7 +37,7 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 
 {
   "memberNickname" : "태호",
-  "touristAttractionId" : "1",
+  "apiId" : "128767",
   "score" : 10,
   "comments" : "좋아요~"
 }
@@ -52,6 +52,11 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
   "touristAttractionId" : "1",
   "tasteCode" : "열정적인"
 }
+
+### 2.3 더미데이터 가져오기
+GET http://localhost:8080/api/evaluation/dummy/lang/korService
+Content-Type: application/json
+
 
 ### 3.1 사용자의 선호 관광지 타입 등록 (관광지, 문화시설, 행사/공연/축제, 여행코스, 레포츠, 숙박, 쇼핑, 음식점)
 POST http://localhost:8080/api/evaluation/category
@@ -74,7 +79,7 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 }
 
 ### 5.1 위치기반 관광지 리스트 조회
-GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305
+GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305/nickname/태호
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
 

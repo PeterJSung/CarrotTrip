@@ -30,6 +30,5 @@ public class LocationOpenApiItemDto {
     private int readcount; //0
     private int sigungucode; //5
     private String title; //개미촌
-
-
+    private double recommendScore; //추천스코어
 }
