@@ -4,14 +4,11 @@ import { getImpressionInfo, SelectChipVO } from 'component/basic/Signup/signupco
 import { YELLOW_COLOR } from 'globaltheme';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useThunk } from 'redux/common';
+import { updateInfo2Banner } from 'redux/signupInfo';
 import styled from 'styled-components';
+import { EvaluationAreaRes, TourAreaInfo } from 'vo/signup';
 import ExpandableBanner from './ExpandableBanner';
-
-export interface SignupBannerContainerProps {
-    upperText: string;
-    lowerText: string;
-    id: number;
-}
 
 const MenuTypo = styled(Typography)`
     font-family: Noto Sans KR !important;
@@ -44,14 +41,17 @@ const ConfirmBtn = styled(Button)`
     color: black !important;
 `;
 
-const SignupBannerContainer = (props: SignupBannerContainerProps): JSX.Element => {
+const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
     const [isExpand, setIsExpand] = useState<boolean>(false);
+    const [isFilled, setIsFilled] = useState<boolean>(false);
     const { t } = useTranslation();
     const [chipData, setChipData] = useState<SelectChipVO[]>(getImpressionInfo(t));
     const [rating, setRating] = useState<number>(0);
+    const updateCurrentBanner = useThunk(updateInfo2Banner);
 
     const onBannerClick = () => {
         setIsExpand(!isExpand);
+        uploadData();
     };
 
     const resetClick = () => {
@@ -62,7 +62,12 @@ const SignupBannerContainer = (props: SignupBannerContainerProps): JSX.Element =
         });
         setChipData(nextData);
         setIsExpand(false);
+        setIsFilled(false);
         setRating(0);
+        updateCurrentBanner(props.contentId, {
+            score: 0,
+            attraction: [],
+        });
     };
 
     const onChipClick = (id: number) => {
@@ -73,26 +78,52 @@ const SignupBannerContainer = (props: SignupBannerContainerProps): JSX.Element =
         });
         setChipData(nextData);
     };
-    console.log(`Render Signup Banner`);
+
+    const confirmClick = () => {
+        setIsExpand(false);
+        uploadData();
+    };
+
+    const uploadData = () => {
+        const notFilled = rating === 0;
+        const nextData: TourAreaInfo = {
+            score: rating,
+            attraction: notFilled ? [] : chipData.map((d) => d.code), // must skip when ration is default value
+        };
+        setIsFilled(!notFilled);
+        updateCurrentBanner(props.contentId, nextData);
+    };
+    console.log(`Render Banner ${props.name}`);
+
     return (
         <ExpandableBanner
-            isFilled={false}
-            lowerText={props.upperText}
-            upperText={props.lowerText}
+            src={props.thumbnail1}
+            isFilled={isFilled}
+            lowerText={props.address}
+            upperText={props.name}
             onClick={onBannerClick}
             isExpand={isExpand}
         >
             <Box px="1rem" pt="1rem">
-                <MenuTypo>얼마나 만족스러웠나요?</MenuTypo>
+                <MenuTypo>
+                    얼마나 만족스러웠나요?
+                    <span
+                        style={{
+                            color: 'red',
+                        }}
+                    >
+                        *필수입력
+                    </span>
+                </MenuTypo>
                 <YellowRating
                     value={rating}
                     onChange={(event, newValue) => {
                         setRating(newValue ?? 0);
                     }}
                 />
-
                 <Box mt="1.8rem">
                     <MenuTypo>해당 여행지의 인상은 어떤가요?</MenuTypo>
+
                     <SelectChipDisplay data={chipData} onClick={onChipClick} />
                 </Box>
             </Box>
@@ -101,7 +132,7 @@ const SignupBannerContainer = (props: SignupBannerContainerProps): JSX.Element =
                 <Box display="flex" flexDirection="column" justifyContent="center">
                     <SkipTypo onClick={resetClick}>넘어가기</SkipTypo>
                 </Box>
-                <ConfirmBtn>확인</ConfirmBtn>
+                <ConfirmBtn onClick={confirmClick}>확인</ConfirmBtn>
             </Box>
         </ExpandableBanner>
     );

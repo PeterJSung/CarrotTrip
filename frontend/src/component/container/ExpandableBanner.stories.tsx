@@ -22,6 +22,11 @@ export default {
             type: 'boolean',
             name: 'Expand 여부',
         },
+        src: {
+            table: {
+                disable: true,
+            },
+        },
         onClick: {
             table: {
                 disable: true,
@@ -38,5 +43,6 @@ const expandableBannerTemplate: ComponentStory<typeof ExpandableBanner> = (props
 
 export const expandableBanner = expandableBannerTemplate.bind({});
 expandableBanner.args = {
+    src: 'https://picsum.photos/800',
     onClick: action('Expand Click'),
 };

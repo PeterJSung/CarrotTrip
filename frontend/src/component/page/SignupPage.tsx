@@ -59,7 +59,7 @@ const SignupPage = (): JSX.Element => {
     const [idx, setIdx] = useState<number>(0);
     const sliderRef = useRef<Slider>(null);
 
-    const infoArr: CombinedSignupData<any>[] = [];
+    const infoArr: Array<CombinedSignupData<any>> = [];
     infoArr.push(useSelector(singupInfo1));
     infoArr.push(useSelector(singupInfo2));
     infoArr.push(useSelector(singupInfo3));

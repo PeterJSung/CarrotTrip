@@ -9,6 +9,7 @@ export interface ExpandableBannerProps {
     isFilled: boolean;
     upperText: string;
     lowerText: string;
+    src: string;
     onClick: () => void;
 }
 
@@ -81,7 +82,6 @@ const ExpandableBanner = (props: PropsWithChildren<ExpandableBannerProps>): JSX.
     const lowerText = props.lowerText;
     const height = `${isExpand ? EXPANDED_HEIGHT : DEFAULT_HEIGHT}rem`;
 
-    console.log(`Rerender Expanable`);
     return (
         <CardWrapper>
             <CardClickable
@@ -91,7 +91,7 @@ const ExpandableBanner = (props: PropsWithChildren<ExpandableBannerProps>): JSX.
                 }}
             >
                 <BlackPanel black={isExpand} />
-                <CardImage component="img" image="https://picsum.photos/800" />
+                <CardImage component="img" image={props.src} />
                 <BannerWrapper>
                     <TextWrapper>
                         <TypoUpperText>{upperText}</TypoUpperText>

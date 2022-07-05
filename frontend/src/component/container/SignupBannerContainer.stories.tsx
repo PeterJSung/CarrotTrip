@@ -21,7 +21,9 @@ const signupBannerContainerTemplate: ComponentStory<typeof SignupBannerContainer
 
 export const signupBannerContainer = signupBannerContainerTemplate.bind({});
 signupBannerContainer.args = {
-    id: 1,
-    lowerText: 'test1',
-    upperText: 'test2',
+    contentId: 1,
+    name: 'test1',
+    address: 'test2',
+    thumbnail1: 'https://picsum.photos/800',
+    thumbnail2: 'https://picsum.photos/800',
 };
