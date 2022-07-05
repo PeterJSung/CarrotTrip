@@ -5,10 +5,9 @@ import com.carrot.trip.dto.*;
 import com.carrot.trip.service.EvaluationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -52,6 +51,11 @@ public class EvaluationController {
                     .build());
         }
         return  Response.ok(true);
+    }
+
+    @GetMapping("/evaluation/dummy/lang/{lang}")
+    public ArrayList<DummyDTO> getDummy(@PathVariable("lang") String lang) {
+        return evaluationService.getDummy(lang);
     }
 
 

@@ -19,6 +19,8 @@ public interface EvaluationRepository  extends JpaRepository<Evaluation, Long> {
 
     ArrayList<Evaluation> findByApiId(Long apiId);
 
+    int deleteEvaluationsByMemberNicknameAndApiId(String memberNickname, Long apiIds);
+
 
 //    @Transactional
 //    @Modifying(clearAutomatically = true)

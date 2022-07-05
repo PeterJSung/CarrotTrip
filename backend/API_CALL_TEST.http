@@ -53,6 +53,11 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
   "tasteCode" : "열정적인"
 }
 
+### 2.3 더미데이터 가져오기
+GET http://localhost:8080/api/evaluation/dummy/lang/korService
+Content-Type: application/json
+
+
 ### 3.1 사용자의 선호 관광지 타입 등록 (관광지, 문화시설, 행사/공연/축제, 여행코스, 레포츠, 숙박, 쇼핑, 음식점)
 POST http://localhost:8080/api/evaluation/category
 Content-Type: application/json

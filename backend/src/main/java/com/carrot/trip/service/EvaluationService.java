@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class EvaluationService {
     private final MemberTasteRepository memberTasteRepository;
 
     public EvaluationDTO createEvaluation(EvaluationDTO evaluationDTO) {
+        evaluationRepository.deleteEvaluationsByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
         evaluationRepository.save(Evaluation.builder()
                 .memberNickname(evaluationDTO.getMemberNickname())
                 .apiId(evaluationDTO.getApiId())
@@ -59,6 +62,15 @@ public class EvaluationService {
                 .tasteCode(memberTasteDTO.getTasteCode())
                 .build());
         return memberTasteDTO;
+    }
+
+    public ArrayList<DummyDTO> getDummy(String lang) {
+        if (lang.equals("korService")){
+            return DummyListDTO.getKorService();
+        }
+        else {
+            return DummyListDTO.getEngService();
+        }
     }
 
 
