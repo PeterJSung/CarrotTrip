@@ -46,7 +46,6 @@ interface PlaceRefInfo {
     code: number;
 }
 const i18n_PLACE_REF: PlaceRefInfo[] = [
-    { code: 1, translateKey: '상관없음' },
     { code: 2, translateKey: '관광지' },
     { code: 3, translateKey: '문화시설' },
     { code: 4, translateKey: '축제공연' },
@@ -102,3 +101,6 @@ export const getPlaceInfo = (t: TFunction): SelectBoxVO[] => {
     });
     return ret;
 };
+
+export const CHECKED_DIM_OP = 0.77;
+export const UNCHECKED_DIM_OP = 0.2;

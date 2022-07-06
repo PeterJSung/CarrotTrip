@@ -9,28 +9,28 @@ const http = Axios.create({
 
 const restGet = async <Req = any, Res = any>(
     url: string,
-    config: AxiosRequestConfig<Req>,
+    config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
     return (await http.get(url, config)).data;
 };
 
 const restDelete = async <Req = any, Res = any>(
     url: string,
-    config: AxiosRequestConfig<Req>,
+    config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
     return (await http.delete(url, config)).data;
 };
 
 const restPost = async <Req = any, Res = any>(
     url: string,
-    config: AxiosRequestConfig<Req>,
+    config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
     return (await http.post(url, config)).data;
 };
 
 const restPut = async <Req = any, Res = any>(
     url: string,
-    config: AxiosRequestConfig<Req>,
+    config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
     return (await http.post(url, config)).data;
 };

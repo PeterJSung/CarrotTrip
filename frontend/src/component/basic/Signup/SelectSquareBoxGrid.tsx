@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import SelectSquareBox from './SelectSquareBox';
@@ -12,42 +12,53 @@ export interface SelectSquareBoxGridProps {
     onClick: (id: number) => void;
 }
 
+const RowContainer = styled(Grid)<{ btmmargin: number }>`
+    justify-content: space-between;
+    &:not(:last-child) {
+        margin-bottom: ${(p) => p.btmmargin}rem;
+    }
+`;
+
+const ItemContainer = styled(Grid)<{ colcount: number; appendmargin: number; totalwidth: number }>`
+    width: calc(
+        ((${(p) => p.totalwidth}px - ${SPACE}rem * (${(p) => p.colcount} - 1)) / ${(p) => p.colcount}) -
+            ${(p) => p.appendmargin}rem
+    );
+    height: calc(
+        ((${(p) => p.totalwidth}px - ${SPACE}rem * (${(p) => p.colcount} - 1)) / ${(p) => p.colcount}) -
+            ${(p) => p.appendmargin}rem
+    );
+    display: inline-block;
+`;
+
 const SelectSquareBoxGrid = (props: SelectSquareBoxGridProps): JSX.Element => {
     const rowCount = Math.ceil(props.data.length / props.colCount);
     const [width, setWidth] = useState<number>(0);
     const gridRef = useRef<HTMLDivElement>(null);
     let idx = 0;
-
+    const appendMargin = SPACE / props.colCount;
     useEffect(() => {
         gridRef.current && setWidth(gridRef.current.clientWidth);
     }, []);
-
-    const RowContainer = styled(Grid)`
-        justify-content: space-between;
-        &:not(:last-child) {
-            margin-bottom: ${SPACE + 0.5}rem;
-        }
-    `;
-
-    const ItemContainer = styled(Box)`
-        width: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
-        height: calc(((${width}px - ${SPACE}rem * (${props.colCount} - 1)) / ${props.colCount}) - 0.25rem);
-        display: inline-block;
-    `;
 
     return (
         <Grid container direction="column" ref={gridRef}>
             {width > 0 &&
                 Array.from({ length: rowCount }).map((d, i) => {
                     return (
-                        <RowContainer container key={i}>
+                        <RowContainer btmmargin={SPACE + appendMargin} container key={i}>
                             {Array.from({ length: props.colCount }).map((d, i) => {
                                 const renderIdx = idx;
                                 idx++;
                                 const key = `${renderIdx}-${i}`;
                                 if (renderIdx <= props.data.length) {
                                     return (
-                                        <ItemContainer key={key}>
+                                        <ItemContainer
+                                            colcount={props.colCount}
+                                            totalwidth={width}
+                                            appendmargin={appendMargin}
+                                            key={key}
+                                        >
                                             <SelectSquareBox onClick={props.onClick} {...props.data[renderIdx]} />
                                         </ItemContainer>
                                     );

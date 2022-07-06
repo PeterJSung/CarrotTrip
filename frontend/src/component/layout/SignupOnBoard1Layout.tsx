@@ -58,7 +58,7 @@ const SignupOnBoard1Layout = (): JSX.Element => {
             userInfo: data,
         });
     }, []);
-
+    console.log(`Layout Render 1`);
     return (
         <SignupCommonLayout upperText={'닉네임을 알려주세요'} lowerText={'닉네임은 마이페이지에서 변경 가능해요.'}>
             <TextField label={nickNameLabel} variant="outlined" onChange={nickNameChange} />

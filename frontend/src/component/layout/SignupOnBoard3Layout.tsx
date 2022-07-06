@@ -35,7 +35,7 @@ const SignupOnBoard3Layout = (): JSX.Element => {
         });
     }, [placeArr]);
 
-    console.log(`Rerender `);
+    console.log(`Render Layout 3`);
 
     return (
         <SignupCommonLayout
@@ -43,7 +43,7 @@ const SignupOnBoard3Layout = (): JSX.Element => {
             lowerText={'수집한 정보는 여행지 추천에 사용될 예정이에요.'}
         >
             <Box width="100%" position="relative">
-                <SelectSquareBoxGrid colCount={3} data={placeArr} onClick={onClick} />
+                <SelectSquareBoxGrid colCount={4} data={placeArr} onClick={onClick} />
             </Box>
         </SignupCommonLayout>
     );

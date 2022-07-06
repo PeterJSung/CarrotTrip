@@ -1,12 +1,15 @@
 import { createTheme } from '@mui/material';
 
+export const YELLOW_COLOR = '#FEF32F';
+export const BLACK_COLOR = '#f3f5f7';
+
 const globalTheme = createTheme({
     palette: {
         secondary: {
-            main: '#FEF32F',
+            main: YELLOW_COLOR,
         },
         info: {
-            main: '#f3f5f7',
+            main: BLACK_COLOR,
         },
     },
 });

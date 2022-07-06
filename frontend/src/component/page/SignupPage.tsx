@@ -1,6 +1,8 @@
 import { Box, Button, LinearProgress, styled } from '@mui/material';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
+import SkipDialog from 'component/basic/Signup/SkipDialog';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
+import SignupOnBoard2Layout from 'component/layout/SignupOnBoard2Layout';
 import SignupOnBoard3Layout from 'component/layout/SignupOnBoard3Layout';
 import SignupOnBoard4Layout from 'component/layout/SignupOnBoard4Layout';
 import SignupOnBoard5Layout from 'component/layout/SignupOnBoard5Layout';
@@ -57,9 +59,10 @@ const isPossibleSkip = (idx: number) => {
 
 const SignupPage = (): JSX.Element => {
     const [idx, setIdx] = useState<number>(0);
+    const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const sliderRef = useRef<Slider>(null);
 
-    const infoArr: CombinedSignupData<any>[] = [];
+    const infoArr: Array<CombinedSignupData<any>> = [];
     infoArr.push(useSelector(singupInfo1));
     infoArr.push(useSelector(singupInfo2));
     infoArr.push(useSelector(singupInfo3));
@@ -71,16 +74,40 @@ const SignupPage = (): JSX.Element => {
     const isDisable = !forceSkip && disp.isDisable; // disable 이며 skip 이 불가능할때
     const btnText = infoArr[idx].disp.buttonText;
 
-    const onNextClick = debounce((next: boolean) => {
-        if (next && idx + 1 !== SEQ_COUNT) {
+    const goPagingAction = (isNext: boolean) => {
+        if (isNext) {
             setIdx(idx + 1);
             sliderRef.current?.slickGoTo(idx + 1);
-        } else if (!next && idx !== 0) {
+        } else {
             setIdx(idx - 1);
             sliderRef.current?.slickGoTo(idx - 1);
         }
+    };
+
+    const onNextClick = debounce((next: boolean) => {
+        if (next && idx + 1 !== SEQ_COUNT) {
+            goPagingAction(true);
+        } else if (!next && idx !== 0) {
+            goPagingAction(false);
+        }
     }, PAGEING_TIME);
 
+    const skipBtnClick = () => {
+        setDialogOpen(true);
+    };
+
+    const skipConfirmBtnClick = async (isSkip: boolean) => {
+        if (isSkip) {
+            const isLast = idx + 1 === SEQ_COUNT;
+            if (isLast) {
+                //uploaddata
+            } else {
+                goPagingAction(true);
+            }
+        }
+        setDialogOpen(false);
+    };
+    console.log(`Page Render`);
     return (
         <DefaultPageContainer>
             <LinearProgress
@@ -91,14 +118,14 @@ const SignupPage = (): JSX.Element => {
                 variant="determinate"
                 value={(100 * (idx + 1)) / SEQ_COUNT}
             />
-            <SignupPageHeader onClick={onNextClick} isSkip={forceSkip} />
+            <SignupPageHeader onClick={onNextClick} isSkip={forceSkip} onSkipClick={skipBtnClick} />
             <Box flexGrow="1">
                 <Slider ref={sliderRef} {...sliderSetting}>
                     <OnBoardingBox>
                         <SignupOnBoard1Layout />
                     </OnBoardingBox>
                     <OnBoardingBox>
-                        <div>2</div>
+                        <SignupOnBoard2Layout />
                     </OnBoardingBox>
                     <OnBoardingBox>
                         <SignupOnBoard3Layout />
@@ -116,6 +143,7 @@ const SignupPage = (): JSX.Element => {
                     {btnText}
                 </ClickButton>
             </Box>
+            <SkipDialog open={dialogOpen} onClick={skipConfirmBtnClick} />
         </DefaultPageContainer>
     );
 };
