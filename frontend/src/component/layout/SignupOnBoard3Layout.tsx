@@ -35,6 +35,8 @@ const SignupOnBoard3Layout = (): JSX.Element => {
         });
     }, [placeArr]);
 
+    console.log(`Render Layout 3`);
+
     return (
         <SignupCommonLayout
             upperText={`어떤 장소를 찾고 있나요?`}

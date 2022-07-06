@@ -13,6 +13,7 @@ const BackIcon = styled(ArrowBackIcon)`
 
 export interface SignupPageHeaderProps {
     onClick: (isNext: boolean) => void;
+    onSkipClick: () => void;
     isSkip: boolean;
 }
 
@@ -30,7 +31,7 @@ const SignupPageHeader = (props: SignupPageHeaderProps): JSX.Element => {
                 <BackIcon />
             </BackButton>
             {props.isSkip ? (
-                <SkipTypoWrapper onClick={() => props.onClick(true)}>
+                <SkipTypoWrapper onClick={props.onSkipClick}>
                     <Typography>넘어가기</Typography>
                 </SkipTypoWrapper>
             ) : (

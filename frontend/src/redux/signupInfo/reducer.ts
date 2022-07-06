@@ -39,7 +39,7 @@ const github = createReducer<SignupOnboardState, SignupOnboardAction>(initialSta
     [actions.SignUpInfoActions.UPDATE_BANNER_INFO2]: (state, action) =>
         produce(state, (draft) => {
             draft.data.signupInfo2Banner[action.payload.id] = action.payload.data;
-            if (draft.data.signupInfo2Banner[action.payload.id].attraction.length === 0) {
+            if (draft.data.signupInfo2Banner[action.payload.id].score === 0) {
                 delete draft.data.signupInfo2Banner[action.payload.id];
             }
         }),

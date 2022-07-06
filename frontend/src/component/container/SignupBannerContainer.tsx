@@ -50,8 +50,10 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
     const updateCurrentBanner = useThunk(updateInfo2Banner);
 
     const onBannerClick = () => {
+        if (isExpand) {
+            uploadData(); // isExpand 일때만 upload
+        }
         setIsExpand(!isExpand);
-        uploadData();
     };
 
     const resetClick = () => {
@@ -88,12 +90,12 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
         const notFilled = rating === 0;
         const nextData: TourAreaInfo = {
             score: rating,
-            attraction: notFilled ? [] : chipData.map((d) => d.code), // must skip when ration is default value
+            attraction: notFilled ? [] : chipData.filter((d) => d.checked).map((d) => d.code), // must skip when ration is default value
         };
         setIsFilled(!notFilled);
         updateCurrentBanner(props.contentId, nextData);
+        console.log(`Upload ${props.name}`);
     };
-    console.log(`Render Banner ${props.name}`);
 
     return (
         <ExpandableBanner

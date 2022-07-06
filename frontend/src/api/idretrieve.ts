@@ -11,3 +11,12 @@ export const getUserExist = async (username: string): Promise<boolean> => {
     });
     return response.data;
 };
+
+export const mockGetUserExist = {
+    url: ID_EXIST_URL,
+    method: 'GET',
+    status: 200,
+    response: {
+        data: false,
+    },
+};

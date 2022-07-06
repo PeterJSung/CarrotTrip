@@ -1,5 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
-import { ID_EXIST_URL } from 'api/idretrieve';
+import { mockGetEvaluationArea } from 'api/evaluationArea';
+import { mockGetUserExist } from 'api/idretrieve';
 import { getDummyState } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupPage from './SignupPage';
@@ -13,14 +14,5 @@ export default {
 
 export const signupPage = () => <SignupPage />;
 signupPage.parameters = {
-    mockData: [
-        {
-            url: ID_EXIST_URL,
-            method: 'GET',
-            status: 200,
-            response: {
-                data: false,
-            },
-        },
-    ],
+    mockData: [mockGetUserExist, mockGetEvaluationArea],
 };

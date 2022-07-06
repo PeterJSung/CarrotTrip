@@ -36,6 +36,8 @@ const SignupOnBoard4Layout = (): JSX.Element => {
         });
     }, [chipArr]);
 
+    console.log(`Render Layout 4`);
+
     return (
         <SignupCommonLayout
             upperText={`${nickName}님에 대해 알려주세요`}
