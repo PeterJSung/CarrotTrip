@@ -6,6 +6,7 @@ const LoginPage = (): JSX.Element => {
         console.log('Click');
         nivagate('/test');
     };
+    console.log(kakao.maps.services);
     return <div onClick={onClick}>Login</div>;
 };
 

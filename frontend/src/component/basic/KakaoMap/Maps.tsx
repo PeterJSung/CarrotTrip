@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import { Gps } from 'vo/gps';
 import KakaoMapMarkerList, { MarkerInfo } from './MarkerList';
-import KakaoMapNowLocationBtn from './NowLocationBtn';
+import KakaoMapNowLocationBtn from './MyLocationBtn';
 
 export interface KaKaoMapProps {
     gpsInfo: Gps;
