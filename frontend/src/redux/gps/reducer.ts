@@ -1,9 +1,9 @@
-import { ActionType, createReducer } from 'typesafe-actions';
-import { SyncState } from 'redux/common';
-import { GpsActions } from './actions';
-import * as actions from './actions';
 import { produce } from 'immer';
+import { SyncState } from 'redux/common';
+import { ActionType, createReducer } from 'typesafe-actions';
 import { Gps } from 'vo/gps';
+import * as actions from './actions';
+import { GpsActions } from './actions';
 
 export type GpsAction = ActionType<typeof actions>;
 
@@ -13,11 +13,11 @@ const initialState: GpsState = {
     data: undefined,
 };
 
-const github = createReducer<GpsState, GpsAction>(initialState, {
+const reducers = createReducer<GpsState, GpsAction>(initialState, {
     [GpsActions.GPS_UPDATE]: (state, action) =>
         produce(state, (draft) => {
             draft.data = action.payload;
         }),
 });
 
-export default github;
+export default reducers;
