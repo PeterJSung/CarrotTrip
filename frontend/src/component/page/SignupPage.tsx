@@ -1,4 +1,5 @@
-import { Box, Button, LinearProgress, styled } from '@mui/material';
+import { Box, LinearProgress, styled } from '@mui/material';
+import SignupButton from 'component/basic/Signup/SignupButton';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SkipDialog from 'component/basic/Signup/SkipDialog';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
@@ -16,20 +17,6 @@ import DefaultPageContainer from './DefaultPageContainer';
 
 const SEQ_COUNT: number = 5;
 const PAGEING_TIME: number = 80;
-const ClickButton = styled(Button)`
-    width: 100%;
-    height: 100%;
-    border-radius: 0.5rem;
-    color: white;
-    background-color: #111313;
-    //color: white;
-    &:hover {
-        background-color: #111313af;
-    }
-    &.Mui-disabled {
-        background-color: #c2c2c2 !important;
-    }
-`;
 
 const sliderSetting: Settings = {
     dots: false,
@@ -139,9 +126,9 @@ const SignupPage = (): JSX.Element => {
                 </Slider>
             </Box>
             <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
-                <ClickButton disabled={disp.isDisable} onClick={() => onNextClick(true)}>
+                <SignupButton disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
-                </ClickButton>
+                </SignupButton>
             </Box>
             <SkipDialog open={dialogOpen} onClick={skipConfirmBtnClick} />
         </DefaultPageContainer>

@@ -1,9 +1,9 @@
-import { ActionType, createReducer } from 'typesafe-actions';
-import { AsyncState, getInitialAsyncState } from 'redux/common';
-import { GithubProfileActions } from './actions';
-import * as actions from './actions';
 import { produce } from 'immer';
+import { AsyncState, getInitialAsyncState } from 'redux/common';
+import { ActionType, createReducer } from 'typesafe-actions';
 import { GithubProfile } from 'vo/github';
+import * as actions from './actions';
+import { GithubProfileActions } from './actions';
 
 export type GithubAction = ActionType<typeof actions>;
 
@@ -14,7 +14,7 @@ const initialState: GithubProfileState = {
     data: null,
 };
 
-const github = createReducer<GithubProfileState, GithubAction>(initialState, {
+const reducers = createReducer<GithubProfileState, GithubAction>(initialState, {
     [GithubProfileActions.GET_USER_PROFILE]: (state) =>
         produce(state, (draft) => {
             draft.asyncInfo.error = null;
@@ -34,4 +34,4 @@ const github = createReducer<GithubProfileState, GithubAction>(initialState, {
         }),
 });
 
-export default github;
+export default reducers;

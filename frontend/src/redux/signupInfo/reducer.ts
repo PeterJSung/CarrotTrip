@@ -31,7 +31,7 @@ const initialState: SignupOnboardState = {
     },
 };
 
-const github = createReducer<SignupOnboardState, SignupOnboardAction>(initialState, {
+const reducers = createReducer<SignupOnboardState, SignupOnboardAction>(initialState, {
     [actions.SignUpInfoActions.UPDATE_INFO1]: (state, action) =>
         produce(state, (draft) => {
             draft.data.signupInfo1 = action.payload;
@@ -61,4 +61,4 @@ const github = createReducer<SignupOnboardState, SignupOnboardAction>(initialSta
         }),
 });
 
-export default github;
+export default reducers;
