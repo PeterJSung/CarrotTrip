@@ -1,9 +1,9 @@
 import { DEFAULT_MAP_LEVEL } from 'common/constants';
+import MapIndicatorRegion from 'component/container/MapIndicatorRegion';
 import { useEffect, useRef } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import { Gps } from 'vo/gps';
 import KakaoMapMarkerList, { MarkerInfo } from './MarkerList';
-import KakaoMapNowLocationBtn from './MyLocationBtn';
 
 export interface KaKaoMapProps {
     gpsInfo: Gps;
@@ -29,7 +29,7 @@ const KakaoMap = ({ gpsInfo, ...events }: KaKaoMapProps): JSX.Element => {
             <Map ref={mapRef} center={{ lat: gpsInfo.lat, lng: gpsInfo.lng }} style={{ width: '100%', height: '100%' }}>
                 <KakaoMapMarkerList onClick={events.onClickMarker} markers={markers} />
             </Map>
-            <KakaoMapNowLocationBtn onClick={events.onClickPosReset} />
+            <MapIndicatorRegion />
         </>
     );
 };
