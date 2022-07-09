@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, Story } from '@storybook/react';
 import { PropsWithChildren } from 'react';
+import { getDummyState } from 'stories/common.stories';
 import { DEFAULT_GPS } from 'vo/gps';
 import KakaoMap from './Maps';
 
@@ -22,6 +23,7 @@ const getGeoArgs = (name: string, defaultValue: number) => ({
 export default {
     title: 'Basic/KakaoMap/Kakaomap',
     component: KakaoMap,
+    decorators: [(story) => getDummyState(story())],
     argTypes: {
         storyBookLat: getGeoArgs('위도', DEFAULT_GPS.lat),
         storyBookLng: getGeoArgs('경도', DEFAULT_GPS.lng),

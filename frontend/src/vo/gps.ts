@@ -10,6 +10,11 @@ export const DEFAULT_GPS: Gps = {
     lng: DEFAULT_LNG,
 };
 
+export interface KakaoRegionAPIRes {
+    meta: { total_count: number };
+    documents: Array<KakaoRegionInfo>;
+}
+
 export interface KakaoRegionInfo {
     region_type: 'B' | 'H';
     code: string;

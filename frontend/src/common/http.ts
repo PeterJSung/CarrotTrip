@@ -11,28 +11,28 @@ const restGet = async <Req = any, Res = any>(
     url: string,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return (await http.get(url, config)).data;
+    return await http.get(url, config);
 };
 
 const restDelete = async <Req = any, Res = any>(
     url: string,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return (await http.delete(url, config)).data;
+    return await http.delete(url, config);
 };
 
 const restPost = async <Req = any, Res = any>(
     url: string,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return (await http.post(url, config)).data;
+    return await http.post(url, config);
 };
 
 const restPut = async <Req = any, Res = any>(
     url: string,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return (await http.post(url, config)).data;
+    return await http.post(url, config);
 };
 
 export { restPut, restGet, restDelete, restPost };
