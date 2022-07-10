@@ -17,7 +17,7 @@ export const getC2RData = async (lat: number, lng: number): Promise<KakaoRegionA
     return response.data;
 };
 
-export const mockGetUserExist = {
+export const mockGetC2RData = {
     url: CONVERT_C2R_URL,
     method: 'GET',
     status: 200,
