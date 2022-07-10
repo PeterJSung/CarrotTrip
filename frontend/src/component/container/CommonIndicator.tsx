@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import styled from 'styled-components';
 import { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
 const SIDE_MARGIN = 1.25;
 const TOP_MARGIN = 2.81;
@@ -14,8 +14,8 @@ const IndicatorWrapper = styled(Box)`
     justify-content: space-between;
 `;
 
-const IndicatorCommon = (props: PropsWithChildren<any>): JSX.Element => {
+const CommonIndicator = (props: PropsWithChildren<any>): JSX.Element => {
     return <IndicatorWrapper>{props.children}</IndicatorWrapper>;
 };
 
-export default IndicatorCommon;
+export default CommonIndicator;

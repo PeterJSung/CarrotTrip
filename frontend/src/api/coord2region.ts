@@ -21,7 +21,5 @@ export const mockGetUserExist = {
     url: CONVERT_C2R_URL,
     method: 'GET',
     status: 200,
-    response: {
-        data: false,
-    },
+    response: false,
 };

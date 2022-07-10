@@ -22,6 +22,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
     const updateSignupInfo = useThunk(updateInfo2);
     const getSignupInfo2Banner: SignupBanner2Data = useSelector(signupInfo2Banner);
 
+    console.log(renderData);
     const totalDataCount = renderData.length;
     const remainCount = Object.keys(getSignupInfo2Banner).length;
     const needNextSeletCount = totalDataCount - remainCount;

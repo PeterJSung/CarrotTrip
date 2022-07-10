@@ -1,4 +1,4 @@
-import { mapButtonCommon } from './mapButtonCommon';
+import { commonMapButton } from './commonMapButton';
 
 export interface MyLocationBtnProps {
     onClick: () => void;
@@ -16,6 +16,6 @@ const LocationSVG = (): JSX.Element => (
     </svg>
 );
 
-const MyLocationBtn = (props: MyLocationBtnProps): JSX.Element => mapButtonCommon(<LocationSVG />, props.onClick);
+const MyLocationBtn = (props: MyLocationBtnProps): JSX.Element => commonMapButton(<LocationSVG />, props.onClick);
 
 export default MyLocationBtn;

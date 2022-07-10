@@ -1,33 +1,48 @@
 import { getC2RData } from 'api/coord2region';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
-import { updateGpsThunk } from 'redux/gps';
-import { Gps } from 'vo/gps';
+import { gpsSelector, updateGpsThunk } from 'redux/gps';
+import { KakaoRegionAPIRes } from 'vo/gps';
 import MyLocationBtn from '../basic/KakaoMap/MyLocationBtn';
 import MyProfileBtn from '../basic/KakaoMap/MyProfileBtn';
 import RegionDiscription from '../basic/KakaoMap/RegionDiscription';
-import IndicatorCommon from './IndicatorCommon';
+import CommonIndicator from './CommonIndicator';
 
-const getGeoLocationInfo = (cb: (gpsData: Gps) => void) => {
+const getGeoLocationInfo = (cb: (lat: number, lng: number) => void) => {
     const options: PositionOptions = { timeout: 6000 };
     navigator.geolocation &&
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                cb({ lat: position.coords.latitude, lng: position.coords.longitude });
+                cb(position.coords.latitude, position.coords.longitude);
             },
             console.error,
             options,
         );
 };
 
+const parserRegionStr = (apiRes: KakaoRegionAPIRes): string => {
+    let retData = apiRes.documents.filter((d) => d.region_type === 'B');
+    if (!retData) {
+        retData = apiRes.documents.filter((d) => d.region_type === 'H');
+    }
+    return `${retData[0].region_1depth_name}, ${retData[0].region_3depth_name}`;
+};
+
 const MapIndicatorRegion = (): JSX.Element => {
+    const currentGpsInfo = useSelector(gpsSelector);
     const updateGpsState = useThunk(updateGpsThunk);
     useEffect(() => {
-        getGeoLocationInfo(async (nextGps: Gps) => {
-            const res = await getC2RData(nextGps.lat, nextGps.lng);
-            console.log(res);
-        });
+        myLocationBtnClick();
     }, []);
+
+    const myLocationBtnClick = () => {
+        getGeoLocationInfo(async (lat: number, lng: number) => {
+            const res = await getC2RData(lat, lng);
+            updateGpsState(lat, lng, parserRegionStr(res));
+        });
+    };
+
     /*
     const resetPosClick = useCallback(() => {
         // timeout at 60000 milliseconds (60 seconds)
@@ -39,11 +54,11 @@ const MapIndicatorRegion = (): JSX.Element => {
     }, [gpsState]);
 */
     return (
-        <IndicatorCommon>
+        <CommonIndicator>
             <MyProfileBtn onClick={console.log} />
-            <RegionDiscription region="test" />
-            <MyLocationBtn onClick={console.log} />
-        </IndicatorCommon>
+            <RegionDiscription region={currentGpsInfo.regionStr} />
+            <MyLocationBtn onClick={myLocationBtnClick} />
+        </CommonIndicator>
     );
 };
 
