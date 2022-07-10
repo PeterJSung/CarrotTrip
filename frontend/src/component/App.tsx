@@ -2,22 +2,14 @@ import RouterGuard from 'common/RouterGuard';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 //Slick import
-import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from 'redux/userInfo';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { PATH_HOME_PAGE, PATH_LOGIN_PAGE, PATH_SIGNUP_LOADING_PAGE, PATH_SIGNUP_PAGE } from './page/common';
 import HomePage from './page/HomePage';
 import LoginPage from './page/LoginPage';
 import SignupLoadingPage from './page/SignupLoadingPage';
 import SignupPage from './page/SignupPage';
-const Test = () => {
-    let navigate = useNavigate();
-    function handleClick() {
-        navigate('/signup');
-    }
-
-    return <div onClick={handleClick}>aa</div>;
-};
 
 const App = (): JSX.Element => {
     const userInfo = useSelector(getUserInfo);
@@ -27,14 +19,14 @@ const App = (): JSX.Element => {
     // all of page is redirection to /login
     return (
         <Routes>
-            <Route element={<RouterGuard redirectPath="/login" isAllowed={userInfo} />}>
-                <Route path="/" element={<HomePage />} />
+            <Route element={<RouterGuard redirectPath={PATH_LOGIN_PAGE} isAllowed={userInfo} />}>
+                <Route path={PATH_HOME_PAGE} element={<HomePage />} />
                 <Route path="/dashboard" element={<p>This is Dashboard</p>} />
             </Route>
-            <Route element={<RouterGuard redirectPath="/" isAllowed={!userInfo} />}>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/loading" element={<SignupLoadingPage />} />
+            <Route element={<RouterGuard redirectPath={PATH_HOME_PAGE} isAllowed={!userInfo} />}>
+                <Route path={PATH_LOGIN_PAGE} element={<LoginPage />} />
+                <Route path={PATH_SIGNUP_PAGE} element={<SignupPage />} />
+                <Route path={PATH_SIGNUP_LOADING_PAGE} element={<SignupLoadingPage />} />
             </Route>
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>

@@ -10,9 +10,6 @@ export interface SignupCommonLayoutProps {
 const Wrapper = styled(Box)`
     display: flex;
     flex-direction: column;
-    & > div .MuiOutlinedInput-root {
-        margin-bottom: 2rem;
-    }
 `;
 
 const UpperTextTypo = styled(Typography)`

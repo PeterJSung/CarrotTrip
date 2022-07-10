@@ -1,3 +1,4 @@
+import { DEFAULT_LAT, DEFAULT_LNG } from 'common/constants';
 import { produce } from 'immer';
 import { SyncState } from 'redux/common';
 import { ActionType, createReducer } from 'typesafe-actions';
@@ -7,10 +8,14 @@ import { GpsActions } from './actions';
 
 export type GpsAction = ActionType<typeof actions>;
 
-export type GpsState = SyncState<Gps | undefined>;
+export type GpsState = SyncState<Gps>;
 
 const initialState: GpsState = {
-    data: undefined,
+    data: {
+        lat: DEFAULT_LAT,
+        lng: DEFAULT_LNG,
+        regionStr: '',
+    },
 };
 
 const reducers = createReducer<GpsState, GpsAction>(initialState, {

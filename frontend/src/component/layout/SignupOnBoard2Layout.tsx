@@ -22,6 +22,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
     const updateSignupInfo = useThunk(updateInfo2);
     const getSignupInfo2Banner: SignupBanner2Data = useSelector(signupInfo2Banner);
 
+    console.log(renderData);
     const totalDataCount = renderData.length;
     const remainCount = Object.keys(getSignupInfo2Banner).length;
     const needNextSeletCount = totalDataCount - remainCount;
@@ -42,11 +43,9 @@ const SignupOnBoard2Layout = (): JSX.Element => {
             });
         };
         fetch();
-        console.log(`Init Call`);
     }, []);
 
     useEffect(() => {
-        console.log(`Effect Call`);
         const selectedData: SignupInfo2Data[] = [];
         for (const key in getSignupInfo2Banner) {
             const numberId = Number(key);
@@ -66,7 +65,6 @@ const SignupOnBoard2Layout = (): JSX.Element => {
         });
     }, [getSignupInfo2Banner, renderData]);
 
-    console.log(`Layout Render 2`);
     return (
         <SignupCommonLayout upperText={'다녀온 관광지를 평가해주세요'} lowerText={lowerText}>
             {renderData.map((data) => {

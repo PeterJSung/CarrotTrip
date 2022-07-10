@@ -1,7 +1,7 @@
 import { ComponentMeta } from '@storybook/react';
 import { mockGetEvaluationArea } from 'api/evaluationArea';
 import { mockGetUserExist } from 'api/idretrieve';
-import { getDummyState } from 'stories/common.stories';
+import { dummyRouter, getDummyState } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupPage from './SignupPage';
 
@@ -9,7 +9,7 @@ import SignupPage from './SignupPage';
 export default {
     title: 'Page/SignupPage',
     component: SignupPage,
-    decorators: [(story) => getDummyState(story()), WithMock],
+    decorators: [(story) => getDummyState(dummyRouter(story())), WithMock],
 } as ComponentMeta<typeof SignupPage>;
 
 export const signupPage = () => <SignupPage />;

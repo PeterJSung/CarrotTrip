@@ -10,9 +10,11 @@ import SignupOnBoard5Layout from 'component/layout/SignupOnBoard5Layout';
 import { debounce } from 'lodash';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Slider, { Settings } from 'react-slick';
 import { singupInfo1, singupInfo2, singupInfo3, singupInfo4, singupInfo5 } from 'redux/signupInfo';
 import { CombinedSignupData } from 'vo/signup';
+import { PATH_SIGNUP_LOADING_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const SEQ_COUNT: number = 5;
@@ -20,6 +22,7 @@ const PAGEING_TIME: number = 80;
 
 const sliderSetting: Settings = {
     dots: false,
+    lazyLoad: 'ondemand',
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: PAGEING_TIME,
@@ -45,6 +48,7 @@ const isPossibleSkip = (idx: number) => {
 };
 
 const SignupPage = (): JSX.Element => {
+    const navigation = useNavigate();
     const [idx, setIdx] = useState<number>(0);
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const sliderRef = useRef<Slider>(null);
@@ -88,13 +92,14 @@ const SignupPage = (): JSX.Element => {
             const isLast = idx + 1 === SEQ_COUNT;
             if (isLast) {
                 //uploaddata
+                navigation(PATH_SIGNUP_LOADING_PAGE); // must upload other component
             } else {
                 goPagingAction(true);
             }
         }
         setDialogOpen(false);
     };
-    console.log(`Page Render`);
+
     return (
         <DefaultPageContainer>
             <LinearProgress
