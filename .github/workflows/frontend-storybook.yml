@@ -30,9 +30,8 @@ jobs:
           node-version: 16.14.x
       - name: Run Install & build storybook
         run: |
-          npm i -g pnpm
-          pnpm i 
-          pnpm run build-storybook
+          npm i 
+          npm run build-storybook
           ls -al
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
