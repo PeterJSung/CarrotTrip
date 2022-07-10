@@ -240,7 +240,10 @@ X-AUTH-TOKEN: {JWT TOKEN}
             "readcount": 16603,
             "sigungucode": 18,
             "title": "가든파이브라이프(Garden5life)",
-            "recommendScore": 7.0
+            "recommendScore": 7.0,
+            "mbti": "ESTJ",
+            "mbtiAveScore": 9.0,
+            "aveScore": 5.75            
           },
           {
             "addr1": "서울특별시 송파구 중대로10길 42",
@@ -261,7 +264,10 @@ X-AUTH-TOKEN: {JWT TOKEN}
             "readcount": 9251,
             "sigungucode": 18,
             "title": "K2 (문정점)",
-            "recommendScore": 9.0
+            "recommendScore": 9.0,
+            "mbti": "ESTJ",
+            "mbtiAveScore": 5.0,
+            "aveScore": 2.25            
           }
         ]
       },
@@ -277,3 +283,6 @@ X-AUTH-TOKEN: {JWT TOKEN}
 }
 ```
 recommendScore가 예상별점을 의미한다.
+mbti는 해당 관광지와 제일 잘 맞는 MBTI를 의미한다.
+mbtiAveScore는 그 MBTI들의 평균점수를 의미한다.
+aveScore는 해당 관광지에 대한 평균별점을 의미한다.

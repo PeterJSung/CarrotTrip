@@ -4,12 +4,15 @@ import com.carrot.trip.common.PearsonUtil;
 import com.carrot.trip.dto.EvaluationDTO;
 import com.carrot.trip.dto.LocationOpenApiResponseDTO;
 import com.carrot.trip.entity.Evaluation;
+import com.carrot.trip.entity.Member;
 import com.carrot.trip.repository.EvaluationRepository;
+import com.carrot.trip.repository.MemberRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.classfile.ElementValue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.List;
+import java.util.Map.Entry;
 
 @Slf4j
 @Service
@@ -26,6 +30,7 @@ import java.util.List;
 public class OpenAPIService {
 
     private final EvaluationRepository evaluationRepository;
+    private final MemberRepository memberRepository;
     private final EvaluationService evaluationService;
 
     @Value("${openapi.secretkey}")
@@ -46,6 +51,7 @@ public class OpenAPIService {
 
         supporter(dto);
         recommendScore(dto, nickname);
+        recommendMBTI(dto);
 
         return dto;
     }
@@ -92,6 +98,49 @@ public class OpenAPIService {
         }
     }
 
+    public void recommendMBTI(LocationOpenApiResponseDTO dto) {
+        for (int i = 0; i < dto.getResponse().getBody().getItems().getItem().size(); i++) {
+            Map<String, Double> scoreSumByMBTI = new HashMap<String, Double>();
+            Map<String, Double> scoreCntByMBTI = new HashMap<String, Double>();
+            Map<String, Double> scoreAveByMBTI = new HashMap<String, Double>();
+
+            ArrayList<Evaluation> partiUsers = evaluationRepository.findByApiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
+            for(int j = 0; j < partiUsers.size(); j++){
+                Member partiMBTI = memberRepository.findByNickname(partiUsers.get(j).getMemberNickname()).orElseThrow(() -> new IllegalArgumentException("가입되지 않은 닉네임 입니다."));
+                Evaluation partiScore = evaluationRepository.findByMemberNicknameAndApiId(partiUsers.get(j).getMemberNickname(), dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
+
+                if (scoreSumByMBTI.get(partiMBTI.getMbti()) == null){
+                    scoreSumByMBTI.put(partiMBTI.getMbti(), partiScore.getScore());
+                    scoreCntByMBTI.put(partiMBTI.getMbti(), 1.0);
+                }
+                else {
+                    scoreSumByMBTI.put(partiMBTI.getMbti(), scoreSumByMBTI.get(partiMBTI.getMbti()) + partiScore.getScore());
+                    scoreCntByMBTI.put(partiMBTI.getMbti(), scoreCntByMBTI.get(partiMBTI.getMbti()) + 1.0);
+                }
+            }
+            for (Map.Entry<String, Double> entry : scoreSumByMBTI.entrySet()) {
+                scoreAveByMBTI.put(entry.getKey(), entry.getValue() / scoreCntByMBTI.get(entry.getKey()));
+            }
+            Comparator<Entry<String, Double>> comparator = new Comparator<Entry<String, Double>>() {
+                @Override
+                public int compare(Entry<String, Double> e1, Entry<String, Double> e2) {
+                    return e1.getValue().compareTo(e2.getValue());
+                }
+            };         // Max Value의 key, value
+            Entry<String, Double> maxEntry = Collections.max(scoreAveByMBTI.entrySet(), comparator);
+            /*
+            // Min Value의 key, value
+            Entry<String, Double> minEntry = Collections.min(scoreAveByMBTI.entrySet(), comparator);
+            // 결과 출력
+            System.out.println(maxEntry.getKey() + " : " + maxEntry.getValue()); // 2 : 70
+            System.out.println(minEntry.getKey() + " : " + minEntry.getValue()); // 1 : 5
+             */
+            dto.getResponse().getBody().getItems().getItem().get(i).setMbti(maxEntry.getKey());
+            dto.getResponse().getBody().getItems().getItem().get(i).setMbtiAveScore(maxEntry.getValue());
+        }
+
+    }
+
     public void recommendScore(LocationOpenApiResponseDTO dto, String nickname) {
         ArrayList<Evaluation> targetUser = evaluationRepository.findByMemberNickname(nickname);
         ArrayList<Long> targetUserContentIDs = new ArrayList<>(); // 추천대상 사용자가 평가한 모든 리스트를 가져온다
@@ -107,10 +156,16 @@ public class OpenAPIService {
             ArrayList<Evaluation> partiUsers = evaluationRepository.findByApiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
             double simmilarScore = -1000;
             double bestRecommendScore = 0;
+
+            double aveScore = 0; //특정 관광지에 대한 평점 계산을 하기 위한 변수
+            double cntScore = partiUsers.size(); //특정 관광지에 대한 평점 계산을 하기 위한 변수
             //ArrayList<Long> targetUserContentIDsAndTargetContentID = targetUserContentIDs;
             //targetUserContentIDsAndTargetContentID.add(dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
             for(int j = 0; j < partiUsers.size(); j++){ //
+
                 double candidateScore = partiUsers.get(j).getScore();
+                aveScore += partiUsers.get(j).getScore();
+
                 List<Double> xScore = new ArrayList<>();
                 List<Double> yScore = new ArrayList<>();
                 if(!partiUsers.get(j).getMemberNickname().equals(nickname)){
@@ -134,6 +189,8 @@ public class OpenAPIService {
 
             //하나의 content id에 대한 예상평점(내부 for에서 최고평점)을 주입
             dto.getResponse().getBody().getItems().getItem().get(i).setRecommendScore(bestRecommendScore);
+            //하나의 content id에 대한 평점 주입
+            dto.getResponse().getBody().getItems().getItem().get(i).setAveScore(aveScore / cntScore);
         }
     }
 
