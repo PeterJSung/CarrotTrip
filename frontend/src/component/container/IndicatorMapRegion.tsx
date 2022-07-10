@@ -43,16 +43,6 @@ const IndicatorMapRegion = (): JSX.Element => {
         });
     };
 
-    /*
-    const resetPosClick = useCallback(() => {
-        // timeout at 60000 milliseconds (60 seconds)
-        getGeoLocationInfo(setGpsState);
-    }, [setGpsState]);
-
-    useEffect(() => {
-        updateGpsState(gpsState.lat, gpsState.lng);
-    }, [gpsState]);
-*/
     return (
         <CommonIndicator>
             <MyProfileBtn onClick={console.log} />
