@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { gpsSelector } from 'redux/gps';
-import MapIndicatorRegion from './MapIndicatorRegion';
+import IndicatorMapRegion from './IndicatorMapRegion';
 
 const KakaoMapContainer = (): JSX.Element => {
     /*
@@ -40,7 +40,7 @@ const KakaoMapContainer = (): JSX.Element => {
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
                 <KakaoMapMarkerList onClick={console.log} markers={markers} />
             </Map>
-            <MapIndicatorRegion />
+            <IndicatorMapRegion />
         </Box>
     );
 };

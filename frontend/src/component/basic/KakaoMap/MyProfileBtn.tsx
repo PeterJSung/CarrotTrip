@@ -1,8 +1,6 @@
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { commonMapButton } from './commonMapButton';
-export interface MyProfileBtnProps {
-    onClick: () => void;
-}
+import { commonMapButton, CommonMapButtonProps } from './commonMapButton';
+
 /*
 const ProfileSVG = (): JSX.Element => (
     <svg width="18" height="8" viewBox="0 0 18 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +14,7 @@ const ProfileSVG = (): JSX.Element => (
     </svg>
 );
 */
-const MyProfileBtn = (props: MyProfileBtnProps): JSX.Element =>
+const MyProfileBtn = (props: CommonMapButtonProps): JSX.Element =>
     commonMapButton(<PersonOutlineIcon style={{ color: '#111313' }} />, props.onClick);
 
 export default MyProfileBtn;

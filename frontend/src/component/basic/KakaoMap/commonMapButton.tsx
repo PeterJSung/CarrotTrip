@@ -16,4 +16,8 @@ const commonMapButton = (icon: JSX.Element, handler: () => void): JSX.Element =>
     return <ButtonWrapper onClick={handler}>{icon}</ButtonWrapper>;
 };
 
+export interface CommonMapButtonProps {
+    onClick: () => void;
+}
+
 export { commonMapButton };
