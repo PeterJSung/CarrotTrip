@@ -70,7 +70,7 @@ public class DummyListDTO {
                 .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
                 .build());
         dummyList.add(DummyDTO.builder()
-                .name("Seoul Forest (서울숲)")
+                .name("Haeundae Beach (해운대해수욕장)")
                 .address("264, Haeundaehaebyeon-ro, Haeundae-gu, Busan")
                 .contentId(264155L)
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
@@ -99,7 +99,7 @@ public class DummyListDTO {
                 .build());
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
         dummyList.add(DummyDTO.builder()
-                .name("海雲台海水浴場（해운대해수욕장")
+                .name("海雲台海水浴場（해운대해수욕장)")
                 .address("プサン広域市ヘウンデ区ヘウンデヘビョンロ264")
                 .contentId(281824L)
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
@@ -111,36 +111,162 @@ public class DummyListDTO {
     /** 중문간체 */
     public static ArrayList<DummyDTO> getChsService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+         dummyList.add(DummyDTO.builder()
+                .name("首尔林(서울숲)")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("海云台海水浴场해운대해수욕장")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
     /** 중문번체 */
     public static ArrayList<DummyDTO> getChtService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
     /** 독어(독일어) */
     public static ArrayList<DummyDTO> getGerService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("首尔林(서울숲)")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("海云台海水浴场해운대해수욕장")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
     /** 불어(프랑스어) */
     public static ArrayList<DummyDTO> getFreService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("首尔林(서울숲)")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("海云台海水浴场해운대해수욕장")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
     /** 서어(스페인어) */
     public static ArrayList<DummyDTO> getSpnService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("首尔林(서울숲)")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("海云台海水浴场해운대해수욕장")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
     /** 노어(러시아어) */
     public static ArrayList<DummyDTO> getRusService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("首尔林(서울숲)")
+                .address("首尔特别市城东区纛岛路273(圣水洞1街、首尔林管理事务所)")
+                .contentId(805281L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("海云台海水浴场해운대해수욕장")
+                .address("釜山广域市海云台区海云台海边路264(佑洞)")
+                .contentId(331260L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+         dummyList.add(DummyDTO.builder()
+                .name("江华岛(강화도)")
+                .address("仁川广域市江华郡江华邑江华大路")
+                .contentId(331203L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
         return dummyList;
     }
 }
