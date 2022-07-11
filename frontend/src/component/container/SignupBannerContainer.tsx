@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Rating, Typography } from '@mui/material';
 import SelectChipDisplay from 'component/basic/Signup/SelectChipDisplay';
-import { getImpressionInfo, SelectChipVO } from 'component/basic/Signup/signupconstants';
+import { getImpressionAllData, SelectChipVO } from 'component/basic/Signup/signupconstants';
 import { YELLOW_COLOR } from 'globaltheme';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -45,7 +45,7 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
     const [isExpand, setIsExpand] = useState<boolean>(false);
     const [isFilled, setIsFilled] = useState<boolean>(false);
     const { t } = useTranslation();
-    const [chipData, setChipData] = useState<SelectChipVO[]>(getImpressionInfo(t));
+    const [chipData, setChipData] = useState<SelectChipVO[]>(getImpressionAllData(t));
     const [rating, setRating] = useState<number>(0);
     const updateCurrentBanner = useThunk(updateInfo2Banner);
 

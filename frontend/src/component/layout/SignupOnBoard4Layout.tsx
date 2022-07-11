@@ -1,5 +1,5 @@
 import SelectChipDisplay from 'component/basic/Signup/SelectChipDisplay';
-import { getImpressionInfo, SelectChipVO } from 'component/basic/Signup/signupconstants';
+import { getImpressionAllData, SelectChipVO } from 'component/basic/Signup/signupconstants';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import SignupCommonLayout from './SignupCommonLayout';
 
 const SignupOnBoard4Layout = (): JSX.Element => {
     const { t } = useTranslation();
-    const [chipArr, setChipArr] = useState<SelectChipVO[]>(getImpressionInfo(t));
+    const [chipArr, setChipArr] = useState<SelectChipVO[]>(getImpressionAllData(t));
     const nickName = useSelector(singupInfo1).userInfo?.nickName;
     const updateData = useThunk(updateInfo4);
 
