@@ -6,19 +6,23 @@ import * as actions from './actions';
 export type UserInfoAction = ActionType<typeof actions>;
 
 export type UserInfoState = SyncState<{
-    userInfo: boolean;
+    isLogin: boolean;
+    userId: string;
+    userName: string;
 }>;
 
 const initialState: UserInfoState = {
     data: {
-        userInfo: false,
+        isLogin: false,
+        userId: '',
+        userName: '',
     },
 };
 
 const reducers = createReducer<UserInfoState, UserInfoAction>(initialState, {
     [actions.UserInfoActions.UPDATE_USERINFO]: (state, action) =>
         produce(state, (draft) => {
-            draft.data.userInfo = action.payload;
+            draft.data = action.payload;
         }),
 });
 

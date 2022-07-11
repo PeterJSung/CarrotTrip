@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
-import { signupInfo2Banner, updateInfo2 } from 'redux/signupInfo';
+import { getSignupInfo2Banner, updateInfo2 } from 'redux/signupInfo';
 import styled from 'styled-components';
 import { LocaleCode } from 'vo/locale';
 import { EvaluationAreaRes, SignupBanner2Data, SignupInfo2Data } from 'vo/signup';
@@ -20,11 +20,10 @@ const SignupOnBoard2Layout = (): JSX.Element => {
     const [renderData, setRenderData] = useState<EvaluationAreaRes[]>([]);
     const { i18n, t } = useTranslation();
     const updateSignupInfo = useThunk(updateInfo2);
-    const getSignupInfo2Banner: SignupBanner2Data = useSelector(signupInfo2Banner);
+    const signupInfo2Banner: SignupBanner2Data = useSelector(getSignupInfo2Banner);
 
-    console.log(renderData);
     const totalDataCount = renderData.length;
-    const remainCount = Object.keys(getSignupInfo2Banner).length;
+    const remainCount = Object.keys(signupInfo2Banner).length;
     const needNextSeletCount = totalDataCount - remainCount;
     const lowerText =
         needNextSeletCount > 0 ? `${needNextSeletCount}개를 더 선택해주세요.` : '선택할 것이 남아있지 않습니다.';
@@ -47,12 +46,12 @@ const SignupOnBoard2Layout = (): JSX.Element => {
 
     useEffect(() => {
         const selectedData: SignupInfo2Data[] = [];
-        for (const key in getSignupInfo2Banner) {
+        for (const key in signupInfo2Banner) {
             const numberId = Number(key);
             selectedData.push({
                 id: numberId,
-                attraction: [...getSignupInfo2Banner[numberId].attraction],
-                score: getSignupInfo2Banner[numberId].score,
+                attraction: [...signupInfo2Banner[numberId].attraction],
+                score: signupInfo2Banner[numberId].score,
             });
         }
 

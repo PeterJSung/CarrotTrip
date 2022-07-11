@@ -6,7 +6,7 @@ export const pause = (ms: number): Promise<void> => {
         }, ms);
     });
 };
-console.log(new kakao.maps.services.Geocoder());
+
 export const someBigComplexData = async () => {
-    await pause(2500);
+    await pause(10000);
 };
