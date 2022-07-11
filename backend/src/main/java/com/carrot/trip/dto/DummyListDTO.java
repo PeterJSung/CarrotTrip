@@ -71,7 +71,7 @@ public class DummyListDTO {
                 .build());
         dummyList.add(DummyDTO.builder()
                 .name("Seoul Forest (서울숲)")
-                .address("2264, Haeundaehaebyeon-ro, Haeundae-gu, Busan")
+                .address("264, Haeundaehaebyeon-ro, Haeundae-gu, Busan")
                 .contentId(264155L)
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
                 .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
@@ -82,6 +82,29 @@ public class DummyListDTO {
     /** 일문 */
     public static ArrayList<DummyDTO> getJpnService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("江華島（강화도）")
+                .address("仁川広域市 江華郡 江華邑 江華大路")
+                .contentId(281768L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
+                .build());
+        ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("北村韓屋村（북촌한옥마을）")
+                .address("ソウル特別市 鐘路区 桂洞キル 37")
+                .contentId(655800L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/06/2512006_image2_1.jpg")
+                .thumbnail2(">http://tong.visitkorea.or.kr/cms/resource/06/2512006_image3_1.jpg")
+                .build());
+        ArrayList<DummyDTO> dummyList = new ArrayList<>();
+        dummyList.add(DummyDTO.builder()
+                .name("海雲台海水浴場（해운대해수욕장")
+                .address("プサン広域市ヘウンデ区ヘウンデヘビョンロ264")
+                .contentId(281824L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
         return dummyList;
     }
 
