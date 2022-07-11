@@ -20,6 +20,7 @@ const SmallHeadText = styled(CommonText)`
     font-weight: 700;
     font-size: 16px;
     line-height: 23px;
+    margin-bottom: 0.5rem;
 `;
 
 const DescriptionText = styled(CommonText)`

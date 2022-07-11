@@ -10,16 +10,20 @@ export interface AttractionInfo {
 interface PlaceRefInfo {
     translateKey: string;
     code: number;
+    src: string;
 }
+
+const COMMON_PREFIX_PLACE_SRC = `assets/placephoto`;
+
 export const i18n_PLACE_REF: PlaceRefInfo[] = [
-    { code: 2, translateKey: '관광지' },
-    { code: 3, translateKey: '문화시설' },
-    { code: 4, translateKey: '축제공연' },
-    { code: 5, translateKey: '여행코스' },
-    { code: 6, translateKey: '레포츠' },
-    { code: 7, translateKey: '숙박' },
-    { code: 8, translateKey: '쇼핑' },
-    { code: 9, translateKey: '음식점' },
+    { code: 1, translateKey: '관광지', src: `${COMMON_PREFIX_PLACE_SRC}/tourplace.png` },
+    { code: 2, translateKey: '문화시설', src: `${COMMON_PREFIX_PLACE_SRC}/culture.png` },
+    { code: 3, translateKey: '축제공연', src: `${COMMON_PREFIX_PLACE_SRC}/festival.png` },
+    { code: 4, translateKey: '여행코스', src: `${COMMON_PREFIX_PLACE_SRC}/travel.png` },
+    { code: 5, translateKey: '레포츠', src: `${COMMON_PREFIX_PLACE_SRC}/reports.png` },
+    { code: 6, translateKey: '숙박', src: `${COMMON_PREFIX_PLACE_SRC}/sukbak.png` },
+    { code: 7, translateKey: '쇼핑', src: `${COMMON_PREFIX_PLACE_SRC}/shop.png` },
+    { code: 8, translateKey: '음식점', src: `${COMMON_PREFIX_PLACE_SRC}/resto.png` },
 ];
 
 export const i18n_IMPRESSION_REF: AttractionInfo = {

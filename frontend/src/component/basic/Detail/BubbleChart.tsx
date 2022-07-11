@@ -72,6 +72,7 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
     private simulation: Simulation<SimulationNodeDatum, undefined> | undefined;
     constructor(props: BubbleChartProps) {
         super(props);
+        console.log(`Constructor`);
         this.state = {
             data: [],
         };
@@ -87,7 +88,7 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
     }
 
     componentDidUpdate(prevProps: BubbleChartProps) {
-        if (JSON.stringify(prevProps.bubblesData) !== JSON.stringify(this.props.bubblesData)) {
+        if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
             this.forceData = this.setForceData(this.props);
             this.animateBubbles();
         }

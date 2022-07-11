@@ -1,6 +1,8 @@
 import { Box, Divider } from '@mui/material';
 import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
+import DetailBubbleChartContainer from 'component/container/DetailBubbleChartContainer';
+import DetailMBTIContainer from 'component/container/DetailMBTIContainer';
 import { memo } from 'react';
 import styled from 'styled-components';
 
@@ -13,11 +15,21 @@ const ItemContainer = styled(Box)`
     }
 `;
 
-const PlaceDetailLayout = (): JSX.Element => {
+const ImgTag = styled.img`
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
+
+const DetailPlaceLayout = (): JSX.Element => {
     return (
         <Box>
-            <Box>
-                <img src="test" />
+            <Box height="11rem">
+                <ImgTag src="https://picsum.photos/800" />
             </Box>
             <ItemContainer>
                 <PlaceDescriptionDetail
@@ -28,9 +40,9 @@ const PlaceDetailLayout = (): JSX.Element => {
                 <Divider />
                 <PlaceAdressDetail adressHeaderText="주소" adressText="경기도 어쩌고 저쩌고" />
                 <Divider />
-                <div>bubble</div>
+                <DetailBubbleChartContainer />
                 <Divider />
-                <div>mbtilist</div>
+                <DetailMBTIContainer />
                 <Divider />
                 <div>reviewCOntainer</div>
             </ItemContainer>
@@ -38,4 +50,4 @@ const PlaceDetailLayout = (): JSX.Element => {
     );
 };
 
-export default memo(PlaceDetailLayout);
+export default memo(DetailPlaceLayout);

@@ -1,12 +1,12 @@
 import { ComponentMeta } from '@storybook/react';
 import { getDummyState } from 'stories/common.stories';
-import PlaceDetailLayout from './PlaceDetailLayout';
+import DetailPlaceLayout from './DetailPlaceLayout';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Layout/PlaceDetailLayout',
-    component: PlaceDetailLayout,
+    title: 'Layout/DetailPlaceLayout',
+    component: DetailPlaceLayout,
     decorators: [(story) => getDummyState(story())],
-} as ComponentMeta<typeof PlaceDetailLayout>;
+} as ComponentMeta<typeof DetailPlaceLayout>;
 
-export const placeDetailLayout = () => <PlaceDetailLayout />;
+export const detailPlaceLayout = () => <DetailPlaceLayout />;

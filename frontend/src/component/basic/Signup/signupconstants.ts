@@ -63,7 +63,7 @@ export const getPlaceInfo = (t: TFunction): SelectBoxVO[] => {
     // code need to setup
     i18n_PLACE_REF.forEach((eachData) => {
         ret.push({
-            src: 'https://picsum.photos/800', // it`ll be replace
+            src: eachData.src, // it`ll be replace
             checked: false,
             code: eachData.code,
             title: eachData.translateKey, //it`ll be converted from i18n

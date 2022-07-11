@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { i18n_PLACE_REF } from 'vo/travelInfo';
 import SelectSquareBox from './SelectSquareBox';
 
 export default {
@@ -28,7 +29,7 @@ const selectSquareBoxTemplate: ComponentStory<typeof SelectSquareBox> = (props) 
 
 export const selectSquareBox = selectSquareBoxTemplate.bind({});
 selectSquareBox.args = {
-    src: 'https://picsum.photos/800',
+    src: i18n_PLACE_REF[0].src,
     title: '바다',
     onClick: action('Select Box Click'),
 };

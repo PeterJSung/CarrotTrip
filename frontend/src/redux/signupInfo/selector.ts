@@ -1,10 +1,10 @@
 import { RootState } from 'redux/rootReducer';
 
-const singupInfo1 = (state: RootState) => state.signupInfo.data.signupInfo1;
-const signupInfo2Banner = (state: RootState) => state.signupInfo.data.signupInfo2Banner;
-const singupInfo2 = (state: RootState) => state.signupInfo.data.signupInfo2;
-const singupInfo3 = (state: RootState) => state.signupInfo.data.signupInfo3;
-const singupInfo4 = (state: RootState) => state.signupInfo.data.signupInfo4;
-const singupInfo5 = (state: RootState) => state.signupInfo.data.signupInfo5;
+const getSingupInfo1 = (state: RootState) => state.signupInfo.data.signupInfo1;
+const getSignupInfo2Banner = (state: RootState) => state.signupInfo.data.signupInfo2Banner;
+const getSingupInfo2 = (state: RootState) => state.signupInfo.data.signupInfo2;
+const getSingupInfo3 = (state: RootState) => state.signupInfo.data.signupInfo3;
+const getSingupInfo4 = (state: RootState) => state.signupInfo.data.signupInfo4;
+const getSingupInfo5 = (state: RootState) => state.signupInfo.data.signupInfo5;
 
-export { singupInfo1, signupInfo2Banner, singupInfo2, singupInfo3, singupInfo4, singupInfo5 };
+export { getSingupInfo1, getSignupInfo2Banner, getSingupInfo2, getSingupInfo3, getSingupInfo4, getSingupInfo5 };

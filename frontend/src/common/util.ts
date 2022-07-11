@@ -8,5 +8,5 @@ export const pause = (ms: number): Promise<void> => {
 };
 
 export const someBigComplexData = async () => {
-    await pause(2500);
+    await pause(10000);
 };

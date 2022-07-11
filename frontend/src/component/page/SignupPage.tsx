@@ -12,7 +12,7 @@ import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Slider, { Settings } from 'react-slick';
-import { singupInfo1, singupInfo2, singupInfo3, singupInfo4, singupInfo5 } from 'redux/signupInfo';
+import { getSingupInfo1, getSingupInfo2, getSingupInfo3, getSingupInfo4, getSingupInfo5 } from 'redux/signupInfo';
 import { CombinedSignupData } from 'vo/signup';
 import { PATH_SIGNUP_LOADING_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
@@ -54,11 +54,11 @@ const SignupPage = (): JSX.Element => {
     const sliderRef = useRef<Slider>(null);
 
     const infoArr: Array<CombinedSignupData<any>> = [];
-    infoArr.push(useSelector(singupInfo1));
-    infoArr.push(useSelector(singupInfo2));
-    infoArr.push(useSelector(singupInfo3));
-    infoArr.push(useSelector(singupInfo4));
-    infoArr.push(useSelector(singupInfo5));
+    infoArr.push(useSelector(getSingupInfo1));
+    infoArr.push(useSelector(getSingupInfo2));
+    infoArr.push(useSelector(getSingupInfo3));
+    infoArr.push(useSelector(getSingupInfo4));
+    infoArr.push(useSelector(getSingupInfo5));
 
     const disp = infoArr[idx].disp;
     const forceSkip = isPossibleSkip(idx);

@@ -2,16 +2,18 @@ import { Box } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, Story } from '@storybook/react';
 import { PropsWithChildren } from 'react';
+import { i18n_PLACE_REF } from 'vo/travelInfo';
 import SelectSquareBoxGrid from './SelectSquareBoxGrid';
 import { SelectBoxVO } from './signupconstants';
 
 const generateDummyData = (count: number): SelectBoxVO[] => {
     const ret: SelectBoxVO[] = [];
     for (let i = 0; i < count; i++) {
+        const srcIdx = i % i18n_PLACE_REF.length;
         ret.push({
             code: i,
             checked: false,
-            src: 'https://picsum.photos/800',
+            src: i18n_PLACE_REF[srcIdx].src,
             title: `제목${i}`,
         });
     }
