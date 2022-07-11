@@ -89,7 +89,6 @@ public class DummyListDTO {
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
                 .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
                 .build());
-        ArrayList<DummyDTO> dummyList = new ArrayList<>();
         dummyList.add(DummyDTO.builder()
                 .name("北村韓屋村（북촌한옥마을）")
                 .address("ソウル特別市 鐘路区 桂洞キル 37")
@@ -97,7 +96,6 @@ public class DummyListDTO {
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/06/2512006_image2_1.jpg")
                 .thumbnail2(">http://tong.visitkorea.or.kr/cms/resource/06/2512006_image3_1.jpg")
                 .build());
-        ArrayList<DummyDTO> dummyList = new ArrayList<>();
         dummyList.add(DummyDTO.builder()
                 .name("海雲台海水浴場（해운대해수욕장)")
                 .address("プサン広域市ヘウンデ区ヘウンデヘビョンロ264")
