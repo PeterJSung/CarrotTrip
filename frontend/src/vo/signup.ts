@@ -1,5 +1,7 @@
-export interface IdRetrieveReq {
-    nickName: string;
+export interface IdRetrieveRes {
+    data: boolean;
+    message: string;
+    statusCode: string;
 }
 
 export interface EvaluationAreaRes {
