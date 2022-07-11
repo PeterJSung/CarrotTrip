@@ -58,9 +58,23 @@ public class DummyListDTO {
          dummyList.add(DummyDTO.builder()
                 .name("Eurwang-ri Beach (을왕리해수욕장)")
                 .address("16-15, Yongyuseo-ro 302beon-gil, Jung-gu, Incheon")
-                .contentId(264514)
+                .contentId(264514L)
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/66/2512766_image2_1.jpg")
                 .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/66/2512766_image2_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("Seoul Forest (서울숲)")
+                .address("273, Ttukseom-ro, Seongdong-gu, Seoul")
+                .contentId(789696L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("Seoul Forest (서울숲)")
+                .address("2264, Haeundaehaebyeon-ro, Haeundae-gu, Busan")
+                .contentId(264155L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
                 .build());
         return dummyList;
     }
