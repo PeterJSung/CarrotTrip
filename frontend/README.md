@@ -38,6 +38,7 @@ https://developers.kakao.com/docs/latest/ko/local/dev-guide
 {
     "test": "It is Test Data",  // 변수 없이 기본 키워드로 설정
     "test_with_variable": "Welcome, {{name}}!" // 외부 변수를 넣고싶다면 {{변수명}} 을 넣어서 작업하면됨.
+}
 ```
 
 ## 알고리즘 관련

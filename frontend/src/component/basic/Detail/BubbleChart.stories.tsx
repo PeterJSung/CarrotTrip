@@ -39,7 +39,7 @@ export default {
 
 type Args = React.ComponentProps<typeof BubbleChart> & InputPropOverrides;
 
-export const bubbleChart: Story<Args> = ({ itemCount }) => {
+export const HookBubbleChart: Story<Args> = ({ itemCount }) => {
     const { t } = useTranslation();
     const idArr = [];
     if (itemCount >= 15) {
