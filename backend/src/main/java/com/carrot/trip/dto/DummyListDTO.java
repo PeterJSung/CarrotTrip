@@ -55,6 +55,13 @@ public class DummyListDTO {
     /** 영문 */
     public static ArrayList<DummyDTO> getEngService() {
         ArrayList<DummyDTO> dummyList = new ArrayList<>();
+         dummyList.add(DummyDTO.builder()
+                .name("Eurwang-ri Beach (을왕리해수욕장)")
+                .address("16-15, Yongyuseo-ro 302beon-gil, Jung-gu, Incheon")
+                .contentId(264514)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/66/2512766_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/66/2512766_image2_1.jpg")
+                .build());
         return dummyList;
     }
 
