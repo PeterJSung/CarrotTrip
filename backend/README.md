@@ -2,13 +2,7 @@
 ## 1. 회원가입 페이지 (Onboarding_01)
 ### 1.1 닉네임 중복체크
 #### URI
-``GET`` ``/api/join/isExistNickname``
-#### Request
-```json
-{
-    "nickName": "태호"
-}
-```
+``GET`` ``/api/join/isExistNickname/{nickname}``
 #### Response
 ```json
 {

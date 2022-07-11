@@ -1,10 +1,6 @@
 ### 1.1 닉네임 중복체크
-GET http://localhost:8080/api/join/isExistNickname
-Content-Type: application/json
+GET http://localhost:8080/api/join/isExistNickname/이런닉네임은아직없겠지false가뜬다면없는거다
 
-{
-  "nickName": "이런닉네임은아직없겠지false가뜬다면없는거다"
-}
 
 ### 1.2 회원가입
 POST http://localhost:8080/api/join

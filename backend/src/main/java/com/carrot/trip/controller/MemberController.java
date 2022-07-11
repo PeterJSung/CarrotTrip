@@ -70,10 +70,10 @@ public class MemberController {
     }
 
     // 회원가입
-    @GetMapping("/join/isExistNickname")
-    public Response<Boolean> idCheck(@RequestBody Map<String, String> user) {
+    @GetMapping("/join/isExistNickname/{nickname}")
+    public Response<Boolean> idCheck(@PathVariable("nickname") String nickname) {
 
-        if(memberService.isExistUserByNickname(user.get("nickName"))){
+        if(memberService.isExistUserByNickname(nickname)){
             return Response.ok(true);
         }
 
