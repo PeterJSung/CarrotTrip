@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { BLACK_COLOR, GRAY_COLOR } from 'globaltheme';
 import { memo, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +18,7 @@ const UpperTextTypo = styled(Typography)`
     font-weight: 700 !important;
     font-size: 20px !important;
     line-height: 29px !important;
-    color: #191919 !important;
+    color: ${BLACK_COLOR} !important;
     margin-bottom: 0.5rem !important;
 `;
 
@@ -27,7 +28,7 @@ const LowerTextTypo = styled(Typography)`
     font-weight: 400 !important;
     font-size: 15px !important;
     line-height: 22px !important;
-    color: #6d6d6d !important;
+    color: ${GRAY_COLOR} !important;
     margin-bottom: 1.5rem !important;
 `;
 const SignupCommonLayout = (props: PropsWithChildren<SignupCommonLayoutProps>): JSX.Element => {

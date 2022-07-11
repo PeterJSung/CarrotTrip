@@ -1,5 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { BLACK_COLOR } from 'globaltheme';
 import styled from 'styled-components';
+import CommonBtn from '../common/CommonBtn';
 
 export interface SkipDialogProps {
     onClick: (isSkip: boolean) => void;
@@ -10,7 +12,7 @@ const CommonTypo = styled.p`
     font-family: 'Noto Sans KR';
     font-style: normal;
     letter-spacing: -0.5px;
-    color: #191919;
+    color: ${BLACK_COLOR};
 `;
 
 const HeaderTypo = styled(CommonTypo)`
@@ -25,15 +27,8 @@ const BodyTypo = styled(CommonTypo)`
     line-height: 20px;
 `;
 
-const ConfirmBtn = styled(Button)<{ isBlack: boolean }>`
-    background-color: ${(p) => (p.isBlack ? `#191919` : 'white')};
-    color: ${(p) => (p.isBlack ? 'white' : `#191919`)};
-    border-radius: 0.5rem;
+const DialogBtn = styled(CommonBtn)`
     width: 40%;
-    border: 0.15rem solid #191919;
-    &:hover {
-        background-color: ${(p) => (p.isBlack ? 'rgba(25,25,25,0.75)' : `#1976d20a`)};
-    }
 `;
 
 const SkipDialog = (props: SkipDialogProps): JSX.Element => {
@@ -63,12 +58,12 @@ const SkipDialog = (props: SkipDialogProps): JSX.Element => {
                     justifyContent: 'space-around',
                 }}
             >
-                <ConfirmBtn isBlack={false} onClick={noSkipAction}>
+                <DialogBtn isBlack={false} onClick={noSkipAction}>
                     취소
-                </ConfirmBtn>
-                <ConfirmBtn isBlack={true} onClick={skipAction}>
-                    다음
-                </ConfirmBtn>
+                </DialogBtn>
+                <DialogBtn isBlack={true} onClick={skipAction}>
+                    확인
+                </DialogBtn>
             </DialogActions>
         </Dialog>
     );

@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Rating, Typography } from '@mui/material';
 import SelectChipDisplay from 'component/basic/Signup/SelectChipDisplay';
 import { getImpressionAllData, SelectChipVO } from 'component/basic/Signup/signupconstants';
-import { YELLOW_COLOR } from 'globaltheme';
+import { GRAY_COLOR, YELLOW_COLOR } from 'globaltheme';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThunk } from 'redux/common';
@@ -31,7 +31,7 @@ const SkipTypo = styled(Typography)`
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 17px !important;
-    color: #6d6d6d !important;
+    color: ${GRAY_COLOR} !important;
     text-decoration-line: underline !important;
 `;
 

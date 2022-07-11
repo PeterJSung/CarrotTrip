@@ -1,5 +1,5 @@
 import { Box, LinearProgress, styled } from '@mui/material';
-import SignupButton from 'component/basic/Signup/SignupButton';
+import CommonBtn from 'component/basic/common/CommonBtn';
 import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SkipDialog from 'component/basic/Signup/SkipDialog';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
@@ -29,6 +29,11 @@ const sliderSetting: Settings = {
     swipe: false,
     draggable: false,
 };
+
+const SignupPageBtn = styled(CommonBtn)`
+    width: 100%;
+    height: 100%;
+`;
 
 const OnBoardingBox = styled(Box)`
     & > div {
@@ -131,9 +136,9 @@ const SignupPage = (): JSX.Element => {
                 </Slider>
             </Box>
             <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
-                <SignupButton disabled={disp.isDisable} onClick={() => onNextClick(true)}>
+                <SignupPageBtn isBlack={true} disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
-                </SignupButton>
+                </SignupPageBtn>
             </Box>
             <SkipDialog open={dialogOpen} onClick={skipConfirmBtnClick} />
         </DefaultPageContainer>
