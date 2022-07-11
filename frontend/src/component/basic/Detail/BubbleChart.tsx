@@ -72,7 +72,6 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
     private simulation: Simulation<SimulationNodeDatum, undefined> | undefined;
     constructor(props: BubbleChartProps) {
         super(props);
-        console.log(`Constructor`);
         this.state = {
             data: [],
         };

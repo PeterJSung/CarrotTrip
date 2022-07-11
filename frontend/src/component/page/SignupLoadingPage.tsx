@@ -88,7 +88,7 @@ const SignupLoadingPage = (): JSX.Element => {
                 <HeadText>{`${signupInfo1.userInfo?.nickName}님을 위한 추천 여행지를 찾는 중이에요`}</HeadText>
                 <WaitingText>잠시만 기다려주세요!</WaitingText>
             </BodyWrapper>
-            <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
+            <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
                 <SignupLoadingPageBtn isBlack={true} disabled={!result} onClick={btnClick}>
                     {btnText}
                 </SignupLoadingPageBtn>

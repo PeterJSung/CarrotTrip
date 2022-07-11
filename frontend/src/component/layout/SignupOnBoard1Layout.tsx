@@ -39,7 +39,6 @@ const SignupOnBoard1Layout = (): JSX.Element => {
     const updateSignupInfo = useThunk(updateInfo1);
 
     const updateDataCB = (nextData: InputLayoutType) => {
-        console.log(nextData);
         if (nextData.nickName !== '' && nextData.pw !== '' && nextData.pwConfirm !== '') {
             updateSignupInfo({
                 disp: {
@@ -57,10 +56,8 @@ const SignupOnBoard1Layout = (): JSX.Element => {
         let isExist: boolean = false;
         if (currentUserName.length > 0) {
             isExist = await getUserExist(currentUserName);
-            console.log(1);
         }
         updateDataCB({ ...data, nickName: currentUserName, exist: isExist });
-        console.log(2);
     }, DEFAULT_DEBOUNCE_TEXT);
 
     const passwordChange = debounce(async (e: any) => {

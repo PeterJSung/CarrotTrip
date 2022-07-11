@@ -83,8 +83,12 @@ const SignupPage = (): JSX.Element => {
     const onNextClick = debounce((next: boolean) => {
         if (next && idx + 1 !== SEQ_COUNT) {
             goPagingAction(true);
-        } else if (!next && idx !== 0) {
-            goPagingAction(false);
+        } else if (!next) {
+            if (idx !== 0) {
+                goPagingAction(false);
+            } else {
+                navigation(-1);
+            }
         }
     }, PAGEING_TIME);
 
@@ -135,7 +139,7 @@ const SignupPage = (): JSX.Element => {
                     </OnBoardingBox>
                 </Slider>
             </Box>
-            <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
+            <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
                 <SignupPageBtn isBlack={true} disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
                 </SignupPageBtn>

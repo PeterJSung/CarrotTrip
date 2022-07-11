@@ -5,7 +5,6 @@ export const ID_EXIST_URL: string = '/api/join/isExistNickname';
 
 export const getUserExist = async (username: string): Promise<boolean> => {
     const response = await restGet<{}, IdRetrieveRes>(`${ID_EXIST_URL}/${username}`);
-    console.log(response);
     return response.data.data;
 };
 
