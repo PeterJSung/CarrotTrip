@@ -2,13 +2,7 @@
 ## 1. 회원가입 페이지 (Onboarding_01)
 ### 1.1 닉네임 중복체크
 #### URI
-``GET`` ``/api/join/isExistNickname``
-#### Request
-```json
-{
-    "nickName": "태호"
-}
-```
+``GET`` ``/api/join/isExistNickname/{nickname}``
 #### Response
 ```json
 {
@@ -184,7 +178,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ## 4. 특정 사용자 대한 성향 등록 페이지 (Onboarding_05)
 ###  4.1 특정 사용자 대한 성향 등록 (조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적)
 #### URI
-``POST`` ``/evaluation/taste/member``
+``POST`` ``/api/evaluation/taste/member``
 #### Header
 Content-Type: application/json
 
@@ -206,4 +200,83 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ```
 코드 별 코드네임은 TasteCode.java 참조
 
+## 5. 메인화면 (지도)
+###  5.1 위치기반 주변 관광지 및 예상별점 받기 (업데이트 예정 : MBTI 추천 정보)
+#### URI
+``GET`` ``/api/touristAttraction/list/x/{경도 (ex)127.1625892}/y/{위도 (ex)37.4587305}/nickname/{nickName}``
+#### Header
+Content-Type: application/json
 
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Response
+```json
+{
+  "response": {
+    "body": {
+      "items": {
+        "item": [
+          {
+            "addr1": "서울특별시 송파구 충민로 66",
+            "areacode": 1,
+            "cat1": "A04",
+            "cat2": "A0401",
+            "cat3": "A04010600",
+            "contentid": 732484,
+            "contenttypeid": 38,
+            "createdtime": 20090511234754,
+            "dist": 4067,
+            "firstimage": "http://tong.visitkorea.or.kr/cms/resource/78/1920578_image2_1.jpg",
+            "firstimage2": "http://tong.visitkorea.or.kr/cms/resource/78/1920578_image3_1.jpg",
+            "mapx": 127.1229354097,
+            "mapy": 37.4770061292,
+            "mlevel": 6,
+            "modifiedtime": 20220324165652,
+            "readcount": 16603,
+            "sigungucode": 18,
+            "title": "가든파이브라이프(Garden5life)",
+            "recommendScore": 7.0,
+            "mbti": "ESTJ",
+            "mbtiAveScore": 9.0,
+            "aveScore": 5.75            
+          },
+          {
+            "addr1": "서울특별시 송파구 중대로10길 42",
+            "areacode": 1,
+            "cat1": "A04",
+            "cat2": "A0401",
+            "cat3": "A04010600",
+            "contentid": 987584,
+            "contenttypeid": 38,
+            "createdtime": 20100326145236,
+            "dist": 4944,
+            "firstimage": "http://tong.visitkorea.or.kr/cms/resource/12/1000812_image2_1.jpg",
+            "firstimage2": "http://tong.visitkorea.or.kr/cms/resource/12/1000812_image3_1.jpg",
+            "mapx": 127.1238488274,
+            "mapy": 37.4906934463,
+            "mlevel": 6,
+            "modifiedtime": 20211104155245,
+            "readcount": 9251,
+            "sigungucode": 18,
+            "title": "K2 (문정점)",
+            "recommendScore": 9.0,
+            "mbti": "ESTJ",
+            "mbtiAveScore": 5.0,
+            "aveScore": 2.25            
+          }
+        ]
+      },
+      "numOfRows": 100,
+      "pageNo": 1,
+      "totalCount": 82
+    },
+    "header": {
+      "resultCode": "0000",
+      "resultMsg": "OK"
+    }
+  }
+}
+```
+recommendScore가 예상별점을 의미한다.
+mbti는 해당 관광지와 제일 잘 맞는 MBTI를 의미한다.
+mbtiAveScore는 그 MBTI들의 평균점수를 의미한다.
+aveScore는 해당 관광지에 대한 평균별점을 의미한다.

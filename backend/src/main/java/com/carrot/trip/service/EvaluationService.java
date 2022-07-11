@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Slf4j
@@ -25,6 +26,7 @@ public class EvaluationService {
     private final MemberFavoriteCategoryRepository memberFavoriteCategoryRepository;
     private final MemberTasteRepository memberTasteRepository;
 
+    @Transactional
     public EvaluationDTO createEvaluation(EvaluationDTO evaluationDTO) {
         evaluationRepository.deleteEvaluationsByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
         evaluationRepository.save(Evaluation.builder()
