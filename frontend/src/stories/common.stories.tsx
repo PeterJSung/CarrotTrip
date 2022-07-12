@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Gps from 'redux/gps';
 import PlaceInfo from 'redux/placeInfo';
-import UserInfo from 'redux/userInfo';
+import UserInfo, { UserInfoState } from 'redux/userInfo';
 
 import { PlaceInfoState } from 'redux/placeInfo';
 import { CombinedStateType } from 'redux/rootReducer';
-import SignupInfo from 'redux/signupInfo';
+import SignupInfo, { getDefaultSignupInfoDisp, SignupOnboardState } from 'redux/signupInfo';
 import { PlaceBasicInformation, PlaceDetailInformation } from 'vo/placeInfo';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
@@ -47,7 +47,7 @@ const getDummyPlaceDetail: PlaceDetailInformation = {
     reviewArr: [],
 };
 
-const dummyPlcaeStore: PlaceInfoState = {
+const dummyPlaceStore: PlaceInfoState = {
     data: {
         basicInfo: getDummyPlaceBasic,
         detailInfo: getDummyPlaceDetail,
@@ -55,4 +55,38 @@ const dummyPlcaeStore: PlaceInfoState = {
     },
 };
 
-export { genDummyStore, getDummyState, getDummyStateWithMock, dummyRouter, dummyPlcaeStore };
+const dummyUserInfoStore: UserInfoState = {
+    data: {
+        isLogin: false,
+        userId: 'Test Id',
+        userName: 'Test Name',
+    },
+};
+
+const dummySingupInfoStore: SignupOnboardState = {
+    data: {
+        signupInfo1: {
+            disp: getDefaultSignupInfoDisp(),
+            userInfo: {
+                nickName: 'TestNickName',
+                pw: 'testPw',
+                pwConfirm: 'testPwConfirm',
+            },
+        },
+        signupInfo2: { disp: getDefaultSignupInfoDisp(), userInfo: [] },
+        signupInfo2Banner: {},
+        signupInfo3: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+        signupInfo4: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+        signupInfo5: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+    },
+};
+
+export {
+    genDummyStore,
+    getDummyState,
+    getDummyStateWithMock,
+    dummyRouter,
+    dummyPlaceStore,
+    dummyUserInfoStore,
+    dummySingupInfoStore,
+};

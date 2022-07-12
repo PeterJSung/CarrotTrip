@@ -1,12 +1,17 @@
 import { Box } from '@mui/material';
+import { getTourNaviInfo } from 'api/navigation';
 import { DEFAULT_MAP_LEVEL } from 'common/constants';
-import KakaoMapMarkerList, { MarkerInfo } from 'component/basic/KakaoMap/MarkerList';
 import MyLocationMarker from 'component/basic/KakaoMap/MyLocationMarker';
-import { useEffect, useRef } from 'react';
-import { Map } from 'react-kakao-maps-sdk';
+import { useEffect, useRef, useState } from 'react';
+import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { gpsSelector } from 'redux/gps';
 import IndicatorMapRegion from './IndicatorMapRegion';
+
+interface LatLng {
+    lat: number;
+    lng: number;
+}
 
 const KakaoMapContainer = (): JSX.Element => {
     /*
@@ -17,8 +22,12 @@ const KakaoMapContainer = (): JSX.Element => {
         url: '//dapi.kakao.com/v2/maps/sdk.js',
     });
     */
+
+    const [guide, setGuidLine] = useState<LatLng[]>([]);
+    const [road, setRoad] = useState<LatLng[]>([]);
+    const [markers, setMarkers] = useState<LatLng[]>([]);
     const currentGpsInfo = useSelector(gpsSelector);
-    const markers: MarkerInfo[] = [];
+    //const markers: MarkerInfo[] = [];
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
@@ -30,6 +39,79 @@ const KakaoMapContainer = (): JSX.Element => {
         }
     }, [mapRef, currentGpsInfo]);
 
+    useEffect(() => {
+        const fetch = async () => {
+            console.log(`NaviStart`);
+            const ret = await getTourNaviInfo(
+                {
+                    x: 126.97224161387756,
+                    y: 37.57776094924411,
+                },
+                [
+                    {
+                        y: 37.57412170480612,
+                        x: 126.9757522146493,
+                    },
+                    {
+                        y: 37.57249172836604,
+                        x: 126.98016750972909,
+                    },
+                    {
+                        y: 37.57129493286989,
+                        x: 126.99429485433944,
+                    },
+                    {
+                        y: 37.573106029495335,
+                        x: 127.0031243220909,
+                    },
+                ],
+            );
+            console.log(ret);
+            const guidVertex: LatLng[] = [];
+            const roadVertex: LatLng[] = [];
+            const position: LatLng[] = [];
+            ret.routes.forEach((r) => {
+                r.sections.forEach((s) => {
+                    s.guides.forEach((sr) => {
+                        guidVertex.push({
+                            lng: sr.x,
+                            lat: sr.y,
+                        });
+                    });
+                    s.roads.forEach((aaa) => {
+                        for (let i = 0; i < aaa.vertexes.length; i += 2) {
+                            roadVertex.push({
+                                lng: aaa.vertexes[i],
+                                lat: aaa.vertexes[i + 1],
+                            });
+                        }
+                    });
+                });
+            });
+            position.push({
+                lat: ret.routes[0].summary.origin.y,
+                lng: ret.routes[0].summary.origin.x,
+            });
+            ret.routes[0].summary.waypoints.forEach((d) => {
+                position.push({
+                    lat: d.y,
+                    lng: d.x,
+                });
+            });
+            position.push({
+                lat: ret.routes[0].summary.destination.y,
+                lng: ret.routes[0].summary.destination.x,
+            });
+            setRoad(roadVertex);
+            setMarkers(position);
+            setGuidLine(guidVertex);
+        };
+        fetch();
+    }, []);
+
+    console.log(`Data`);
+    console.log(guide);
+
     return (
         <Box width="100%" height="100%" position="relative">
             <Map
@@ -38,7 +120,28 @@ const KakaoMapContainer = (): JSX.Element => {
                 style={{ width: '100%', height: '100%' }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
-                <KakaoMapMarkerList onClick={console.log} markers={markers} />
+                {markers.map((res) => (
+                    <MapMarker
+                        position={{
+                            ...res,
+                        }}
+                    />
+                ))}
+
+                <Polyline
+                    path={guide}
+                    strokeWeight={3} // 선의 두께 입니다
+                    strokeColor={'red'} // 선의 색깔입니다
+                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                    strokeStyle={'solid'} // 선의 스타일입니다
+                />
+                <Polyline
+                    path={road}
+                    strokeWeight={3} // 선의 두께 입니다
+                    strokeColor={'blue'} // 선의 색깔입니다
+                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                    strokeStyle={'solid'} // 선의 스타일입니다
+                />
             </Map>
             <IndicatorMapRegion />
         </Box>

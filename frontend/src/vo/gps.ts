@@ -28,3 +28,82 @@ export interface KakaoRegionInfo {
     x: number;
     y: number;
 }
+
+export interface KakaoNaviAPIReqBody {
+    avoid: NaviAvoidType[];
+    origin: NaviPoint; // 현재 내 GPS 위치
+    destination: NaviPoint; // 여행지의 맨 끝
+    waypoints: NaviPoint[]; // 맨끝을 제외한 여행지 순서대로 넣기
+}
+
+export interface KakaoNaviAPIRes {
+    trans_id: string;
+    routes: NaviRoute[];
+}
+
+interface NaviRoute {
+    result_code: number;
+    result_msg: string;
+    summary: NaviSummary;
+    sections: NaviSecion[];
+}
+
+interface NaviRoad {
+    name: string;
+    distance: number;
+    duration: number;
+    traffic_speed: number;
+    traffic_state: number;
+    vertexes: number[];
+}
+
+interface NaviGuide {
+    name: string;
+    x: number;
+    y: number;
+    distance: number;
+    duration: number;
+    type: number;
+    guidance: string;
+    road_index: number;
+}
+
+interface NaviBound {
+    min_x: number;
+    min_y: number;
+    max_x: number;
+    max_y: number;
+}
+
+type NaviAvoidType = 'roadevent' | 'ferries' | 'toll' | 'schoolzone' | 'motorway';
+type NaviPriorityType = 'RECOMMEND' /* 추천(Default) */ | 'TIME' /* 최단시간 */ | 'DISTANCE'; /* 최단경로 */
+
+interface NaviFare {
+    taxi: number;
+    toll: number;
+}
+
+export interface NaviPoint {
+    name?: String;
+    x: number;
+    y: number;
+}
+
+interface NaviSummary {
+    origin: NaviPoint;
+    destination: NaviPoint;
+    waypoints: NaviPoint[];
+    priority: NaviPriorityType;
+    bound: NaviBound;
+    fare: NaviFare;
+    distance: number;
+    duration: number;
+}
+
+interface NaviSecion {
+    distance: number;
+    duration: number;
+    bound: NaviBound;
+    roads: NaviRoad[];
+    guides: NaviGuide[];
+}
