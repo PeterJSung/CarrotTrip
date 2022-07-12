@@ -109,7 +109,7 @@ tasteCode: 조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 
 
 ###  2.3 관광지 더미 데이터 가져오기
 #### URI
-``GET`` ``/api/api/evaluation/dummy/lang/{lang}``
+``GET`` ``/api/evaluation/dummy/lang/{lang}``
 #### Header
 Content-Type: application/json
 
@@ -203,7 +203,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ## 5. 메인화면 (지도)
 ###  5.1 위치기반 주변 관광지 및 예상별점 받기 (업데이트 예정 : MBTI 추천 정보)
 #### URI
-``GET`` ``/api/touristAttraction/list/x/{경도 (ex)127.1625892}/y/{위도 (ex)37.4587305}/nickname/{nickName}``
+``GET`` ``/api/touristAttraction/list/x/{경도 (ex)127.1625892}/y/{위도 (ex)37.4587305}/nickname/{nickName}/language/{lang}``
 #### Header
 Content-Type: application/json
 

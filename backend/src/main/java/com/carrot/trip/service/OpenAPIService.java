@@ -36,10 +36,10 @@ public class OpenAPIService {
     @Value("${openapi.secretkey}")
     private  String secretKey;
 
-    public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname) throws URISyntaxException, JsonProcessingException {
+    public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname, String lang) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
+        String url = "http://api.visitkorea.or.kr/openapi/service/rest/" + lang + "/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
         URI uri = new URI(url);
 
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);

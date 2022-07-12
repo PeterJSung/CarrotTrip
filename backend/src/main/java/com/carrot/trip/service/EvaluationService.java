@@ -70,6 +70,27 @@ public class EvaluationService {
         if (lang.equals("korService")){
             return DummyListDTO.getKorService();
         }
+        else if (lang.equals("JpnService")){
+            return DummyListDTO.getJpnService();
+        }
+        else if (lang.equals("ChsService")){
+            return DummyListDTO.getChsService();
+        }
+        else if (lang.equals("ChtService")){
+            return DummyListDTO.getChtService();
+        }
+        else if (lang.equals("GerService")){
+            return DummyListDTO.getGerService();
+        }
+        else if (lang.equals("FreService")){
+            return DummyListDTO.getFreService();
+        }
+        else if (lang.equals("SpnService")){
+            return DummyListDTO.getSpnService();
+        }
+        else if (lang.equals("RusService")){
+            return DummyListDTO.getRusService();
+        }
         else {
             return DummyListDTO.getEngService();
         }

@@ -75,7 +75,7 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 }
 
 ### 5.1 위치기반 관광지 리스트 조회
-GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305/nickname/테스터
+GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305/nickname/테스터/language/KorService
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
 
