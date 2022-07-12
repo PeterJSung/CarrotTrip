@@ -8,10 +8,10 @@ const MyLocationMarker = (props: MyLocationMarkerProps): JSX.Element => {
     return (
         <MapMarker
             image={{
-                src: 'https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif',
+                src: 'assets/maps/currenticon.png',
                 size: {
-                    width: DEFAULT_REM_PX * 1.75,
-                    height: DEFAULT_REM_PX * 1.75,
+                    width: DEFAULT_REM_PX * 1.4,
+                    height: DEFAULT_REM_PX * 1.4,
                 },
             }}
             position={{ lat: props.lat, lng: props.lng }}

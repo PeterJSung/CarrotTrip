@@ -13,7 +13,7 @@ const passwordLabel = '비밀번호';
 const passwordConfirmLabel = '비밀번호 확인';
 type InputLayoutType = SignupInfo1Data & { exist: boolean };
 
-const DEFAULT_DEBOUNCE_TEXT = 100;
+const DEFAULT_DEBOUNCE_TEXT = 200;
 
 const TextFiledWrapper = styled(Box)`
     width: 100%;
@@ -53,7 +53,10 @@ const SignupOnBoard1Layout = (): JSX.Element => {
 
     const nickNameChange = debounce(async (e: any) => {
         const currentUserName: string = e.target.value;
-        const isExist = await getUserExist(currentUserName);
+        let isExist: boolean = false;
+        if (currentUserName.length > 0) {
+            isExist = await getUserExist(currentUserName);
+        }
         updateDataCB({ ...data, nickName: currentUserName, exist: isExist });
     }, DEFAULT_DEBOUNCE_TEXT);
 

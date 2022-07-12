@@ -1,17 +1,25 @@
-import { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, ReducersMapObject } from '@reduxjs/toolkit';
 
-import Counter from './counter';
-import Github from './github';
-import Gps from './gps';
-import SignupInfo from './signupInfo';
-import UserInfo from './userInfo';
+import Gps, { GpsState } from './gps';
+import PlaceInfo, { PlaceInfoState } from './placeInfo';
+import SignupInfo, { SignupOnboardState } from './signupInfo';
+import UserInfo, { UserInfoState } from './userInfo';
 
-const reducers = combineReducers({
-    counter: Counter,
-    github: Github,
+export type CombinedStateType = ReducersMapObject<
+    {
+        gps: GpsState;
+        signupInfo: SignupOnboardState;
+        userInfo: UserInfoState;
+        placeInfo: PlaceInfoState;
+    },
+    any
+>;
+
+const reducers = combineReducers<CombinedStateType>({
     gps: Gps,
     signupInfo: SignupInfo,
     userInfo: UserInfo,
+    placeInfo: PlaceInfo,
 });
 
 export type RootState = ReturnType<typeof reducers>;

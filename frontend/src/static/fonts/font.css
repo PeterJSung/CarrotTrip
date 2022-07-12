@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'PyeongChangPeace';
+    font-display: fallback;
+    src: url('./PyeongChangPeace.ttf') format('truetype'), url('./PyeongChangPeace.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}

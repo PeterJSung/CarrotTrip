@@ -1,5 +1,5 @@
 import { restGet } from 'common/http';
-import { DEFAULT_LOCALE_CODE, LocaleCode } from 'vo/locale';
+import { LocaleCode } from 'vo/locale';
 import { EvaluationAreaRes } from 'vo/signup';
 
 export const ID_EVALUATION_AREA_URL: string = '/api/evaluation/dummy/lang';
@@ -10,7 +10,7 @@ export const getEvaluationArea = async (locale: LocaleCode): Promise<EvaluationA
 };
 
 export const mockGetEvaluationArea = {
-    url: `${ID_EVALUATION_AREA_URL}/${DEFAULT_LOCALE_CODE}`,
+    url: `${ID_EVALUATION_AREA_URL}/:locale`,
     method: 'GET',
     status: 200,
     response: [

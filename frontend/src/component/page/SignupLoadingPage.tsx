@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from '@mui/material';
 import { someBigComplexData } from 'common/util';
-import SignupButton from 'component/basic/Signup/SignupButton';
+import CommonBtn from 'component/basic/common/CommonBtn';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -27,6 +27,11 @@ const BodyWrapper = styled.div`
 const CommonText = styled.span`
     font-family: 'Noto Sans KR';
     font-style: normal;
+`;
+
+const SignupLoadingPageBtn = styled(CommonBtn)`
+    width: 100%;
+    height: 100%;
 `;
 
 const HeadText = styled(CommonText)`
@@ -83,10 +88,10 @@ const SignupLoadingPage = (): JSX.Element => {
                 <HeadText>{`${signupInfo1.userInfo?.nickName}님을 위한 추천 여행지를 찾는 중이에요`}</HeadText>
                 <WaitingText>잠시만 기다려주세요!</WaitingText>
             </BodyWrapper>
-            <Box height="7.5%" padding="0rem 1.5rem 1.5rem">
-                <SignupButton disabled={!result} onClick={btnClick}>
+            <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
+                <SignupLoadingPageBtn isBlack={true} disabled={!result} onClick={btnClick}>
                     {btnText}
-                </SignupButton>
+                </SignupLoadingPageBtn>
             </Box>
         </DefaultPageContainer>
     );

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { ComponentMeta, Story } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 
-import BubbleChart, { generationDetailInfo } from './BubbleChart';
+import MyBubbleChart, { generationDetailInfo } from './BubbleChart';
 import { getImpressionSpecificData } from './detailCommon';
 
 type InputPropOverrides = {
@@ -11,7 +11,7 @@ type InputPropOverrides = {
 
 export default {
     title: 'Basic/Detail/BubbleChart',
-    component: BubbleChart,
+    component: MyBubbleChart,
     argTypes: {
         itemCount: {
             control: 'number',
@@ -35,11 +35,11 @@ export default {
             },
         },
     },
-} as ComponentMeta<typeof BubbleChart>;
+} as ComponentMeta<typeof MyBubbleChart>;
 
-type Args = React.ComponentProps<typeof BubbleChart> & InputPropOverrides;
+type Args = React.ComponentProps<typeof MyBubbleChart> & InputPropOverrides;
 
-export const HookBubbleChart: Story<Args> = ({ itemCount }) => {
+export const BubbleChart: Story<Args> = ({ itemCount }) => {
     const { t } = useTranslation();
     const idArr = [];
     if (itemCount >= 15) {
@@ -54,7 +54,7 @@ export const HookBubbleChart: Story<Args> = ({ itemCount }) => {
     const dat = getImpressionSpecificData(t, idArr);
     return (
         <Box width="100%" height="100%">
-            <BubbleChart bubblesData={generationDetailInfo(dat)} width={375} height={280} />
+            <MyBubbleChart bubblesData={generationDetailInfo(dat)} width={375} height={280} />
         </Box>
     );
 };

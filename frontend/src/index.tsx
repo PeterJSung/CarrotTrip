@@ -2,12 +2,13 @@ import { ThemeProvider } from '@mui/material/styles';
 import App from 'component/App';
 import GlobalStyles from 'globalstyle';
 import globalTheme from 'globaltheme';
+import 'i18n';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from 'redux/rootStore';
 import reportWebVitals from './reportWebVitals';
-import 'i18n';
+import './static/fonts/font.css';
 
 ReactDOM.render(
     <Provider store={store}>

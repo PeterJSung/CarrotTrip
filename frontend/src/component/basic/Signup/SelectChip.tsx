@@ -1,4 +1,5 @@
 import { Chip } from '@mui/material';
+import { BLACK_COLOR, GRAY_COLOR } from 'globaltheme';
 import styled from 'styled-components';
 import { SelectChipVO } from './signupconstants';
 
@@ -12,11 +13,11 @@ const ChipBase = styled(Chip)`
 `;
 
 const CheckedChip = styled(ChipBase)`
-    color: #191919 !important;
+    color: ${BLACK_COLOR} !important;
 `;
 
 const UnCheckedChip = styled(ChipBase)`
-    color: #6d6d6d !important;
+    color: ${GRAY_COLOR} !important;
 `;
 
 const SelectChip = (props: SelectChipProps): JSX.Element => {

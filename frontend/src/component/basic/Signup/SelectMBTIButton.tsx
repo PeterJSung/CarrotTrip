@@ -1,4 +1,5 @@
 import { ButtonBase, Typography } from '@mui/material';
+import { BLACK_COLOR, GRAY_COLOR, WHITE_COLOR, YELLOW_COLOR } from 'globaltheme';
 import styled from 'styled-components';
 import { MBTI_TYPE } from './signupconstants';
 
@@ -15,19 +16,19 @@ const MBTIBase = styled(ButtonBase)`
 `;
 
 const CheckedBtn = styled(MBTIBase)`
-    background-color: #fef32f !important;
+    background-color: ${YELLOW_COLOR} !important;
 `;
 
 const UnCheckedBtn = styled(MBTIBase)`
-    background-color: #f3f5f7 !important;
+    background-color: ${WHITE_COLOR} !important;
 `;
 
 const CheckedText = styled(Typography)`
-    color: #191919 !important;
+    color: ${BLACK_COLOR} !important;
 `;
 
 const UnCheckedText = styled(Typography)`
-    color: #6d6d6d !important;
+    color: ${GRAY_COLOR} !important;
 `;
 
 const SelectMBTIButton = (props: SelectMBTIButtonProps): JSX.Element => {

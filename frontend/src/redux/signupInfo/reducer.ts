@@ -31,34 +31,36 @@ const initialState: SignupOnboardState = {
     },
 };
 
-const reducers = createReducer<SignupOnboardState, SignupOnboardAction>(initialState, {
-    [actions.SignUpInfoActions.UPDATE_INFO1]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo1 = action.payload;
-        }),
-    [actions.SignUpInfoActions.UPDATE_BANNER_INFO2]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo2Banner[action.payload.id] = action.payload.data;
-            if (draft.data.signupInfo2Banner[action.payload.id].score === 0) {
-                delete draft.data.signupInfo2Banner[action.payload.id];
-            }
-        }),
-    [actions.SignUpInfoActions.UPDATE_INFO2]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo2 = action.payload;
-        }),
-    [actions.SignUpInfoActions.UPDATE_INFO3]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo3 = action.payload;
-        }),
-    [actions.SignUpInfoActions.UPDATE_INFO4]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo4 = action.payload;
-        }),
-    [actions.SignUpInfoActions.UPDATE_INFO5]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data.signupInfo5 = action.payload;
-        }),
-});
+export const generateReducer = (firstState: SignupOnboardState = initialState) => {
+    return createReducer<SignupOnboardState, SignupOnboardAction>(firstState, {
+        [actions.SignUpInfoActions.UPDATE_INFO1]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo1 = action.payload;
+            }),
+        [actions.SignUpInfoActions.UPDATE_BANNER_INFO2]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo2Banner[action.payload.id] = action.payload.data;
+                if (draft.data.signupInfo2Banner[action.payload.id].score === 0) {
+                    delete draft.data.signupInfo2Banner[action.payload.id];
+                }
+            }),
+        [actions.SignUpInfoActions.UPDATE_INFO2]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo2 = action.payload;
+            }),
+        [actions.SignUpInfoActions.UPDATE_INFO3]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo3 = action.payload;
+            }),
+        [actions.SignUpInfoActions.UPDATE_INFO4]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo4 = action.payload;
+            }),
+        [actions.SignUpInfoActions.UPDATE_INFO5]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data.signupInfo5 = action.payload;
+            }),
+    });
+};
 
-export default reducers;
+export default generateReducer();

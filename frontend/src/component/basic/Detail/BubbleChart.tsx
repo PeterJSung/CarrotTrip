@@ -72,7 +72,6 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
     private simulation: Simulation<SimulationNodeDatum, undefined> | undefined;
     constructor(props: BubbleChartProps) {
         super(props);
-        console.log(`Constructor`);
         this.state = {
             data: [],
         };
@@ -85,6 +84,7 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
 
     componentWillUnmount() {
         this.simulation?.stop(); // it must be release for memory leak
+        this.simulation = undefined;
     }
 
     componentDidUpdate(prevProps: BubbleChartProps) {
@@ -121,7 +121,7 @@ class BubbleChart extends React.Component<BubbleChartProps, StateSetType> {
                 }),
             )
             .on('tick', () => {
-                this.setState({ data });
+                this.simulation && this.setState({ data });
             });
     };
 

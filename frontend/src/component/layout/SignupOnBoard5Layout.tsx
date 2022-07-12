@@ -9,8 +9,6 @@ const SignupOnBoard5Layout = (): JSX.Element => {
     const updateSignupInfo = useThunk(updateInfo5);
     const [mbtiStr, setMBTIStr] = useState<string>('');
 
-    console.log(`Render Layout 5`);
-
     useEffect(() => {
         const isDisable = mbtiStr.length !== MBTI_LEN;
         updateSignupInfo({

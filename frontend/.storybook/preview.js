@@ -4,6 +4,7 @@ import React from 'react';
 import Globalstyle from '../src/globalstyle';
 import globaltheme from '../src/globaltheme';
 import '../src/i18n';
+import '../src/static/fonts/font.css';
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";

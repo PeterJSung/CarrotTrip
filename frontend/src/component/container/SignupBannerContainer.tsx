@@ -1,7 +1,8 @@
-import { Box, Button, Divider, Rating, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
+import CommonRating from 'component/basic/common/CommonRating';
 import SelectChipDisplay from 'component/basic/Signup/SelectChipDisplay';
 import { getImpressionAllData, SelectChipVO } from 'component/basic/Signup/signupconstants';
-import { YELLOW_COLOR } from 'globaltheme';
+import { GRAY_COLOR } from 'globaltheme';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThunk } from 'redux/common';
@@ -19,19 +20,13 @@ const MenuTypo = styled(Typography)`
     margin-bottom: 0.8rem !important;
 `;
 
-const YellowRating = styled(Rating)`
-    & .MuiRating-iconFilled {
-        color: ${YELLOW_COLOR} !important;
-    }
-`;
-
 const SkipTypo = styled(Typography)`
     font-family: Noto Sans KR !important;
     font-style: normal !important;
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 17px !important;
-    color: #6d6d6d !important;
+    color: ${GRAY_COLOR} !important;
     text-decoration-line: underline !important;
 `;
 
@@ -94,7 +89,6 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
         };
         setIsFilled(!notFilled);
         updateCurrentBanner(props.contentId, nextData);
-        console.log(`Upload ${props.name}`);
     };
 
     return (
@@ -117,7 +111,7 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
                         *필수입력
                     </span>
                 </MenuTypo>
-                <YellowRating
+                <CommonRating
                     value={rating}
                     onChange={(event, newValue) => {
                         setRating(newValue ?? 0);
