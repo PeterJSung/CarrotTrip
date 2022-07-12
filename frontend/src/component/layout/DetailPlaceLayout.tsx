@@ -1,9 +1,11 @@
 import { Box, Divider } from '@mui/material';
+import DetailBubbleChart from 'component/basic/Detail/DetailBubbleChart';
+import DetailMBTI from 'component/basic/Detail/DetailMBTI';
 import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
-import DetailBubbleChartContainer from 'component/container/DetailBubbleChartContainer';
-import DetailMBTIContainer from 'component/container/DetailMBTIContainer';
 import { memo } from 'react';
+import { useSelector } from 'react-redux';
+import { getPlaceBasicInfo, getPlaceDetailInfo } from 'redux/placeInfo';
 import styled from 'styled-components';
 
 const ItemContainer = styled(Box)`
@@ -26,6 +28,9 @@ const ImgTag = styled.img`
 `;
 
 const DetailPlaceLayout = (): JSX.Element => {
+    const placeBasicInfo = useSelector(getPlaceBasicInfo);
+    const placeDetailInfo = useSelector(getPlaceDetailInfo);
+
     return (
         <Box>
             <Box height="11rem">
@@ -33,16 +38,16 @@ const DetailPlaceLayout = (): JSX.Element => {
             </Box>
             <ItemContainer>
                 <PlaceDescriptionDetail
-                    placeType="type"
-                    placeName="이것은 네임"
-                    placeDesc="이것은 이름에이은 디테일한 설명입니다"
+                    placeType={placeBasicInfo.placeType}
+                    placeName={placeBasicInfo.placename}
+                    placeDesc={placeDetailInfo.description}
                 />
                 <Divider />
-                <PlaceAdressDetail adressHeaderText="주소" adressText="경기도 어쩌고 저쩌고" />
+                <PlaceAdressDetail adressText={placeDetailInfo.adress} />
                 <Divider />
-                <DetailBubbleChartContainer />
+                <DetailBubbleChart moodArr={placeDetailInfo.moodArr} />
                 <Divider />
-                <DetailMBTIContainer />
+                <DetailMBTI mbtiArr={placeDetailInfo.mbtiArr} />
                 <Divider />
                 <div>reviewCOntainer</div>
             </ItemContainer>

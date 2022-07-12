@@ -19,11 +19,13 @@ const initialState: UserInfoState = {
     },
 };
 
-const reducers = createReducer<UserInfoState, UserInfoAction>(initialState, {
-    [actions.UserInfoActions.UPDATE_USERINFO]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data = action.payload;
-        }),
-});
+export const generateReducer = (firstState: UserInfoState = initialState) => {
+    return createReducer<UserInfoState, UserInfoAction>(firstState, {
+        [actions.UserInfoActions.UPDATE_USERINFO]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data = action.payload;
+            }),
+    });
+};
 
-export default reducers;
+export default generateReducer();

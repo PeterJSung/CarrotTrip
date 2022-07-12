@@ -18,11 +18,13 @@ const initialState: GpsState = {
     },
 };
 
-const reducers = createReducer<GpsState, GpsAction>(initialState, {
-    [GpsActions.GPS_UPDATE]: (state, action) =>
-        produce(state, (draft) => {
-            draft.data = action.payload;
-        }),
-});
+export const generateReducer = (firstState: GpsState = initialState) => {
+    return createReducer<GpsState, GpsAction>(firstState, {
+        [GpsActions.GPS_UPDATE]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data = action.payload;
+            }),
+    });
+};
 
-export default reducers;
+export default generateReducer();

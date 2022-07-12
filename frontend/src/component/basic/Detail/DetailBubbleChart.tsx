@@ -6,14 +6,18 @@ import { useTranslation } from 'react-i18next';
 
 const MINIMUM_HEIGHT = 20;
 
-const DetailBubbleChartContainer = (): JSX.Element => {
+export interface DetailBubbleChartProps {
+    moodArr: number[];
+}
+
+const DetailBubbleChart = (props: DetailBubbleChartProps): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null);
     const [size, setSize] = useState<{ w: number; h: number }>({
         h: 0,
         w: 0,
     });
     const { t } = useTranslation();
-    const dat = getImpressionSpecificData(t, [1, 7, 3, 4, 5, 6, 7]);
+    const dat = getImpressionSpecificData(t, props.moodArr);
 
     useEffect(() => {
         if (ref.current) {
@@ -23,6 +27,7 @@ const DetailBubbleChartContainer = (): JSX.Element => {
             });
         }
     }, [ref.current]);
+
     return (
         <Box display="flex" flexDirection="column">
             {smallHeadText('분위기')}
@@ -33,4 +38,4 @@ const DetailBubbleChartContainer = (): JSX.Element => {
     );
 };
 
-export default DetailBubbleChartContainer;
+export default DetailBubbleChart;

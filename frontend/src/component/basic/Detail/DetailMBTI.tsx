@@ -1,7 +1,12 @@
 import { Box } from '@mui/material';
 import { smallHeadText } from 'component/basic/Detail/detailCommon';
+import { PlaceBookmarkInfo } from 'vo/placeInfo';
 
-const DetailMBTIContainer = (): JSX.Element => {
+export interface DetailMBTIProps {
+    mbtiArr: PlaceBookmarkInfo[];
+}
+
+const DetailMBTI = (props: DetailMBTIProps): JSX.Element => {
     return (
         <Box display="flex" flexDirection="column">
             {smallHeadText('{사용자 MBTI} 86%가 북마크한 장소에요.')}
@@ -12,4 +17,4 @@ const DetailMBTIContainer = (): JSX.Element => {
     );
 };
 
-export default DetailMBTIContainer;
+export default DetailMBTI;
