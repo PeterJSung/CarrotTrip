@@ -1,0 +1,5 @@
+@import 'react-spring-bottom-sheet/dist/style.css';
+
+[data-rsbs-header]:before {
+    display: none;
+}
