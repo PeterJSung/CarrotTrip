@@ -1,6 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { mockGetUserExist } from 'api/idretrieve';
-import { getDummyState } from 'stories/common.stories';
+import { getDummyState, mockGetUserExist } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupOnBoard1Layout from './SignupOnBoard1Layout';
 

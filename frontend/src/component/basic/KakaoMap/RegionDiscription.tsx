@@ -13,7 +13,7 @@ const ButtonWrapper = styled(Box)`
     height: ${REGION_DISCRIPTION_HEIGHT}rem !important;
     background-color: #ffffff !important;
     border-radius: 0.25rem;
-    z-index: 150;
+    z-index: 2;
     box-sizing: border-box;
 `;
 
@@ -27,7 +27,7 @@ const TextCompo = styled(Typography)`
     font-weight: 400 !important;
     font-size: 15px !important;
     line-height: 22px !important;
-    z-index: 150;
+    z-index: 2;
 `;
 
 const RegionDiscription = (props: RegionDiscriptionProps): JSX.Element => {

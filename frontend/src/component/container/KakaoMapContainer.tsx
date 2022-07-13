@@ -1,17 +1,31 @@
-import { Box } from '@mui/material';
+import { Code } from '@mui/icons-material';
+import { Box, Button } from '@mui/material';
 import { getTourNaviInfo } from 'api/navigation';
 import { DEFAULT_MAP_LEVEL } from 'common/constants';
 import MyLocationMarker from 'component/basic/KakaoMap/MyLocationMarker';
 import { useEffect, useRef, useState } from 'react';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
+import { BottomSheet } from 'react-spring-bottom-sheet';
+import { RefHandles } from 'react-spring-bottom-sheet/dist/types';
 import { gpsSelector } from 'redux/gps';
+import styled from 'styled-components';
 import IndicatorMapRegion from './IndicatorMapRegion';
 
 interface LatLng {
     lat: number;
     lng: number;
 }
+
+const CustomBtnSheet = styled(BottomSheet)`
+    & > div {
+        width: 95%;
+        margin: auto;
+    }
+    & > div > [data-rsbs-header] {
+        padding: 0.5rem 0rem;
+    }
+`;
 
 const KakaoMapContainer = (): JSX.Element => {
     /*
@@ -23,13 +37,16 @@ const KakaoMapContainer = (): JSX.Element => {
     });
     */
 
-    const [guide, setGuidLine] = useState<LatLng[]>([]);
+    const [open, setOpen] = useState<boolean>(false);
     const [road, setRoad] = useState<LatLng[]>([]);
     const [markers, setMarkers] = useState<LatLng[]>([]);
     const currentGpsInfo = useSelector(gpsSelector);
     //const markers: MarkerInfo[] = [];
 
     const mapRef = useRef<kakao.maps.Map>(null);
+
+    const [staticMode, setStaticMode] = useState<boolean>(false);
+    const bottomSheetRef = useRef<RefHandles>(null);
 
     useEffect(() => {
         const map = mapRef.current;
@@ -66,18 +83,11 @@ const KakaoMapContainer = (): JSX.Element => {
                     },
                 ],
             );
-            console.log(ret);
-            const guidVertex: LatLng[] = [];
+
             const roadVertex: LatLng[] = [];
             const position: LatLng[] = [];
             ret.routes.forEach((r) => {
                 r.sections.forEach((s) => {
-                    s.guides.forEach((sr) => {
-                        guidVertex.push({
-                            lng: sr.x,
-                            lat: sr.y,
-                        });
-                    });
                     s.roads.forEach((aaa) => {
                         for (let i = 0; i < aaa.vertexes.length; i += 2) {
                             roadVertex.push({
@@ -104,21 +114,20 @@ const KakaoMapContainer = (): JSX.Element => {
             });
             setRoad(roadVertex);
             setMarkers(position);
-            setGuidLine(guidVertex);
         };
         fetch();
     }, []);
 
-    console.log(`Data`);
-    console.log(guide);
-
+    useEffect(() => {
+        setTimeout(() => {
+            console.log(`Transition Complete`);
+            mapRef.current?.relayout();
+        }, 500);
+    }, [open]);
+    console.log(`Render after`);
     return (
-        <Box width="100%" height="100%" position="relative">
-            <Map
-                ref={mapRef}
-                center={{ lat: currentGpsInfo.lat, lng: currentGpsInfo.lng }}
-                style={{ width: '100%', height: '100%' }}
-            >
+        <Box width="100%" height="100%" position="relative" display="flex">
+            <Map ref={mapRef} center={{ lat: currentGpsInfo.lat, lng: currentGpsInfo.lng }} style={{ flexGrow: 1 }}>
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
                 {markers.map((res) => (
                     <MapMarker
@@ -128,22 +137,50 @@ const KakaoMapContainer = (): JSX.Element => {
                     />
                 ))}
 
-                <Polyline
-                    path={guide}
-                    strokeWeight={3} // 선의 두께 입니다
-                    strokeColor={'red'} // 선의 색깔입니다
-                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                    strokeStyle={'solid'} // 선의 스타일입니다
+                <MapMarker
+                    onClick={() => setOpen(true)}
+                    position={{ lat: currentGpsInfo.lat, lng: currentGpsInfo.lng }}
                 />
                 <Polyline
                     path={road}
-                    strokeWeight={3} // 선의 두께 입니다
+                    strokeWeight={10} // 선의 두께 입니다
                     strokeColor={'blue'} // 선의 색깔입니다
                     strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                     strokeStyle={'solid'} // 선의 스타일입니다
                 />
             </Map>
             <IndicatorMapRegion />
+            <CustomBtnSheet
+                open={open}
+                onDismiss={() => setOpen(false)}
+                blocking={false}
+                header={
+                    <input
+                        className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-300 focus:bg-white focus:ring-0"
+                        type="text"
+                        placeholder="Text input field in a sticky header"
+                    />
+                }
+                defaultSnap={1}
+                snapPoints={({ maxHeight }) => {
+                    if (staticMode) {
+                        console.log(`Itis static Mode`);
+                        return [maxHeight * 0.8];
+                    } else {
+                        console.log(`Not StaticMode`);
+                        return [maxHeight * 0.4, maxHeight * 0.95];
+                    }
+                }}
+            >
+                <Button onClick={() => setStaticMode(!staticMode)}>Test</Button>
+                <p>
+                    When <Code>blocking</Code> is <Code>false</Code> it's possible to use the Bottom Sheet as an height
+                    adjustable sidebar/panel.
+                </p>
+                <p>
+                    You can combine this with <Code>onDismissable</Code> to fine-tune the behavior you want.
+                </p>
+            </CustomBtnSheet>
         </Box>
     );
 };
