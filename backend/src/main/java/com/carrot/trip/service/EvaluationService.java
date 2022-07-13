@@ -41,7 +41,7 @@ public class EvaluationService {
 
     public TouristAttractionTasteDTO createTouristAttractionTaste(TouristAttractionTasteDTO touristAttractionTasteDTO) {
         touristAttractionTasteRepository.save(TouristAttractionTaste.builder()
-                .touristAttractionId(touristAttractionTasteDTO.getTouristAttractionId())
+                .apiId(touristAttractionTasteDTO.getApiId())
                 .memberNickname(touristAttractionTasteDTO.getMemberNickname())
                 .tasteCode(touristAttractionTasteDTO.getTasteCode())
                 .build());

@@ -45,8 +45,8 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 
 {
   "memberNickname" : "태호",
-  "touristAttractionId" : "1",
-  "tasteCode" : "열정적인"
+  "apiId" : 13245,
+  "tasteCode" : "12"
 }
 
 ### 2.3 더미데이터 가져오기

@@ -17,8 +17,8 @@ public class TouristAttractionTaste {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TOURIST_ATTRACTION_ID")
-    private String touristAttractionId;
+    @Column(name = "API_ID")
+    private Long apiId;
 
     @Column(name = "MEMBER_NICKNAME")
     private String memberNickname;

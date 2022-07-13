@@ -20,4 +20,30 @@ public enum CategoryCode {
     private final Integer codeKr;
     private final Integer codeGlobal;
     private final String name;
+    public static int transKrCode(Integer code) {
+        if (code == CategoryCode.TOURIST_ATTRACTION.getCodeKr() || code == CategoryCode.TOURIST_ATTRACTION.getCodeGlobal()) {
+            return CategoryCode.TOURIST_ATTRACTION.getCodeKr();
+        }
+        else if (code == CategoryCode.CULTURAL_FACILITIES.getCodeKr() || code == CategoryCode.CULTURAL_FACILITIES.getCodeGlobal()) {
+            return CategoryCode.CULTURAL_FACILITIES.getCodeKr();
+        }
+        else if (code == CategoryCode.EVENT_PERFOMANCE_FESTIVAL.getCodeKr() || code == CategoryCode.EVENT_PERFOMANCE_FESTIVAL.getCodeGlobal()) {
+            return CategoryCode.EVENT_PERFOMANCE_FESTIVAL.getCodeKr();
+        }
+        else if (code == CategoryCode.TRAVEL_COURSE.getCodeKr() || code == CategoryCode.TRAVEL_COURSE.getCodeGlobal()) {
+            return CategoryCode.TRAVEL_COURSE.getCodeKr();
+        }
+        else if (code == CategoryCode.LEPORTS.getCodeKr() || code == CategoryCode.LEPORTS.getCodeGlobal()) {
+            return CategoryCode.LEPORTS.getCodeKr();
+        }
+        else if (code == CategoryCode.ACCOMMODATION.getCodeKr() || code == CategoryCode.ACCOMMODATION.getCodeGlobal()) {
+            return CategoryCode.ACCOMMODATION.getCodeKr();
+        }
+        else if (code == CategoryCode.SHOPPING.getCodeKr() || code == CategoryCode.SHOPPING.getCodeGlobal()) {
+            return CategoryCode.SHOPPING.getCodeKr();
+        }
+        else {
+            return CategoryCode.RESTOURANT.getCodeKr();
+        }
+    };
 }

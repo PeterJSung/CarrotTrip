@@ -9,4 +9,6 @@ import java.util.ArrayList;
 @Repository
 public interface MemberTasteRepository extends JpaRepository<MemberTaste, Long> {
     ArrayList<MemberTaste> findAll();
+
+    ArrayList<MemberTaste> findByMemberNickname(String memberNickname);
 }

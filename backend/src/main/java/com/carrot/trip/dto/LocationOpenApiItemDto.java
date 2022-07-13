@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.ArrayList;
+
 @Builder
 @Getter
 @Setter
@@ -34,4 +36,6 @@ public class LocationOpenApiItemDto {
     private String mbti;
     private double mbtiAveScore;
     private double aveScore;
+    private ArrayList<String> tasteList;
+    private boolean userTaste;
 }

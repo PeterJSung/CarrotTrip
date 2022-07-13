@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TouristAttractionTasteDTO {
-    private String touristAttractionId;
+    private Long apiId;
     private String memberNickname;
     private String tasteCode;
 }
