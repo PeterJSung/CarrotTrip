@@ -3,10 +3,16 @@ package com.carrot.trip.service;
 import com.carrot.trip.common.PearsonUtil;
 import com.carrot.trip.dto.EvaluationDTO;
 import com.carrot.trip.dto.LocationOpenApiResponseDTO;
+import com.carrot.trip.dto.TouristAttractionTasteDTO;
 import com.carrot.trip.entity.Evaluation;
 import com.carrot.trip.entity.Member;
+import com.carrot.trip.entity.MemberTaste;
+import com.carrot.trip.entity.TouristAttractionTaste;
 import com.carrot.trip.repository.EvaluationRepository;
 import com.carrot.trip.repository.MemberRepository;
+import com.carrot.trip.repository.MemberTasteRepository;
+import com.carrot.trip.repository.TouristAttractionTasteRepository;
+import com.carrot.trip.type.CategoryCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,15 +37,17 @@ public class OpenAPIService {
 
     private final EvaluationRepository evaluationRepository;
     private final MemberRepository memberRepository;
+    private final MemberTasteRepository memberTasteRepository;
+    private final TouristAttractionTasteRepository touristAttractionTasteRepository;
     private final EvaluationService evaluationService;
 
     @Value("${openapi.secretkey}")
     private  String secretKey;
 
-    public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname) throws URISyntaxException, JsonProcessingException {
+    public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname, String lang) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
+        String url = "http://api.visitkorea.or.kr/openapi/service/rest/" + lang + "/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
         URI uri = new URI(url);
 
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);
@@ -52,6 +60,7 @@ public class OpenAPIService {
         supporter(dto);
         recommendScore(dto, nickname);
         recommendMBTI(dto);
+        recommendTaste(dto, nickname);
 
         return dto;
     }
@@ -95,6 +104,79 @@ public class OpenAPIService {
                     .comments("좋아요~! " + ran4)
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 정민 : " + ran4);
+
+            if (i % 3 == 0) {
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("태호")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("3")//활기있는
+                        .build()
+                );
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("태호")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("5")//모험적인
+                        .build()
+                );
+            }
+            if (i % 2 == 0) {
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("가현")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("2")//차분한
+                        .build()
+                );
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("가현")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("8")//온화한
+                        .build()
+                );
+            }
+            if (i % 10 == 0) {
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("가현")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("2")//차분한
+                        .build()
+                );
+                evaluationService.createTouristAttractionTaste(TouristAttractionTasteDTO.builder()
+                        .memberNickname("정민")
+                        .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
+                        .tasteCode("9")//즉흥적인
+                        .build()
+                );
+            }
+        }
+    }
+
+    public void recommendTaste(LocationOpenApiResponseDTO dto, String nickname) {
+        ArrayList<MemberTaste> memberTastes = memberTasteRepository.findByMemberNickname(nickname);
+        ArrayList<String> memberTastesString = new ArrayList<>();
+        for (int i = 0; i < memberTastes.size(); i++) {
+            memberTastesString.add(memberTastes.get(i).getTasteCode());
+        }
+        for (int i = 0; i < dto.getResponse().getBody().getItems().getItem().size(); i++) {
+            ArrayList<TouristAttractionTaste> tourTasteList = touristAttractionTasteRepository.findByApiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
+            ArrayList<String> tourTasteListStr = new ArrayList<>();
+            boolean isUserTaste = true;
+            for (int j = 0; j < tourTasteList.size(); j++){
+                if(!tourTasteListStr.contains(tourTasteList.get(j).getTasteCode())){
+                    tourTasteListStr.add(tourTasteList.get(j).getTasteCode());
+                }
+            }
+            if (memberTastesString.size() < 1) {
+                isUserTaste = false;
+            }
+            for (int j = 0; j < memberTastesString.size(); j++) {
+                if (!tourTasteListStr.contains(memberTastesString.get(j))) { //사용자의 취향이 1개라도 빠져있다면 해당 관광지는 대상이 아니다.
+                    isUserTaste = false;
+                    break;
+                }
+            }
+            dto.getResponse().getBody().getItems().getItem().get(i).setTasteList(tourTasteListStr);
+            dto.getResponse().getBody().getItems().getItem().get(i).setUserTaste(isUserTaste);
+            dto.getResponse().getBody().getItems().getItem().get(i).setContenttypeid(CategoryCode.transKrCode(dto.getResponse().getBody().getItems().getItem().get(i).getContenttypeid())); //콘텐츠타입(카테고리) 국문으로 통일하는 작업
         }
     }
 

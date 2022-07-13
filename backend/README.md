@@ -93,23 +93,25 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ```json
 {
     "memberNickname" : "태호",
-    "touristAttractionId" : "1",
-    "tasteCode" : "모험적인"
+    "apiId" : 12341,
+    "tasteCode" : "1"
 }
 ```
 #### Response
 ```json
 {
     "memberNickname" : "태호",
-    "touristAttractionId" : "1",
-    "tasteCode" : "모험적인"
+    "apiId" : 12341,
+    "tasteCode" : "1"
 }
 ```
 tasteCode: 조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적
+apiId는 contentId를 의미합니다.
+tasteCode는 스트링 형태로써, 쌍따옴표로 감싸줍니다.
 
 ###  2.3 관광지 더미 데이터 가져오기
 #### URI
-``GET`` ``/api/api/evaluation/dummy/lang/{lang}``
+``GET`` ``/api/evaluation/dummy/lang/{lang}``
 #### Header
 Content-Type: application/json
 
@@ -203,7 +205,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ## 5. 메인화면 (지도)
 ###  5.1 위치기반 주변 관광지 및 예상별점 받기 (업데이트 예정 : MBTI 추천 정보)
 #### URI
-``GET`` ``/api/touristAttraction/list/x/{경도 (ex)127.1625892}/y/{위도 (ex)37.4587305}/nickname/{nickName}``
+``GET`` ``/api/touristAttraction/list/x/{경도 (ex)127.1625892}/y/{위도 (ex)37.4587305}/nickname/{nickName}/language/{lang}``
 #### Header
 Content-Type: application/json
 
@@ -237,7 +239,12 @@ X-AUTH-TOKEN: {JWT TOKEN}
             "recommendScore": 7.0,
             "mbti": "ESTJ",
             "mbtiAveScore": 9.0,
-            "aveScore": 5.75            
+            "aveScore": 5.75,
+            "tasteList": [
+              "3",
+              "5"
+            ],
+            "userTaste": true            
           },
           {
             "addr1": "서울특별시 송파구 중대로10길 42",
@@ -261,7 +268,13 @@ X-AUTH-TOKEN: {JWT TOKEN}
             "recommendScore": 9.0,
             "mbti": "ESTJ",
             "mbtiAveScore": 5.0,
-            "aveScore": 2.25            
+            "aveScore": 2.25,
+            "tasteList": [
+              "2",
+              "8",
+              "9"
+            ],
+            "userTaste": false            
           }
         ]
       },
@@ -280,3 +293,6 @@ recommendScore가 예상별점을 의미한다.
 mbti는 해당 관광지와 제일 잘 맞는 MBTI를 의미한다.
 mbtiAveScore는 그 MBTI들의 평균점수를 의미한다.
 aveScore는 해당 관광지에 대한 평균별점을 의미한다.
+tasteList는 해당 관광지에 대해 평가된 관광지 성향 리스트를 의미한다.
+userTaste는 해당 관광지의 성향리스트를 기반으로 사용자의 성향과 부합되는 관광지 여부를 의미한다.
+

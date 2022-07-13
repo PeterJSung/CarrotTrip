@@ -24,9 +24,10 @@ public class TouristAttractionController {
 
     private final OpenAPIService openAPIService;
 
-    @GetMapping("/touristAttraction/list/x/{x}/y/{y}/nickname/{nickname}")
-    public LocationOpenApiResponseDTO getMapData(@PathVariable("x") Double x, @PathVariable("y") Double y, @PathVariable("nickname") String nickname) throws URISyntaxException, JsonProcessingException {
-        return openAPIService.openAPICall(x, y, nickname);
+    @GetMapping("/touristAttraction/list/x/{x}/y/{y}/nickname/{nickname}/language/{lang}")
+    public LocationOpenApiResponseDTO getMapData(@PathVariable("x") Double x, @PathVariable("y") Double y
+            , @PathVariable("nickname") String nickname, @PathVariable("lang") String lang) throws URISyntaxException, JsonProcessingException {
+        return openAPIService.openAPICall(x, y, nickname, lang);
     }
 
     @GetMapping("/touristAttraction/pearsons/test")

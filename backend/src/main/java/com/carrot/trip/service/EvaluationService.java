@@ -41,7 +41,7 @@ public class EvaluationService {
 
     public TouristAttractionTasteDTO createTouristAttractionTaste(TouristAttractionTasteDTO touristAttractionTasteDTO) {
         touristAttractionTasteRepository.save(TouristAttractionTaste.builder()
-                .touristAttractionId(touristAttractionTasteDTO.getTouristAttractionId())
+                .apiId(touristAttractionTasteDTO.getApiId())
                 .memberNickname(touristAttractionTasteDTO.getMemberNickname())
                 .tasteCode(touristAttractionTasteDTO.getTasteCode())
                 .build());
@@ -69,6 +69,27 @@ public class EvaluationService {
     public ArrayList<DummyDTO> getDummy(String lang) {
         if (lang.equals("korService")){
             return DummyListDTO.getKorService();
+        }
+        else if (lang.equals("JpnService")){
+            return DummyListDTO.getJpnService();
+        }
+        else if (lang.equals("ChsService")){
+            return DummyListDTO.getChsService();
+        }
+        else if (lang.equals("ChtService")){
+            return DummyListDTO.getChtService();
+        }
+        else if (lang.equals("GerService")){
+            return DummyListDTO.getGerService();
+        }
+        else if (lang.equals("FreService")){
+            return DummyListDTO.getFreService();
+        }
+        else if (lang.equals("SpnService")){
+            return DummyListDTO.getSpnService();
+        }
+        else if (lang.equals("RusService")){
+            return DummyListDTO.getRusService();
         }
         else {
             return DummyListDTO.getEngService();
