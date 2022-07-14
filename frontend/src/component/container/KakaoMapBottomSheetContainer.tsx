@@ -5,20 +5,30 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import { RefHandles } from 'react-spring-bottom-sheet/dist/types';
 import styled from 'styled-components';
 
+type SHEET_TYPE = 'SUGGESTION' | 'PLACEDETAIL';
+
 export interface KakaoMapBottomSheetContainerProps {
     open: boolean;
-    mode: number;
+    mode: SHEET_TYPE;
+    setOpen: (isClose: boolean) => void;
 }
 
-const MainSheet = styled(BottomSheet)`
+const SuggestionSheet = styled(BottomSheet)`
     & > div {
         width: 95%;
         margin: auto;
     }
 `;
 
+const PlaceDetailSheet = styled(BottomSheet)`
+    & > div {
+        width: 100%;
+    }
+`;
+
 const KakaoMapBottomSheetContainer = (props: KakaoMapBottomSheetContainerProps): JSX.Element => {
-    const [open, setOpen] = useState<boolean>(false);
+    const open = props.open;
+    const SheetComponent = props.mode === 'PLACEDETAIL' ? PlaceDetailSheet : SuggestionSheet;
     //const markers: MarkerInfo[] = [];
 
     const mapRef = useRef<kakao.maps.Map>(null);
@@ -27,9 +37,9 @@ const KakaoMapBottomSheetContainer = (props: KakaoMapBottomSheetContainerProps):
     const bottomSheetRef = useRef<RefHandles>(null);
 
     return (
-        <BottomSheet
+        <SheetComponent
             open={open}
-            onDismiss={() => setOpen(false)}
+            onDismiss={() => props.setOpen(true)}
             blocking={false}
             header={
                 <input
@@ -57,7 +67,7 @@ const KakaoMapBottomSheetContainer = (props: KakaoMapBottomSheetContainerProps):
             <p>
                 You can combine this with <Code>onDismissable</Code> to fine-tune the behavior you want.
             </p>
-        </BottomSheet>
+        </SheetComponent>
     );
 };
 

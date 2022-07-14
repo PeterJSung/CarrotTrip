@@ -2,10 +2,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Gps from 'redux/gps';
-import PlaceInfo from 'redux/placeInfo';
+import MapInteractionStack from 'redux/mapinteractionstack';
+import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
 import UserInfo, { UserInfoState } from 'redux/userInfo';
 
-import { PlaceInfoState } from 'redux/placeInfo';
 import { CombinedStateType } from 'redux/rootReducer';
 import SignupInfo, { getDefaultSignupInfoDisp, SignupOnboardState } from 'redux/signupInfo';
 import { PlaceBasicInformation, PlaceDetailInformation } from 'vo/placeInfo';
@@ -23,6 +23,11 @@ const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
             signupInfo: nextStore ? (nextStore.signupInfo ? nextStore.signupInfo : SignupInfo) : SignupInfo,
             userInfo: nextStore ? (nextStore.userInfo ? nextStore.userInfo : UserInfo) : UserInfo,
             placeInfo: nextStore ? (nextStore.placeInfo ? nextStore.placeInfo : PlaceInfo) : PlaceInfo,
+            mapDispStack: nextStore
+                ? nextStore.mapDispStack
+                    ? nextStore.mapDispStack
+                    : MapInteractionStack
+                : MapInteractionStack,
         }),
     });
 };
