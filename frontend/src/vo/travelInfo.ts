@@ -13,6 +13,20 @@ interface PlaceRefInfo {
     src: string;
 }
 
+interface SuggestionTabInfo {
+    code: number;
+    translateKey: string;
+}
+
+export const i18n_SUGGESTION_REF: SuggestionTabInfo[] = [
+    { code: 1, translateKey: '추천코스' },
+    { code: 2, translateKey: '관광지' },
+    { code: 3, translateKey: '음식점' },
+    { code: 4, translateKey: '쇼핑' },
+    { code: 5, translateKey: 'MBTI' },
+    { code: 6, translateKey: '기타' },
+];
+
 const COMMON_PREFIX_PLACE_SRC = `assets/placephoto`;
 
 export const i18n_PLACE_REF: PlaceRefInfo[] = [
