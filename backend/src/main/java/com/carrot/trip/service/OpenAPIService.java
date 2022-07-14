@@ -2,6 +2,7 @@ package com.carrot.trip.service;
 
 import com.carrot.trip.common.PearsonUtil;
 import com.carrot.trip.dto.EvaluationDTO;
+import com.carrot.trip.dto.LocationOpenApiItemDto;
 import com.carrot.trip.dto.LocationOpenApiResponseDTO;
 import com.carrot.trip.dto.TouristAttractionTasteDTO;
 import com.carrot.trip.entity.Evaluation;
@@ -61,6 +62,7 @@ public class OpenAPIService {
         recommendScore(dto, nickname);
         recommendMBTI(dto);
         recommendTaste(dto, nickname);
+        recommendCourse(dto);
 
         return dto;
     }
@@ -148,6 +150,60 @@ public class OpenAPIService {
                 );
             }
         }
+    }
+
+    public void recommendCourse(LocationOpenApiResponseDTO dto) {
+
+        double BEST_RECOMMEND_SCORE_TOURIST_ATTRACTION = -1000;
+        LocationOpenApiItemDto BEST_RECOMMEND_ITEM_TOURIST_ATTRACTION = null;
+
+        double BEST_RECOMMEND_SCORE_ACCOMMODATION = -1000;
+        LocationOpenApiItemDto BEST_RECOMMEND_ITEM_ACCOMMODATION = null;
+
+        double BEST_RECOMMEND_SCORE_SHOPPING = -1000;
+        LocationOpenApiItemDto BEST_RECOMMEND_ITEM_SHOPPING = null;
+
+        double BEST_RECOMMEND_SCORE_RESTOURANT = -1000;
+        LocationOpenApiItemDto BEST_RECOMMEND_ITEM_RESTOURANT = null;
+
+        for (int i = 0; i < dto.getResponse().getBody().getItems().getItem().size(); i++) {
+            if (CategoryCode.TOURIST_ATTRACTION.getCodeKr() == dto.getResponse().getBody().getItems().getItem().get(i).getContenttypeid()
+                    && BEST_RECOMMEND_SCORE_TOURIST_ATTRACTION < dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore()) {
+                BEST_RECOMMEND_SCORE_TOURIST_ATTRACTION = dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore();
+                BEST_RECOMMEND_ITEM_TOURIST_ATTRACTION = dto.getResponse().getBody().getItems().getItem().get(i);
+            }
+            else if (CategoryCode.ACCOMMODATION.getCodeKr() == dto.getResponse().getBody().getItems().getItem().get(i).getContenttypeid()
+                    && BEST_RECOMMEND_SCORE_ACCOMMODATION < dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore()) {
+                BEST_RECOMMEND_SCORE_ACCOMMODATION = dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore();
+                BEST_RECOMMEND_ITEM_ACCOMMODATION = dto.getResponse().getBody().getItems().getItem().get(i);
+            }
+            else if (CategoryCode.SHOPPING.getCodeKr() == dto.getResponse().getBody().getItems().getItem().get(i).getContenttypeid()
+                    && BEST_RECOMMEND_SCORE_SHOPPING < dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore()) {
+                BEST_RECOMMEND_SCORE_SHOPPING = dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore();
+                BEST_RECOMMEND_ITEM_SHOPPING = dto.getResponse().getBody().getItems().getItem().get(i);
+            }
+            else if (CategoryCode.RESTOURANT.getCodeKr() == dto.getResponse().getBody().getItems().getItem().get(i).getContenttypeid()
+                    && BEST_RECOMMEND_SCORE_RESTOURANT < dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore()) {
+                BEST_RECOMMEND_SCORE_RESTOURANT = dto.getResponse().getBody().getItems().getItem().get(i).getRecommendScore();
+                BEST_RECOMMEND_ITEM_RESTOURANT = dto.getResponse().getBody().getItems().getItem().get(i);
+            }
+        }
+
+        ArrayList<LocationOpenApiItemDto> resultCourse = new ArrayList<LocationOpenApiItemDto>();
+        if (BEST_RECOMMEND_ITEM_TOURIST_ATTRACTION != null){
+            resultCourse.add(BEST_RECOMMEND_ITEM_TOURIST_ATTRACTION);
+        }
+        if (BEST_RECOMMEND_ITEM_ACCOMMODATION != null){
+            resultCourse.add(BEST_RECOMMEND_ITEM_ACCOMMODATION);
+        }
+        if (BEST_RECOMMEND_ITEM_SHOPPING != null){
+            resultCourse.add(BEST_RECOMMEND_ITEM_SHOPPING);
+        }
+        if (BEST_RECOMMEND_ITEM_RESTOURANT != null){
+            resultCourse.add(BEST_RECOMMEND_ITEM_RESTOURANT);
+        }
+
+        dto.getResponse().getBody().getItems().setRecommendCourseItem(resultCourse);
     }
 
     public void recommendTaste(LocationOpenApiResponseDTO dto, String nickname) {

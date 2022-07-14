@@ -13,4 +13,5 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class LocationOpenApiResponseItemsDTO {
     private ArrayList<LocationOpenApiItemDto> item;
+    private ArrayList<LocationOpenApiItemDto> recommendCourseItem;
 }

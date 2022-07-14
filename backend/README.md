@@ -276,6 +276,38 @@ X-AUTH-TOKEN: {JWT TOKEN}
             ],
             "userTaste": false            
           }
+        ],
+        "recommendCourseItem": [
+          {
+            "addr1": "경기도 성남시 수정구 태평로55번길 72",
+            "areacode": 31,
+            "cat1": "A02",
+            "cat2": "A0201",
+            "cat3": "A02010800",
+            "contentid": 304794,
+            "contenttypeid": 12,
+            "createdtime": 20071129201521,
+            "dist": 2342,
+            "firstimage": "http://tong.visitkorea.or.kr/cms/resource/47/2021847_image2_1.jpg",
+            "firstimage2": "http://tong.visitkorea.or.kr/cms/resource/47/2021847_image3_1.jpg",
+            "mapx": 127.137076459,
+            "mapy": 37.453439674,
+            "mlevel": 6,
+            "modifiedtime": 20220325112707,
+            "readcount": 26178,
+            "sigungucode": 12,
+            "title": "망경암",
+            "recommendScore": 10.0,
+            "mbti": "ESTJ",
+            "mbtiAveScore": 10.0,
+            "aveScore": 7.5,
+            "tasteList": [
+              "2",
+              "8",
+              "9"
+            ],
+            "userTaste": false
+          }
         ]
       },
       "numOfRows": 100,
@@ -295,4 +327,4 @@ mbtiAveScore는 그 MBTI들의 평균점수를 의미한다.
 aveScore는 해당 관광지에 대한 평균별점을 의미한다.
 tasteList는 해당 관광지에 대해 평가된 관광지 성향 리스트를 의미한다.
 userTaste는 해당 관광지의 성향리스트를 기반으로 사용자의 성향과 부합되는 관광지 여부를 의미한다.
-
+recommendCourseItem은 추천코스 탭을 위한 데이터를 추려낸 아이템리스트이다.
