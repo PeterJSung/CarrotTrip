@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CommonSheetBanner from './CommonSheetBanner';
 
@@ -35,6 +35,11 @@ const DetailText = styled(Typography)`
     color: #8e9095 !important;
 `;
 
+const InformDivider = styled(Divider)`
+    margin-left: 0.375rem !important;
+    margin-right: 0.5rem !important;
+`;
+
 const StarIcon = (): JSX.Element => (
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -61,11 +66,12 @@ const BannerRecommandTotal = (props: BannerRecommandTotalProps): JSX.Element => 
     return (
         <CommonSheetBanner>
             <Box display="flex" flexDirection="column">
-                <Box>
+                <Box display="flex">
                     <TitleText>전체 코스보기</TitleText>
-                    <Box>
+                    <Box display="flex" my="auto" mr="auto">
                         <StarIcon />
                         <DetailText>{`${props.score} (평균)`}</DetailText>
+                        <InformDivider orientation="vertical" flexItem />
                         <RunIcon />
                         <DetailText>{`${props.distance}KM`}</DetailText>
                     </Box>
