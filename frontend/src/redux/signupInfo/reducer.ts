@@ -6,7 +6,7 @@ import * as actions from './actions';
 
 export type SignupOnboardAction = ActionType<typeof actions>;
 
-const getDefaultData = (): SignUpDisplayData => ({
+export const getDefaultSignupInfoDisp = (): SignUpDisplayData => ({
     buttonText: '',
     isDisable: false,
 });
@@ -22,12 +22,12 @@ export type SignupOnboardState = SyncState<{
 
 const initialState: SignupOnboardState = {
     data: {
-        signupInfo1: { disp: getDefaultData(), userInfo: undefined },
-        signupInfo2: { disp: getDefaultData(), userInfo: [] },
+        signupInfo1: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+        signupInfo2: { disp: getDefaultSignupInfoDisp(), userInfo: [] },
         signupInfo2Banner: {},
-        signupInfo3: { disp: getDefaultData(), userInfo: undefined },
-        signupInfo4: { disp: getDefaultData(), userInfo: undefined },
-        signupInfo5: { disp: getDefaultData(), userInfo: undefined },
+        signupInfo3: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+        signupInfo4: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
+        signupInfo5: { disp: getDefaultSignupInfoDisp(), userInfo: undefined },
     },
 };
 

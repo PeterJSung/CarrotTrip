@@ -8,7 +8,7 @@ const ButtonWrapper = styled(IconButton)`
     height: ${BTN_SIZE}rem !important;
     background-color: #ffffff !important;
     border-radius: 50%;
-    z-index: 150;
+    z-index: 2;
     box-sizing: border-box;
 `;
 

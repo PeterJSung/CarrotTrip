@@ -1,6 +1,7 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import { someBigComplexData } from 'common/util';
 import CommonBtn from 'component/basic/common/CommonBtn';
+import LoadingImg from 'component/basic/Signup/LoadingImg';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -8,12 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { getSingupInfo1 } from 'redux/signupInfo';
 import styled from 'styled-components';
 import DefaultPageContainer from './DefaultPageContainer';
-
-const ImgLoading = styled.img`
-    width: 100%;
-    height: 100%;
-    position: absolute;
-`;
 
 const BodyWrapper = styled.div`
     display: flex;
@@ -74,17 +69,7 @@ const SignupLoadingPage = (): JSX.Element => {
     return (
         <DefaultPageContainer>
             <BodyWrapper>
-                <Box width="15rem" height="15rem" position="relative">
-                    <ImgLoading src="assets/signup/loading.png" />
-                    <Box width="100%" height="100%" display="flex" justifyContent="center" alignItems="center">
-                        <CircularProgress
-                            style={{
-                                marginTop: '-25%',
-                            }}
-                            color="secondary"
-                        />
-                    </Box>
-                </Box>
+                <LoadingImg />
                 <HeadText>{`${signupInfo1.userInfo?.nickName}님을 위한 추천 여행지를 찾는 중이에요`}</HeadText>
                 <WaitingText>잠시만 기다려주세요!</WaitingText>
             </BodyWrapper>

@@ -7,16 +7,3 @@ export const getUserExist = async (username: string): Promise<boolean> => {
     const response = await restGet<{}, IdRetrieveRes>(`${ID_EXIST_URL}/${username}`);
     return response.data.data;
 };
-
-const sampleResMock: IdRetrieveRes = {
-    data: false,
-    message: 'TESTMSG',
-    statusCode: 'TESTCODE',
-};
-
-export const mockGetUserExist = {
-    url: `${ID_EXIST_URL}/:id`,
-    method: 'GET',
-    status: 200,
-    response: sampleResMock,
-};

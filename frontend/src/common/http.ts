@@ -23,16 +23,18 @@ const restDelete = async <Req = any, Res = any>(
 
 const restPost = async <Req = any, Res = any>(
     url: string,
+    data?: Req,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return await http.post(url, config);
+    return await http.post(url, data, config);
 };
 
 const restPut = async <Req = any, Res = any>(
     url: string,
+    data?: Req,
     config?: AxiosRequestConfig<Req>,
 ): Promise<AxiosResponse<Res>> => {
-    return await http.post(url, config);
+    return await http.post(url, data, config);
 };
 
 export { restPut, restGet, restDelete, restPost };

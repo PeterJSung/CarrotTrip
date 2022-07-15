@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ChipComponent = styled(Chip)`
     width: 3rem;
+    border-radius: 0.25rem;
     margin-bottom: 0.375rem;
 `;
 

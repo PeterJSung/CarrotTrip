@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 //Slick import
 import { getIsLogin } from 'redux/userInfo';
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
 import { PATH_HOME_PAGE, PATH_LOGIN_PAGE, PATH_SIGNUP_LOADING_PAGE, PATH_SIGNUP_PAGE } from './page/common';
 import HomePage from './page/HomePage';
 import LoginPage from './page/LoginPage';

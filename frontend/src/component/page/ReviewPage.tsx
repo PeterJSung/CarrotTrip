@@ -1,8 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, IconButton, TextField, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import CommonBtn from 'component/basic/common/CommonBtn';
-import CommonRating from 'component/basic/common/CommonRating';
-import ReviewLayout from 'component/container/ReviewLayout';
+import ReviewLayout from 'component/layout/ReviewLayout';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -14,53 +13,8 @@ const BackButton = styled(IconButton)`
     margin-bottom: 0.5rem;
 `;
 
-const PlaceName = styled(Typography)`
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 29px;
-    margin-top: 1rem;
-`;
-
-const RatingTitle = styled(Typography)`
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 22px;
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.05em;
-`;
-
-const RatingComponent = styled(CommonRating)`
-    margin-top: 0.625rem;
-    margin: auto;
-`;
-
 const BackIcon = styled(ArrowBackIcon)`
     color: '#8E9095';
-`;
-
-const ImgTag = styled.img`
-    border-radius: 0.5rem;
-    width: 100%;
-    height: 100%;
-`;
-
-const ReviewTextField = styled(TextField)`
-    margin-top: 1rem;
-    margin-bottom: 0.625rem;
-`;
-
-const ReviewIndicatorText = styled(Typography)`
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 14px;
-    text-align: right;
 `;
 
 const WarningText = styled(Typography)`

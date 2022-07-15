@@ -1,7 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { mockGetEvaluationArea } from 'api/evaluationArea';
-import { mockGetUserExist } from 'api/idretrieve';
-import { dummyRouter, getDummyState } from 'stories/common.stories';
+import { dummyRouter, getDummyState, mockGetEvaluationArea, mockGetUserExist } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupPage from './SignupPage';
 

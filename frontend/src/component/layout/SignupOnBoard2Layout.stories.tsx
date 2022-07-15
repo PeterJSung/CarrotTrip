@@ -1,6 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { mockGetEvaluationArea } from 'api/evaluationArea';
-import { getDummyState } from 'stories/common.stories';
+import { getDummyState, mockGetEvaluationArea } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import SignupOnBoard2Layout from './SignupOnBoard2Layout';
 

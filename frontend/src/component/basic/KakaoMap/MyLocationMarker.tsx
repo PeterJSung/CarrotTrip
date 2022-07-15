@@ -8,12 +8,13 @@ const MyLocationMarker = (props: MyLocationMarkerProps): JSX.Element => {
     return (
         <MapMarker
             image={{
-                src: 'assets/maps/currenticon.png',
+                src: 'assets/maps/currenticonred.png',
                 size: {
                     width: DEFAULT_REM_PX * 1.4,
                     height: DEFAULT_REM_PX * 1.4,
                 },
             }}
+            clickable={false}
             position={{ lat: props.lat, lng: props.lng }}
         />
     );

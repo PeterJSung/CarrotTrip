@@ -1,18 +1,18 @@
 import { ComponentMeta } from '@storybook/react';
 import { generateReducer } from 'redux/placeInfo';
-import { dummyPlaceStore, dummyRouter, getDummyStateWithMock } from '../../stories/common.stories';
-import ReviewPage from './ReviewPage';
+import { dummyPlaceStore, getDummyStateWithMock } from 'stories/common.stories';
+import ReviewLayout from './ReviewLayout';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Page/ReviewPage',
-    component: ReviewPage,
+    title: 'Layout/ReviewLayout',
+    component: ReviewLayout,
     decorators: [
         (story) =>
-            getDummyStateWithMock(dummyRouter(story()), {
+            getDummyStateWithMock(story(), {
                 placeInfo: generateReducer(dummyPlaceStore),
             }),
     ],
-} as ComponentMeta<typeof ReviewPage>;
+} as ComponentMeta<typeof ReviewLayout>;
 
-export const reviewPage = () => <ReviewPage />;
+export const reviewLayout = () => <ReviewLayout />;
