@@ -4,7 +4,6 @@ import SignupPageHeader from 'component/basic/Signup/SignupPageHeader';
 import SkipDialog from 'component/basic/Signup/SkipDialog';
 import SignupOnBoard1Layout from 'component/layout/SignupOnBoard1Layout';
 import SignupOnBoard2Layout from 'component/layout/SignupOnBoard2Layout';
-import SignupOnBoard3Layout from 'component/layout/SignupOnBoard3Layout';
 import SignupOnBoard4Layout from 'component/layout/SignupOnBoard4Layout';
 import SignupOnBoard5Layout from 'component/layout/SignupOnBoard5Layout';
 import { debounce } from 'lodash';
@@ -12,12 +11,12 @@ import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Slider, { Settings } from 'react-slick';
-import { getSingupInfo1, getSingupInfo2, getSingupInfo3, getSingupInfo4, getSingupInfo5 } from 'redux/signupInfo';
+import { getSingupInfo1, getSingupInfo2, getSingupInfo4, getSingupInfo5 } from 'redux/signupInfo';
 import { CombinedSignupData } from 'vo/signup';
 import { PATH_SIGNUP_LOADING_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
-const SEQ_COUNT: number = 5;
+const SEQ_COUNT: number = 4;
 const PAGEING_TIME: number = 80;
 
 const sliderSetting: Settings = {
@@ -61,7 +60,6 @@ const SignupPage = (): JSX.Element => {
     const infoArr: Array<CombinedSignupData<any>> = [];
     infoArr.push(useSelector(getSingupInfo1));
     infoArr.push(useSelector(getSingupInfo2));
-    infoArr.push(useSelector(getSingupInfo3));
     infoArr.push(useSelector(getSingupInfo4));
     infoArr.push(useSelector(getSingupInfo5));
 
@@ -127,9 +125,6 @@ const SignupPage = (): JSX.Element => {
                     </OnBoardingBox>
                     <OnBoardingBox>
                         <SignupOnBoard2Layout />
-                    </OnBoardingBox>
-                    <OnBoardingBox>
-                        <SignupOnBoard3Layout />
                     </OnBoardingBox>
                     <OnBoardingBox>
                         <SignupOnBoard4Layout />

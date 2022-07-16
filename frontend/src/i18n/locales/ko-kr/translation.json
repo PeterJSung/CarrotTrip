@@ -24,6 +24,8 @@
     "signup.onboard.five.lowertext": "모른다면 넘어가주세요.",
     "loginpage.signin": "로그인",
     "loginpage.signup": "회원가입",
+    "loginpage.uppertext": "환영합니다! :)",
+    "loginpage.lowertext": "당근여행에서 당신 근처의 여행을 시작하세요.",
     "reviewpage.warning": "해당 장소와 무관한 내용이나 동일 문자의 반복 등 부적합한 내용은 사전경고없이 삭제될 수 있습니다.",
     "signuploadingpage.btn": "결과보기",
     "signuploadingpage.first": "{{ name }}님을 위한 추천 여행지를 찾는 중이에요",
