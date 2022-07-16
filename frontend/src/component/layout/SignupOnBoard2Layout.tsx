@@ -24,9 +24,11 @@ const SignupOnBoard2Layout = (): JSX.Element => {
 
     const totalDataCount = renderData.length;
     const remainCount = Object.keys(signupInfo2Banner).length;
-    const needNextSeletCount = totalDataCount - remainCount;
+    const remain = totalDataCount - remainCount;
     const lowerText =
-        needNextSeletCount > 0 ? `${needNextSeletCount}개를 더 선택해주세요.` : '선택할 것이 남아있지 않습니다.';
+        remain > 0
+            ? t('signup.onboard.two.lowertext.remainselect', { remain })
+            : t('signup.onboard.two.lowertext.normain');
 
     useEffect(() => {
         updateSignupInfo({
@@ -57,7 +59,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
 
         updateSignupInfo({
             disp: {
-                buttonText: `${remainCount}/${totalDataCount}개 입력`,
+                buttonText: t('common.next'),
                 isDisable: false,
             },
             userInfo: selectedData,
@@ -65,7 +67,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
     }, [getSignupInfo2Banner, renderData]);
 
     return (
-        <SignupCommonLayout upperText={'다녀온 관광지를 평가해주세요'} lowerText={lowerText}>
+        <SignupCommonLayout upperText={t('signup.onboard.two.uppertext')} lowerText={lowerText}>
             {renderData.map((data) => {
                 return (
                     <BannerWrapper key={data.contentId}>

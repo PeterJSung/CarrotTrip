@@ -51,7 +51,7 @@ export const getImpressionAllData = (t: TFunction): SelectChipVO[] => {
         ret.push({
             checked: false,
             code: Number(key),
-            title: i18n_IMPRESSION_REF[key].translateKey, //it`ll be converted from i18n
+            title: t(i18n_IMPRESSION_REF[key].translateKey), //it`ll be converted from i18n
         });
     }
     return ret;
@@ -66,7 +66,7 @@ export const getPlaceInfo = (t: TFunction): SelectBoxVO[] => {
             src: eachData.src, // it`ll be replace
             checked: false,
             code: eachData.code,
-            title: eachData.translateKey, //it`ll be converted from i18n
+            title: t(eachData.translateKey), //it`ll be converted from i18n
         });
     });
     return ret;

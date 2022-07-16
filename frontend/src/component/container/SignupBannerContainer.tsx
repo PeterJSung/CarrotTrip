@@ -102,13 +102,13 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
         >
             <Box px="1rem" pt="1rem">
                 <MenuTypo>
-                    얼마나 만족스러웠나요?
+                    {t('signup.onboard.banner.satisfymenu')}
                     <span
                         style={{
                             color: 'red',
                         }}
                     >
-                        *필수입력
+                        {`*${t('signup.onboard.banner.require')}`}
                     </span>
                 </MenuTypo>
                 <CommonRating
@@ -118,17 +118,16 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
                     }}
                 />
                 <Box mt="1.8rem">
-                    <MenuTypo>해당 여행지의 인상은 어떤가요?</MenuTypo>
-
+                    <MenuTypo>{t('signup.onboard.banner.impressmenu')}</MenuTypo>
                     <SelectChipDisplay data={chipData} onClick={onChipClick} />
                 </Box>
             </Box>
             <Divider />
             <Box display="flex" justifyContent="space-between" py="0.5rem" px="1rem">
                 <Box display="flex" flexDirection="column" justifyContent="center">
-                    <SkipTypo onClick={resetClick}>넘어가기</SkipTypo>
+                    <SkipTypo onClick={resetClick}>{t('common.ignore')}</SkipTypo>
                 </Box>
-                <ConfirmBtn onClick={confirmClick}>확인</ConfirmBtn>
+                <ConfirmBtn onClick={confirmClick}>{t('common.confirm')}</ConfirmBtn>
             </Box>
         </ExpandableBanner>
     );

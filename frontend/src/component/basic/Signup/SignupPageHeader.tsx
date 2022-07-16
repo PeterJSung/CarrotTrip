@@ -1,5 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, IconButton, styled, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const BackButton = styled(IconButton)`
     margin-left: 1rem;
@@ -25,6 +26,7 @@ const SkipTypoWrapper = styled(Box)`
 `;
 
 const SignupPageHeader = (props: SignupPageHeaderProps): JSX.Element => {
+    const { t } = useTranslation();
     return (
         <Box display="flex" flexDirection="row" justifyContent="space-between">
             <BackButton onClick={() => props.onClick(false)}>
@@ -32,7 +34,7 @@ const SignupPageHeader = (props: SignupPageHeaderProps): JSX.Element => {
             </BackButton>
             {props.isSkip ? (
                 <SkipTypoWrapper onClick={props.onSkipClick}>
-                    <Typography>넘어가기</Typography>
+                    <Typography>{t('common.ignore')}</Typography>
                 </SkipTypoWrapper>
             ) : (
                 <></>

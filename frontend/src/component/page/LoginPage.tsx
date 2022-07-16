@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import { YELLOW_COLOR } from 'globaltheme';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PATH_SIGNUP_PAGE } from './common';
@@ -71,6 +72,7 @@ const MarkerSVG = (): JSX.Element => (
 );
 
 const LoginPage = (): JSX.Element => {
+    const { t } = useTranslation();
     const nivagate = useNavigate();
     const onClickLogin = () => {
         nivagate('/test');
@@ -88,15 +90,14 @@ const LoginPage = (): JSX.Element => {
                     <MarkerSVG />
                     <CircleIcon />
                 </Box>
-
-                <AppNameText>당근여행</AppNameText>
+                <AppNameText>{t('common.appname')}</AppNameText>
             </Box>
             <ButtonWrapper>
                 <LoginPageBtn isBlack={true} onClick={console.log}>
-                    로그인
+                    {t('loginpage.signin')}
                 </LoginPageBtn>
                 <LoginPageBtn isBlack={false} onClick={onClickSignup}>
-                    회원가입
+                    {t('loginpage.signup')}
                 </LoginPageBtn>
             </ButtonWrapper>
         </DefaultPageContainer>

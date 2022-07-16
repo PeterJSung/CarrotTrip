@@ -1,11 +1,13 @@
 import { MBTI_LEN } from 'component/basic/Signup/signupconstants';
 import SignupMBTIContainer from 'component/container/SignupMBTIContainer';
 import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useThunk } from 'redux/common';
 import { updateInfo5 } from 'redux/signupInfo';
 import SignupCommonLayout from './SignupCommonLayout';
 
 const SignupOnBoard5Layout = (): JSX.Element => {
+    const { t } = useTranslation();
     const updateSignupInfo = useThunk(updateInfo5);
     const [mbtiStr, setMBTIStr] = useState<string>('');
 
@@ -13,7 +15,7 @@ const SignupOnBoard5Layout = (): JSX.Element => {
         const isDisable = mbtiStr.length !== MBTI_LEN;
         updateSignupInfo({
             disp: {
-                buttonText: '확인',
+                buttonText: t('common.confirm'),
                 isDisable,
             },
             userInfo: isDisable ? '' : mbtiStr,
@@ -21,7 +23,10 @@ const SignupOnBoard5Layout = (): JSX.Element => {
     }, [mbtiStr, updateSignupInfo]);
 
     return (
-        <SignupCommonLayout upperText={'MBTI를 알려주세요'} lowerText={'모른다면 넘어가주세요.'}>
+        <SignupCommonLayout
+            upperText={t('signup.onboard.five.uppertext')}
+            lowerText={t('signup.onboard.five.lowertext')}
+        >
             <SignupMBTIContainer onMBTIChange={setMBTIStr} />
         </SignupCommonLayout>
     );

@@ -1,5 +1,6 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { BLACK_COLOR } from 'globaltheme';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import CommonBtn from '../common/CommonBtn';
 
@@ -32,6 +33,7 @@ const DialogBtn = styled(CommonBtn)`
 `;
 
 const SkipDialog = (props: SkipDialogProps): JSX.Element => {
+    const { t } = useTranslation();
     const skipAction = () => {
         props.onClick(true);
     };
@@ -48,10 +50,10 @@ const SkipDialog = (props: SkipDialogProps): JSX.Element => {
             aria-describedby="alert-dialog-description"
         >
             <DialogTitle>
-                <HeaderTypo>작성중인 내용을 취소하시겠습니까?</HeaderTypo>
+                <HeaderTypo>{t('signup.skipdialog.title')}</HeaderTypo>
             </DialogTitle>
             <DialogContent>
-                <BodyTypo>취소 선택 시 작성된 내용은 저장되지 않습니다.</BodyTypo>
+                <BodyTypo>{t('signup.skipdialog.description')}</BodyTypo>
             </DialogContent>
             <DialogActions
                 style={{
@@ -59,10 +61,10 @@ const SkipDialog = (props: SkipDialogProps): JSX.Element => {
                 }}
             >
                 <DialogBtn isBlack={false} onClick={noSkipAction}>
-                    취소
+                    {t('common.cancel')}
                 </DialogBtn>
                 <DialogBtn isBlack={true} onClick={skipAction}>
-                    확인
+                    {t('common.confirm')}
                 </DialogBtn>
             </DialogActions>
         </Dialog>

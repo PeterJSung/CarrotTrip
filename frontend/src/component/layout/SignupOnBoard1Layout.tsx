@@ -2,15 +2,13 @@ import { Box, TextField } from '@mui/material';
 import { getUserExist } from 'api/idretrieve';
 import { debounce } from 'lodash';
 import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useThunk } from 'redux/common';
 import { updateInfo1 } from 'redux/signupInfo';
 import styled from 'styled-components';
 import { SignupInfo1Data } from 'vo/signup';
 import SignupCommonLayout from './SignupCommonLayout';
 
-const nickNameLabel = '닉네임';
-const passwordLabel = '비밀번호';
-const passwordConfirmLabel = '비밀번호 확인';
 type InputLayoutType = SignupInfo1Data & { exist: boolean };
 
 const DEFAULT_DEBOUNCE_TEXT = 200;
@@ -29,6 +27,7 @@ const TextFiledWrapper = styled(Box)`
 `;
 
 const SignupOnBoard1Layout = (): JSX.Element => {
+    const { t } = useTranslation();
     const [data, setData] = useState<InputLayoutType>({
         nickName: '',
         pw: '',
@@ -42,7 +41,7 @@ const SignupOnBoard1Layout = (): JSX.Element => {
         if (nextData.nickName !== '' && nextData.pw !== '' && nextData.pwConfirm !== '') {
             updateSignupInfo({
                 disp: {
-                    buttonText: '다음',
+                    buttonText: t('common.next'),
                     isDisable: nextData.exist || nextData.pw !== nextData.pwConfirm,
                 },
                 userInfo: nextData,
@@ -71,7 +70,7 @@ const SignupOnBoard1Layout = (): JSX.Element => {
     useEffect(() => {
         updateSignupInfo({
             disp: {
-                buttonText: '다음',
+                buttonText: t('common.next'),
                 isDisable: true,
             },
             userInfo: data,
@@ -81,20 +80,20 @@ const SignupOnBoard1Layout = (): JSX.Element => {
     const passwordNotMatch = data.pw !== data.pwConfirm;
 
     return (
-        <SignupCommonLayout upperText={'닉네임을 알려주세요'} lowerText={'닉네임은 마이페이지에서 변경 가능해요.'}>
+        <SignupCommonLayout upperText={t('signup.onboard.one.uppertext')} lowerText={t('signup.onboard.one.lowertext')}>
             <TextFiledWrapper>
                 <TextField
                     error={data.exist}
-                    helperText={data.exist ? '이미 존재하는 닉네임 입니다.' : ''}
-                    label={nickNameLabel}
+                    helperText={data.exist ? t('signup.onboard.one.duplication') : ''}
+                    label={t('common.nickname')}
                     variant="outlined"
                     onChange={nickNameChange}
                 />
-                <TextField label={passwordLabel} variant="outlined" type="password" onChange={passwordChange} />
+                <TextField label={t('common.password')} variant="outlined" type="password" onChange={passwordChange} />
                 <TextField
                     error={passwordNotMatch}
-                    helperText={passwordNotMatch ? '일치하지 않는 비밀번호 입니다.' : ''}
-                    label={passwordConfirmLabel}
+                    helperText={passwordNotMatch ? t('signup.onboard.one.missmatch') : ''}
+                    label={t('common.passwordconfirm')}
                     variant="outlined"
                     type="password"
                     onChange={passwordConfirmChange}

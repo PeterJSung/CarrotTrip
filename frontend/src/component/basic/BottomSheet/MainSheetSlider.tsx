@@ -32,7 +32,7 @@ const getSuggestionInfo = (t: TFunction): ChipDispInfo[] => {
     i18n_SUGGESTION_REF.forEach((eachData) => {
         ret.push({
             code: eachData.code,
-            title: eachData.translateKey,
+            title: t(eachData.translateKey),
         });
     });
     return ret;

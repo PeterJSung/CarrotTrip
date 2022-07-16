@@ -30,7 +30,7 @@ const DetailBubbleChart = (props: DetailBubbleChartProps): JSX.Element => {
 
     return (
         <Box display="flex" flexDirection="column">
-            {smallHeadText('분위기')}
+            {smallHeadText(t('placeinfo.mood'))}
             <Box ref={ref} width="100%" minHeight={`${MINIMUM_HEIGHT}rem`}>
                 <BubbleChart bubblesData={generationDetailInfo(dat)} width={size.w} height={size.h} />
             </Box>

@@ -2,6 +2,7 @@ import { Box, TextField, Typography } from '@mui/material';
 import CommonRating from 'component/basic/common/CommonRating';
 import PlaceInfoChip from 'component/basic/common/PlaceInfoChip';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { getPlaceBasicInfo } from 'redux/placeInfo';
 import styled from 'styled-components';
@@ -67,6 +68,7 @@ const ReviewLayout = (): JSX.Element => {
     const [reviewText, setReviewText] = useState<string>('');
     const placeBasicInfo = useSelector(getPlaceBasicInfo);
 
+    const { t } = useTranslation();
     const reviewChange = (event: any) => {
         const currentReview: string = event.target.value;
         setReviewText(currentReview);
@@ -85,7 +87,7 @@ const ReviewLayout = (): JSX.Element => {
             </Box>
 
             <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
-                <RatingTitle>별점주기</RatingTitle>
+                <RatingTitle>{t('review.rating')}</RatingTitle>
                 <RatingComponent
                     value={rating}
                     onChange={(event, newValue) => {
@@ -95,14 +97,9 @@ const ReviewLayout = (): JSX.Element => {
             </Box>
 
             <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
-                <RatingTitle>리뷰쓰기</RatingTitle>
-                <ReviewTextField
-                    multiline
-                    minRows={10}
-                    placeholder="이 장소는 어떠셨나요? 솔직한 평을 남겨주세요."
-                    onChange={reviewChange}
-                />
-                <ReviewIndicatorText>{`${reviewText.length}자 | 최소 20자`}</ReviewIndicatorText>
+                <RatingTitle>{t('review.write')}</RatingTitle>
+                <ReviewTextField multiline minRows={10} placeholder={t('review.placeholder')} onChange={reviewChange} />
+                <ReviewIndicatorText>{t('review.limit', { length: reviewText.length })}</ReviewIndicatorText>
             </Box>
         </>
     );
