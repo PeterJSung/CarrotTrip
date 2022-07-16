@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { smallHeadText } from 'component/basic/Detail/detailCommon';
+import { useTranslation } from 'react-i18next';
 import { PlaceBookmarkInfo } from 'vo/placeInfo';
 
 export interface DetailMBTIProps {
@@ -7,9 +8,15 @@ export interface DetailMBTIProps {
 }
 
 const DetailMBTI = (props: DetailMBTIProps): JSX.Element => {
+    const { t } = useTranslation();
     return (
         <Box display="flex" flexDirection="column">
-            {smallHeadText('{사용자 MBTI} 86%가 북마크한 장소에요.')}
+            {smallHeadText(
+                t('placeinfo.mookmarktext', {
+                    mbti: 'ITNJ',
+                    percent: '86',
+                }),
+            )}
             <Box position="relative">
                 <div>AAA</div>
             </Box>

@@ -1,4 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import CommonSheetBanner from './CommonSheetBanner';
 
@@ -63,14 +64,15 @@ const RunIcon = (): JSX.Element => (
 );
 
 const BannerRecommandTotal = (props: BannerRecommandTotalProps): JSX.Element => {
+    const { t } = useTranslation();
     return (
         <CommonSheetBanner>
             <Box display="flex" flexDirection="column">
                 <Box display="flex">
-                    <TitleText>전체 코스보기</TitleText>
+                    <TitleText>{t('bottomsheet.totalcourse')}</TitleText>
                     <Box display="flex" my="auto" mr="auto">
                         <StarIcon />
-                        <DetailText>{`${props.score} (평균)`}</DetailText>
+                        <DetailText>{`${props.score} (${t('bottomsheet.avg')})`}</DetailText>
                         <InformDivider orientation="vertical" flexItem />
                         <RunIcon />
                         <DetailText>{`${props.distance}KM`}</DetailText>

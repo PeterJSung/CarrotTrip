@@ -41,7 +41,7 @@ const getImpressionSpecificData = (t: TFunction, data: number[]): AttractionData
         if (data.includes(id)) {
             ret.push({
                 color: i18n_IMPRESSION_REF[key].color,
-                translateKey: i18n_IMPRESSION_REF[key].translateKey, //it`ll be converted from i18n
+                translateKey: t(i18n_IMPRESSION_REF[key].translateKey), //it`ll be converted from i18n
             });
         }
     }

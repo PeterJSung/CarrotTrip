@@ -28,7 +28,7 @@ const SignupOnBoard3Layout = (): JSX.Element => {
         const selectedId: number[] = placeArr.filter((d) => d.checked).map((d) => d.code);
         updateData({
             disp: {
-                buttonText: '다음',
+                buttonText: t('common.next'),
                 isDisable: selectedId.length === 0,
             },
             userInfo: selectedId,
@@ -37,8 +37,8 @@ const SignupOnBoard3Layout = (): JSX.Element => {
 
     return (
         <SignupCommonLayout
-            upperText={`어떤 장소를 찾고 있나요?`}
-            lowerText={'수집한 정보는 여행지 추천에 사용될 예정이에요.'}
+            upperText={t('signup.onboard.three.uppertext')}
+            lowerText={t('signup.onboard.three.lowertext')}
         >
             <Box width="100%" position="relative">
                 <SelectSquareBoxGrid colCount={4} data={placeArr} onClick={onClick} />

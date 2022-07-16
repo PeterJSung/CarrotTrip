@@ -21,7 +21,7 @@ const SelectMBTIButtonGrid = <T extends MBTI_TYPE>(props: SelectMBTIButtonProps<
         <Box flexDirection="column" display="flex">
             {props.type.map((type) => (
                 <ButtonWrapper key={type}>
-                    <SelectMBTIButton type={type} checked={type == props.selected} onClick={props.onClick} />
+                    <SelectMBTIButton type={type} checked={type === props.selected} onClick={props.onClick} />
                 </ButtonWrapper>
             ))}
         </Box>

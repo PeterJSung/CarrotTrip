@@ -52,7 +52,7 @@ const SignupLoadingPage = (): JSX.Element => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [result, setResult] = useState<boolean>(false);
-    const signupInfo1 = useSelector(getSingupInfo1);
+    const name = useSelector(getSingupInfo1).userInfo?.nickName;
 
     useEffect(() => {
         const loadComplexData = async () => {
@@ -64,18 +64,17 @@ const SignupLoadingPage = (): JSX.Element => {
         loadComplexData();
     }, []);
 
-    const btnText = `결과보기`;
     const btnClick = () => {};
     return (
         <DefaultPageContainer>
             <BodyWrapper>
                 <LoadingImg />
-                <HeadText>{`${signupInfo1.userInfo?.nickName}님을 위한 추천 여행지를 찾는 중이에요`}</HeadText>
-                <WaitingText>잠시만 기다려주세요!</WaitingText>
+                <HeadText>{t('signuploadingpage.first', { name })}</HeadText>
+                <WaitingText>{t('signuploadingpage.second')}</WaitingText>
             </BodyWrapper>
             <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
                 <SignupLoadingPageBtn isBlack={true} disabled={!result} onClick={btnClick}>
-                    {btnText}
+                    {t('signuploadingpage.btn')}
                 </SignupLoadingPageBtn>
             </Box>
         </DefaultPageContainer>

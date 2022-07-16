@@ -10,7 +10,7 @@ import SignupCommonLayout from './SignupCommonLayout';
 const SignupOnBoard4Layout = (): JSX.Element => {
     const { t } = useTranslation();
     const [chipArr, setChipArr] = useState<SelectChipVO[]>(getImpressionAllData(t));
-    const nickName = useSelector(getSingupInfo1).userInfo?.nickName;
+    const name = useSelector(getSingupInfo1).userInfo?.nickName;
     const updateData = useThunk(updateInfo4);
 
     const onClick = (id: number) => {
@@ -29,7 +29,7 @@ const SignupOnBoard4Layout = (): JSX.Element => {
         const slectedId: number[] = chipArr.filter((data) => data.checked).map((data) => data.code);
         updateData({
             disp: {
-                buttonText: '다음',
+                buttonText: t('common.next'),
                 isDisable: slectedId.length === 0,
             },
             userInfo: slectedId,
@@ -38,8 +38,8 @@ const SignupOnBoard4Layout = (): JSX.Element => {
 
     return (
         <SignupCommonLayout
-            upperText={`${nickName}님에 대해 알려주세요`}
-            lowerText={'수집한 정보는 여행지 추천에 사용될 예정이에요.'}
+            upperText={t('signup.onboard.four.uppertext', { name })}
+            lowerText={t('signup.onboard.four.lowertext')}
         >
             <SelectChipDisplay data={chipArr} onClick={onClick} />
         </SignupCommonLayout>
