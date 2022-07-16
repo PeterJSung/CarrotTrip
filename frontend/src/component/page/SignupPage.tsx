@@ -42,7 +42,7 @@ const OnBoardingBox = styled(Box)`
 `;
 
 const isPossibleSkip = (idx: number) => {
-    const skipPage = [1, 4];
+    const skipPage = [1, 3];
     for (const i of skipPage) {
         if (idx === i) {
             return true;
@@ -79,8 +79,12 @@ const SignupPage = (): JSX.Element => {
     };
 
     const onNextClick = debounce((next: boolean) => {
-        if (next && idx + 1 !== SEQ_COUNT) {
-            goPagingAction(true);
+        if (next) {
+            if (idx + 1 !== SEQ_COUNT) {
+                goPagingAction(true);
+            } else {
+                navigation(PATH_SIGNUP_LOADING_PAGE);
+            }
         } else if (!next) {
             if (idx !== 0) {
                 goPagingAction(false);
@@ -96,13 +100,7 @@ const SignupPage = (): JSX.Element => {
 
     const skipConfirmBtnClick = async (isSkip: boolean) => {
         if (isSkip) {
-            const isLast = idx + 1 === SEQ_COUNT;
-            if (isLast) {
-                //uploaddata
-                navigation(PATH_SIGNUP_LOADING_PAGE); // must upload other component
-            } else {
-                goPagingAction(true);
-            }
+            onNextClick(true);
         }
         setDialogOpen(false);
     };

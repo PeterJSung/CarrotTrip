@@ -1,4 +1,4 @@
-import { getEvaluationArea } from 'api/evaluationArea';
+import { getEvaluationArea } from 'api/evaluationAreaRetrieve';
 import SignupBannerContainer from 'component/container/SignupBannerContainer';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

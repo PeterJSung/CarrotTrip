@@ -10,7 +10,7 @@ import { CombinedStateType } from 'redux/rootReducer';
 import SignupInfo, { getDefaultSignupInfoDisp, SignupOnboardState } from 'redux/signupInfo';
 import { PlaceBasicInformation, PlaceDetailInformation } from 'vo/placeInfo';
 
-import { ID_EVALUATION_AREA_URL } from 'api/evaluationArea';
+import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
 import { FIND_NAVIGATION_URL } from 'api/navigation';
 
@@ -69,8 +69,8 @@ const dummyPlaceStore: PlaceInfoState = {
 const dummyUserInfoStore: UserInfoState = {
     data: {
         isLogin: false,
-        userId: 'Test Id',
-        userName: 'Test Name',
+        mbti: 'ITNJ',
+        name: '테스트 아이디',
     },
 };
 

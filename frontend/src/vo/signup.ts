@@ -1,3 +1,17 @@
+// 타입이똑같음
+export interface SigninInfo {
+    name: string;
+    mbti: string;
+    isLogin: boolean;
+}
+
+// 타입이똑같음
+export interface SignupReqResBody {
+    nickname: string;
+    password: string;
+    mbti: string;
+}
+
 export interface IdRetrieveRes {
     data: boolean;
     message: string;

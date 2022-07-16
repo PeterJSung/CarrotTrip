@@ -1,3 +1,16 @@
+export interface PlaceUpdateAttractInfoReqRes {
+    memberNickname: string;
+    apiId: number;
+    tasteCode: string;
+}
+
+export interface PlaceUpdateScoreNCommentInfoReqRes {
+    memberNickname: string;
+    apiId: number;
+    score: number;
+    comments?: string;
+}
+
 export interface PlaceBasicInformation {
     placename: string;
     placeType: string;
