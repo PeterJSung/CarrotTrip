@@ -4,8 +4,13 @@
 // ko-kr 에있고 en-us 에 키가 있으면 en-us value 그대로사용
 // ko-kr 에만 있으면 en-us 에 만들고 "" 로 대체
 const fs = require('fs');
-const name = __dirname + '\\locales\\en-us\\translation.json';
-console.log(name);
-const m = JSON.parse(fs.readFileSync(name).toString());
-console.log(m);
-fs.writeFileSync(name, JSON.stringify(m));
+const originFilePath = __dirname + '\\locales\\ko-kr\\translation.json';
+const distFilePath = __dirname + '\\locales\\en-us\\translation.json';
+const newFile = {};
+const originData = JSON.parse(fs.readFileSync(originFilePath).toString());
+const distData = JSON.parse(fs.readFileSync(distFilePath).toString());
+
+for (const key in originData) {
+    newFile[key] = distData[key] ?? '';
+}
+fs.writeFileSync(distFilePath, JSON.stringify(newFile, null, 4).replace(/\n/g, '\r\n'));
