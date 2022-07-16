@@ -1,5 +1,5 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import BackArrowBtn from 'component/basic/common/BackArrowBtn';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import ReviewLayout from 'component/layout/ReviewLayout';
 import { useState } from 'react';
@@ -7,16 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import DefaultPageContainer from './DefaultPageContainer';
-
-const BackButton = styled(IconButton)`
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-`;
-
-const BackIcon = styled(ArrowBackIcon)`
-    color: '#8E9095';
-`;
 
 const WarningText = styled(Typography)`
     font-family: 'Noto Sans KR';
@@ -40,9 +30,7 @@ const ReviewPage = (): JSX.Element => {
     return (
         <DefaultPageContainer>
             <Box display="flex" flexDirection="row" justifyContent="space-between">
-                <BackButton onClick={onClickBackBtn}>
-                    <BackIcon />
-                </BackButton>
+                <BackArrowBtn onClick={onClickBackBtn} />
             </Box>
             <Box flexGrow="1">
                 <ReviewLayout />
