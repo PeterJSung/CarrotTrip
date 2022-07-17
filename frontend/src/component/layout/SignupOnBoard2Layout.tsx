@@ -64,7 +64,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
             },
             userInfo: selectedData,
         });
-    }, [getSignupInfo2Banner, renderData]);
+    }, [signupInfo2Banner]);
 
     return (
         <SignupCommonLayout upperText={t('signup.onboard.two.uppertext')} lowerText={lowerText}>

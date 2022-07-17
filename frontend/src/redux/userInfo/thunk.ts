@@ -3,7 +3,7 @@ import { RootState } from 'redux/rootReducer';
 import { signinAction } from './actions';
 import { UserInfoAction } from './reducer';
 
-export const signinUser = (name: string, mbti: string): ThunkAction<void, RootState, null, UserInfoAction> => {
+export const signinUser = (name: string, mbti?: string): ThunkAction<void, RootState, null, UserInfoAction> => {
     return async (dispatch) => {
         await dispatch(
             signinAction({
