@@ -11,13 +11,15 @@ import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Slider, { Settings } from 'react-slick';
-import { getSingupInfo1, getSingupInfo2, getSingupInfo4, getSingupInfo5 } from 'redux/signupInfo';
+import { useThunk } from 'redux/common';
+import { getSingupInfo1, getSingupInfo2, getSingupInfo4, getSingupInfo5, resetInfoFromSkip } from 'redux/signupInfo';
 import { CombinedSignupData } from 'vo/signup';
 import { PATH_SIGNUP_LOADING_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const SEQ_COUNT: number = 4;
 const PAGEING_TIME: number = 80;
+const skipPage = [1, 3];
 
 const sliderSetting: Settings = {
     dots: false,
@@ -42,7 +44,6 @@ const OnBoardingBox = styled(Box)`
 `;
 
 const isPossibleSkip = (idx: number) => {
-    const skipPage = [1, 4];
     for (const i of skipPage) {
         if (idx === i) {
             return true;
@@ -56,6 +57,7 @@ const SignupPage = (): JSX.Element => {
     const [idx, setIdx] = useState<number>(0);
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const sliderRef = useRef<Slider>(null);
+    const resetThunk = useThunk(resetInfoFromSkip);
 
     const infoArr: Array<CombinedSignupData<any>> = [];
     infoArr.push(useSelector(getSingupInfo1));
@@ -79,8 +81,12 @@ const SignupPage = (): JSX.Element => {
     };
 
     const onNextClick = debounce((next: boolean) => {
-        if (next && idx + 1 !== SEQ_COUNT) {
-            goPagingAction(true);
+        if (next) {
+            if (idx + 1 !== SEQ_COUNT) {
+                goPagingAction(true);
+            } else {
+                navigation(PATH_SIGNUP_LOADING_PAGE);
+            }
         } else if (!next) {
             if (idx !== 0) {
                 goPagingAction(false);
@@ -96,13 +102,8 @@ const SignupPage = (): JSX.Element => {
 
     const skipConfirmBtnClick = async (isSkip: boolean) => {
         if (isSkip) {
-            const isLast = idx + 1 === SEQ_COUNT;
-            if (isLast) {
-                //uploaddata
-                navigation(PATH_SIGNUP_LOADING_PAGE); // must upload other component
-            } else {
-                goPagingAction(true);
-            }
+            resetThunk(idx);
+            onNextClick(true);
         }
         setDialogOpen(false);
     };

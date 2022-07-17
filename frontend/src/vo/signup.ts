@@ -1,3 +1,23 @@
+// 타입이똑같음
+export interface SignupRegisterAttraction {
+    memberNickname: string;
+    categoryCodes: string;
+}
+
+// 타입이똑같음
+export interface SigninInfo {
+    name: string;
+    mbti?: string;
+    isLogin: boolean;
+}
+
+// 타입이똑같음
+export interface SignupReqResBody {
+    nickname: string;
+    password: string;
+    mbti?: string;
+}
+
 export interface IdRetrieveRes {
     data: boolean;
     message: string;
@@ -37,4 +57,5 @@ export interface SignupBanner2Data {
 export interface CombinedSignupData<T> {
     disp: SignUpDisplayData;
     userInfo: T;
+    isSkip?: boolean;
 }

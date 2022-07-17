@@ -1,13 +1,14 @@
 import { Box } from '@mui/material';
-import { someBigComplexData } from 'common/util';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import LoadingImg from 'component/basic/Signup/LoadingImg';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getSingupInfo1 } from 'redux/signupInfo';
+import { useThunk } from 'redux/common';
+import { getSingupInfo1, signupSeqence } from 'redux/signupInfo';
 import styled from 'styled-components';
+import { PATH_HOME_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const BodyWrapper = styled.div`
@@ -53,18 +54,20 @@ const SignupLoadingPage = (): JSX.Element => {
     const navigate = useNavigate();
     const [result, setResult] = useState<boolean>(false);
     const name = useSelector(getSingupInfo1).userInfo?.nickName;
+    const signupThunk = useThunk(signupSeqence);
 
     useEffect(() => {
-        const loadComplexData = async () => {
-            // signupSequence
-            // calcuateBigdata
-            await someBigComplexData();
+        const signupSeqence = async () => {
+            await signupThunk();
             setResult(true);
         };
-        loadComplexData();
+        signupSeqence();
     }, []);
 
-    const btnClick = () => {};
+    const btnClick = () => {
+        navigate(PATH_HOME_PAGE);
+    };
+
     return (
         <DefaultPageContainer>
             <BodyWrapper>

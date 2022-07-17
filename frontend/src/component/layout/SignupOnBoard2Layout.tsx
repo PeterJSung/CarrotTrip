@@ -1,4 +1,4 @@
-import { getEvaluationArea } from 'api/evaluationArea';
+import { getEvaluationArea } from 'api/evaluationAreaRetrieve';
 import SignupBannerContainer from 'component/container/SignupBannerContainer';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -64,7 +64,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
             },
             userInfo: selectedData,
         });
-    }, [getSignupInfo2Banner, renderData]);
+    }, [signupInfo2Banner]);
 
     return (
         <SignupCommonLayout upperText={t('signup.onboard.two.uppertext')} lowerText={lowerText}>

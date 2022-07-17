@@ -1,21 +1,18 @@
 import { produce } from 'immer';
 import { SyncState } from 'redux/common';
 import { ActionType, createReducer } from 'typesafe-actions';
+import { SigninInfo } from 'vo/signup';
 import * as actions from './actions';
 
 export type UserInfoAction = ActionType<typeof actions>;
 
-export type UserInfoState = SyncState<{
-    isLogin: boolean;
-    userId: string;
-    userName: string;
-}>;
+export type UserInfoState = SyncState<SigninInfo>;
 
 const initialState: UserInfoState = {
     data: {
         isLogin: false,
-        userId: '',
-        userName: '',
+        name: '',
+        mbti: '',
     },
 };
 
