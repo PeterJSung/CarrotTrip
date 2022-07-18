@@ -25,8 +25,8 @@ public class EvaluationController {
 
     // 평가 : 관광지에 대한 성향
     @PostMapping("/evaluation/taste/touristAttraction")
-    public TouristAttractionTasteDTO createTasteTouristAttraction(@RequestBody TouristAttractionTasteDTO tatDTO) {
-        return evaluationService.createTouristAttractionTaste(tatDTO);
+    public TouristAttractionTastesDTO createTasteTouristAttraction(@RequestBody TouristAttractionTastesDTO tatDTO) {
+        return evaluationService.createTouristAttractionTastes(tatDTO);
     }
 
     // 평가 : 사용자의 선호하는 관광지 카테고리(관광지 타입) 설정

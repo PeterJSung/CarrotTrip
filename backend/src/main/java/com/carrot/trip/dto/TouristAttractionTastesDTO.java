@@ -11,8 +11,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TouristAttractionTasteDTO {
+public class TouristAttractionTastesDTO {
     private Long apiId;
     private String memberNickname;
-    private String tasteCode;
+    private ArrayList<String> tasteCodes;
 }
