@@ -1,8 +1,12 @@
 import { createAction } from 'typesafe-actions';
-import { Gps } from 'vo/gps';
+import { LocationInfo, MyLocationGps } from 'vo/gps';
 
 export enum GpsActions {
-    GPS_UPDATE = 'GPS/GPS_UPDATE',
+    CURRENT_GPS_UPDATE = 'GPS/CURRENT_GPS_UPDATE',
+    TEMPORARY_GPS_UPDATE = 'GPS/TEMPORARY_GPS_UPDATE',
+    HIGHLIGHT_GPS_UPDATE = 'GPS/HIGHLIGHT_GPS_UPDATE',
 }
 
-export const gpsUpdate = createAction(GpsActions.GPS_UPDATE)<Gps>();
+export const currentGpsUpdate = createAction(GpsActions.CURRENT_GPS_UPDATE)<MyLocationGps>();
+export const temporaryGpsUpdate = createAction(GpsActions.TEMPORARY_GPS_UPDATE)<LocationInfo>();
+export const hightlightGpsUpdate = createAction(GpsActions.HIGHLIGHT_GPS_UPDATE)<LocationInfo | undefined>();

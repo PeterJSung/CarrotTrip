@@ -10,14 +10,9 @@
 // 3depth 시
 // 관광지 id 정보가 기본 (이정보로 다른정보 다 가져올수 있나???) 이건 추후 논의
 
-export interface Interaction2Recommand {
-    type: 'Interaction2Recommand';
-    courseIdx: number;
-}
-
-export interface Interaction2Suggestion {
-    type: 'Interaction2Suggestion';
-    suggestionIdx: number;
+interface Interaction2 {
+    type: 'Interaction2';
+    tabIdx: number;
     selectedData: {
         id: number;
         lng: number;
@@ -25,12 +20,12 @@ export interface Interaction2Suggestion {
     };
 }
 
-export interface Interaction3 {
+interface Interaction3 {
     type: 'Interaction3';
     id: number;
 }
 
-export type Interaction2Type = Interaction2Recommand | Interaction2Suggestion;
+export type Interaction2Type = Interaction2;
 export type Interaction3Type = Interaction3;
 
 export type MapInteractionStackType = [Interaction2Type?, Interaction3Type?];

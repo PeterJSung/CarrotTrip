@@ -1,6 +1,6 @@
 import { combineReducers, ReducersMapObject } from '@reduxjs/toolkit';
 
-import Gps, { GpsState } from './gps';
+import MyLocationGps, { GpsState } from './gps';
 import MapInteractionStack, { MapInteractionStackState } from './mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from './placeInfo';
 import SignupInfo, { SignupOnboardState } from './signupInfo';
@@ -18,7 +18,7 @@ export type CombinedStateType = ReducersMapObject<
 >;
 
 const reducers = combineReducers<CombinedStateType>({
-    gps: Gps,
+    gps: MyLocationGps,
     signupInfo: SignupInfo,
     userInfo: UserInfo,
     placeInfo: PlaceInfo,

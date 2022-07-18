@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Gps from 'redux/gps';
+import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
 import UserInfo, { UserInfoState } from 'redux/userInfo';
@@ -19,7 +19,7 @@ import MockApiResNavi from './apimock/navi.json';
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
         reducer: combineReducers<CombinedStateType>({
-            gps: nextStore ? (nextStore.gps ? nextStore.gps : Gps) : Gps,
+            gps: nextStore ? (nextStore.gps ? nextStore.gps : MyLocationGps) : MyLocationGps,
             signupInfo: nextStore ? (nextStore.signupInfo ? nextStore.signupInfo : SignupInfo) : SignupInfo,
             userInfo: nextStore ? (nextStore.userInfo ? nextStore.userInfo : UserInfo) : UserInfo,
             placeInfo: nextStore ? (nextStore.placeInfo ? nextStore.placeInfo : PlaceInfo) : PlaceInfo,

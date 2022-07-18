@@ -1,3 +1,40 @@
+export interface TourListRetrieveRes {
+    body: {
+        items: {
+            item: TourlistInfo[];
+            recommendCourseItem: TourlistInfo[];
+        };
+        numOfRows: number;
+        pageNo: number;
+        totalCount: number;
+    };
+}
+
+export interface TourlistInfo {
+    addr1: string;
+    areacode: number;
+    cat1: string;
+    cat2: string;
+    cat3: string;
+    contentid: number;
+    contenttypeid: number;
+    createdtime: number;
+    dist: number;
+    mapx: number;
+    mapy: number;
+    mlevel: number;
+    modifiedtime: number;
+    readcount: number;
+    sigungucode: number;
+    title: string;
+    recommendScore: number;
+    mbti: string;
+    mbtiAveScore: number;
+    aveScore: number;
+    tasteList: number[];
+    userTaste: boolean;
+}
+
 export interface AttractionDataSet {
     translateKey: string;
     color: string;

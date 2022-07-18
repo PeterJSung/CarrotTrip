@@ -1,6 +1,7 @@
 import { RootState } from 'redux/rootReducer';
-import { Gps } from 'vo/gps';
+import { LocationInfo, MyLocationGps } from 'vo/gps';
 
-const gpsSelector = (state: RootState): Gps => state.gps.data;
+const currentGps = (state: RootState): MyLocationGps => state.gps.data.current;
+const temporaryGps = (state: RootState): LocationInfo => state.gps.data.temporaryMove;
 
-export { gpsSelector };
+export { currentGps, temporaryGps };
