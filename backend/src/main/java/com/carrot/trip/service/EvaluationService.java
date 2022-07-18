@@ -39,6 +39,18 @@ public class EvaluationService {
         return evaluationDTO;
     }
 
+    public TouristAttractionTastesDTO createTouristAttractionTastes(TouristAttractionTastesDTO touristAttractionTastesDTO) {
+        for(int i = 0; i < touristAttractionTastesDTO.getTasteCodes().size(); i ++) {
+            touristAttractionTasteRepository.save(TouristAttractionTaste.builder()
+                    .apiId(touristAttractionTastesDTO.getApiId())
+                    .memberNickname(touristAttractionTastesDTO.getMemberNickname())
+                    .tasteCode(touristAttractionTastesDTO.getTasteCodes().get(i))
+                    .build());
+        }
+
+        return touristAttractionTastesDTO;
+    }
+
     public TouristAttractionTasteDTO createTouristAttractionTaste(TouristAttractionTasteDTO touristAttractionTasteDTO) {
         touristAttractionTasteRepository.save(TouristAttractionTaste.builder()
                 .apiId(touristAttractionTasteDTO.getApiId())
