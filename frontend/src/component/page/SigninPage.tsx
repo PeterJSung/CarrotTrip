@@ -76,7 +76,7 @@ const SigninPage = (): JSX.Element => {
         <DefaultPageContainer>
             <Box position="relative" display="flex" flexDirection="row" justifyContent="space-between">
                 <BackArrowBtn onClick={onClickBack} />
-                <LoginTypo>로그인</LoginTypo>
+                <LoginTypo>{t('loginpage.signin')}</LoginTypo>
             </Box>
             <Box px="1rem" flexGrow="1" display="flex" flexDirection="column">
                 <SignupCommonLayout upperText={t('loginpage.uppertext')} lowerText={t('loginpage.lowertext')}>

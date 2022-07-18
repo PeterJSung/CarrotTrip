@@ -1,11 +1,11 @@
 // 타입이똑같음
 export interface SignupRegisterAttraction {
     memberNickname: string;
-    categoryCodes: string;
+    categoryCodes: number[];
 }
 
 // 타입이똑같음
-export interface SigninInfo {
+export interface SigninInSignupInfo {
     name: string;
     mbti?: string;
     isLogin: boolean;

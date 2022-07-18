@@ -1,7 +1,7 @@
 export interface PlaceUpdateAttractInfoReqRes {
     memberNickname: string;
     apiId: number;
-    tasteCode: string;
+    tasteCodes: number[];
 }
 
 export interface PlaceUpdateScoreNCommentInfoReqRes {

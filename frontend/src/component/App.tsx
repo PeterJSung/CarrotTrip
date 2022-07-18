@@ -24,6 +24,7 @@ const App = (): JSX.Element => {
     // all of page is redirection to /login
     return (
         <Routes>
+            <Route path={PATH_SIGNUP_LOADING_PAGE} element={<SignupLoadingPage />} />
             <Route element={<RouterGuard redirectPath={PATH_LANDING_PAGE} isAllowed={isLogin} />}>
                 <Route path={PATH_HOME_PAGE} element={<HomePage />} />
                 <Route path="/dashboard" element={<p>This is Dashboard</p>} />
@@ -32,7 +33,6 @@ const App = (): JSX.Element => {
                 <Route path={PATH_LANDING_PAGE} element={<LandingPage />} />
                 <Route path={PATH_SIGNIN_PAGE} element={<SigninPage />} />
                 <Route path={PATH_SIGNUP_PAGE} element={<SignupPage />} />
-                <Route path={PATH_SIGNUP_LOADING_PAGE} element={<SignupLoadingPage />} />
             </Route>
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>

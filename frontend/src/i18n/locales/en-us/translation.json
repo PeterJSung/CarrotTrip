@@ -54,7 +54,7 @@
     "travelinfo.impression.8": "gentle",
     "travelinfo.impression.9": "improvised",
     "travelinfo.impression.10": "weird",
-    "travelinfo.impression.11": "",
+    "travelinfo.impression.11": "introvert",
     "travelinfo.impression.12": "introvoted",
     "travelinfo.impression.13": "complicated",
     "travelinfo.impression.14": "planned",
@@ -70,7 +70,7 @@
     "review.write": "Write review",
     "review.rating": "Give a rate",
     "review.placeholder": "How was this place? Please leave an honest review",
-    "review.limit": "words | at least 20 words",
+    "review.limit": "{{ length }}words | at least 20 words",
     "test": "It is Test Data",
     "test_with_variable": "Welcome, {{name}}!"
 }

@@ -115,16 +115,18 @@ export const signupSeqence = (): ThunkAction<void, RootState, null, SignupOnboar
         allPromiseArr.push(
             postRegistUserAttraction({
                 memberNickname: signupResult.nickname,
-                categoryCodes: attractionInfo.userInfo.join(''),
+                categoryCodes: attractionInfo.userInfo ?? [],
             }),
         );
 
-        getState().signupInfo.data.signupInfo2.userInfo.forEach((d) => {
-            allPromiseArr.push(updateEvaluationScoreNComment(signupResult.nickname, d.id, d.score));
-            d.attraction.length > 0 &&
-                allPromiseArr.push(updateEvaluationAttract(signupResult.nickname, d.id, d.attraction));
-        });
-        const res = await Promise.allSettled(allPromiseArr);
-        console.log(res);
+        const signupInfo2 = getState().signupInfo.data.signupInfo2;
+
+        !signupInfo2.isSkip &&
+            signupInfo2.userInfo.forEach((d) => {
+                allPromiseArr.push(updateEvaluationScoreNComment(signupResult.nickname, d.id, d.score));
+                d.attraction.length > 0 &&
+                    allPromiseArr.push(updateEvaluationAttract(signupResult.nickname, d.id, d.attraction));
+            });
+        await Promise.allSettled(allPromiseArr);
     };
 };
