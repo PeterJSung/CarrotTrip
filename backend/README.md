@@ -92,22 +92,25 @@ X-AUTH-TOKEN: {JWT TOKEN}
 #### Request
 ```json
 {
-    "memberNickname" : "태호",
-    "apiId" : 12341,
-    "tasteCode" : "1"
+  "memberNickname" : "태호",
+  "apiId" : 13245,
+  "tasteCodes" : ["5", "12"]
 }
 ```
 #### Response
 ```json
 {
-    "memberNickname" : "태호",
-    "apiId" : 12341,
-    "tasteCode" : "1"
+  "apiId": 13245,
+  "memberNickname": "태호",
+  "tasteCodes": [
+    "5",
+    "12"
+  ]
 }
 ```
 tasteCode: 조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적
 apiId는 contentId를 의미합니다.
-tasteCode는 스트링 형태로써, 쌍따옴표로 감싸줍니다.
+tasteCodes는 스트링 형태로써, 쌍따옴표로 감싸줍니다.
 
 ###  2.3 관광지 더미 데이터 가져오기
 #### URI
