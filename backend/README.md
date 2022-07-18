@@ -46,7 +46,9 @@ data가 false면 현재 서버에 아이디가 존재하지 않는 것이므로 
 #### Response
 ```json
 {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE"
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU4MTU2NzMxLCJleHAiOjE2NTgyNDMxMzF9.SULPcJiK9HpoDth52a2fHE2qumo_2_JIGCLqqMXupmE",
+  "nickname": "태호",
+  "mbti": "INTJ"
 }
 ```
 응답으로 토큰을 발급 받은 뒤에는 헤더에 JWT 토큰을 포함하여 통신하면 된다.
