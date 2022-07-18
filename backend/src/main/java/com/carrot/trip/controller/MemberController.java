@@ -59,6 +59,8 @@ public class MemberController {
         }
         return TokenDTO.builder()
                 .token(jwtTokenProvider.createToken(member.getUserNickname(), Collections.singletonList("ROLE_USER")))
+                .mbti(member.getMbti())
+                .nickname(member.getNickname())
                 .build();
     }
 
