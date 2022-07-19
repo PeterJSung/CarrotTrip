@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { i18n_SUGGESTION_REF } from 'vo/travelInfo';
 
 export interface MainSheetSliderProps {
+    selectedIdx: number;
     onClick: (code: number) => void;
 }
 
@@ -44,7 +45,15 @@ const MainSheetSlider = (props: MainSheetSliderProps): JSX.Element => {
     return (
         <ScrollMenu>
             {standardData.map((d) => {
-                return <ScrollChip clickable key={d.title} label={d.title} onClick={() => props.onClick(d.code)} />;
+                return (
+                    <ScrollChip
+                        color={props.selectedIdx === d.code ? 'secondary' : 'info'}
+                        clickable
+                        key={d.title}
+                        label={d.title}
+                        onClick={() => props.onClick(d.code)}
+                    />
+                );
             })}
         </ScrollMenu>
     );

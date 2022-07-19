@@ -62,9 +62,7 @@ const SignupLoadingPage = (): JSX.Element => {
             const promiseArr: Array<Promise<any>> = [];
             promiseArr.push(signupThunk());
             promiseArr.push(pause(3000));
-            console.log(`Errorerer`);
             await Promise.allSettled(promiseArr);
-            console.log(`End`);
             setComplete(true);
         };
         signupSeqence();

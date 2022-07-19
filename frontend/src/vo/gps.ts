@@ -6,7 +6,7 @@ export interface LocationInfo {
     zoom: number;
 }
 
-export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string };
+export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string; isDefault: boolean };
 
 export interface GpsInformation {
     current: MyLocationGps;
@@ -17,6 +17,7 @@ export interface GpsInformation {
 export const DEFAULT_GPS: MyLocationGps = {
     lat: DEFAULT_LAT,
     lng: DEFAULT_LNG,
+    isDefault: true,
     regionStr: '',
 };
 

@@ -3,7 +3,7 @@ import { postRegistUserAttraction, postSignup } from 'api/signup';
 import { cloneDeep } from 'lodash';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
-import { signinUser } from 'redux/userInfo';
+import { sessionInThunk } from 'redux/userInfo';
 import { CombinedSignupData, SignupInfo1Data, SignupInfo2Data, TourAreaInfo } from 'vo/signup';
 import {
     signupInfo1UpdateAction,
@@ -100,7 +100,7 @@ export const signupSeqence = (): ThunkAction<void, RootState, null, SignupOnboar
         const attractionInfo = getState().signupInfo.data.signupInfo4;
         const mbtiInfo = getState().signupInfo.data.signupInfo5;
         if (idInfo.userInfo === undefined || mbtiInfo.userInfo === undefined || attractionInfo.userInfo === undefined) {
-            console.log(`Error signup failed cause no require ment data`);
+            console.error(`Error signup failed cause no require ment data`);
             return;
         }
 
@@ -109,7 +109,7 @@ export const signupSeqence = (): ThunkAction<void, RootState, null, SignupOnboar
             nickname: idInfo.userInfo.nickName,
             password: idInfo.userInfo.pw,
         });
-        await dispatch(signinUser(signupResult.nickname, signupResult.mbti));
+        await dispatch(sessionInThunk(signupResult.nickname, signupResult.mbti));
         // signup 과정 및 세션 lockin 완료.
         const allPromiseArr: Array<Promise<any>> = [];
         allPromiseArr.push(

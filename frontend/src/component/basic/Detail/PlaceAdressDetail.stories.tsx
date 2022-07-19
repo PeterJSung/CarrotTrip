@@ -8,4 +8,4 @@ export default {
     component: PlaceAdressDetail,
 } as ComponentMeta<typeof PlaceAdressDetail>;
 
-export const placeAdressDetail = () => <PlaceAdressDetail adressText="서울특별시 가나다 마바사 아자차 카타파하" />;
+export const placeAdressDetail = () => <PlaceAdressDetail address="서울특별시 가나다 마바사 아자차 카타파하" />;

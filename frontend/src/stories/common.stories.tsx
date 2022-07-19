@@ -14,7 +14,9 @@ import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
 import { FIND_NAVIGATION_URL } from 'api/navigation';
 
+import { TOURLIST_INFO_URL } from 'api/tourlistInfo';
 import MockApiResNavi from './apimock/navi.json';
+import MockApiResTourlist from './apimock/tourlist.json';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
@@ -132,6 +134,13 @@ export const mockGetTourNaviInfo = {
     method: 'POST',
     status: 200,
     response: MockApiResNavi,
+};
+
+export const mockGetTourlist = {
+    url: `${TOURLIST_INFO_URL}/x/:lng/y/:lat/nickname/:name/language/:locale`,
+    method: 'GET',
+    status: 200,
+    response: MockApiResTourlist,
 };
 
 export {

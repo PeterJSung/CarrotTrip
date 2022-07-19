@@ -2,7 +2,7 @@ import { DEFAULT_REM_PX } from 'common/constants';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { MyLocationGps } from 'vo/gps';
 
-export type MyLocationMarkerProps = Omit<MyLocationGps, 'regionStr' | 'zoom'>;
+export type MyLocationMarkerProps = Omit<MyLocationGps, 'regionStr' | 'zoom' | 'isDefault'>;
 
 const MyLocationMarker = (props: MyLocationMarkerProps): JSX.Element => {
     return (

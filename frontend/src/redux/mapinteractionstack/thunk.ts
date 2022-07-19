@@ -15,19 +15,16 @@ export const updateInetractionStack = (
     return async (dispatch, getState) => {
         const currentDispStack = getState().mapDispStack;
         let newRet: MapInteractionStackType = [];
-        console.log('Seq1');
         if (information) {
             if (
                 (currentDispStack.data.length === 0 || currentDispStack.data.length === 1) &&
                 isIntersaction2(information)
             ) {
-                console.log('Seq2');
                 newRet[0] = cloneDeep(information as Interaction2Type);
             } else if (
                 (currentDispStack.data.length === 1 || currentDispStack.data.length === 2) &&
                 isIntersaction3(information)
             ) {
-                console.log('Seq3');
                 newRet = cloneDeep(currentDispStack.data);
                 newRet[1] = cloneDeep(information as Interaction3Type);
             }
@@ -35,8 +32,6 @@ export const updateInetractionStack = (
             newRet = cloneDeep(currentDispStack.data);
             newRet.length--;
         }
-
-        console.log('Seq4');
         await dispatch(mapUpdateStackeAction(newRet));
     };
 };

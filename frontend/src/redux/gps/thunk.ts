@@ -22,6 +22,7 @@ export const updateCurrentGpsThunk = (
         const nextGps: MyLocationGps = {
             lat,
             lng,
+            isDefault: false,
             regionStr,
         };
         await dispatch(currentGpsUpdate(nextGps));

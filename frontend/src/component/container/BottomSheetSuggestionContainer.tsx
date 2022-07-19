@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import MainSheetSlider from 'component/basic/BottomSheet/MainSheetSlider';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
@@ -13,11 +14,17 @@ const SuggestionSheet = styled(BottomSheet)`
         width: 95%;
         margin: auto;
     }
+    & [data-rsbs-header] {
+        padding: 0.5rem 0.25rem;
+    }
 `;
 
 const BottomSheetSuggestionContainer = (): JSX.Element => {
     const updateThunk = useThunk(updateInetractionStack);
     const getData = useSelector(getMapInteractionStack);
+
+    const [suggestIdx, setSuggestIdx] = useState<number>(1);
+
     let isOpen = false;
 
     if (getData[0] && !getData[1]) {
@@ -28,11 +35,14 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
         updateThunk();
     };
 
-    console.log(`It is Suggestion Container ${isOpen}`);
     const mapRef = useRef<kakao.maps.Map>(null);
 
     const [staticMode, setStaticMode] = useState<boolean>(false);
     const bottomSheetRef = useRef<RefHandles>(null);
+
+    const suggestionSliderClick = (idx: number) => {
+        setSuggestIdx(idx);
+    };
 
     return (
         <SuggestionSheet
@@ -41,7 +51,7 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
             // onDismiss={() => props.setOpen(true)}
             blocking={false}
             defaultSnap={0}
-            header={<div>This is Header</div>}
+            header={<MainSheetSlider selectedIdx={suggestIdx} onClick={suggestionSliderClick} />}
             snapPoints={({ maxHeight }) => [maxHeight * 0.4, maxHeight * 0.95]}
         >
             <Button

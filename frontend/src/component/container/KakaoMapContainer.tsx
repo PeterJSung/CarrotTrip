@@ -12,6 +12,9 @@ import BottomSheetSuggestionContainer from './BottomSheetSuggestionContainer';
 import IndicatorDetailPlace from './IndicatorDetailPlace';
 import IndicatorMapRegion from './IndicatorMapRegion';
 
+import { useTranslation } from 'react-i18next';
+import { retriveTourlistArea } from 'redux/tourlistarea';
+import { getUserName } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 
@@ -28,6 +31,7 @@ const getHighlightInfo = (data: MapInteractionStackType): LocationInfo | undefin
 };
 
 const KakaoMapContainer = (): JSX.Element => {
+    const { i18n } = useTranslation();
     /*
     만약 이방식으로 하면 내부에서 hook 으로 주입하는거기때문에 load 가 늦어짐.
     반응성 빠르게하기위해서는 Script 로 외부주입하는게 맞다.
@@ -38,13 +42,22 @@ const KakaoMapContainer = (): JSX.Element => {
     */
 
     const updateInteraction = useThunk(updateInetractionStack);
+    const retriveTourThunk = useThunk(retriveTourlistArea);
+
     const currentGpsInfo = useSelector(currentGps);
     const temporaryGpsInfo = useSelector(temporaryGps);
     const interactionStack = useSelector(getMapInteractionStack);
+    const userName = useSelector(getUserName);
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
     const highLightPos = getHighlightInfo(interactionStack);
+
+    useEffect(() => {
+        if (!currentGpsInfo.isDefault) {
+            retriveTourThunk(currentGpsInfo.lng, currentGpsInfo.lat, userName, i18n.language);
+        }
+    }, [currentGpsInfo]);
 
     const centerPos: LocationInfo = {
         lat: currentGpsInfo.lat,
@@ -59,7 +72,6 @@ const KakaoMapContainer = (): JSX.Element => {
     }
 
     const markerClick = () => {
-        console.log('Click');
         const markerInfo: Interaction2Type = {
             type: 'Interaction2',
             tabIdx: 0,
@@ -71,7 +83,6 @@ const KakaoMapContainer = (): JSX.Element => {
         };
         updateInteraction(markerInfo);
     };
-    console.log(interactionStack);
 
     useEffect(() => {
         const map = mapRef.current;
@@ -81,7 +92,6 @@ const KakaoMapContainer = (): JSX.Element => {
         }
     }, [mapRef, currentGpsInfo]);
 
-    console.log(`Render after ${JSON.stringify(currentGpsInfo)}`);
     return (
         <Box width="100%" height="100%" position="relative" display="flex">
             <Map
