@@ -11,4 +11,6 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TokenDTO {
     private String token;
+    private String nickname;
+    private String mbti;
 }
