@@ -1,6 +1,7 @@
 import { retriveTourareaAPI } from 'api/tourlistInfo';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
+import { getTourlistAreaAction } from './actions';
 import { TourlistAreaAction } from './reducer';
 
 export const retriveTourlistArea = (
@@ -11,9 +12,13 @@ export const retriveTourlistArea = (
 ): ThunkAction<void, RootState, null, TourlistAreaAction> => {
     return async (dispatch) => {
         const res = await retriveTourareaAPI(lng, lat, name, locale);
-        const recommandData = res.response.body.items.recommendCourseItem;
-        const totalData = res.response.body.items.item;
-        console.log(recommandData);
-        console.log(totalData);
+        const recommand = res.response.body.items.recommendCourseItem;
+        const total = res.response.body.items.item;
+        await dispatch(
+            getTourlistAreaAction({
+                recommand,
+                total,
+            }),
+        );
     };
 };

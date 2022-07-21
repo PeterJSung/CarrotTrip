@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { SyncState } from 'redux/common';
 import { ActionType, createReducer } from 'typesafe-actions';
-import { TourlistDataset } from 'vo/travelInfo';
+import { contentIdMapper, TourlistDataset, TourlistInfo } from 'vo/travelInfo';
 import * as actions from './actions';
 
 export type TourlistAreaAction = ActionType<typeof actions>;
@@ -18,11 +18,32 @@ const initialState: TourlistAreaState = {
     },
 };
 
+const convertContentTypeId = (typeId: number): number => contentIdMapper[typeId].targetCode;
+
+const convertDatasetFromAPI = (d: TourlistInfo): TourlistDataset => ({
+    addr: d.addr1,
+    aveScore: d.aveScore,
+    contentId: d.contentid,
+    contenTtypeId: convertContentTypeId(d.contenttypeid),
+    lat: d.mapy,
+    lng: d.mapx,
+    mbti: d.mbti,
+    mbtiAveScore: d.mbtiAveScore,
+    recommendScore: d.recommendScore,
+    tasteList: d.tasteList,
+    title: d.title,
+    userTaste: d.userTaste,
+});
+
 export const generateReducer = (firstState: TourlistAreaState = initialState) => {
     return createReducer<TourlistAreaState, TourlistAreaAction>(firstState, {
         [actions.TourlistAreaActions.UPDATE_AREA]: (state, action) =>
             produce(state, (draft) => {
-                draft.data = action.payload;
+                draft.data.recommand = action.payload.recommand.map(convertDatasetFromAPI);
+                draft.data.item = {};
+                action.payload.total.forEach((d) => {
+                    draft.data.item[convertContentTypeId(d.contenttypeid)] = convertDatasetFromAPI(d);
+                });
             }),
     });
 };

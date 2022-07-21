@@ -2,7 +2,7 @@ import { Chip } from '@mui/material';
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import { TFunction, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { i18n_SUGGESTION_REF } from 'vo/travelInfo';
+import { i18n_SUGGESTION_REF, Suggestion_Event_Type } from 'vo/travelInfo';
 
 export interface MainSheetSliderProps {
     selectedIdx: number;
@@ -10,7 +10,7 @@ export interface MainSheetSliderProps {
 }
 
 const ScrollChip = styled(Chip)`
-    margin-right: 0.375rem;
+    margin-right: 0.375rem !important;
     & > span {
         font-family: 'Noto Sans KR';
         font-style: normal;
@@ -22,6 +22,7 @@ const ScrollChip = styled(Chip)`
 `;
 
 interface ChipDispInfo {
+    type: Suggestion_Event_Type;
     title: string;
     code: number;
 }
@@ -32,8 +33,9 @@ const getSuggestionInfo = (t: TFunction): ChipDispInfo[] => {
     // code need to setup
     i18n_SUGGESTION_REF.forEach((eachData) => {
         ret.push({
-            code: eachData.code,
-            title: t(eachData.translateKey),
+            type: eachData.type,
+            code: eachData.dataset.targetCode,
+            title: t(eachData.dataset.translateKey),
         });
     });
     return ret;
