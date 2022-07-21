@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { pause } from 'common/util';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import LoadingImg from 'component/basic/Signup/LoadingImg';
 import { useEffect, useState } from 'react';
@@ -52,14 +53,17 @@ const WaitingText = styled(CommonText)`
 const SignupLoadingPage = (): JSX.Element => {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const [result, setResult] = useState<boolean>(false);
+    const [complete, setComplete] = useState<boolean>(false);
     const name = useSelector(getSingupInfo1).userInfo?.nickName;
     const signupThunk = useThunk(signupSeqence);
 
     useEffect(() => {
         const signupSeqence = async () => {
-            await signupThunk();
-            setResult(true);
+            const promiseArr: Array<Promise<any>> = [];
+            promiseArr.push(signupThunk());
+            promiseArr.push(pause(3000));
+            await Promise.allSettled(promiseArr);
+            setComplete(true);
         };
         signupSeqence();
     }, []);
@@ -71,12 +75,12 @@ const SignupLoadingPage = (): JSX.Element => {
     return (
         <DefaultPageContainer>
             <BodyWrapper>
-                <LoadingImg />
+                <LoadingImg isDone={complete} />
                 <HeadText>{t('signuploadingpage.first', { name })}</HeadText>
                 <WaitingText>{t('signuploadingpage.second')}</WaitingText>
             </BodyWrapper>
             <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
-                <SignupLoadingPageBtn isBlack={true} disabled={!result} onClick={btnClick}>
+                <SignupLoadingPageBtn isBlack={true} disabled={!complete} onClick={btnClick}>
                     {t('signuploadingpage.btn')}
                 </SignupLoadingPageBtn>
             </Box>

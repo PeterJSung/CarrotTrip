@@ -65,8 +65,8 @@ export const getPlaceInfo = (t: TFunction): SelectBoxVO[] => {
         ret.push({
             src: eachData.src, // it`ll be replace
             checked: false,
-            code: eachData.code,
-            title: t(eachData.translateKey), //it`ll be converted from i18n
+            code: eachData.dataset.targetCode,
+            title: t(eachData.dataset.translateKey), //it`ll be converted from i18n
         });
     });
     return ret;

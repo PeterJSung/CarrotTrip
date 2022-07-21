@@ -34,16 +34,13 @@ const SignupOnBoard2Layout = (): JSX.Element => {
         updateSignupInfo({
             disp: {
                 buttonText: '',
-                isDisable: false,
+                isDisable: true,
             },
             userInfo: [],
         });
-        const fetch = async () => {
-            getEvaluationArea(i18n.language as LocaleCode).then((res) => {
-                setRenderData(res);
-            });
-        };
-        fetch();
+        getEvaluationArea(i18n.language as LocaleCode).then((res) => {
+            setRenderData(res);
+        });
     }, []);
 
     useEffect(() => {
@@ -60,7 +57,7 @@ const SignupOnBoard2Layout = (): JSX.Element => {
         updateSignupInfo({
             disp: {
                 buttonText: t('common.next'),
-                isDisable: false,
+                isDisable: remainCount === 0,
             },
             userInfo: selectedData,
         });

@@ -1,33 +1,37 @@
-import { Code } from '@mui/icons-material';
-import { Box, Button } from '@mui/material';
-import { getTourNaviInfo } from 'api/navigation';
-import { DEFAULT_MAP_LEVEL } from 'common/constants';
+import { Box } from '@mui/material';
+import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_MAP_LEVEL, HIGHLIGHT_MAP_LEVEL } from 'common/constants';
 import MyLocationMarker from 'component/basic/KakaoMap/MyLocationMarker';
-import { useEffect, useRef, useState } from 'react';
-import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
+import { useEffect, useRef } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
-import { BottomSheet } from 'react-spring-bottom-sheet';
-import { RefHandles } from 'react-spring-bottom-sheet/dist/types';
-import { gpsSelector } from 'redux/gps';
-import styled from 'styled-components';
+import { useThunk } from 'redux/common';
+import { currentGps, temporaryGps } from 'redux/gps';
+import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
+import { Interaction2Type, MapInteractionStackType } from 'vo/mapInteraction';
+import BottomSheetSuggestionContainer from './BottomSheetSuggestionContainer';
+import IndicatorDetailPlace from './IndicatorDetailPlace';
 import IndicatorMapRegion from './IndicatorMapRegion';
 
-interface LatLng {
-    lat: number;
-    lng: number;
-}
+import { useTranslation } from 'react-i18next';
+import { retriveTourlistArea } from 'redux/tourlistarea';
+import { getUserName } from 'redux/userInfo';
+import { LocationInfo } from 'vo/gps';
+import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 
-const CustomBtnSheet = styled(BottomSheet)`
-    & > div {
-        width: 95%;
-        margin: auto;
+const getHighlightInfo = (data: MapInteractionStackType): LocationInfo | undefined => {
+    if (data[1]) {
+        return {
+            lat: DEFAULT_LAT,
+            lng: DEFAULT_LNG,
+            zoom: HIGHLIGHT_MAP_LEVEL,
+        };
+    } else {
+        return undefined;
     }
-    & > div > [data-rsbs-header] {
-        padding: 0.5rem 0rem;
-    }
-`;
+};
 
 const KakaoMapContainer = (): JSX.Element => {
+    const { i18n } = useTranslation();
     /*
     만약 이방식으로 하면 내부에서 hook 으로 주입하는거기때문에 load 가 늦어짐.
     반응성 빠르게하기위해서는 Script 로 외부주입하는게 맞다.
@@ -37,16 +41,48 @@ const KakaoMapContainer = (): JSX.Element => {
     });
     */
 
-    const [open, setOpen] = useState<boolean>(false);
-    const [road, setRoad] = useState<LatLng[]>([]);
-    const [markers, setMarkers] = useState<LatLng[]>([]);
-    const currentGpsInfo = useSelector(gpsSelector);
-    //const markers: MarkerInfo[] = [];
+    const updateInteraction = useThunk(updateInetractionStack);
+    const retriveTourThunk = useThunk(retriveTourlistArea);
+
+    const currentGpsInfo = useSelector(currentGps);
+    const temporaryGpsInfo = useSelector(temporaryGps);
+    const interactionStack = useSelector(getMapInteractionStack);
+    const userName = useSelector(getUserName);
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
-    const [staticMode, setStaticMode] = useState<boolean>(false);
-    const bottomSheetRef = useRef<RefHandles>(null);
+    const highLightPos = getHighlightInfo(interactionStack);
+
+    useEffect(() => {
+        if (!currentGpsInfo.isDefault) {
+            retriveTourThunk(currentGpsInfo.lng, currentGpsInfo.lat, userName, i18n.language);
+        }
+    }, [currentGpsInfo]);
+
+    const centerPos: LocationInfo = {
+        lat: currentGpsInfo.lat,
+        lng: currentGpsInfo.lng,
+        zoom: DEFAULT_MAP_LEVEL,
+    };
+
+    if (interactionStack[1] && interactionStack[0]) {
+        centerPos.lat = interactionStack[0].selectedData.lat;
+        centerPos.lng = interactionStack[0].selectedData.lng;
+        centerPos.zoom = HIGHLIGHT_MAP_LEVEL;
+    }
+
+    const markerClick = () => {
+        const markerInfo: Interaction2Type = {
+            type: 'Interaction2',
+            tabIdx: 0,
+            selectedData: {
+                id: 1,
+                lat: DEFAULT_LAT,
+                lng: DEFAULT_LNG,
+            },
+        };
+        updateInteraction(markerInfo);
+    };
 
     useEffect(() => {
         const map = mapRef.current;
@@ -56,6 +92,45 @@ const KakaoMapContainer = (): JSX.Element => {
         }
     }, [mapRef, currentGpsInfo]);
 
+    return (
+        <Box width="100%" height="100%" position="relative" display="flex">
+            <Map
+                ref={mapRef}
+                level={centerPos.zoom}
+                zoomable={!highLightPos}
+                draggable={!highLightPos}
+                center={{ lat: centerPos.lat - 0.0027, lng: centerPos.lng }}
+                style={{ flexGrow: 1 }}
+            >
+                <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
+
+                <MapMarker onClick={markerClick} position={{ lat: centerPos.lat, lng: centerPos.lng }} />
+            </Map>
+            {interactionStack[1] !== undefined ? <IndicatorDetailPlace /> : <IndicatorMapRegion />}
+            <BottomSheetPlaceDetailContainer />
+            <BottomSheetSuggestionContainer />
+        </Box>
+    );
+};
+
+export default KakaoMapContainer;
+
+/*
+                {markers.map((res) => (
+                    <MapMarker
+                        position={{
+                            ...res,
+                        }}
+                    />
+                ))}
+
+                <Polyline
+                    path={road}
+                    strokeWeight={10} // 선의 두께 입니다
+                    strokeColor={'blue'} // 선의 색깔입니다
+                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                    strokeStyle={'solid'} // 선의 스타일입니다
+                />
     useEffect(() => {
         const fetch = async () => {
             console.log(`NaviStart`);
@@ -117,72 +192,4 @@ const KakaoMapContainer = (): JSX.Element => {
         };
         fetch();
     }, []);
-
-    useEffect(() => {
-        setTimeout(() => {
-            console.log(`Transition Complete`);
-            mapRef.current?.relayout();
-        }, 500);
-    }, [open]);
-    console.log(`Render after`);
-    return (
-        <Box width="100%" height="100%" position="relative" display="flex">
-            <Map ref={mapRef} center={{ lat: currentGpsInfo.lat, lng: currentGpsInfo.lng }} style={{ flexGrow: 1 }}>
-                <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
-                {markers.map((res) => (
-                    <MapMarker
-                        position={{
-                            ...res,
-                        }}
-                    />
-                ))}
-
-                <MapMarker
-                    onClick={() => setOpen(true)}
-                    position={{ lat: currentGpsInfo.lat, lng: currentGpsInfo.lng }}
-                />
-                <Polyline
-                    path={road}
-                    strokeWeight={10} // 선의 두께 입니다
-                    strokeColor={'blue'} // 선의 색깔입니다
-                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                    strokeStyle={'solid'} // 선의 스타일입니다
-                />
-            </Map>
-            <IndicatorMapRegion />
-            <CustomBtnSheet
-                open={open}
-                onDismiss={() => setOpen(false)}
-                blocking={false}
-                header={
-                    <input
-                        className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-300 focus:bg-white focus:ring-0"
-                        type="text"
-                        placeholder="Text input field in a sticky header"
-                    />
-                }
-                defaultSnap={1}
-                snapPoints={({ maxHeight }) => {
-                    if (staticMode) {
-                        console.log(`Itis static Mode`);
-                        return [maxHeight * 0.8];
-                    } else {
-                        console.log(`Not StaticMode`);
-                        return [maxHeight * 0.4, maxHeight * 0.95];
-                    }
-                }}
-            >
-                <Button onClick={() => setStaticMode(!staticMode)}>Test</Button>
-                <p>
-                    When <Code>blocking</Code> is <Code>false</Code> it's possible to use the Bottom Sheet as an height
-                    adjustable sidebar/panel.
-                </p>
-                <p>
-                    You can combine this with <Code>onDismissable</Code> to fine-tune the behavior you want.
-                </p>
-            </CustomBtnSheet>
-        </Box>
-    );
-};
-
-export default KakaoMapContainer;
+*/

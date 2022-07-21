@@ -1,14 +1,23 @@
 import { DEFAULT_LAT, DEFAULT_LNG } from 'common/constants';
 
-export interface Gps {
+export interface LocationInfo {
     lng: number;
     lat: number;
-    regionStr: string;
+    zoom: number;
 }
 
-export const DEFAULT_GPS: Gps = {
+export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string; isDefault: boolean };
+
+export interface GpsInformation {
+    current: MyLocationGps;
+    temporaryMove: LocationInfo;
+    highlight?: LocationInfo;
+}
+
+export const DEFAULT_GPS: MyLocationGps = {
     lat: DEFAULT_LAT,
     lng: DEFAULT_LNG,
+    isDefault: true,
     regionStr: '',
 };
 

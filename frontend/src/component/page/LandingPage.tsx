@@ -4,7 +4,7 @@ import { YELLOW_COLOR } from 'globaltheme';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PATH_SIGNUP_PAGE } from './common';
+import { PATH_SIGNIN_PAGE, PATH_SIGNUP_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const CircleIcon = styled.div`
@@ -75,7 +75,7 @@ const LandingPage = (): JSX.Element => {
     const { t } = useTranslation();
     const nivagate = useNavigate();
     const onClickLogin = () => {
-        nivagate('/test');
+        nivagate(PATH_SIGNIN_PAGE);
     };
 
     const onClickSignup = () => {
@@ -93,7 +93,7 @@ const LandingPage = (): JSX.Element => {
                 <AppNameText>{t('common.appname')}</AppNameText>
             </Box>
             <ButtonWrapper>
-                <LandingPageBtn isBlack={true} onClick={console.log}>
+                <LandingPageBtn isBlack={true} onClick={onClickLogin}>
                     {t('loginpage.signin')}
                 </LandingPageBtn>
                 <LandingPageBtn isBlack={false} onClick={onClickSignup}>

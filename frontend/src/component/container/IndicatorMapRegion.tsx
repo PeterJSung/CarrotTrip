@@ -2,7 +2,7 @@ import { getC2RData } from 'api/coord2region';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
-import { gpsSelector, updateGpsThunk } from 'redux/gps';
+import { currentGps, updateCurrentGpsThunk } from 'redux/gps';
 import { KakaoRegionAPIRes } from 'vo/gps';
 import MyLocationBtn from '../basic/KakaoMap/MyLocationBtn';
 import MyProfileBtn from '../basic/KakaoMap/MyProfileBtn';
@@ -30,8 +30,8 @@ const parserRegionStr = (apiRes: KakaoRegionAPIRes): string => {
 };
 
 const IndicatorMapRegion = (): JSX.Element => {
-    const currentGpsInfo = useSelector(gpsSelector);
-    const updateGpsState = useThunk(updateGpsThunk);
+    const currentGpsInfo = useSelector(currentGps);
+    const updateGpsState = useThunk(updateCurrentGpsThunk);
     useEffect(() => {
         myLocationBtnClick();
     }, []);
@@ -40,6 +40,7 @@ const IndicatorMapRegion = (): JSX.Element => {
         getGeoLocationInfo(async (lat: number, lng: number) => {
             const res = await getC2RData(lat, lng);
             updateGpsState(lat, lng, parserRegionStr(res));
+            //updateGpsState(lat, lng, DEFAULT_MAP_LEVEL, parserRegionStr(res));
         });
     };
 

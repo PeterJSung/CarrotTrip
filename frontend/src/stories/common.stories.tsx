@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Gps from 'redux/gps';
+import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
 import UserInfo, { UserInfoState } from 'redux/userInfo';
@@ -14,12 +14,14 @@ import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
 import { FIND_NAVIGATION_URL } from 'api/navigation';
 
+import { TOURLIST_INFO_URL } from 'api/tourlistInfo';
 import MockApiResNavi from './apimock/navi.json';
+import MockApiResTourlist from './apimock/tourlist.json';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
         reducer: combineReducers<CombinedStateType>({
-            gps: nextStore ? (nextStore.gps ? nextStore.gps : Gps) : Gps,
+            gps: nextStore ? (nextStore.gps ? nextStore.gps : MyLocationGps) : MyLocationGps,
             signupInfo: nextStore ? (nextStore.signupInfo ? nextStore.signupInfo : SignupInfo) : SignupInfo,
             userInfo: nextStore ? (nextStore.userInfo ? nextStore.userInfo : UserInfo) : UserInfo,
             placeInfo: nextStore ? (nextStore.placeInfo ? nextStore.placeInfo : PlaceInfo) : PlaceInfo,
@@ -132,6 +134,13 @@ export const mockGetTourNaviInfo = {
     method: 'POST',
     status: 200,
     response: MockApiResNavi,
+};
+
+export const mockGetTourlist = {
+    url: `${TOURLIST_INFO_URL}/x/:lng/y/:lat/nickname/:name/language/:locale`,
+    method: 'GET',
+    status: 200,
+    response: MockApiResTourlist,
 };
 
 export {

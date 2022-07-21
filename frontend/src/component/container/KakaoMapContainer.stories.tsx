@@ -1,5 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
-import { getDummyState, mockGetTourNaviInfo } from 'stories/common.stories';
+import { generateReducer } from 'redux/userInfo';
+import { getDummyStateWithMock, mockGetTourlist, mockGetTourNaviInfo } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import KakaoMapContainer from './KakaoMapContainer';
 
@@ -7,10 +8,21 @@ import KakaoMapContainer from './KakaoMapContainer';
 export default {
     title: 'Container/KakaoMapContainer',
     component: KakaoMapContainer,
-    decorators: [(story) => getDummyState(story()), WithMock],
+    decorators: [
+        (story) =>
+            getDummyStateWithMock(story(), {
+                userInfo: generateReducer({
+                    data: {
+                        isLogin: true,
+                        name: 'test',
+                    },
+                }),
+            }),
+        WithMock,
+    ],
 } as ComponentMeta<typeof KakaoMapContainer>;
 
 export const kakaoMapContainer = () => <KakaoMapContainer />;
 kakaoMapContainer.parameters = {
-    mockData: [mockGetTourNaviInfo],
+    mockData: [mockGetTourNaviInfo, mockGetTourlist],
 };

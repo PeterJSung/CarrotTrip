@@ -5,7 +5,7 @@ import { descriptionText, smallHeadText } from './detailCommon';
 // this code is based from https://github.com/EliEladElrom/react-tutorials/blob/master/bubble-chart/src/components/BubbleChart/BubbleChart.tsx
 
 export interface PlaceAdressDetailProps {
-    adressText: string;
+    address: string;
 }
 
 const PlaceAdressDetail = (props: PlaceAdressDetailProps): JSX.Element => {
@@ -13,7 +13,7 @@ const PlaceAdressDetail = (props: PlaceAdressDetailProps): JSX.Element => {
     return (
         <Box display="flex" flexDirection="column">
             {smallHeadText(t('placeinfo.address'))}
-            {descriptionText(props.adressText)}
+            {descriptionText(props.address)}
         </Box>
     );
 };

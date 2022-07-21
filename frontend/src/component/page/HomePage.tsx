@@ -1,5 +1,7 @@
+import KakaoMapContainer from 'component/container/KakaoMapContainer';
+
 const HomePage = (): JSX.Element => {
-    return <div>Home</div>;
+    return <KakaoMapContainer />;
 };
 
 export default HomePage;
