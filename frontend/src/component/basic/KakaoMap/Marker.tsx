@@ -4,7 +4,6 @@ import { specializeContentId } from 'vo/travelInfo';
 import EctIcon from './MarkerIcons/EctIcon';
 import RestorantIcon from './MarkerIcons/RestorantIcon';
 import ShoppingIcon from './MarkerIcons/ShoppingIcon';
-import SrcIcon from './MarkerIcons/SrcIcon';
 import TourIcon from './MarkerIcons/TourIcon';
 
 export interface MarkerProps {
@@ -44,7 +43,10 @@ const Marker = (props: MarkerProps): JSX.Element => {
             clickable={true}
         >
             <Box onClick={() => props.onClick(props.contentId, props.contentTypeId)}>
-                {props.src ? <SrcIcon isSelected={props.isSelect} src={props.src} /> : nonSrcIcon(props)}
+                {
+                    /*props.src ? <SrcIcon isSelected={props.isSelect} src={props.src} /> : nonSrcIcon(props) */
+                    nonSrcIcon(props)
+                }
             </Box>
         </CustomOverlayMap>
     );

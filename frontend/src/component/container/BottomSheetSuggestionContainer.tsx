@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { DEFAULT_LAT, DEFAULT_LNG } from 'common/constants';
 import MainSheetSlider from 'component/basic/BottomSheet/MainSheetSlider';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,7 @@ import { RefHandles } from 'react-spring-bottom-sheet/dist/types';
 import { useThunk } from 'redux/common';
 import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
 import styled from 'styled-components';
-import { Interaction3Type } from 'vo/mapInteraction';
+import { Interaction2Type, Interaction3Type } from 'vo/mapInteraction';
 
 const SuggestionSheet = styled(BottomSheet)`
     & > div {
@@ -20,10 +21,8 @@ const SuggestionSheet = styled(BottomSheet)`
 `;
 
 const BottomSheetSuggestionContainer = (): JSX.Element => {
-    const updateThunk = useThunk(updateInetractionStack);
+    const updateInteraction = useThunk(updateInetractionStack);
     const getData = useSelector(getMapInteractionStack);
-
-    const [suggestIdx, setSuggestIdx] = useState<number>(1);
 
     let isOpen = false;
 
@@ -32,7 +31,7 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
     }
 
     const onBackClick = () => {
-        updateThunk();
+        updateInteraction();
     };
 
     const mapRef = useRef<kakao.maps.Map>(null);
@@ -41,7 +40,16 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
     const bottomSheetRef = useRef<RefHandles>(null);
 
     const suggestionSliderClick = (idx: number) => {
-        setSuggestIdx(idx);
+        const markerInfo: Interaction2Type = {
+            type: 'Interaction2',
+            tabIdx: idx,
+            selectedData: {
+                id: 1,
+                lat: DEFAULT_LAT,
+                lng: DEFAULT_LNG,
+            },
+        };
+        updateInteraction(markerInfo);
     };
 
     return (
@@ -51,7 +59,9 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
             // onDismiss={() => props.setOpen(true)}
             blocking={false}
             defaultSnap={0}
-            header={<MainSheetSlider selectedIdx={suggestIdx} onClick={suggestionSliderClick} />}
+            header={
+                <MainSheetSlider selectedIdx={getData[0] ? getData[0].tabIdx : 1} onClick={suggestionSliderClick} />
+            }
             snapPoints={({ maxHeight }) => [maxHeight * 0.4, maxHeight * 0.95]}
         >
             <Button
@@ -60,7 +70,7 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
                         id: 1,
                         type: 'Interaction3',
                     };
-                    updateThunk(nextPlaceDetail);
+                    updateInteraction(nextPlaceDetail);
                 }}
             >
                 It is Suggestion Sheet if{' '}
