@@ -8,7 +8,7 @@ export type TourlistAreaAction = ActionType<typeof actions>;
 
 export type TourlistAreaState = SyncState<{
     recommand: TourlistDataset[];
-    item: { [key: string]: TourlistDataset };
+    item: { [key: string]: TourlistDataset[] };
 }>;
 
 const initialState: TourlistAreaState = {
@@ -24,7 +24,7 @@ const convertDatasetFromAPI = (d: TourlistInfo): TourlistDataset => ({
     addr: d.addr1,
     aveScore: d.aveScore,
     contentId: d.contentid,
-    contenTtypeId: convertContentTypeId(d.contenttypeid),
+    contentTypeId: convertContentTypeId(d.contenttypeid),
     lat: d.mapy,
     lng: d.mapx,
     mbti: d.mbti,
@@ -33,6 +33,7 @@ const convertDatasetFromAPI = (d: TourlistInfo): TourlistDataset => ({
     tasteList: d.tasteList,
     title: d.title,
     userTaste: d.userTaste,
+    src: d.firstimage ?? d.firstimage2,
 });
 
 export const generateReducer = (firstState: TourlistAreaState = initialState) => {
@@ -42,7 +43,11 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                 draft.data.recommand = action.payload.recommand.map(convertDatasetFromAPI);
                 draft.data.item = {};
                 action.payload.total.forEach((d) => {
-                    draft.data.item[convertContentTypeId(d.contenttypeid)] = convertDatasetFromAPI(d);
+                    const convId = convertContentTypeId(d.contenttypeid);
+                    if (!draft.data.item[convId]) {
+                        draft.data.item[convId] = [];
+                    }
+                    draft.data.item[convId].push(convertDatasetFromAPI(d));
                 });
             }),
     });

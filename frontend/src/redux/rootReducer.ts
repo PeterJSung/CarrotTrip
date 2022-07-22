@@ -4,6 +4,7 @@ import MyLocationGps, { GpsState } from './gps';
 import MapInteractionStack, { MapInteractionStackState } from './mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from './placeInfo';
 import SignupInfo, { SignupOnboardState } from './signupInfo';
+import TourlistArea, { TourlistAreaState } from './tourlistarea';
 import UserInfo, { UserInfoState } from './userInfo';
 
 export type CombinedStateType = ReducersMapObject<
@@ -13,6 +14,7 @@ export type CombinedStateType = ReducersMapObject<
         userInfo: UserInfoState;
         placeInfo: PlaceInfoState;
         mapDispStack: MapInteractionStackState;
+        tourlistArea: TourlistAreaState;
     },
     any
 >;
@@ -23,6 +25,7 @@ const reducers = combineReducers<CombinedStateType>({
     userInfo: UserInfo,
     placeInfo: PlaceInfo,
     mapDispStack: MapInteractionStack,
+    tourlistArea: TourlistArea,
 });
 
 export type RootState = ReturnType<typeof reducers>;

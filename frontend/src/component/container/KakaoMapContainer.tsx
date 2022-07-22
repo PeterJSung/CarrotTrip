@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_MAP_LEVEL, HIGHLIGHT_MAP_LEVEL } from 'common/constants';
 import MyLocationMarker from 'component/basic/KakaoMap/MyLocationMarker';
 import { useEffect, useRef } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
 import { currentGps, temporaryGps } from 'redux/gps';
@@ -17,6 +17,7 @@ import { retriveTourlistArea } from 'redux/tourlistarea';
 import { getUserName } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
+import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
 
 const getHighlightInfo = (data: MapInteractionStackType): LocationInfo | undefined => {
     if (data[1]) {
@@ -103,8 +104,7 @@ const KakaoMapContainer = (): JSX.Element => {
                 style={{ flexGrow: 1 }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
-
-                <MapMarker onClick={markerClick} position={{ lat: centerPos.lat, lng: centerPos.lng }} />
+                <KakaoMapMarkerContainer />
             </Map>
             {interactionStack[1] !== undefined ? <IndicatorDetailPlace /> : <IndicatorMapRegion />}
             <BottomSheetPlaceDetailContainer />

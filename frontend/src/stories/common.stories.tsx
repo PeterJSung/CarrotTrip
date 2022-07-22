@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
+import TourlistArea from 'redux/tourlistarea';
 import UserInfo, { UserInfoState } from 'redux/userInfo';
 
 import { CombinedStateType } from 'redux/rootReducer';
@@ -30,6 +31,7 @@ const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
                     ? nextStore.mapDispStack
                     : MapInteractionStack
                 : MapInteractionStack,
+            tourlistArea: nextStore ? (nextStore.tourlistArea ? nextStore.tourlistArea : TourlistArea) : TourlistArea,
         }),
     });
 };
