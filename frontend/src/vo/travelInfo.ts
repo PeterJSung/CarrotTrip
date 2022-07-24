@@ -13,6 +13,18 @@ export interface TourListRetrieveRes {
     };
 }
 
+interface EachRegionInfo {
+    src: string;
+    id: number;
+    title: string;
+}
+
+export interface TourlistRecoomandDataset {
+    distanceInfo: number;
+    startInfo: EachRegionInfo;
+    endInfo: EachRegionInfo;
+}
+
 export interface TourlistDataset {
     addr: string;
     contentId: number;

@@ -56,7 +56,7 @@ const KakaoMapContainer = (): JSX.Element => {
 
     useEffect(() => {
         if (!currentGpsInfo.isDefault) {
-            retriveTourThunk(currentGpsInfo.lng, currentGpsInfo.lat, userName, i18n.language);
+            retriveTourThunk(currentGpsInfo, userName, i18n.language);
         }
     }, [currentGpsInfo]);
 
