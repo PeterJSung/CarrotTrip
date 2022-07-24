@@ -26,6 +26,7 @@ public class EvaluationService {
     private final MemberFavoriteCategoryRepository memberFavoriteCategoryRepository;
     private final MemberTasteRepository memberTasteRepository;
 
+    /** 일반 사용자용 평가등록 : 이미 데이터가 존재할 경우 삭제 후 등록한다. */
     @Transactional
     public EvaluationDTO createEvaluation(EvaluationDTO evaluationDTO) {
         evaluationRepository.deleteEvaluationsByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
@@ -35,6 +36,25 @@ public class EvaluationService {
                 .score(evaluationDTO.getScore())
                 .comments(evaluationDTO.getComments())
                 .build());
+
+        return evaluationDTO;
+    }
+
+    /** 서포터용 평가등록 : 이미 데이터가 존재할 경우 등록하지 않는다. */
+    @Transactional
+    public EvaluationDTO createEvaluationForSupporter(EvaluationDTO evaluationDTO) {
+        Evaluation evaluation = evaluationRepository.findByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
+        if (evaluation != null){
+            return null;
+        }
+        else {
+            evaluationRepository.save(Evaluation.builder()
+                    .memberNickname(evaluationDTO.getMemberNickname())
+                    .apiId(evaluationDTO.getApiId())
+                    .score(evaluationDTO.getScore())
+                    .comments(evaluationDTO.getComments())
+                    .build());
+        }
 
         return evaluationDTO;
     }

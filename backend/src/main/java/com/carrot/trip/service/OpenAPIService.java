@@ -75,7 +75,7 @@ public class OpenAPIService {
             Integer ran3 = random.nextInt((10 - 1) + 1) + 1;
             Integer ran4 = random.nextInt((10 - 1) + 1) + 1;
 
-            evaluationService.createEvaluation(EvaluationDTO.builder()
+            evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("태호")
                     .score(ran1)
@@ -83,7 +83,7 @@ public class OpenAPIService {
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 태호 : " + ran1);
 
-            evaluationService.createEvaluation(EvaluationDTO.builder()
+            evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("가현")
                     .score(ran2)
@@ -91,7 +91,7 @@ public class OpenAPIService {
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 가현 : " + ran2);
 
-            evaluationService.createEvaluation(EvaluationDTO.builder()
+            evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("영현")
                     .score(ran3)
@@ -99,7 +99,7 @@ public class OpenAPIService {
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 영현 : " + ran3);
 
-            evaluationService.createEvaluation(EvaluationDTO.builder()
+            evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("정민")
                     .score(ran4)

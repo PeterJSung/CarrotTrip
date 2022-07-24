@@ -58,7 +58,7 @@ data가 false면 현재 서버에 아이디가 존재하지 않는 것이므로 
 밸류 : {JWT TOKEN}
 
 ## 2. 기본 평가 페이지 (Onboarding_02)
-###  2.1 특정 관광지에 대한 별점, 코멘트 등록
+###  2.1 특정 관광지에 대한 별점, 코멘트 등록/수정
 #### URI
 ``POST`` ``/api/evaluation/score``
 #### Header
@@ -83,6 +83,8 @@ X-AUTH-TOKEN: {JWT TOKEN}
     "comments": "좋아요~"
 }
 ```
+해당 API는 수정 목적으로도 사용 가능합니다.
+(기존에 데이터가 있다면 제거하고 등록하는 방식입니다)
 
 ###  2.2 특정 관광지에 대한 성향 등록
 #### URI
@@ -333,3 +335,75 @@ aveScore는 해당 관광지에 대한 평균별점을 의미한다.
 tasteList는 해당 관광지에 대해 평가된 관광지 성향 리스트를 의미한다.
 userTaste는 해당 관광지의 성향리스트를 기반으로 사용자의 성향과 부합되는 관광지 여부를 의미한다.
 recommendCourseItem은 추천코스 탭을 위한 데이터를 추려낸 아이템리스트이다.
+
+## 6. 북마크
+###  6.1 북마크 조회
+#### URI
+``GET`` ``/api/bookmark/{nickname}``
+#### Header
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Response
+```json
+[
+  {
+    "id": 1,
+    "memberNickname": "태호",
+    "apiId": 9991
+  },
+  {
+    "id": 2,
+    "memberNickname": "태호",
+    "apiId": 9992
+  },
+  {
+    "id": 3,
+    "memberNickname": "태호",
+    "apiId": 9993
+  }
+]
+```
+
+###  6.2 북마크 등록/수정
+#### URI
+``POST`` ``/api/bookmark``
+#### Header
+Content-Type: application/json
+
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Request
+```json
+{
+  "memberNickname": "태호",
+  "apiId": 10000
+}
+```
+#### Response
+```json
+{
+  "memberNickname": "태호",
+  "apiId": 10000
+}
+```
+
+###  6.3 북마크 삭제
+#### URI
+``DELETE`` ``/api/bookmark``
+#### Header
+Content-Type: application/json
+
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Request
+```json
+{
+  "memberNickname": "태호",
+  "apiId": 10000
+}
+```
+#### Response
+```json
+{
+  "memberNickname": "태호",
+  "apiId": 10000
+}
+```
+

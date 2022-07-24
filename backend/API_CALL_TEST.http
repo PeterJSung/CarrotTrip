@@ -26,7 +26,7 @@ GET http://localhost:8080/api/user/test
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDgxMDMxLCJleHAiOjE2NTU1Njc0MzF9.Ew8wA-gt7EBomyaNJLNvyy5EWyKx-V5500wH1EgmTT8
 
-### 2.1 특정 관광지에 대한 별점, 코멘트 등록
+### 2.1 특정 관광지에 대한 별점, 코멘트 등록/수정
 POST http://localhost:8080/api/evaluation/score
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDgxMDMxLCJleHAiOjE2NTU1Njc0MzF9.Ew8wA-gt7EBomyaNJLNvyy5EWyKx-V5500wH1EgmTT8
@@ -78,6 +78,31 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305/nickname/테테/language/KorService
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+### 6.1 북마크 조회
+GET http://localhost:8080/api/bookmark/태호
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+### 6.2 북마크 등록 및 수정
+POST http://localhost:8080/api/bookmark
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+{
+  "memberNickname" : "태호",
+  "apiId" : "10000"
+}
+
+### 6.3 북마크 삭제
+DELETE http://localhost:8080/api/bookmark
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
+{
+  "memberNickname" : "태호",
+  "apiId" : "10000"
+}
 
 
 ### 공공 데이터 API 테스트 (시크릿키는 담당개발자에게 문의하시오)
