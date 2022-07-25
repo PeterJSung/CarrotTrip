@@ -13,10 +13,22 @@ export interface TourListRetrieveRes {
     };
 }
 
+interface EachRegionInfo {
+    src: string;
+    id: number;
+    title: string;
+}
+
+export interface TourlistRecoomandDataset {
+    distanceInfo: number;
+    startInfo: EachRegionInfo;
+    endInfo: EachRegionInfo;
+}
+
 export interface TourlistDataset {
     addr: string;
     contentId: number;
-    contenTtypeId: number;
+    contentTypeId: number;
     lat: number;
     lng: number;
     src?: string;
@@ -126,6 +138,9 @@ interface IdMapperSet {
 interface ContentIdMapper {
     [key: number]: IdMapperSet;
 }
+
+// 12 = tour area 38 = shopping 39 = restorant
+export const specializeContentId = [12, 38, 39];
 
 export const contentIdMapper: ContentIdMapper = {
     // 국문 contendId refer link is https://api.visitkorea.or.kr/openAPI/tourAPI/koreaGuide.do

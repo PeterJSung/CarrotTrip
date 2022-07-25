@@ -5,6 +5,8 @@ import { MapImageIconProps } from './common';
 const ImgComponent = styled.img`
     max-height: 100%;
     max-width: 100%;
+    min-height: 100%;
+    min-width: 100%;
 `;
 
 const SrcIcon = (props: MapImageIconProps): JSX.Element => {

@@ -41,9 +41,12 @@ const getSuggestionInfo = (t: TFunction): ChipDispInfo[] => {
     return ret;
 };
 
+const seletedColor = () => {};
+
 const MainSheetSlider = (props: MainSheetSliderProps): JSX.Element => {
     const { t } = useTranslation();
     const standardData = getSuggestionInfo(t);
+
     return (
         <ScrollMenu>
             {standardData.map((d) => {

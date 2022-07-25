@@ -1,5 +1,10 @@
-import { CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk';
-import styled from 'styled-components';
+import { Box } from '@mui/material';
+import { CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { specializeContentId } from 'vo/travelInfo';
+import EctIcon from './MarkerIcons/EctIcon';
+import RestorantIcon from './MarkerIcons/RestorantIcon';
+import ShoppingIcon from './MarkerIcons/ShoppingIcon';
+import TourIcon from './MarkerIcons/TourIcon';
 
 export interface MarkerProps {
     isSelect: boolean;
@@ -7,19 +12,25 @@ export interface MarkerProps {
     lng: number;
     contentId: number;
     contentTypeId: number;
-    src?: number;
-    onClick: (id: any) => void;
+    src?: string;
+    onClick: (id: number, typeId: number) => void;
 }
 
-const BorderMarker = styled(MapMarker)`
-    background-color: red !important;
-    width: 500px !important;
-    & > img {
-        box-sizing: border-box;
-        border: 2px solid #191919;
-        border-radius: 50%;
+const nonSrcIcon = (props: MarkerProps) => {
+    let Component = EctIcon;
+    switch (props.contentTypeId) {
+        case specializeContentId[0]: //restorant
+            Component = TourIcon;
+            break;
+        case specializeContentId[1]: //restorant
+            Component = ShoppingIcon;
+            break;
+        case specializeContentId[2]: //restorant
+            Component = RestorantIcon;
+            break;
     }
-`;
+    return <Component isSelected={props.isSelect} />;
+};
 
 const Marker = (props: MarkerProps): JSX.Element => {
     return (
@@ -31,20 +42,12 @@ const Marker = (props: MarkerProps): JSX.Element => {
             }}
             clickable={true}
         >
-            {/* 커스텀 오버레이에 표시할 내용입니다 */}
-            <div
-                onClick={props.onClick}
-                className="label"
-                style={{
-                    backgroundColor: 'red',
-                    zIndex: 5,
-                    color: 'white',
-                }}
-            >
-                <span className="left"></span>
-                <span className="center">카카오!</span>
-                <span className="right"></span>
-            </div>
+            <Box onClick={() => props.onClick(props.contentId, props.contentTypeId)}>
+                {
+                    /*props.src ? <SrcIcon isSelected={props.isSelect} src={props.src} /> : nonSrcIcon(props) */
+                    nonSrcIcon(props)
+                }
+            </Box>
         </CustomOverlayMap>
     );
 };
