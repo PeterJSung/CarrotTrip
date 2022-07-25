@@ -33,7 +33,7 @@ jobs:
           ls -al
           /bin/bash -c "npm install --production"
           ls -al
-          /bin/bash -c "npm run build:linux"
+          /bin/bash -c "npm run build-linux"
           cd ..
           rm -rf ./backend/src/main/resources/static/*
           cp -r ./frontend/build/* ./backend/src/main/resources/static
