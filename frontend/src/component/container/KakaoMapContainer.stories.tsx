@@ -14,6 +14,7 @@ export default {
                 userInfo: generateReducer({
                     data: {
                         isLogin: true,
+                        mbti: 'ITNJ',
                         name: 'test',
                     },
                 }),

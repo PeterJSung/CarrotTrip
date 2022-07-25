@@ -1,10 +1,13 @@
 import { DEFAULT_LAT, DEFAULT_LNG } from 'common/constants';
 
-export interface LocationInfo {
+export interface PosInfo {
     lng: number;
     lat: number;
-    zoom: number;
 }
+
+export type LocationInfo = {
+    zoom: number;
+} & PosInfo;
 
 export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string; isDefault: boolean };
 

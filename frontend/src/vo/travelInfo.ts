@@ -1,3 +1,5 @@
+import { PosInfo } from './gps';
+
 export interface TourListRetrieveRes {
     response: {
         body: {
@@ -13,16 +15,29 @@ export interface TourListRetrieveRes {
     };
 }
 
+export interface TourlistRecoomandPathset {
+    totalDistance: number;
+    vertexList: PosInfo[];
+}
+
 interface EachRegionInfo {
     src: string;
     id: number;
     title: string;
 }
 
-export interface TourlistRecoomandDataset {
+export interface TourlistRecommandTotalSet {
+    totalDistance: number;
+    name: string;
+    avgRating: number;
+    sections: TourlistRecommandCourseSet[];
+}
+
+export interface TourlistRecommandCourseSet {
     distanceInfo: number;
     startInfo: EachRegionInfo;
     endInfo: EachRegionInfo;
+    vertexList: PosInfo[];
 }
 
 export interface TourlistDataset {

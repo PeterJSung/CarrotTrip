@@ -18,6 +18,8 @@ import { FIND_NAVIGATION_URL } from 'api/navigation';
 import { TOURLIST_INFO_URL } from 'api/tourlistInfo';
 import MockApiResNavi from './apimock/navi.json';
 import MockApiResTourlist from './apimock/tourlist.json';
+import MockDataItemList from './datamock/itemList.json';
+import MockDataRecommandList from './datamock/recommandlist.json';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
@@ -144,6 +146,9 @@ export const mockGetTourlist = {
     status: 200,
     response: MockApiResTourlist,
 };
+
+export const mockGetDataRecommandList = MockDataRecommandList;
+export const mockGetDataItemList = MockDataItemList;
 
 export {
     genDummyStore,
