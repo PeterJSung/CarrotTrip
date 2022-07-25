@@ -44,12 +44,11 @@ jobs:
           git commit -m "Auto merge commit"
           git push https://${{ secrets.CARROT_TRIP_PAT }}@github.com/PeterJSung/CarrotTrip build-auto-merge-${{ steps.random.outputs.value }}
       - name: create pull request towards the main branch
-        uses: peter-evans/create-pull-request@v3.10.1
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.CARROT_TRIP_PAT }}
           commit-message: Auto Pull Request
           title: New post pr
-
           body: Auto-created Pull Request
           branch: build-auto-merge-${{ steps.random.outputs.value }} # The branch where you commit
           base: main # Don't forget to specify the right base branch here
