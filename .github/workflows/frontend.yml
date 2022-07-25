@@ -42,6 +42,7 @@ jobs:
           branch: build-auto-merge-${{ steps.random.outputs.value }}
       - name: commit and push new file
         run: |
+          echo $GITHUB_REPOSITORY
           git remote set-url origin https://x-access-token:${{ secrets.CARROT_TRIP_PAT }}@github.com/$GITHUB_REPOSITORY
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
