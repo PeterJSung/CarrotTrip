@@ -30,7 +30,9 @@ jobs:
       - name: Run Install & build pacakge
         run: |
           cd frontend
+          ls -al
           npm i 
+          ls -al
           npm run build:linux
           cd ..
           rm -rf ./backend/src/main/resources/static/*
