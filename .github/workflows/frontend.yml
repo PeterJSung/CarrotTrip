@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependency
-        run: git pull origin main --allow-unrelated-histories
+        run: git fetch --unshallow --tags
       - name: Use Node.js 16.14.x
         uses: actions/setup-node@v1
         with:
@@ -35,10 +35,7 @@ jobs:
           echo "Some line" > file1.txt
       - name: commit and push new file
         run: |
-          echo $GITHUB_REPOSITORY
-          git remote set-url origin https://x-access-token:${{ secrets.CARROT_TRIP_PAT }}@github.com/$GITHUB_REPOSITORY
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git remote add origin https://peterjsung:${{ secrets.CARROT_TRIP_PAT }}@github.com/$GITHUB_REPOSITORY
           git add .
           git commit -m "Auto merge commit"
           git push -u origin build-auto-merge-${{ steps.random.outputs.value }}
