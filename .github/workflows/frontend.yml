@@ -16,40 +16,20 @@ on:
 jobs:
   autodeploy:
     runs-on: ubuntu-latest
-    steps:
+     steps:
       - uses: actions/checkout@v3
         with:
           ref: main
-      - name: Install Dependency
-        run: git fetch --unshallow --tags
-      - name: Use Node.js 16.14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.14.x
-      - name: Generate random number
-        id: random
-        run: echo "::set-output name=value::$(echo $RANDOM)"
-      - name: Example how to use the output
-        run: echo "${{ steps.random.outputs.value }}"
-      - name: Run Install & build pacakge
+      - name: Create commits
         run: |
-          cd ./backend/src/main/resources/static
-          echo "Some line" > file1.txt
-      - name: commit and push new file
-        run: |
-          git config --global user.name "peterjsung"
-          git config --global user.email ${{ secrets.EMAIL }}
-          git branch build-auto-merge-${{ steps.random.outputs.value }}
-          git checkout build-auto-merge-${{ steps.random.outputs.value }}
-          git add .
-          git commit -m "Auto merge commit"
-          git push -u https://${{ secrets.CARROT_TRIP_PAT }}@github.com/PeterJSung/CarrotTrip
-      - name: create pull request towards the main branch
-        uses: peter-evans/create-pull-request@v3.10.1
-        with:
-          token: ${{ secrets.CARROT_TRIP_PAT }}
-          commit-message: Auto Pull Request
-          title: New post pr
-          body: Auto-created Pull Request
-          branch: build-auto-merge-${{ steps.random.outputs.value }} # The branch where you commit
-          base: main # Don't forget to specify the right base branch here
+          git config user.name 'Peter Evans'
+          git config user.email 'peter-evans@users.noreply.github.com'
+          date +%s > report.txt
+          git commit -am "Modify tracked file during workflow"
+          date +%s > new-report.txt
+          git add -A
+          git commit -m "Add untracked file during workflow"
+      - name: Uncommitted change
+        run: date +%s > report.txt
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
