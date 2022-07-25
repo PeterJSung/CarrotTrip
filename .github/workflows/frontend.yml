@@ -42,8 +42,8 @@ jobs:
           npm i 
           npm run build:linux
           cd ..
-          rm ./backend/src/main/resources/static/*
-          cp ./frontend/build/* ./backend/src/main/resources/static
+          rm -rf ./backend/src/main/resources/static/*
+          cp -r ./frontend/build/* ./backend/src/main/resources/static
       - name: commit and push new file
         run: |
           git config user.name "GitHub Actions Bot"
