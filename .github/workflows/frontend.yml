@@ -31,7 +31,7 @@ jobs:
         run: |
           cd frontend
           ls -al
-          npm i 
+          npm install --production
           ls -al
           npm run build:linux
           cd ..
