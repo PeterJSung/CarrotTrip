@@ -14,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Slf4j
 @Service
@@ -29,12 +31,17 @@ public class EvaluationService {
     /** 일반 사용자용 평가등록 : 이미 데이터가 존재할 경우 삭제 후 등록한다. */
     @Transactional
     public EvaluationDTO createEvaluation(EvaluationDTO evaluationDTO) {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String nowTime1 = sdf1.format(now);
+
         evaluationRepository.deleteEvaluationsByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
         evaluationRepository.save(Evaluation.builder()
                 .memberNickname(evaluationDTO.getMemberNickname())
                 .apiId(evaluationDTO.getApiId())
                 .score(evaluationDTO.getScore())
                 .comments(evaluationDTO.getComments())
+                .regDt(nowTime1)
                 .build());
 
         return evaluationDTO;
@@ -43,6 +50,10 @@ public class EvaluationService {
     /** 서포터용 평가등록 : 이미 데이터가 존재할 경우 등록하지 않는다. */
     @Transactional
     public EvaluationDTO createEvaluationForSupporter(EvaluationDTO evaluationDTO) {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String nowTime1 = sdf1.format(now);
+
         Evaluation evaluation = evaluationRepository.findByMemberNicknameAndApiId(evaluationDTO.getMemberNickname(), evaluationDTO.getApiId());
         if (evaluation != null){
             return null;
@@ -53,6 +64,7 @@ public class EvaluationService {
                     .apiId(evaluationDTO.getApiId())
                     .score(evaluationDTO.getScore())
                     .comments(evaluationDTO.getComments())
+                    .regDt(nowTime1)
                     .build());
         }
 
