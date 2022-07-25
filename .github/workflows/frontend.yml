@@ -18,8 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: main
       - name: Use Node.js 16.14.x
         uses: actions/setup-node@v1
         with:
@@ -33,7 +31,7 @@ jobs:
           ls -al
           /bin/bash -c "npm install --production"
           ls -al
-          /bin/bash -c "npm run build-linux"
+          npm run build:linux
           cd ..
           rm -rf ./backend/src/main/resources/static/*
           cp -r ./frontend/build/* ./backend/src/main/resources/static
