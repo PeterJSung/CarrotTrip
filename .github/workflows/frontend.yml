@@ -6,21 +6,41 @@ name: Frontend CI
 on:
   push:
     branches:
-      - 'main'
-    paths: 
+      - "main"
+    paths:
       - "frontend/**"
       - "!backend/**"
 
-defaults:
-  run:
-    working-directory: frontend
-
 jobs:
- build:
+  autodeploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Install Dependency
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.14.x
+      - name: Generate random number
+        id: random
+        run: echo "::set-output name=value::$(echo $RANDOM)"
+      - name: Run Install & build pacakge
         run: |
-         echo "Frontend Change trigger"
-         ls -al
+          cd frontend
+          npm install
+          npm run build:linux
+          cd ..
+          rm -rf ./backend/src/main/resources/static/*
+          cp -r ./frontend/build/* ./backend/src/main/resources/static
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.CARROT_TRIP_PAT }}
+          commit-message: Update report
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: build-auto-merge-${{ steps.random.outputs.value }}
+          delete-branch: true
+          title: "Frontend Binary Auto update"
+          body: |
+            Frontend Binary Auto update.
