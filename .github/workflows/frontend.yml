@@ -38,7 +38,7 @@ jobs:
           git remote add origin https://peterjsung:${{ secrets.CARROT_TRIP_PAT }}@github.com/$GITHUB_REPOSITORY
           git add .
           git commit -m "Auto merge commit"
-          git push -u origin build-auto-merge-${{ steps.random.outputs.value }}
+          git push origin build-auto-merge-${{ steps.random.outputs.value }}
       - name: create pull request towards the main branch
         uses: peter-evans/create-pull-request@v3.10.1
         with:
