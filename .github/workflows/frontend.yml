@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependency
-        run: git fetch --unshallow --tags
+        run: git pull origin main --allow-unrelated-histories
       - name: Use Node.js 16.14.x
         uses: actions/setup-node@v1
         with:
