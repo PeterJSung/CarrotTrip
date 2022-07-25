@@ -14,4 +14,5 @@ public class EvaluationDTO {
     private Long apiId;
     private Integer score;
     private String comments;
+    private String regDt;
 }

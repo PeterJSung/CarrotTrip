@@ -28,4 +28,7 @@ public class Evaluation {
 
     @Column(name = "COMMENTS")
     private String comments;
+
+    @Column(name = "REG_DT")
+    private String regDt;
 }

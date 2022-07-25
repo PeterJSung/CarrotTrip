@@ -70,10 +70,10 @@ public class OpenAPIService {
     public void supporter(LocationOpenApiResponseDTO dto) {
         Random random = new Random();
         for(int i = 0; i < dto.getResponse().getBody().getItems().getItem().size(); i++) { // 조회된 관광지 아이템들 순회
-            Integer ran1 = random.nextInt((10 - 1) + 1) + 1;
-            Integer ran2 = random.nextInt((10 - 1) + 1) + 1;
-            Integer ran3 = random.nextInt((10 - 1) + 1) + 1;
-            Integer ran4 = random.nextInt((10 - 1) + 1) + 1;
+            Integer ran1 = random.nextInt((5 - 1) + 1) + 1;
+            Integer ran2 = random.nextInt((5 - 1) + 1) + 1;
+            Integer ran3 = random.nextInt((5 - 1) + 1) + 1;
+            Integer ran4 = random.nextInt((5 - 1) + 1) + 1;
 
             evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
