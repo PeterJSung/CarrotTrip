@@ -33,13 +33,6 @@ jobs:
         run: |
           cd ./backend/src/main/resources/static
           echo "Some line" > file1.txt
-      - name: create branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.CARROT_TRIP_PAT }}
-        with:
-          # The branch to create
-          branch: build-auto-merge-${{ steps.random.outputs.value }}
       - name: commit and push new file
         run: |
           echo $GITHUB_REPOSITORY
@@ -48,7 +41,7 @@ jobs:
           git config user.email "<>"
           git add .
           git commit -m "Auto merge commit"
-          git push origin build-auto-merge-${{ steps.random.outputs.value }}
+          git push -u origin build-auto-merge-${{ steps.random.outputs.value }}
       - name: create pull request towards the main branch
         uses: peter-evans/create-pull-request@v3.10.1
         with:
