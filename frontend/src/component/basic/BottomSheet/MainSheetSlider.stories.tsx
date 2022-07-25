@@ -13,7 +13,7 @@ export default {
 export const mainSheetSlider = () => (
     <>
         <Box width="15rem" border="solid 0.2rem black">
-            <MainSheetSlider selectedIdx={1} onClick={action(`Suggestion Click`)} />
+            <MainSheetSlider isNonMbti={false} selectedIdx={1} onClick={action(`Suggestion Click`)} />
         </Box>
         <Typography fontSize={2}>이 컴포넌트의 스크롤은 모바일에서만 됩니다. 시간이없어서.. 죄송 ㅠㅠ</Typography>
         <Typography fontSize={2}>

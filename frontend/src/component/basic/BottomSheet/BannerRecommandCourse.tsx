@@ -1,4 +1,6 @@
-import { Box, ButtonBase } from '@mui/material';
+import { Box } from '@mui/material';
+import { reAdjustmantKMnM } from 'common/util';
+import { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import CommonSheetBanner from './CommonSheetBanner';
 
@@ -30,7 +32,7 @@ export interface BannerRecommandCourseProps {
 
 const DEFAULT_ISZE = 5;
 
-const ImgButton = styled(ButtonBase)`
+const ImgButton = styled.div`
     width: ${DEFAULT_ISZE}rem !important;
     height: ${DEFAULT_ISZE}rem !important;
     border-radius: 0.5rem !important;
@@ -55,6 +57,11 @@ const TitleText = styled.span`
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
 `;
 
 const DistanceText = styled.span`
@@ -77,7 +84,14 @@ const DistanceWapper = styled.div`
 `;
 
 const RegionBtn = (props: EachRegionInfo & Pick<BannerRecommandCourseProps, 'onClick'>): JSX.Element => (
-    <Box display="flex" flexDirection="column" onClick={() => props.onClick(props.id)}>
+    <Box
+        display="flex"
+        flexDirection="column"
+        onClick={(e: SyntheticEvent) => {
+            e.stopPropagation();
+            props.onClick(props.id);
+        }}
+    >
         <ImgButton>
             <ImgDisplay src={props.src} />
         </ImgButton>
@@ -86,11 +100,7 @@ const RegionBtn = (props: EachRegionInfo & Pick<BannerRecommandCourseProps, 'onC
 );
 
 const BannerRecommandCourse = (props: BannerRecommandCourseProps): JSX.Element => {
-    const unitStr: 'KM' | 'M' = props.distanceInfo >= 1000 ? 'KM' : 'M';
-    let dist = props.distanceInfo;
-    if (unitStr === 'KM') {
-        dist = parseFloat((dist / 1000).toFixed(2));
-    }
+    const { unit, dist } = reAdjustmantKMnM(props.distanceInfo);
 
     return (
         <CommonSheetBanner>
@@ -99,7 +109,7 @@ const BannerRecommandCourse = (props: BannerRecommandCourseProps): JSX.Element =
                 <Box position="relative" flexGrow={1}>
                     <DistanceWapper>
                         <RunIcon />
-                        <DistanceText>{`${dist}${unitStr}`}</DistanceText>
+                        <DistanceText>{`${dist}${unit}`}</DistanceText>
                     </DistanceWapper>
                     <DashLine />
                 </Box>

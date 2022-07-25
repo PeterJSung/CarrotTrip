@@ -15,6 +15,7 @@ const PlaceDetailSheet = styled(BottomSheet)`
         display: flex;
         position: absolute;
         width: 100%;
+        box-shadow: unset !important;
     }
     & [data-rsbs-overlay] {
         overflow: hidden;

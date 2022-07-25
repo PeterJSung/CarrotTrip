@@ -15,3 +15,12 @@ export const calculateLatLngDistance = (oLat: number, oLng: number, cLat: number
     const Y = 111 * Math.abs(oLat - cLat);
     return Math.sqrt(Math.pow(X, 2) + Math.pow(Y, 2));
 };
+
+export const reAdjustmantKMnM = (distance: number): { unit: 'KM' | 'M'; dist: number } => {
+    const unit: 'KM' | 'M' = distance >= 1000 ? 'KM' : 'M';
+    let dist = distance;
+    if (unit === 'KM') {
+        dist = parseFloat((dist / 1000).toFixed(2));
+    }
+    return { dist, unit };
+};

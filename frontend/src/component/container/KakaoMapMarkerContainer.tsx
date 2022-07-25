@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
 
-import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_MAP_LEVEL } from 'common/constants';
+import { DEFAULT_MAP_LEVEL } from 'common/constants';
 import Marker, { MarkerProps } from 'component/basic/KakaoMap/Marker';
 import { MarkerClusterer } from 'react-kakao-maps-sdk';
 import { useThunk } from 'redux/common';
@@ -20,9 +20,8 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
 
     useEffect(() => {
         const itemKeys = Object.keys(tourlistAreaSelector.item);
-        if (itemKeys.length > 0 && tourlistAreaSelector.recommand.length > 0) {
+        if (itemKeys.length > 0 && tourlistAreaSelector.recommand.totalDistance > 0) {
             const newRenderData: RenderPropsType[] = [];
-            console.log(JSON.stringify(interactionStack));
             if (interactionStack.length === 0 || interactionStack.length === 1) {
                 // default 화면 보여주기
                 itemKeys.forEach((eachKey) => {
@@ -50,8 +49,6 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
             tabIdx: specializeContentId.includes(typeId) ? typeId : 300 /** 300 is ETC */,
             selectedData: {
                 id: id,
-                lat: DEFAULT_LAT,
-                lng: DEFAULT_LNG,
             },
         };
         updateInteraction(markerInfo);

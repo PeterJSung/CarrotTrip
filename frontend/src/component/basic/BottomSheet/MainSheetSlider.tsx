@@ -6,6 +6,7 @@ import { i18n_SUGGESTION_REF, Suggestion_Event_Type } from 'vo/travelInfo';
 
 export interface MainSheetSliderProps {
     selectedIdx: number;
+    isNonMbti: boolean;
     onClick: (code: number) => void;
 }
 
@@ -27,11 +28,14 @@ interface ChipDispInfo {
     code: number;
 }
 
-const getSuggestionInfo = (t: TFunction): ChipDispInfo[] => {
+const getSuggestionInfo = (t: TFunction, isNonMbti: boolean): ChipDispInfo[] => {
     // TODO : it need to import i18n component
     const ret: ChipDispInfo[] = [];
     // code need to setup
     i18n_SUGGESTION_REF.forEach((eachData) => {
+        if (eachData.type === 'MBTI' && isNonMbti) {
+            return;
+        }
         ret.push({
             type: eachData.type,
             code: eachData.dataset.targetCode,
@@ -45,7 +49,7 @@ const seletedColor = () => {};
 
 const MainSheetSlider = (props: MainSheetSliderProps): JSX.Element => {
     const { t } = useTranslation();
-    const standardData = getSuggestionInfo(t);
+    const standardData = getSuggestionInfo(t, props.isNonMbti);
 
     return (
         <ScrollMenu>

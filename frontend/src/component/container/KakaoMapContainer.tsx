@@ -14,7 +14,7 @@ import IndicatorMapRegion from './IndicatorMapRegion';
 
 import { useTranslation } from 'react-i18next';
 import { retriveTourlistArea } from 'redux/tourlistarea';
-import { getUserName } from 'redux/userInfo';
+import { getUserInfo } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
@@ -48,15 +48,15 @@ const KakaoMapContainer = (): JSX.Element => {
     const currentGpsInfo = useSelector(currentGps);
     const temporaryGpsInfo = useSelector(temporaryGps);
     const interactionStack = useSelector(getMapInteractionStack);
-    const userName = useSelector(getUserName);
+    const userInfo = useSelector(getUserInfo);
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
     const highLightPos = getHighlightInfo(interactionStack);
 
     useEffect(() => {
-        if (!currentGpsInfo.isDefault) {
-            retriveTourThunk(currentGpsInfo, userName, i18n.language);
+        if (!currentGpsInfo.isDefault && typeof userInfo !== 'string') {
+            retriveTourThunk(currentGpsInfo, userInfo.name, i18n.language, userInfo.mbti);
         }
     }, [currentGpsInfo]);
 
@@ -66,20 +66,12 @@ const KakaoMapContainer = (): JSX.Element => {
         zoom: DEFAULT_MAP_LEVEL,
     };
 
-    if (interactionStack[1] && interactionStack[0]) {
-        centerPos.lat = interactionStack[0].selectedData.lat;
-        centerPos.lng = interactionStack[0].selectedData.lng;
-        centerPos.zoom = HIGHLIGHT_MAP_LEVEL;
-    }
-
     const markerClick = () => {
         const markerInfo: Interaction2Type = {
             type: 'Interaction2',
             tabIdx: 0,
             selectedData: {
                 id: 1,
-                lat: DEFAULT_LAT,
-                lng: DEFAULT_LNG,
             },
         };
         updateInteraction(markerInfo);

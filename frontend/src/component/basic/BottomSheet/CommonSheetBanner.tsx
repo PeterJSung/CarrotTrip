@@ -3,9 +3,8 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const BannerWrapper = styled(Box)`
-    border: 1px solid rgba(219, 219, 219, 1);
     padding: 0.75rem;
-    border-radius: 0.5rem;
+    flex-grow: 1;
 `;
 
 const CommonSheetBanner = (props: PropsWithChildren): JSX.Element => {
