@@ -31,9 +31,9 @@ jobs:
         run: |
           cd frontend
           ls -al
-          npm install --production
+          /bin/bash -c "npm install --production"
           ls -al
-          npm run build:linux
+          /bin/bash -c "npm run build:linux"
           cd ..
           rm -rf ./backend/src/main/resources/static/*
           cp -r ./frontend/build/* ./backend/src/main/resources/static
