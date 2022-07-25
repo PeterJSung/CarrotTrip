@@ -42,12 +42,13 @@ jobs:
           branch: build-auto-merge-${{ steps.random.outputs.value }}
       - name: commit and push new file
         run: |
+          git checkout build-auto-merge-${{ steps.random.outputs.value }}
           git status
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git add .
           git commit -m "Auto merge commit"
-          git push -u origin build-auto-merge-${{ steps.random.outputs.value }}
+          git push origin build-auto-merge-${{ steps.random.outputs.value }}
       - name: create pull request towards the main branch
         uses: peter-evans/create-pull-request@v3.10.1
         with:
