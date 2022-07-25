@@ -51,5 +51,5 @@ jobs:
           commit-message: Auto Pull Request
           title: New post pr
           body: Auto-created Pull Request
-          branch: origin/build-auto-merge-${{ steps.random.outputs.value }} # The branch where you commit
+          branch: build-auto-merge-${{ steps.random.outputs.value }} # The branch where you commit
           base: main # Don't forget to specify the right base branch here
