@@ -37,6 +37,7 @@ jobs:
         run: |
           git config --global user.name "peterjsung"
           git config --global user.email ${{ secrets.EMAIL }}
+          git remote -v
           git branch build-auto-merge-${{ steps.random.outputs.value }}
           git checkout build-auto-merge-${{ steps.random.outputs.value }}
           git add .
