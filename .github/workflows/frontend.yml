@@ -20,6 +20,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
+      - name: Use Node.js 16.14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.14.x
+      - name: Generate random number
+        id: random
+        run: echo "::set-output name=value::$(echo $RANDOM)"
       - name: Run Install & build pacakge
         run: |
           cd ./backend/src/main/resources/static
@@ -32,7 +39,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: example-patches
+          branch: build-auto-merge-${{ steps.random.outputs.value }}
           delete-branch: true
           title: "[Example] Update report"
           body: |
