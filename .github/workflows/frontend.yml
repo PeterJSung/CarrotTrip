@@ -42,7 +42,7 @@ jobs:
           git checkout build-auto-merge-${{ steps.random.outputs.value }}
           git add .
           git commit -m "Auto merge commit"
-          git push -u origin https://${{ secrets.CARROT_TRIP_PAT }}@github.com/PeterJSung/CarrotTrip build-auto-merge-${{ steps.random.outputs.value }}
+          git push -u https://${{ secrets.CARROT_TRIP_PAT }}@github.com/PeterJSung/CarrotTrip
       - name: create pull request towards the main branch
         uses: peter-evans/create-pull-request@v4
         with:
