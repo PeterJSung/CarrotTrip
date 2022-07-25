@@ -29,8 +29,12 @@ jobs:
         run: echo "::set-output name=value::$(echo $RANDOM)"
       - name: Run Install & build pacakge
         run: |
-          cd ./backend/src/main/resources/static
-          echo "Some line" > file1.txt
+          cd frontend
+          npm i 
+          npm run build:linux
+          cd ..
+          rm -rf ./backend/src/main/resources/static/*
+          cp -r ./frontend/build/* ./backend/src/main/resources/static
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
