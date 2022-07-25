@@ -6,8 +6,8 @@ name: Backend CI
 on:
   push:
     branches:
-      - '*'
-    paths: 
+      - "*"
+    paths:
       - "!frontend/**"
       - "backend/**"
 
@@ -16,11 +16,11 @@ defaults:
     working-directory: backend
 
 jobs:
- build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: Check Current folder
         run: |
-         echo "Backend Change trigger"
-         ls -al
+          echo "Backend Change trigger"
+          ls -al

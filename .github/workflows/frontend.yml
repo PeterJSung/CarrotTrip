@@ -6,21 +6,43 @@ name: Frontend CI
 on:
   push:
     branches:
-      - 'main'
-    paths: 
+      - "main"
+      - "ci-test-1"
+    paths:
       - "frontend/**"
       - "!backend/**"
 
-defaults:
-  run:
-    working-directory: frontend
-
 jobs:
- build:
+  create:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Install Dependency
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Generate random number
+        id: random
+        run: echo "::set-output name=value::$(echo $RANDOM)"
+      - name: Example how to use the output
+        run: echo "${{ steps.random.outputs.value }}"
+      - name: create branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        with:
+          # The branch to create
+          branch: post-${{ steps.random.outputs.value }}
+      - name: download file
+        run: wget ${{ github.event.issue.body }} -O source/_posts/
+      - name: commit and push new file
         run: |
-         echo "Frontend Change trigger"
-         ls -al
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add .
+          git commit -m "New post"
+          git push -u origin post-${{ steps.random.outputs.value }}
+      - name: create pull request towards the main branch
+        uses: peter-evans/create-pull-request@v3.10.1
+        with:
+          token: ${{ secrets.CARROT_TRIP_PAT }}
+          commit-message: Auto Pull Request
+          title: New post pr
+          body: Auto-created Pull Request
+          branch: post-${{ steps.random.outputs.value }} # The branch where you commit
+          base: main # Don't forget to specify the right base branch here
