@@ -16,7 +16,12 @@ const CommonSVGIcon = (props: PropsWithChildren<MapSVGIconProps>): JSX.Element =
     const femat = isSel ? '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.44 0' : '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0';
     return (
         <svg width={s} height={s} viewBox={`0 0 ${s} ${s}`} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter={`url(#${gId})`}>
+            <g
+                filter={`url(#${gId})`}
+                style={{
+                    zIndex: isSel ? 3 : 1,
+                }}
+            >
                 <circle cx={cx} cy={cy} r={cr} fill={cfc} />
                 {isSel ? <></> : <circle cx="23" cy="21" r="14.5" stroke="#EEEEEE" />}
             </g>

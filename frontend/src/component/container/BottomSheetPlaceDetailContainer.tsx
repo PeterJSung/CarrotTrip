@@ -1,8 +1,6 @@
 import DetailPlace from 'component/basic/Detail/DetailPlace';
-import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
-import { RefHandles } from 'react-spring-bottom-sheet/dist/types';
 import { useThunk } from 'redux/common';
 import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
 import styled from 'styled-components';
@@ -34,11 +32,6 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const onBackClick = () => {
         updateThunk();
     };
-
-    const mapRef = useRef<kakao.maps.Map>(null);
-
-    const [staticMode, setStaticMode] = useState<boolean>(false);
-    const bottomSheetRef = useRef<RefHandles>(null);
 
     return (
         <PlaceDetailSheet

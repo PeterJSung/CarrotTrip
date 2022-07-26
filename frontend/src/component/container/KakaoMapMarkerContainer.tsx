@@ -8,7 +8,7 @@ import { MarkerClusterer } from 'react-kakao-maps-sdk';
 import { useThunk } from 'redux/common';
 import { getToutlistArr } from 'redux/tourlistarea';
 import { Interaction2Type } from 'vo/mapInteraction';
-import { specializeContentId } from 'vo/travelInfo';
+import { getTargetCodeFromTourlist, specializeContentId } from 'vo/travelInfo';
 type RenderPropsType = Omit<MarkerProps, 'onClick'>;
 
 const KakaoMapMarkerContainer = (): JSX.Element => {
@@ -23,20 +23,45 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
         if (itemKeys.length > 0 && tourlistAreaSelector.recommand.totalDistance > 0) {
             const newRenderData: RenderPropsType[] = [];
             if (interactionStack.length === 0 || interactionStack.length === 1) {
+                const currentSelectType = interactionStack[0]?.tabIdx;
+                const currentSelectIdx = interactionStack[0]?.selectedData?.id;
+
                 // default 화면 보여주기
                 itemKeys.forEach((eachKey) => {
-                    tourlistAreaSelector.item[eachKey].forEach((eachD) => {
+                    let isSkip = false;
+                    if (
+                        currentSelectType !== undefined &&
+                        (specializeContentId.includes(currentSelectType) || currentSelectType === 300) &&
+                        currentSelectType !== Number(eachKey)
+                    ) {
+                        //skip
+                        isSkip = true;
+                    }
+
+                    tourlistAreaSelector.item[eachKey].forEach((eachD, idx) => {
                         const newData: RenderPropsType = {
                             contentId: eachD.contentId,
                             contentTypeId: eachD.contentTypeId,
-                            isSelect: false,
+                            isSelect: eachD.contentTypeId === currentSelectType && currentSelectIdx === idx,
                             lat: eachD.lat,
                             lng: eachD.lng,
                         };
                         eachD.src && (newData.src = eachD.src);
-                        newRenderData.push(newData);
+                        !isSkip && newRenderData.push(newData);
                     });
                 });
+            } else if (interactionStack.length === 2 && interactionStack[1]) {
+                const highlightIdx = interactionStack[1].idx;
+                const highlightTypeId = interactionStack[1].contentTypeId;
+                const item = tourlistAreaSelector.item[highlightTypeId][highlightIdx];
+                const newData: RenderPropsType = {
+                    contentId: item.contentId,
+                    contentTypeId: highlightTypeId,
+                    isSelect: true,
+                    lat: item.lat,
+                    lng: item.lng,
+                };
+                newRenderData.push(newData);
             }
             setRenderArr(newRenderData);
         }
@@ -44,14 +69,27 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
     }, [interactionStack, tourlistAreaSelector]);
 
     const markerClick = (id: number, typeId: number) => {
-        const markerInfo: Interaction2Type = {
-            type: 'Interaction2',
-            tabIdx: specializeContentId.includes(typeId) ? typeId : 300 /** 300 is ETC */,
-            selectedData: {
-                id: id,
-            },
-        };
-        updateInteraction(markerInfo);
+        const nextIdx = getTargetCodeFromTourlist(typeId);
+        const idx = tourlistAreaSelector.item[nextIdx].findIndex((d) => d.contentId === id);
+
+        if (
+            interactionStack[0] !== undefined &&
+            interactionStack[0].tabIdx === nextIdx &&
+            interactionStack[0].selectedData?.id === idx
+        ) {
+            // if already marker Clicked and current is same to
+            updateInteraction();
+        } else if (!interactionStack[1]) {
+            const markerInfo: Interaction2Type = {
+                type: 'Interaction2',
+                tabIdx: nextIdx,
+                selectedData: {
+                    id: idx,
+                    pos: interactionStack[0]?.selectedData?.pos,
+                },
+            };
+            updateInteraction(markerInfo);
+        }
     };
 
     return (
