@@ -7,10 +7,8 @@ on:
   push:
     branches:
       - "main"
-      - "ci-test/*"
     paths:
       - "frontend/**"
-      - ".github/**"
       - "!backend/**"
 
 defaults:
@@ -22,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
       - name: Install Dependency
         run: git fetch --unshallow --tags
       - name: Use Node.js 16.14.x

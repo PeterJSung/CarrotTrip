@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
       - name: Use Node.js 16.14.x
         uses: actions/setup-node@v1
         with:
@@ -25,6 +27,7 @@ jobs:
         run: echo "::set-output name=value::$(echo $RANDOM)"
       - name: Run Install & build pacakge
         run: |
+          echo ${{ github.ref }}
           cd frontend
           npm install
           npm run build:linux
