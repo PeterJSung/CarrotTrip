@@ -29,6 +29,7 @@ const TotalWrapper = styled(Box)`
 `;
 
 const SuggestionItemList = (props: SuggestionItemListProps): JSX.Element => {
+    console.log(props.dataSet);
     return (
         <ListWapper>
             {props.dataSet.map((d, idx) => {
@@ -43,8 +44,9 @@ const SuggestionItemList = (props: SuggestionItemListProps): JSX.Element => {
                         autoFocus={isSelected}
                     >
                         <BannerSuggestionItem
+                            contentTypeId={d.contentTypeId}
                             src={d.src}
-                            description={d.title}
+                            description={d.addr}
                             placeName={d.title}
                             rating={d.aveScore}
                         />

@@ -6,7 +6,7 @@ import SuggestionItemList from 'component/basic/BottomSheet/SuggestionItemList';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
-import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
+import { getCurrentInteractionType, getTypeOneData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getToutlistArr } from 'redux/tourlistarea';
 import { getUserMbti } from 'redux/userInfo';
 import styled from 'styled-components';
@@ -65,7 +65,7 @@ const RenderList = (data: Interaction2Type) => {
                     await updateInteraction({
                         type: 'Interaction3',
                         idx,
-                        contentTypeId: data.tabIdx,
+                        eventTypeId: data.tabIdx,
                     });
                 }}
             />
@@ -77,14 +77,11 @@ const RenderList = (data: Interaction2Type) => {
 
 const BottomSheetSuggestionContainer = (): JSX.Element => {
     const updateInteraction = useThunk(updateInetractionStack);
-    const getData = useSelector(getMapInteractionStack);
+    const interactionType = useSelector(getCurrentInteractionType);
+    const typeOne = useSelector(getTypeOneData);
     const getUserMBTI = useSelector(getUserMbti);
 
-    let isOpen = false;
-
-    if (getData[0] && !getData[1]) {
-        isOpen = true;
-    }
+    const isOpen = interactionType !== 'NONE' && interactionType !== 'PLACEDETAIL';
 
     const onBackClick = () => {
         updateInteraction();
@@ -109,14 +106,14 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
             header={
                 <MainSheetSlider
                     isNonMbti={!!!getUserMBTI}
-                    selectedIdx={getData[0] ? getData[0].tabIdx : 1}
+                    selectedIdx={typeOne ? typeOne.tabIdx : 1}
                     onClick={suggestionSliderClick}
                 />
             }
             snapPoints={({ maxHeight }) => [maxHeight * 0.4, maxHeight * 0.95]}
         >
             <Box pt="0.5rem" px="0.75rem">
-                {getData[0] && <RenderList {...getData[0]} />}
+                {typeOne && <RenderList {...typeOne} />}
             </Box>
         </SuggestionSheet>
     );

@@ -23,7 +23,7 @@ interface Interaction2 {
 
 interface Interaction3 {
     type: 'Interaction3';
-    contentTypeId: number;
+    eventTypeId: number;
     idx: number;
 }
 

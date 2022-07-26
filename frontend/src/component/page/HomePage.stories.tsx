@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import { generateReducer } from 'redux/userInfo';
-import { getDummyStateWithMock, mockGetTourlist, mockGetTourNaviInfo } from 'stories/common.stories';
+import { getDummyStateWithMock, mockGetTourlist } from 'stories/common.stories';
 import WithMock from 'storybook-addon-mock';
 import HomePage from './HomePage';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -24,5 +24,5 @@ export default {
 
 export const homePage = () => <HomePage />;
 homePage.parameters = {
-    mockData: [mockGetTourNaviInfo, mockGetTourlist],
+    mockData: [mockGetTourlist],
 };
