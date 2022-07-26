@@ -1,5 +1,7 @@
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { contentIdMapper } from 'vo/travelInfo';
 import PlaceInfoChip from '../common/PlaceInfoChip';
 import BannerStarIcon from './BannerStarIcon';
 import CommonSheetBanner from './CommonSheetBanner';
@@ -7,6 +9,7 @@ import CommonSheetBanner from './CommonSheetBanner';
 export interface BannerSuggestionItemProps {
     placeName: string;
     rating: number;
+    contentTypeId: number;
     src?: string;
     description: string;
 }
@@ -58,10 +61,17 @@ const RatingText = styled(CommonText)`
 `;
 
 const PlaceInfoChipCustom = styled(PlaceInfoChip)`
-    margin-bottom: 0;
+    font-family: Noto Sans KR !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 10px !important;
+    line-height: 14px !important;
+    letter-spacing: -0.05em !important;
+    color: #6d6d6d !important;
 `;
 
 const BannerSuggestionItem = (props: BannerSuggestionItemProps): JSX.Element => {
+    const { t } = useTranslation();
     return (
         <CommonSheetBanner>
             <Box display="flex">
@@ -73,7 +83,7 @@ const BannerSuggestionItem = (props: BannerSuggestionItemProps): JSX.Element => 
                 <Box flexGrow="1" display="flex" flexDirection="column" justifyContent="space-between">
                     <PlaceNameText>{props.placeName}</PlaceNameText>
                     <Box display="flex">
-                        <PlaceInfoChipCustom label="test" />
+                        <PlaceInfoChipCustom label={t(contentIdMapper[props.contentTypeId].translateKey)} />
                         <Box my="auto" display="flex" ml="0.3125rem">
                             <BannerStarIcon />
                             <RatingText>{props.rating}</RatingText>

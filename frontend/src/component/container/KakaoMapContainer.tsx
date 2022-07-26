@@ -6,8 +6,8 @@ import { Map } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
 import { currentGps, updateCurrentGpsThunk } from 'redux/gps';
-import { getMapInteractionStack } from 'redux/mapinteractionstack';
-import { MapInteractionStackType } from 'vo/mapInteraction';
+import { getCurrentInteractionType, getTypeOneData, getTypeTwoData } from 'redux/mapinteractionstack';
+import { Interaction2Type, Interaction3Type } from 'vo/mapInteraction';
 import BottomSheetSuggestionContainer from './BottomSheetSuggestionContainer';
 import IndicatorDetailPlace from './IndicatorDetailPlace';
 import IndicatorMapRegion from './IndicatorMapRegion';
@@ -21,26 +21,25 @@ import { LocationInfo } from 'vo/gps';
 import { TourlistDataset } from 'vo/travelInfo';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
+import KakaoMapPoligonContainer from './KakaoMapPoligonContainer';
 
 const getHighlightInfo = (
-    data: MapInteractionStackType,
+    dataOne: Interaction2Type | undefined,
+    dataTwo: Interaction3Type | undefined,
     totalTourlistSet: {
         [key: string]: TourlistDataset[];
     },
 ): LocationInfo | undefined => {
-    if (data[1]) {
-        console.log(totalTourlistSet);
-        console.log(data[1]);
-
-        const item = totalTourlistSet[data[1].contentTypeId][data[1].idx];
+    if (dataTwo) {
+        const item = totalTourlistSet[dataTwo.eventTypeId][dataTwo.idx];
         console.log(item);
         return {
             lat: item.lat,
             lng: item.lng,
             zoom: HIGHLIGHT_MAP_LEVEL,
         };
-    } else if (data[0] && data[0].selectedData?.pos) {
-        return data[0].selectedData.pos;
+    } else if (dataOne && dataOne.selectedData?.pos) {
+        return dataOne.selectedData.pos;
     } else {
         return undefined;
     }
@@ -62,21 +61,22 @@ const KakaoMapContainer = (): JSX.Element => {
 
     const currentGpsInfo = useSelector(currentGps);
     const totalDataSet = useSelector(getSuggestionListArr);
-    const interactionStack = useSelector(getMapInteractionStack);
+    const interactionType = useSelector(getCurrentInteractionType);
+    const dataOne = useSelector(getTypeOneData);
+    const dataTwo = useSelector(getTypeTwoData);
     const userInfo = useSelector(getUserInfo);
     const updateGpsState = useThunk(updateCurrentGpsThunk);
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
     useEffect(() => {
-        console.log(`Current GPs change`);
         if (!currentGpsInfo.isDefault && typeof userInfo !== 'string') {
             retriveTourThunk(currentGpsInfo, userInfo.name, i18n.language, userInfo.mbti);
         }
     }, [currentGpsInfo]);
 
-    const mapHold = !interactionStack[1];
-    const highLightPos = getHighlightInfo(interactionStack, totalDataSet);
+    const isPlaceDetail = interactionType === 'PLACEDETAIL';
+    const highLightPos = getHighlightInfo(dataOne, dataTwo, totalDataSet);
     const centerPos: LocationInfo = {
         lat: highLightPos ? highLightPos.lat - DEFAULT_HIGHLIGHT_OFFSET_LAT : currentGpsInfo.lat,
         lng: highLightPos ? highLightPos.lng : currentGpsInfo.lng,
@@ -84,7 +84,6 @@ const KakaoMapContainer = (): JSX.Element => {
     };
 
     useEffect(() => {
-        console.log(`Errefct Calle`);
         const map = mapRef.current;
         if (map) {
             map.setCenter(new kakao.maps.LatLng(currentGpsInfo.lat, currentGpsInfo.lng));
@@ -104,15 +103,17 @@ const KakaoMapContainer = (): JSX.Element => {
             <Map
                 ref={mapRef}
                 level={centerPos.zoom}
-                zoomable={mapHold}
-                draggable={mapHold}
+                disableDoubleClick={true}
+                zoomable={!isPlaceDetail}
+                draggable={!isPlaceDetail}
                 center={{ lat: centerPos.lat, lng: centerPos.lng }}
                 style={{ flexGrow: 1 }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />
+                <KakaoMapPoligonContainer />
                 <KakaoMapMarkerContainer />
             </Map>
-            {interactionStack[1] !== undefined ? <IndicatorDetailPlace /> : <IndicatorMapRegion />}
+            {isPlaceDetail ? <IndicatorDetailPlace /> : <IndicatorMapRegion />}
             <BottomSheetPlaceDetailContainer />
             <BottomSheetSuggestionContainer />
         </Box>

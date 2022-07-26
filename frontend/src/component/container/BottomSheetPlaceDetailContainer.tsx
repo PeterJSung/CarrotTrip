@@ -2,7 +2,7 @@ import DetailPlace from 'component/basic/Detail/DetailPlace';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
-import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
+import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
 import styled from 'styled-components';
 
 const PlaceDetailSheet = styled(BottomSheet)`
@@ -21,13 +21,11 @@ const PlaceDetailSheet = styled(BottomSheet)`
 `;
 
 const BottomSheetPlaceDetailContainer = (): JSX.Element => {
-    const getData = useSelector(getMapInteractionStack);
-    const updateThunk = useThunk(updateInetractionStack);
-    let isOpen = false;
+    const interactionType = useSelector(getCurrentInteractionType);
+    const typeTWo = useSelector(getTypeTwoData);
 
-    if (getData[1]) {
-        isOpen = true;
-    }
+    const updateThunk = useThunk(updateInetractionStack);
+    const isOpen = interactionType === 'PLACEDETAIL';
 
     const onBackClick = () => {
         updateThunk();

@@ -11,14 +11,14 @@ export interface MarkerProps {
     lat: number;
     lng: number;
     contentId: number;
-    contentTypeId: number;
+    eventTypeId: number;
     src?: string;
     onClick: (id: number, typeId: number) => void;
 }
 
 const nonSrcIcon = (props: MarkerProps) => {
     let Component = EctIcon;
-    switch (props.contentTypeId) {
+    switch (props.eventTypeId) {
         case specializeContentId[0]: //restorant
             Component = TourIcon;
             break;
@@ -40,9 +40,11 @@ const Marker = (props: MarkerProps): JSX.Element => {
                 lat: props.lat,
                 lng: props.lng,
             }}
+            xAnchor={0.8}
+            yAnchor={0.8}
             clickable={true}
         >
-            <Box onClick={() => props.onClick(props.contentId, props.contentTypeId)}>
+            <Box onClick={() => props.onClick(props.contentId, props.eventTypeId)}>
                 {
                     /*props.src ? <SrcIcon isSelected={props.isSelect} src={props.src} /> : nonSrcIcon(props) */
                     nonSrcIcon(props)
