@@ -79,6 +79,11 @@ GET http://localhost:8080/api/touristAttraction/list/x/127.1625892/y/37.4587305/
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
 
+### 5.2 관광지 상세페이지
+GET http://localhost:8080/api/touristAttraction/detail/732484
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU1NDc0NTkwLCJleHAiOjE2NTU1NjA5OTB9.3WK2rtd1iD-LusVcNTnrkBGB6yi1vO-IL2dhy2ZghIE
+
 ### 6.1 북마크 조회
 GET http://localhost:8080/api/bookmark/태호
 Content-Type: application/json
@@ -103,7 +108,6 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
   "memberNickname" : "태호",
   "apiId" : "10000"
 }
-
 
 ### 공공 데이터 API 테스트 (시크릿키는 담당개발자에게 문의하시오)
 GET http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey={SecretKey}&mapX=127.1625892&mapY=37.4587305&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=당근여행&_type=json&numOfRows=2&pageNo=1

@@ -1,7 +1,9 @@
 package com.carrot.trip.service;
 
 import antlr.collections.List;
+import com.carrot.trip.dto.BookmarkDTO;
 import com.carrot.trip.dto.EvaluationDTO;
+import com.carrot.trip.dto.TouristAttractionDetailDTO;
 import com.carrot.trip.entity.Evaluation;
 import com.carrot.trip.entity.Member;
 import com.carrot.trip.entity.TouristAttractionTaste;
@@ -26,6 +28,13 @@ public class TouristAttractionDetailService {
     private final TouristAttractionTasteRepository touristAttractionTasteRepository;
     private final MemberRepository memberRepository;
 
+    public TouristAttractionDetailDTO getDetail(Long apiId) {
+        TouristAttractionDetailDTO touristAttractionDetailDTO = new TouristAttractionDetailDTO();
+        touristAttractionDetailDTO.setCommentList(getCommentList(apiId));
+        touristAttractionDetailDTO.setMbtiRanking(getTouristAttractionMBTIRankingList(apiId));
+        touristAttractionDetailDTO.setTasteList(getTouristAttractionTasteList(apiId));
+        return touristAttractionDetailDTO;
+    }
 
     public ArrayList<Evaluation> getCommentList(Long apiId) {
         return evaluationRepository.findByApiIdOrderByRegDtDesc(apiId);
@@ -74,11 +83,11 @@ public class TouristAttractionDetailService {
 
     public ArrayList getTouristAttractionTasteList(Long apiId) {
         ArrayList<TouristAttractionTaste> touristAttractionTastes = touristAttractionTasteRepository.findByApiId(apiId);
-        HashMap<String, Integer> tasteCounter = null;
+        HashMap<String, Integer> tasteCounter = new HashMap<>();
         ArrayList tasteRankOrdering = new ArrayList();
 
         for (int i = 0; i < touristAttractionTastes.size(); i++) {
-            if (tasteCounter.get(touristAttractionTastes.get(i).getTasteCode()) == null) {
+            if (tasteCounter.isEmpty() || tasteCounter.get(touristAttractionTastes.get(i).getTasteCode()) == null) {
                 tasteCounter.put(touristAttractionTastes.get(i).getTasteCode(), 1);
             }
             else {

@@ -336,6 +336,66 @@ tasteList는 해당 관광지에 대해 평가된 관광지 성향 리스트를 
 userTaste는 해당 관광지의 성향리스트를 기반으로 사용자의 성향과 부합되는 관광지 여부를 의미한다.
 recommendCourseItem은 추천코스 탭을 위한 데이터를 추려낸 아이템리스트이다.
 
+###  5.2 관광지 상세페이지
+#### URI
+``GET`` ``/api/touristAttraction/detail/{contentId}``
+#### Header
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Response
+```json
+{
+  "commentList": [
+    {
+      "id": 16,
+      "memberNickname": "태호",
+      "apiId": 732484,
+      "score": 4.0,
+      "comments": "좋아요~! 4",
+      "regDt": "2022-07-26 22:17:08"
+    },
+    {
+      "id": 17,
+      "memberNickname": "가현",
+      "apiId": 732484,
+      "score": 2.0,
+      "comments": "좋아요~! 2",
+      "regDt": "2022-07-26 22:17:08"
+    },
+    {
+      "id": 18,
+      "memberNickname": "영현",
+      "apiId": 732484,
+      "score": 3.0,
+      "comments": "좋아요~! 3",
+      "regDt": "2022-07-26 22:17:08"
+    },
+    {
+      "id": 19,
+      "memberNickname": "정민",
+      "apiId": 732484,
+      "score": 1.0,
+      "comments": "좋아요~! 1",
+      "regDt": "2022-07-26 22:17:08"
+    }
+  ],
+  "mbtiRanking": {
+    "ESTJ": 1.0,
+    "INTJ": 3.0,
+    "ENTJ": 3.0
+  },
+  "tasteList": [
+    "2",
+    "3",
+    "5",
+    "8",
+    "9"
+  ]
+}
+```
+commentList: 해당 관광지에 대한 평가리스트 제공
+mbtiRanking: 평가한 MBTI 별 평균별점을 제공
+tasteList: 취향코드들을 선택받은 취향이 많은 순서로 제공
+
 ## 6. 북마크
 ###  6.1 북마크 조회
 #### URI

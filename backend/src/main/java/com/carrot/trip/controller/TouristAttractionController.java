@@ -2,7 +2,9 @@ package com.carrot.trip.controller;
 
 import com.carrot.trip.common.PearsonUtil;
 import com.carrot.trip.dto.LocationOpenApiResponseDTO;
+import com.carrot.trip.dto.TouristAttractionDetailDTO;
 import com.carrot.trip.service.OpenAPIService;
+import com.carrot.trip.service.TouristAttractionDetailService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import java.util.List;
 public class TouristAttractionController {
 
     private final OpenAPIService openAPIService;
+    private final TouristAttractionDetailService touristAttractionDetailService;
 
     @GetMapping("/touristAttraction/list/x/{x}/y/{y}/nickname/{nickname}/language/{lang}")
     public LocationOpenApiResponseDTO getMapData(@PathVariable("x") Double x, @PathVariable("y") Double y
@@ -49,6 +52,11 @@ public class TouristAttractionController {
                 Arrays.asList(8,5,5,3,2,1,1,7,6,5,5,3,2)));
 
         return "" + res;
+    }
+
+    @GetMapping("/touristAttraction/detail/{contentId}")
+    public TouristAttractionDetailDTO getDetail(@PathVariable("contentId") Long contentId) {
+        return touristAttractionDetailService.getDetail(contentId);
     }
 
 }
