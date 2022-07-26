@@ -4,7 +4,9 @@
 name: Frontend CI
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - "main"
     paths:
@@ -14,6 +16,7 @@ on:
 
 jobs:
   autodeploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
