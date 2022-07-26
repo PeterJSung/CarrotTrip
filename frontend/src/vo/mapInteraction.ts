@@ -1,6 +1,6 @@
 // 2 depth 시
 
-import { PosInfo } from './gps';
+import { LocationInfo } from './gps';
 
 // Recommand 시
 // 현재 코스타입
@@ -17,13 +17,14 @@ interface Interaction2 {
     tabIdx: number;
     selectedData?: {
         id: number;
-        pos?: PosInfo;
+        pos?: LocationInfo;
     };
 }
 
 interface Interaction3 {
     type: 'Interaction3';
-    id: number;
+    contentTypeId: number;
+    idx: number;
 }
 
 export type Interaction2Type = Interaction2;

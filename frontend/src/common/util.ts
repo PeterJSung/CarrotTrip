@@ -1,3 +1,5 @@
+import { KakaoRegionAPIRes } from 'vo/gps';
+
 export const pause = (ms: number): Promise<void> => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -23,4 +25,24 @@ export const reAdjustmantKMnM = (distance: number): { unit: 'KM' | 'M'; dist: nu
         dist = parseFloat((dist / 1000).toFixed(2));
     }
     return { dist, unit };
+};
+
+export const parserRegionStr = (apiRes: KakaoRegionAPIRes): string => {
+    let retData = apiRes.documents.filter((d) => d.region_type === 'B');
+    if (!retData) {
+        retData = apiRes.documents.filter((d) => d.region_type === 'H');
+    }
+    return `${retData[0].region_1depth_name}, ${retData[0].region_3depth_name}`;
+};
+
+export const getGeoLocationInfo = (cb: (lat: number, lng: number) => void) => {
+    const options: PositionOptions = { timeout: 6000 };
+    navigator.geolocation &&
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                cb(position.coords.latitude, position.coords.longitude);
+            },
+            console.error,
+            options,
+        );
 };

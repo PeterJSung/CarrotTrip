@@ -13,8 +13,6 @@ export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string; is
 
 export interface GpsInformation {
     current: MyLocationGps;
-    temporaryMove: LocationInfo;
-    highlight?: LocationInfo;
 }
 
 export const DEFAULT_GPS: MyLocationGps = {

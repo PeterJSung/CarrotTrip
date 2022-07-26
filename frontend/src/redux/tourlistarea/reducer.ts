@@ -112,7 +112,6 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                 avgRating /= routeResult.sections.length;
                 draft.data.recommand.avgRating = parseFloat(avgRating.toFixed(2));
                 draft.data.recommand.name = action.payload.name;
-                console.log(JSON.stringify(draft.data.item));
             }),
     });
 };

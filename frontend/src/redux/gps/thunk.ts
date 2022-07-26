@@ -1,8 +1,7 @@
-import { HIGHLIGHT_MAP_LEVEL } from 'common/constants';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
-import { LocationInfo, MyLocationGps } from 'vo/gps';
-import { currentGpsUpdate, hightlightGpsUpdate, temporaryGpsUpdate } from './actions';
+import { MyLocationGps } from 'vo/gps';
+import { currentGpsUpdate } from './actions';
 import { GpsAction } from './reducer';
 
 // ThunkAction 의 Generics 에는 다음 값들을 순서대로 넣어줍니다.
@@ -19,6 +18,7 @@ export const updateCurrentGpsThunk = (
     regionStr: string,
 ): ThunkAction<void, RootState, null, GpsAction> => {
     return async (dispatch) => {
+        console.log(`Update Chunkt Calle`);
         const nextGps: MyLocationGps = {
             lat,
             lng,
@@ -26,37 +26,5 @@ export const updateCurrentGpsThunk = (
             regionStr,
         };
         await dispatch(currentGpsUpdate(nextGps));
-    };
-};
-
-export const updateTemporaryGpsThunk = (
-    lat: number,
-    lng: number,
-    zoom: number,
-): ThunkAction<void, RootState, null, GpsAction> => {
-    return async (dispatch) => {
-        const tempGps: LocationInfo = {
-            lat,
-            lng,
-            zoom,
-        };
-        await dispatch(temporaryGpsUpdate(tempGps));
-    };
-};
-
-export const updateHightlightGpsThunk = (lat: number, lng: number): ThunkAction<void, RootState, null, GpsAction> => {
-    return async (dispatch) => {
-        const highlightGps: LocationInfo = {
-            lat,
-            lng,
-            zoom: HIGHLIGHT_MAP_LEVEL,
-        };
-        await dispatch(hightlightGpsUpdate(highlightGps));
-    };
-};
-
-export const resetHightlightGpsThunk = (): ThunkAction<void, RootState, null, GpsAction> => {
-    return async (dispatch) => {
-        await dispatch(hightlightGpsUpdate(undefined));
     };
 };

@@ -154,6 +154,10 @@ interface ContentIdMapper {
     [key: number]: IdMapperSet;
 }
 
+export const getTargetCodeFromTourlist = (typeId: number) => {
+    return specializeContentId.includes(typeId) ? typeId : 300; /** 300 is ETC */
+};
+
 // 12 = tour area 38 = shopping 39 = restorant
 export const specializeContentId = [12, 38, 39];
 

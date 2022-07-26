@@ -1,35 +1,52 @@
 import { Box } from '@mui/material';
-import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_MAP_LEVEL, HIGHLIGHT_MAP_LEVEL } from 'common/constants';
+import { DEFAULT_MAP_LEVEL, HIGHLIGHT_MAP_LEVEL } from 'common/constants';
 import MyLocationMarker from 'component/basic/KakaoMap/MyLocationMarker';
 import { useEffect, useRef } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
-import { currentGps, temporaryGps } from 'redux/gps';
-import { getMapInteractionStack, updateInetractionStack } from 'redux/mapinteractionstack';
-import { Interaction2Type, MapInteractionStackType } from 'vo/mapInteraction';
+import { currentGps, updateCurrentGpsThunk } from 'redux/gps';
+import { getMapInteractionStack } from 'redux/mapinteractionstack';
+import { MapInteractionStackType } from 'vo/mapInteraction';
 import BottomSheetSuggestionContainer from './BottomSheetSuggestionContainer';
 import IndicatorDetailPlace from './IndicatorDetailPlace';
 import IndicatorMapRegion from './IndicatorMapRegion';
 
+import { getC2RData } from 'api/coord2region';
+import { getGeoLocationInfo, parserRegionStr } from 'common/util';
 import { useTranslation } from 'react-i18next';
-import { retriveTourlistArea } from 'redux/tourlistarea';
+import { getSuggestionListArr, retriveTourlistArea } from 'redux/tourlistarea';
 import { getUserInfo } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
+import { TourlistDataset } from 'vo/travelInfo';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
 
-const getHighlightInfo = (data: MapInteractionStackType): LocationInfo | undefined => {
+const getHighlightInfo = (
+    data: MapInteractionStackType,
+    totalTourlistSet: {
+        [key: string]: TourlistDataset[];
+    },
+): LocationInfo | undefined => {
     if (data[1]) {
+        console.log(totalTourlistSet);
+        console.log(data[1]);
+
+        const item = totalTourlistSet[data[1].contentTypeId][data[1].idx];
+        console.log(item);
         return {
-            lat: DEFAULT_LAT,
-            lng: DEFAULT_LNG,
+            lat: item.lat,
+            lng: item.lng,
             zoom: HIGHLIGHT_MAP_LEVEL,
         };
+    } else if (data[0] && data[0].selectedData?.pos) {
+        return data[0].selectedData.pos;
     } else {
         return undefined;
     }
 };
+
+const DEFAULT_HIGHLIGHT_OFFSET_LAT = 0.0027;
 
 const KakaoMapContainer = (): JSX.Element => {
     const { i18n } = useTranslation();
@@ -41,43 +58,33 @@ const KakaoMapContainer = (): JSX.Element => {
         url: '//dapi.kakao.com/v2/maps/sdk.js',
     });
     */
-
-    const updateInteraction = useThunk(updateInetractionStack);
     const retriveTourThunk = useThunk(retriveTourlistArea);
 
     const currentGpsInfo = useSelector(currentGps);
-    const temporaryGpsInfo = useSelector(temporaryGps);
+    const totalDataSet = useSelector(getSuggestionListArr);
     const interactionStack = useSelector(getMapInteractionStack);
     const userInfo = useSelector(getUserInfo);
+    const updateGpsState = useThunk(updateCurrentGpsThunk);
 
     const mapRef = useRef<kakao.maps.Map>(null);
 
-    const highLightPos = getHighlightInfo(interactionStack);
-
     useEffect(() => {
+        console.log(`Current GPs change`);
         if (!currentGpsInfo.isDefault && typeof userInfo !== 'string') {
             retriveTourThunk(currentGpsInfo, userInfo.name, i18n.language, userInfo.mbti);
         }
     }, [currentGpsInfo]);
 
+    const mapHold = !interactionStack[1];
+    const highLightPos = getHighlightInfo(interactionStack, totalDataSet);
     const centerPos: LocationInfo = {
-        lat: currentGpsInfo.lat,
-        lng: currentGpsInfo.lng,
-        zoom: DEFAULT_MAP_LEVEL,
-    };
-
-    const markerClick = () => {
-        const markerInfo: Interaction2Type = {
-            type: 'Interaction2',
-            tabIdx: 0,
-            selectedData: {
-                id: 1,
-            },
-        };
-        updateInteraction(markerInfo);
+        lat: highLightPos ? highLightPos.lat - DEFAULT_HIGHLIGHT_OFFSET_LAT : currentGpsInfo.lat,
+        lng: highLightPos ? highLightPos.lng : currentGpsInfo.lng,
+        zoom: highLightPos ? highLightPos.zoom : DEFAULT_MAP_LEVEL,
     };
 
     useEffect(() => {
+        console.log(`Errefct Calle`);
         const map = mapRef.current;
         if (map) {
             map.setCenter(new kakao.maps.LatLng(currentGpsInfo.lat, currentGpsInfo.lng));
@@ -85,14 +92,21 @@ const KakaoMapContainer = (): JSX.Element => {
         }
     }, [mapRef, currentGpsInfo]);
 
+    useEffect(() => {
+        getGeoLocationInfo(async (lat: number, lng: number) => {
+            const res = await getC2RData(lat, lng);
+            updateGpsState(lat, lng, parserRegionStr(res));
+        });
+    }, []);
+
     return (
         <Box width="100%" height="100%" position="relative" display="flex">
             <Map
                 ref={mapRef}
                 level={centerPos.zoom}
-                zoomable={!highLightPos}
-                draggable={!highLightPos}
-                center={{ lat: centerPos.lat - 0.0027, lng: centerPos.lng }}
+                zoomable={mapHold}
+                draggable={mapHold}
+                center={{ lat: centerPos.lat, lng: centerPos.lng }}
                 style={{ flexGrow: 1 }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />

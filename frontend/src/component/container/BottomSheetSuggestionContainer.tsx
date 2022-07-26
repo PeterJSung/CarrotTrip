@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { DEFAULT_MAP_LEVEL } from 'common/constants';
 import MainSheetSlider from 'component/basic/BottomSheet/MainSheetSlider';
 import RecommandCourseList from 'component/basic/BottomSheet/RecommandCourseList';
 import SuggestionItemList from 'component/basic/BottomSheet/SuggestionItemList';
@@ -48,13 +49,23 @@ const RenderList = (data: Interaction2Type) => {
             <SuggestionItemList
                 dataSet={tourlistInfo.item[data.tabIdx]}
                 selectedIdx={data.selectedData?.id}
-                onListClick={(idx: number) => {
-                    updateInteraction({
+                onListClick={async (idx: number) => {
+                    await updateInteraction({
                         type: 'Interaction2',
                         tabIdx: data.tabIdx,
                         selectedData: {
                             id: idx,
+                            pos: {
+                                lat: tourlistInfo.item[data.tabIdx][idx].lat,
+                                lng: tourlistInfo.item[data.tabIdx][idx].lng,
+                                zoom: DEFAULT_MAP_LEVEL,
+                            },
                         },
+                    });
+                    await updateInteraction({
+                        type: 'Interaction3',
+                        idx,
+                        contentTypeId: data.tabIdx,
                     });
                 }}
             />
