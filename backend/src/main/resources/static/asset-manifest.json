@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.b808d945.css",
-    "main.js": "/static/js/main.2fa2d3e6.js",
+    "main.js": "/static/js/main.5de317e9.js",
     "static/js/27.07bc2567.chunk.js": "/static/js/27.07bc2567.chunk.js",
     "static/media/PyeongChangPeace.ttf": "/static/media/PyeongChangPeace.ab3ecf05dc148a912de3.ttf",
     "static/media/PyeongChangPeace.woff": "/static/media/PyeongChangPeace.eadadc6f855143c02901.woff",
@@ -13,6 +13,6 @@
   },
   "entrypoints": [
     "static/css/main.b808d945.css",
-    "static/js/main.2fa2d3e6.js"
+    "static/js/main.5de317e9.js"
   ]
 }
