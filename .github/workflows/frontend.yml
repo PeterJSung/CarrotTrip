@@ -29,8 +29,6 @@ jobs:
         run: echo "::set-output name=value::$(echo $RANDOM)"
       - name: Run Install & build pacakge
         run: |
-          echo $(git rev-parse --short "$GITHUB_SHA")
-          echo ${GITHUB_REF#refs/heads/}
           cd frontend
           npm install
           npm run build:linux
