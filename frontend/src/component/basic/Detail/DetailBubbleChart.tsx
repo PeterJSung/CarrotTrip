@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 const MINIMUM_HEIGHT = 20;
 
 export interface DetailBubbleChartProps {
-    moodArr: number[];
+    moodArr: string[];
 }
 
 const DetailBubbleChart = (props: DetailBubbleChartProps): JSX.Element => {

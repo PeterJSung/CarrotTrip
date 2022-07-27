@@ -45,7 +45,7 @@ export const nonSrcMarker = () => {
                             key={`${i}-${i2}-${eachSelected}`}
                             isSelect={eachSelected}
                             contentId={1}
-                            contentTypeId={eachContentId}
+                            eventTypeId={eachContentId}
                             lat={lat}
                             lng={lng}
                             onClick={action(`Marker Click ${eachSelected}`)}
@@ -70,7 +70,7 @@ export const srcMarker = () => {
                         src="https://picsum.photos/800"
                         isSelect={eachSelected}
                         contentId={1}
-                        contentTypeId={3}
+                        eventTypeId={3}
                         lat={lat}
                         lng={lng}
                         onClick={action(`Marker Click ${eachSelected}`)}

@@ -1,5 +1,6 @@
 import { combineReducers, ReducersMapObject } from '@reduxjs/toolkit';
 
+import BookMarkInfo, { BookMarkInfoState } from './bookmark';
 import MyLocationGps, { GpsState } from './gps';
 import MapInteractionStack, { MapInteractionStackState } from './mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from './placeInfo';
@@ -15,6 +16,7 @@ export type CombinedStateType = ReducersMapObject<
         placeInfo: PlaceInfoState;
         mapDispStack: MapInteractionStackState;
         tourlistArea: TourlistAreaState;
+        bookMarkInfo: BookMarkInfoState;
     },
     any
 >;
@@ -26,6 +28,7 @@ const reducers = combineReducers<CombinedStateType>({
     placeInfo: PlaceInfo,
     mapDispStack: MapInteractionStack,
     tourlistArea: TourlistArea,
+    bookMarkInfo: BookMarkInfo,
 });
 
 export type RootState = ReturnType<typeof reducers>;

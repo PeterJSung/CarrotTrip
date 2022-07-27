@@ -34,11 +34,10 @@ const bigHeadText = (text: string): JSX.Element => <BigHeadText>{text}</BigHeadT
 const smallHeadText = (text: string): JSX.Element => <SmallHeadText>{text}</SmallHeadText>;
 const descriptionText = (text: string): JSX.Element => <DescriptionText>{text}</DescriptionText>;
 
-const getImpressionSpecificData = (t: TFunction, data: number[]): AttractionDataSet[] => {
+const getImpressionSpecificData = (t: TFunction, data: string[]): AttractionDataSet[] => {
     const ret: AttractionDataSet[] = [];
     for (const key in i18n_IMPRESSION_REF) {
-        const id = Number(key);
-        if (data.includes(id)) {
+        if (data.includes(key)) {
             ret.push({
                 color: i18n_IMPRESSION_REF[key].color,
                 translateKey: t(i18n_IMPRESSION_REF[key].translateKey), //it`ll be converted from i18n

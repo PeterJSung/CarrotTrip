@@ -88,7 +88,6 @@ const BottomSheetSuggestionContainer = (): JSX.Element => {
     };
 
     const suggestionSliderClick = (idx: number) => {
-        console.log(`Click Idx ${idx}`);
         const markerInfo: Interaction2Type = {
             type: 'Interaction2',
             tabIdx: idx,

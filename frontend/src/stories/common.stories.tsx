@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import BookMarkInfo from 'redux/bookmark';
 import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
@@ -15,8 +16,12 @@ import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
 import { FIND_NAVIGATION_URL } from 'api/navigation';
 
+import { RETRIEVE_BOOKMAKR_URL } from 'api/bookmark';
+import { RETRIEVE_PLACEDETAIL_URL } from 'api/placedetail';
 import { TOURLIST_INFO_URL } from 'api/tourlistInfo';
+import MockApiResRetrieveBookMark from './apimock/bookmark.json';
 import MockApiResNavi from './apimock/navi.json';
+import MockApiResPlaceDetail from './apimock/placedetail.json';
 import MockApiResTourlist from './apimock/tourlist.json';
 import MockDataItemList from './datamock/itemList.json';
 import MockDataRecommandList from './datamock/recommandlist.json';
@@ -34,6 +39,7 @@ const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
                     : MapInteractionStack
                 : MapInteractionStack,
             tourlistArea: nextStore ? (nextStore.tourlistArea ? nextStore.tourlistArea : TourlistArea) : TourlistArea,
+            bookMarkInfo: nextStore ? (nextStore.bookMarkInfo ? nextStore.bookMarkInfo : BookMarkInfo) : BookMarkInfo,
         }),
     });
 };
@@ -131,6 +137,20 @@ export const mockGetUserExist = {
         message: 'TESTMSG',
         statusCode: 'TESTCODE',
     },
+};
+
+export const mockGetPlaceDetail = {
+    url: `${RETRIEVE_PLACEDETAIL_URL}/:contentId`,
+    method: 'GET',
+    status: 200,
+    response: MockApiResPlaceDetail,
+};
+
+export const mockGetBookmarkList = {
+    url: `${RETRIEVE_BOOKMAKR_URL}/:id`,
+    method: 'GET',
+    status: 200,
+    response: MockApiResRetrieveBookMark,
 };
 
 export const mockGetTourNaviInfo = {

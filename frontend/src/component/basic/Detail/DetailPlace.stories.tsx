@@ -13,8 +13,8 @@ export const detailPlace = () => (
         address="testAddress"
         description="testDesc"
         mbtiArr={[]}
-        moodArr={[1, 4, 6, 8, 9, 13]}
+        moodArr={['1', '4', '6', '8', '9', '13']}
         name="testName"
-        type="testType"
+        type={12}
     />
 );

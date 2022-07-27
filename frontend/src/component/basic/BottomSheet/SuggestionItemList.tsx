@@ -29,7 +29,6 @@ const TotalWrapper = styled(Box)`
 `;
 
 const SuggestionItemList = (props: SuggestionItemListProps): JSX.Element => {
-    console.log(props.dataSet);
     return (
         <ListWapper>
             {props.dataSet.map((d, idx) => {

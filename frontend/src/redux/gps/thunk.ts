@@ -18,7 +18,6 @@ export const updateCurrentGpsThunk = (
     regionStr: string,
 ): ThunkAction<void, RootState, null, GpsAction> => {
     return async (dispatch) => {
-        console.log(`Update Chunkt Calle`);
         const nextGps: MyLocationGps = {
             lat,
             lng,
