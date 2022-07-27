@@ -32,8 +32,6 @@ jobs:
           node-version: 16.14.x
       - name: Run Install & build storybook
         run: |
-          echo $(git rev-parse --short "$GITHUB_SHA")
-          echo ${GITHUB_REF#refs/heads/}
           npm i 
           npm run build-storybook
           ls -al
