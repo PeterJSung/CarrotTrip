@@ -440,6 +440,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 #### Response
 ```json
 {
+  "id": 8,
   "memberNickname": "태호",
   "apiId": 10000
 }
