@@ -61,13 +61,7 @@ const RatingText = styled(CommonText)`
 `;
 
 const PlaceInfoChipCustom = styled(PlaceInfoChip)`
-    font-family: Noto Sans KR !important;
-    font-style: normal !important;
-    font-weight: 500 !important;
-    font-size: 10px !important;
-    line-height: 14px !important;
-    letter-spacing: -0.05em !important;
-    color: #6d6d6d !important;
+    margin-bottom: 0 !important;
 `;
 
 const BannerSuggestionItem = (props: BannerSuggestionItemProps): JSX.Element => {

@@ -8,7 +8,6 @@ const KakaoMapPoligonContainer = (): JSX.Element => {
     const type = useSelector(getCurrentInteractionType);
     const tourListArr = useSelector(getToutlistArr);
     useEffect(() => {}, []);
-    console.log(tourListArr.recommand.sections);
 
     return (
         <>

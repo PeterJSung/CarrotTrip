@@ -3,16 +3,18 @@ import DetailBubbleChart from 'component/basic/Detail/DetailBubbleChart';
 import DetailMBTI from 'component/basic/Detail/DetailMBTI';
 import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { PlaceBookmarkInfo } from 'vo/placeInfo';
+import { contentIdMapper } from 'vo/travelInfo';
 
-export interface PlaceInfo {
+export interface DetailPlaceProps {
     src: string;
-    type: string;
+    type: number;
     name: string;
     description: string;
     address: string;
-    moodArr: number[];
+    moodArr: string[];
     mbtiArr: PlaceBookmarkInfo[];
 }
 
@@ -35,14 +37,20 @@ const ItemContainer = styled(Box)`
     }
 `;
 
-const DetailPlace = (props: PlaceInfo): JSX.Element => {
+const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
+    const { t } = useTranslation();
+    console.log(`AAA ${props.moodArr}`);
     return (
         <Box>
             <Box height="11rem">
                 <ImgTag src={props.src} />
             </Box>
             <ItemContainer>
-                <PlaceDescriptionDetail placeType={props.type} placeName={props.name} placeDesc={props.description} />
+                <PlaceDescriptionDetail
+                    placeType={t(contentIdMapper[props.type].translateKey)}
+                    placeName={props.name}
+                    placeDesc={props.description}
+                />
                 <Divider />
                 <PlaceAdressDetail address={props.address} />
                 <Divider />

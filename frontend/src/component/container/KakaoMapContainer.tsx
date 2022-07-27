@@ -15,6 +15,7 @@ import IndicatorMapRegion from './IndicatorMapRegion';
 import { getC2RData } from 'api/coord2region';
 import { getGeoLocationInfo, parserRegionStr } from 'common/util';
 import { useTranslation } from 'react-i18next';
+import { retrieveAllBookMark } from 'redux/bookmark';
 import { getSuggestionListArr, retriveTourlistArea } from 'redux/tourlistarea';
 import { getUserInfo } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
@@ -32,7 +33,6 @@ const getHighlightInfo = (
 ): LocationInfo | undefined => {
     if (dataTwo) {
         const item = totalTourlistSet[dataTwo.eventTypeId][dataTwo.idx];
-        console.log(item);
         return {
             lat: item.lat,
             lng: item.lng,
@@ -65,6 +65,7 @@ const KakaoMapContainer = (): JSX.Element => {
     const dataOne = useSelector(getTypeOneData);
     const dataTwo = useSelector(getTypeTwoData);
     const userInfo = useSelector(getUserInfo);
+    const getAllBookMarks = useThunk(retrieveAllBookMark);
     const updateGpsState = useThunk(updateCurrentGpsThunk);
 
     const mapRef = useRef<kakao.maps.Map>(null);
@@ -74,6 +75,10 @@ const KakaoMapContainer = (): JSX.Element => {
             retriveTourThunk(currentGpsInfo, userInfo.name, i18n.language, userInfo.mbti);
         }
     }, [currentGpsInfo]);
+
+    useEffect(() => {
+        typeof userInfo !== 'string' && getAllBookMarks(userInfo.name);
+    }, [userInfo]);
 
     const isPlaceDetail = interactionType === 'PLACEDETAIL';
     const highLightPos = getHighlightInfo(dataOne, dataTwo, totalDataSet);
@@ -121,82 +126,3 @@ const KakaoMapContainer = (): JSX.Element => {
 };
 
 export default KakaoMapContainer;
-
-/*
-                {markers.map((res) => (
-                    <MapMarker
-                        position={{
-                            ...res,
-                        }}
-                    />
-                ))}
-
-                <Polyline
-                    path={road}
-                    strokeWeight={10} // 선의 두께 입니다
-                    strokeColor={'blue'} // 선의 색깔입니다
-                    strokeOpacity={0.5} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                    strokeStyle={'solid'} // 선의 스타일입니다
-                />
-    useEffect(() => {
-        const fetch = async () => {
-            console.log(`NaviStart`);
-            const ret = await getTourNaviInfo(
-                {
-                    x: 126.97224161387756,
-                    y: 37.57776094924411,
-                },
-                [
-                    {
-                        y: 37.57412170480612,
-                        x: 126.9757522146493,
-                    },
-                    {
-                        y: 37.57249172836604,
-                        x: 126.98016750972909,
-                    },
-                    {
-                        y: 37.57129493286989,
-                        x: 126.99429485433944,
-                    },
-                    {
-                        y: 37.573106029495335,
-                        x: 127.0031243220909,
-                    },
-                ],
-            );
-
-            const roadVertex: LatLng[] = [];
-            const position: LatLng[] = [];
-            ret.routes.forEach((r) => {
-                r.sections.forEach((s) => {
-                    s.roads.forEach((aaa) => {
-                        for (let i = 0; i < aaa.vertexes.length; i += 2) {
-                            roadVertex.push({
-                                lng: aaa.vertexes[i],
-                                lat: aaa.vertexes[i + 1],
-                            });
-                        }
-                    });
-                });
-            });
-            position.push({
-                lat: ret.routes[0].summary.origin.y,
-                lng: ret.routes[0].summary.origin.x,
-            });
-            ret.routes[0].summary.waypoints.forEach((d) => {
-                position.push({
-                    lat: d.y,
-                    lng: d.x,
-                });
-            });
-            position.push({
-                lat: ret.routes[0].summary.destination.y,
-                lng: ret.routes[0].summary.destination.x,
-            });
-            setRoad(roadVertex);
-            setMarkers(position);
-        };
-        fetch();
-    }, []);
-*/

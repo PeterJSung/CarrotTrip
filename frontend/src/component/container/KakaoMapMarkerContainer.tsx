@@ -29,7 +29,6 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
         const itemKeys = Object.keys(tourlistAreaSelector.item);
         if (itemKeys.length > 0) {
             const newRenderData: RenderPropsType[] = [];
-            console.log(`Render`);
             if (interactionType !== 'PLACEDETAIL') {
                 const currentSelectType = typeOne?.tabIdx;
                 const currentSelectIdx = typeOne?.selectedData?.id;

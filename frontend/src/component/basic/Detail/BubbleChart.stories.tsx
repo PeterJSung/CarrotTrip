@@ -48,7 +48,7 @@ export const BubbleChart: Story<Args> = ({ itemCount }) => {
         itemCount = 1;
     }
     for (let i = 1; i <= itemCount; i++) {
-        idArr.push(i);
+        idArr.push(`${i}`);
     }
 
     const dat = getImpressionSpecificData(t, idArr);

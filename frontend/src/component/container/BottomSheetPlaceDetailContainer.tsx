@@ -1,8 +1,12 @@
-import DetailPlace from 'component/basic/Detail/DetailPlace';
+import { retrievePlaceDetail } from 'api/placedetail';
+import DetailPlace, { DetailPlaceProps } from 'component/basic/Detail/DetailPlace';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
+import { bookMarkSelector } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
 import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
+import { getSuggestionListArr } from 'redux/tourlistarea';
 import styled from 'styled-components';
 
 const PlaceDetailSheet = styled(BottomSheet)`
@@ -22,7 +26,11 @@ const PlaceDetailSheet = styled(BottomSheet)`
 
 const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const interactionType = useSelector(getCurrentInteractionType);
-    const typeTWo = useSelector(getTypeTwoData);
+    const totalDataArr = useSelector(getSuggestionListArr);
+    const bookMarks = useSelector(bookMarkSelector);
+    const typeTwo = useSelector(getTypeTwoData);
+
+    const [renderData, setRenderData] = useState<DetailPlaceProps>();
 
     const updateThunk = useThunk(updateInetractionStack);
     const isOpen = interactionType === 'PLACEDETAIL';
@@ -31,24 +39,41 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
         updateThunk();
     };
 
+    useEffect(() => {
+        const setup = async () => {
+            if (typeTwo) {
+                const item = totalDataArr[typeTwo.eventTypeId][typeTwo.idx];
+                const data = await retrievePlaceDetail(item.contentId);
+                console.log(`Bottom Sheet Enable ${JSON.stringify(data)}`);
+                setRenderData({
+                    address: item.addr,
+                    description: item.addr,
+                    mbtiArr: [],
+                    moodArr: data.tasteList,
+                    name: item.title,
+                    src: item.src ? item.src : 'https://picsum.photos/800',
+                    type: item.contentTypeId,
+                });
+                //setRenderData()
+            }
+        };
+        setup();
+    }, [typeTwo, bookMarks]);
+
     return (
-        <PlaceDetailSheet
-            open={isOpen}
-            onDismiss={onBackClick}
-            // onDismiss={() => props.setOpen(true)}
-            blocking={false}
-            snapPoints={({ maxHeight }) => [maxHeight * 0.8]}
-        >
-            <DetailPlace
-                src="https://picsum.photos/800"
-                address="testAdd"
-                description="testDesc"
-                mbtiArr={[]}
-                moodArr={[1, 4, 6, 8, 9, 13]}
-                name="testName"
-                type="testType"
-            />
-        </PlaceDetailSheet>
+        <>
+            {renderData && (
+                <PlaceDetailSheet
+                    open={isOpen}
+                    onDismiss={onBackClick}
+                    // onDismiss={() => props.setOpen(true)}
+                    blocking={false}
+                    snapPoints={({ maxHeight }) => [maxHeight * 0.8]}
+                >
+                    <DetailPlace {...renderData} />
+                </PlaceDetailSheet>
+            )}
+        </>
     );
 };
 

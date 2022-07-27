@@ -1,3 +1,29 @@
+export interface PlaceDetailAPIRes {
+    commentList: PlaceReviewDataset[];
+    mbtiRanking: { [key: string]: number };
+    tasteList: string[];
+}
+
+export interface PlaceReviewDataset {
+    id: number;
+    memberNickname: string;
+    apiId: number;
+    score: number;
+    comments: string;
+    regDt: string;
+}
+
+export interface PlaceBookMarkListAPIRes {
+    id: number;
+    memberNickname: string;
+    apiId: number;
+}
+
+export interface PlaceBookMarkHandleAPIReqRes {
+    memberNickname: string;
+    apiId: number;
+}
+
 export interface PlaceUpdateAttractInfoReqRes {
     memberNickname: string;
     apiId: number;

@@ -1,0 +1,48 @@
+{
+    "commentList": [
+        {
+            "id": 16,
+            "memberNickname": "태호",
+            "apiId": 732484,
+            "score": 4.0,
+            "comments": "좋아요~! 4",
+            "regDt": "2022-07-26 22:17:08"
+        },
+        {
+            "id": 17,
+            "memberNickname": "가현",
+            "apiId": 732484,
+            "score": 2.0,
+            "comments": "좋아요~! 2",
+            "regDt": "2022-07-26 22:17:08"
+        },
+        {
+            "id": 18,
+            "memberNickname": "영현",
+            "apiId": 732484,
+            "score": 3.0,
+            "comments": "좋아요~! 3",
+            "regDt": "2022-07-26 22:17:08"
+        },
+        {
+            "id": 19,
+            "memberNickname": "정민",
+            "apiId": 732484,
+            "score": 1.0,
+            "comments": "좋아요~! 1",
+            "regDt": "2022-07-26 22:17:08"
+        }
+    ],
+    "mbtiRanking": {
+        "ESTJ": 1.0,
+        "INTJ": 3.0,
+        "ENTJ": 3.0
+    },
+    "tasteList": [
+        "2",
+        "3",
+        "5",
+        "8",
+        "9"
+    ]
+}
