@@ -38,4 +38,6 @@ public class LocationOpenApiItemDto {
     private double aveScore;
     private ArrayList<String> tasteList;
     private boolean userTaste;
+
+    private String overview;
 }
