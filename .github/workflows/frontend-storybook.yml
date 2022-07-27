@@ -47,4 +47,4 @@ jobs:
           aws s3 sync storybook-static/ s3://${{ secrets.S3_UPLOAD_STORYBOOK_BUCKET_NAME }}/ --include "*.js" --content-type "application/javascript"
           aws cloudfront create-invalidation \
               --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }}\
-              --paths "/*"/
+              --paths "/*"
