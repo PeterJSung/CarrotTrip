@@ -23,7 +23,7 @@ const IndicatorMapRegion = (): JSX.Element => {
     return (
         <CommonIndicator>
             <MyProfileBtn onClick={console.log} />
-            <RegionDiscription region={currentGpsInfo.regionStr} />
+            <RegionDiscription region={currentGpsInfo.regionStrShort} />
             <MyLocationBtn onClick={myLocationBtnClick} />
         </CommonIndicator>
     );

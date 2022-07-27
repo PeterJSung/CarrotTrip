@@ -30,18 +30,18 @@ export interface BannerRecommandCourseProps {
     onClick: (id: number) => void;
 }
 
-const DEFAULT_ISZE = 5;
+const DEFAULT_SIZE = 5;
 
 const ImgButton = styled.div`
-    width: ${DEFAULT_ISZE}rem !important;
-    height: ${DEFAULT_ISZE}rem !important;
+    width: ${DEFAULT_SIZE}rem !important;
+    height: ${DEFAULT_SIZE}rem !important;
     border-radius: 0.5rem !important;
     overflow: hidden;
 `;
 
 const DashLine = styled.hr`
     border: 0.3125px dashed #8e9095;
-    margin-top: ${DEFAULT_ISZE / 2}rem;
+    margin-top: ${DEFAULT_SIZE / 2}rem;
 `;
 
 const ImgDisplay = styled.img`
@@ -51,7 +51,7 @@ const ImgDisplay = styled.img`
 
 const TitleText = styled.span`
     margin-top: 0.3125rem;
-    width: ${DEFAULT_ISZE}rem;
+    width: ${DEFAULT_SIZE}rem;
     text-align: center;
     display: inline-block;
     white-space: nowrap;

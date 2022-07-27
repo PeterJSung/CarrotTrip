@@ -14,7 +14,7 @@ const KakaoMapPoligonContainer = (): JSX.Element => {
             {type === 'COURSE' &&
                 tourListArr.recommand.sections.map((eachD) => (
                     <Polyline
-                        key={`${eachD.startInfo.id}-${eachD.endInfo.id}`}
+                        key={eachD.data.contentId}
                         path={eachD.vertexList}
                         strokeWeight={4} // 선의 두께 입니다
                         strokeColor={'black'} // 선의 색깔입니다

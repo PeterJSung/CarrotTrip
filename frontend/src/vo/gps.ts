@@ -9,7 +9,11 @@ export type LocationInfo = {
     zoom: number;
 } & PosInfo;
 
-export type MyLocationGps = Omit<LocationInfo, 'zoom'> & { regionStr: string; isDefault: boolean };
+export type MyLocationGps = Omit<LocationInfo, 'zoom'> & {
+    regionStrShort: string;
+    regionStrFull: string;
+    isDefault: boolean;
+};
 
 export interface GpsInformation {
     current: MyLocationGps;
@@ -19,7 +23,8 @@ export const DEFAULT_GPS: MyLocationGps = {
     lat: DEFAULT_LAT,
     lng: DEFAULT_LNG,
     isDefault: true,
-    regionStr: '',
+    regionStrShort: '',
+    regionStrFull: '',
 };
 
 export interface KakaoRegionAPIRes {

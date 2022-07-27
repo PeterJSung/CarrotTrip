@@ -1,4 +1,5 @@
 import { produce } from 'immer';
+import { cloneDeep } from 'lodash';
 import { SyncState } from 'redux/common';
 import { ActionType, createReducer } from 'typesafe-actions';
 import { PosInfo } from 'vo/gps';
@@ -97,22 +98,15 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                     draft.data.recommand.sections.push({
                         distanceInfo: eachSection.distance,
                         vertexList: vertexes,
-                        startInfo: {
-                            id: prevData ? prevData.contentId : -1,
-                            src: prevData ? prevData.src ?? 'assets/defaultplaceicon.png' : 'assets/startwalker.png',
-                            title: prevData ? prevData.title : action.payload.myLocationInfo.regionStr,
-                        },
-                        endInfo: {
-                            id: targetInfo.contentId,
-                            src: targetInfo.src ? targetInfo.src : 'assets/defaultplaceicon.png',
-                            title: targetInfo.title,
-                        },
+                        data: cloneDeep(targetInfo),
                     });
                     prevData = targetInfo;
                 });
+
                 avgRating /= routeResult.sections.length;
                 draft.data.recommand.avgRating = parseFloat(avgRating.toFixed(2));
                 draft.data.recommand.name = action.payload.name;
+                console.log(JSON.stringify(draft.data.recommand));
             }),
     });
 };

@@ -43,7 +43,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                     tourlistAreaSelector.item[eachKey].forEach((eachD, idx) => {
                         const isSkipCauseCourse =
                             interactionType === 'COURSE' &&
-                            tourlistAreaSelector.recommand.sections.filter((d) => d.endInfo.id === eachD.contentId)
+                            tourlistAreaSelector.recommand.sections.filter((d) => d.data.contentId === eachD.contentId)
                                 .length === 0;
 
                         const isSkip = !isFullRender && (isSkipCauseFilter || isSkipCauseCourse);

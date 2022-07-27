@@ -6,6 +6,7 @@ import SuggestionItemList from 'component/basic/BottomSheet/SuggestionItemList';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
+import { currentGps } from 'redux/gps';
 import { getCurrentInteractionType, getTypeOneData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getToutlistArr } from 'redux/tourlistarea';
 import { getUserMbti } from 'redux/userInfo';
@@ -26,10 +27,12 @@ const SuggestionSheet = styled(BottomSheet)`
 
 const RenderList = (data: Interaction2Type) => {
     const tourlistInfo = useSelector(getToutlistArr);
+    const currentGpsInfo = useSelector(currentGps);
     const updateInteraction = useThunk(updateInetractionStack);
     if (data.tabIdx === 100) {
         return (
             <RecommandCourseList
+                addressText={currentGpsInfo.regionStrFull}
                 dataSet={tourlistInfo.recommand}
                 onListClick={(idx: number) => {
                     updateInteraction({
@@ -38,6 +41,12 @@ const RenderList = (data: Interaction2Type) => {
                         selectedData: {
                             id: idx,
                         },
+                    });
+                }}
+                onResetClick={() => {
+                    updateInteraction({
+                        type: 'Interaction2',
+                        tabIdx: 100,
                     });
                 }}
                 onTourAreaClick={console.log}
