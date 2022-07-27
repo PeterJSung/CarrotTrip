@@ -24,8 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
       - name: Install Dependency
         run: git fetch --unshallow --tags
       - name: Use Node.js 16.14.x
@@ -34,6 +32,8 @@ jobs:
           node-version: 16.14.x
       - name: Run Install & build storybook
         run: |
+          echo $(git rev-parse --short "$GITHUB_SHA")
+          echo ${GITHUB_REF#refs/heads/}
           npm i 
           npm run build-storybook
           ls -al
