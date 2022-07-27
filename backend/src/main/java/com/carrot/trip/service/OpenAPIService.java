@@ -1,10 +1,7 @@
 package com.carrot.trip.service;
 
 import com.carrot.trip.common.PearsonUtil;
-import com.carrot.trip.dto.EvaluationDTO;
-import com.carrot.trip.dto.LocationOpenApiItemDto;
-import com.carrot.trip.dto.LocationOpenApiResponseDTO;
-import com.carrot.trip.dto.TouristAttractionTasteDTO;
+import com.carrot.trip.dto.*;
 import com.carrot.trip.entity.Evaluation;
 import com.carrot.trip.entity.Member;
 import com.carrot.trip.entity.MemberTaste;
@@ -44,6 +41,22 @@ public class OpenAPIService {
 
     @Value("${openapi.secretkey}")
     private  String secretKey;
+
+    public DetailOpenApiResponseDTO openAPIDetailCall(Long apiId) throws URISyntaxException, JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+
+        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=WB%2Fl1niLmS2eYJi7zSTWckNImEhG12ncvxuaaC2vyNANQN%2FUEyE%2BUudEX%2F4QduFkYKvuv9u5nwHE24rxiB9NLg%3D%3D&MobileOS=ETC&MobileApp=carrotTravel&_type=json&contentId=" + apiId + "&overviewYN=Y";
+        URI uri = new URI(url);
+
+        HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);
+        System.out.println(response.getBody());
+        // Response Body 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+        DetailOpenApiResponseDTO dto =  objectMapper.readValue(response.getBody(), DetailOpenApiResponseDTO.class);
+
+        return dto;
+    }
 
     public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname, String lang) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();

@@ -17,4 +17,5 @@ public class TouristAttractionDetailDTO {
     private ArrayList<Evaluation> commentList;
     private Map<String, Double> mbtiRanking;
     private ArrayList tasteList;
+    private String overview;
 }

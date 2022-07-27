@@ -1,6 +1,7 @@
 package com.carrot.trip.controller;
 
 import com.carrot.trip.common.PearsonUtil;
+import com.carrot.trip.dto.DetailOpenApiResponseDTO;
 import com.carrot.trip.dto.LocationOpenApiResponseDTO;
 import com.carrot.trip.dto.TouristAttractionDetailDTO;
 import com.carrot.trip.service.OpenAPIService;
@@ -33,6 +34,9 @@ public class TouristAttractionController {
         return openAPIService.openAPICall(x, y, nickname, lang);
     }
 
+    //openAPIDetailCall
+
+
     @GetMapping("/touristAttraction/pearsons/test")
     public String pearsonsTest() {
         List lx = Arrays.asList(1,2,3);
@@ -55,8 +59,13 @@ public class TouristAttractionController {
     }
 
     @GetMapping("/touristAttraction/detail/{contentId}")
-    public TouristAttractionDetailDTO getDetail(@PathVariable("contentId") Long contentId) {
+    public TouristAttractionDetailDTO getDetail(@PathVariable("contentId") Long contentId) throws URISyntaxException, JsonProcessingException {
         return touristAttractionDetailService.getDetail(contentId);
+    }
+
+    @GetMapping("/test/detail/{contentId}")
+    public DetailOpenApiResponseDTO getDetail22(@PathVariable("contentId") Long contentId) throws URISyntaxException, JsonProcessingException {
+        return openAPIService.openAPIDetailCall(contentId);
     }
 
 }
