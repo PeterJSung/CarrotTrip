@@ -10,13 +10,16 @@ import com.carrot.trip.entity.TouristAttractionTaste;
 import com.carrot.trip.repository.EvaluationRepository;
 import com.carrot.trip.repository.MemberRepository;
 import com.carrot.trip.repository.TouristAttractionTasteRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.jdbc.core.metadata.Db2CallMetaDataProvider;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.lang.reflect.Array;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,11 +31,14 @@ public class TouristAttractionDetailService {
     private final TouristAttractionTasteRepository touristAttractionTasteRepository;
     private final MemberRepository memberRepository;
 
-    public TouristAttractionDetailDTO getDetail(Long apiId) {
+    private final OpenAPIService openAPIService;
+
+    public TouristAttractionDetailDTO getDetail(Long apiId) throws URISyntaxException, JsonProcessingException {
         TouristAttractionDetailDTO touristAttractionDetailDTO = new TouristAttractionDetailDTO();
         touristAttractionDetailDTO.setCommentList(getCommentList(apiId));
         touristAttractionDetailDTO.setMbtiRanking(getTouristAttractionMBTIRankingList(apiId));
         touristAttractionDetailDTO.setTasteList(getTouristAttractionTasteList(apiId));
+        touristAttractionDetailDTO.setOverview(openAPIService.openAPIDetailCall(apiId).getResponse().getBody().getItems().getItem().getOverview());
         return touristAttractionDetailDTO;
     }
 
@@ -68,7 +74,7 @@ public class TouristAttractionDetailService {
                 return e1.getValue().compareTo(e2.getValue());
             }
         };         // Max Value의 key, value
-        Map.Entry<String, Double> maxEntry = Collections.max(scoreAveByMBTI.entrySet(), comparator);
+        //Map.Entry<String, Double> maxEntry = Collections.max(scoreAveByMBTI.entrySet(), comparator);
             /*
             // Min Value의 key, value
             Entry<String, Double> minEntry = Collections.min(scoreAveByMBTI.entrySet(), comparator);

@@ -25,7 +25,7 @@ public class BookmarkController {
     }
 
     @PostMapping("/bookmark")
-    public BookmarkDTO registBookmark(@RequestBody BookmarkDTO bookmarkDTO) {
+    public Bookmark registBookmark(@RequestBody BookmarkDTO bookmarkDTO) {
         return bookmarkService.createBookmark(bookmarkDTO);
     }
 

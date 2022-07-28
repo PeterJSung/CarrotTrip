@@ -20,14 +20,15 @@ public class BookmarkService {
     private final BookmarkRepository bookmarkRepository;
 
     @Transactional
-    public BookmarkDTO createBookmark(BookmarkDTO bookmarkDTO) {
+    public Bookmark createBookmark(BookmarkDTO bookmarkDTO) {
         bookmarkRepository.deleteEvaluationsByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
         bookmarkRepository.save(Bookmark.builder()
                 .memberNickname(bookmarkDTO.getMemberNickname())
                 .apiId(bookmarkDTO.getApiId())
                 .build());
+        Bookmark bookmark = bookmarkRepository.findByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
 
-        return bookmarkDTO;
+        return bookmark;
     }
 
     @Transactional
