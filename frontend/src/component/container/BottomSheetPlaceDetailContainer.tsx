@@ -47,7 +47,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
                 console.log(`Bottom Sheet Enable ${JSON.stringify(data)}`);
                 setRenderData({
                     address: item.addr,
-                    description: item.addr,
+                    description: data.overview,
                     mbtiArr: [],
                     moodArr: data.tasteList,
                     name: item.title,
@@ -58,7 +58,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
             }
         };
         setup();
-    }, [typeTwo, bookMarks]);
+    }, [typeTwo, bookMarks, totalDataArr]);
 
     return (
         <>

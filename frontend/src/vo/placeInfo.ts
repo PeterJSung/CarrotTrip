@@ -2,6 +2,7 @@ export interface PlaceDetailAPIRes {
     commentList: PlaceReviewDataset[];
     mbtiRanking: { [key: string]: number };
     tasteList: string[];
+    overview: string;
 }
 
 export interface PlaceReviewDataset {
