@@ -35,8 +35,7 @@ export interface TourlistRecommandTotalSet {
 
 export interface TourlistRecommandCourseSet {
     distanceInfo: number;
-    startInfo: EachRegionInfo;
-    endInfo: EachRegionInfo;
+    data: TourlistDataset;
     vertexList: PosInfo[];
 }
 
@@ -53,7 +52,7 @@ export interface TourlistDataset {
     mbti: string;
     mbtiAveScore: number;
     aveScore: number;
-    tasteList: number[];
+    tasteList: string[];
     userTaste: boolean;
 }
 
@@ -80,7 +79,7 @@ export interface TourlistInfo {
     mbti: string;
     mbtiAveScore: number;
     aveScore: number;
-    tasteList: number[];
+    tasteList: string[];
     userTaste: boolean;
 }
 

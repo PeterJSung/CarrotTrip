@@ -40,6 +40,7 @@ specifiers:
   prettier: ^2.6.2
   prop-types: ^15.8.1
   react: ^17.0.2
+  react-clamp-lines: ^3.0.3
   react-dom: ^17.0.2
   react-horizontal-scrolling-menu: ^3.1.0
   react-i18next: ^11.17.4
@@ -74,6 +75,7 @@ dependencies:
   immer: 9.0.15
   lodash: 4.17.21
   react: 17.0.2
+  react-clamp-lines: 3.0.3_react@17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-horizontal-scrolling-menu: 3.1.0_react@17.0.2
   react-i18next: 11.17.4_iunkfnprfsbsde3j2gf563wwwi
@@ -14228,6 +14230,15 @@ packages:
       raf: 3.4.1
       regenerator-runtime: 0.13.9
       whatwg-fetch: 3.6.2
+
+  /react-clamp-lines/3.0.3_react@17.0.2:
+    resolution: {integrity: sha512-NTPPieGp11XGxXbI0mH1mcLtdvOFUk/aDL5En3VcHUTtctILnUVNcPsB7Fe+EoL8E+mds2NIeED9JYpwJslZjQ==}
+    peerDependencies:
+      react: ^15 || ^16 || ^17 || ^18
+    dependencies:
+      prop-types: 15.8.1
+      react: 17.0.2
+    dev: false
 
   /react-dev-utils/12.0.1_rvmon6ehd2r54ktaosvxv4i2y4:
     resolution: {integrity: sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==}

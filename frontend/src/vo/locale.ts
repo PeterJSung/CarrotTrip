@@ -3,7 +3,8 @@ export enum LocaleCode {
     KOKR = 'KorService',
     ENUS = 'EngService',
     JAJP = 'JpnService',
-    CNCN = 'ChsService',
+    ZHHS = 'ChsService', // 중문간체
+    ZHCH = 'ChtService', // 중문번체
     DEDE = 'GerService',
     FRFR = 'FreService',
     ESES = 'SpnService',

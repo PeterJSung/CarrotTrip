@@ -15,14 +15,15 @@ import { GpsAction } from './reducer';
 export const updateCurrentGpsThunk = (
     lat: number,
     lng: number,
-    regionStr: string,
+    addressTextInfo: { shortAddress: string; fullAddress: string },
 ): ThunkAction<void, RootState, null, GpsAction> => {
     return async (dispatch) => {
         const nextGps: MyLocationGps = {
             lat,
             lng,
+            regionStrShort: addressTextInfo.shortAddress,
+            regionStrFull: addressTextInfo.fullAddress,
             isDefault: false,
-            regionStr,
         };
         await dispatch(currentGpsUpdate(nextGps));
     };

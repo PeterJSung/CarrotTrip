@@ -1,4 +1,4 @@
-import { Box, List, ListItemButton } from '@mui/material';
+import { List, ListItemButton } from '@mui/material';
 import styled from 'styled-components';
 import { TourlistDataset } from 'vo/travelInfo';
 import BannerSuggestionItem from './BannerSuggestionItem';
@@ -19,13 +19,6 @@ const ListWapper = styled(List)`
 const ListItemWapper = styled(ListItemButton)`
     padding: 0 !important;
     border-radius: 0.5rem !important;
-`;
-
-const TotalWrapper = styled(Box)`
-    padding: 0 !important;
-    border: 1px solid #dbdbdb;
-    border-radius: 0.5rem;
-    margin-bottom: 0.75rem;
 `;
 
 const SuggestionItemList = (props: SuggestionItemListProps): JSX.Element => {

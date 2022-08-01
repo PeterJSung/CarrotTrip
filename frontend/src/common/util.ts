@@ -27,12 +27,14 @@ export const reAdjustmantKMnM = (distance: number): { unit: 'KM' | 'M'; dist: nu
     return { dist, unit };
 };
 
-export const parserRegionStr = (apiRes: KakaoRegionAPIRes): string => {
-    let retData = apiRes.documents.filter((d) => d.region_type === 'B');
+export const parserRegionStr = (apiRes: KakaoRegionAPIRes) => {
+    let retData = apiRes.documents.filter((d) => d.region_type === 'H');
     if (!retData) {
-        retData = apiRes.documents.filter((d) => d.region_type === 'H');
+        retData = apiRes.documents.filter((d) => d.region_type === 'B');
     }
-    return `${retData[0].region_1depth_name}, ${retData[0].region_3depth_name}`;
+    const shortAddress = `${retData[0].region_1depth_name}, ${retData[0].region_3depth_name}`;
+    const fullAddress = retData[0].address_name;
+    return { shortAddress, fullAddress };
 };
 
 export const getGeoLocationInfo = (cb: (lat: number, lng: number) => void) => {

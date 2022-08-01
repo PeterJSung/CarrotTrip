@@ -13,8 +13,10 @@ export default {
 export const recommandCourseList = () => (
     <RecommandCourseList
         selectedIdx={0}
+        addressText="서울시 용산구 경복궁로 1425-9"
         dataSet={mockGetDataRecommandList}
         onListClick={action('List Click')}
+        onResetClick={action('Reset Click')}
         onTourAreaClick={action('Area Click')}
     />
 );
