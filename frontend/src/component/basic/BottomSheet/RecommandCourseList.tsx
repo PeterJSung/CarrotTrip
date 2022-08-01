@@ -1,4 +1,5 @@
 import { Box, List, ListItemButton } from '@mui/material';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { TourlistRecommandCourseSet, TourlistRecommandTotalSet } from 'vo/travelInfo';
 import BannerRecommandLine from './BannerRecommandLine';
@@ -57,6 +58,7 @@ const RecommandCourseList = (props: RecommandCourseListProps): JSX.Element => {
             idx,
         }));
     }
+
     return (
         <Box>
             {isHighlight && (
@@ -77,7 +79,7 @@ const RecommandCourseList = (props: RecommandCourseListProps): JSX.Element => {
                 )}
                 {renderSections.map((d, idx) => {
                     return (
-                        <>
+                        <Fragment key={d.info.data.addr}>
                             {!(!isStartRender && idx === 0) && (
                                 <BannerRecommandLine distanceText={props.dataSet.sections[d.idx].distanceInfo} />
                             )}
@@ -96,7 +98,7 @@ const RecommandCourseList = (props: RecommandCourseListProps): JSX.Element => {
                                     src={d.info.data.src}
                                 />
                             </ListItemWapper>
-                        </>
+                        </Fragment>
                     );
                 })}
             </ListWapper>

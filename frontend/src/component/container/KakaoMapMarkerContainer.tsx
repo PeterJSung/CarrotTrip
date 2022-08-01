@@ -32,6 +32,8 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
             if (interactionType !== 'PLACEDETAIL') {
                 const currentSelectType = typeOne?.tabIdx;
                 const currentSelectIdx = typeOne?.selectedData?.id;
+                const isRecommandSelectIdx = typeOne?.selectedData?.id;
+                console.log(`Recommand Selected Idx ${isRecommandSelectIdx}`);
                 // default 화면 보여주기
                 itemKeys.forEach((eachKey) => {
                     const isSkipCauseFilter =
@@ -46,7 +48,37 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                             tourlistAreaSelector.recommand.sections.filter((d) => d.data.contentId === eachD.contentId)
                                 .length === 0;
 
-                        const isSkip = !isFullRender && (isSkipCauseFilter || isSkipCauseCourse);
+                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined;
+                        if (isRecommandSelectIdx !== undefined) {
+                            tourlistAreaSelector.recommand.sections.forEach((d, idx2) => {
+                                if (d.data.contentId === eachD.contentId) {
+                                    if (isRecommandSelectIdx === -1) {
+                                        if (isRecommandSelectIdx + 1 === idx2) {
+                                            isSkipRecommandSelect = false;
+                                        }
+                                    } else {
+                                        if (
+                                            isRecommandSelectIdx + 1 >=
+                                            tourlistAreaSelector.recommand.sections.length
+                                        ) {
+                                            if (
+                                                idx2 === tourlistAreaSelector.recommand.sections.length - 1 ||
+                                                idx2 === tourlistAreaSelector.recommand.sections.length - 2
+                                            ) {
+                                                isSkipRecommandSelect = false;
+                                            }
+                                        } else {
+                                            if (isRecommandSelectIdx + 1 === idx2 || isRecommandSelectIdx === idx2) {
+                                                isSkipRecommandSelect = false;
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+
+                        const isSkip =
+                            !isFullRender && (isSkipCauseFilter || isSkipCauseCourse || isSkipRecommandSelect);
 
                         const newData: RenderPropsType = {
                             contentId: eachD.contentId,

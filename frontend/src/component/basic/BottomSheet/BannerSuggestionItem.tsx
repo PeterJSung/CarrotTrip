@@ -47,6 +47,11 @@ const DescriptionText = styled(CommonText)`
     line-height: 19px;
     letter-spacing: -0.05em;
     color: #6d6d6d;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 `;
 
 const RatingText = styled(CommonText)`
