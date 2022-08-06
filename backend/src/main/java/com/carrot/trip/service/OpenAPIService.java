@@ -45,7 +45,7 @@ public class OpenAPIService {
     public DetailOpenApiResponseDTO openAPIDetailCall(Long apiId) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=WB%2Fl1niLmS2eYJi7zSTWckNImEhG12ncvxuaaC2vyNANQN%2FUEyE%2BUudEX%2F4QduFkYKvuv9u5nwHE24rxiB9NLg%3D%3D&MobileOS=ETC&MobileApp=carrotTravel&_type=json&contentId=" + apiId + "&overviewYN=Y";
+        String url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=WB%2Fl1niLmS2eYJi7zSTWckNImEhG12ncvxuaaC2vyNANQN%2FUEyE%2BUudEX%2F4QduFkYKvuv9u5nwHE24rxiB9NLg%3D%3D&MobileOS=ETC&MobileApp=carrotTravel&_type=json&contentId=" + apiId + "&overviewYN=Y";
         URI uri = new URI(url);
 
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);
@@ -61,7 +61,7 @@ public class OpenAPIService {
     public LocationOpenApiResponseDTO openAPICall(Double x, Double y, String nickname, String lang) throws URISyntaxException, JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://api.visitkorea.or.kr/openapi/service/rest/" + lang + "/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
+        String url = "https://api.visitkorea.or.kr/openapi/service/rest/" + lang + "/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
         URI uri = new URI(url);
 
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);

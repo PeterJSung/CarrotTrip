@@ -38,7 +38,7 @@ public class TouristAttractionDetailService {
         touristAttractionDetailDTO.setCommentList(getCommentList(apiId));
         touristAttractionDetailDTO.setMbtiRanking(getTouristAttractionMBTIRankingList(apiId));
         touristAttractionDetailDTO.setTasteList(getTouristAttractionTasteList(apiId));
-        touristAttractionDetailDTO.setOverview(openAPIService.openAPIDetailCall(apiId).getResponse().getBody().getItems().getItem().getOverview());
+        touristAttractionDetailDTO.setOverview(openAPIService.openAPIDetailCall(apiId).getResponse().getBody().getItems().getItem().get(0).getOverview());
         return touristAttractionDetailDTO;
     }
 
