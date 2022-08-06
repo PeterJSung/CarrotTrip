@@ -48,7 +48,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                             tourlistAreaSelector.recommand.sections.filter((d) => d.data.contentId === eachD.contentId)
                                 .length === 0;
 
-                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined;
+                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined && interactionType === 'COURSE';
                         if (isRecommandSelectIdx !== undefined) {
                             tourlistAreaSelector.recommand.sections.forEach((d, idx2) => {
                                 if (d.data.contentId === eachD.contentId) {
