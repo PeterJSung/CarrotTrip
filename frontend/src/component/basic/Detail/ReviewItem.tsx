@@ -14,18 +14,20 @@ export interface ReviewItemProps {
 
 const MyChip = styled(Chip)`
     text-align: center;
-    padding: 0 !important;
-    color: #0066ff;
-    font-family: Noto Sans KR !important;
-    font-style: normal !important;
-    font-weight: 500 !important;
-    font-size: 10px !important;
-    line-height: 14px !important;
-    letter-spacing: -0.05em !important;
     width: 3.5rem !important;
     height: 1.5rem !important;
     background-color: #e2e9ff !important;
     border-radius: 0.25rem !important;
+    & > .MuiChip-label {
+        padding: 0 !important;
+        color: #0066ff;
+        font-family: Noto Sans KR !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 10px !important;
+        line-height: 14px !important;
+        letter-spacing: -0.05em !important;
+    }
 `;
 
 const UserNameTypo = styled.span`
