@@ -28,8 +28,9 @@ jobs:
           node-version: 16.14.x
       - name: Run Install & build pacakge
         run: |
-          npm install
-          npm run build:linux
+          npm i -g pnpm
+          pnpm install
+          pnpm run build:linux
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
