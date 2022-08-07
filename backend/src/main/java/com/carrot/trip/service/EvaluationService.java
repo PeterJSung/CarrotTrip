@@ -111,7 +111,7 @@ public class EvaluationService {
     }
 
     public ArrayList<DummyDTO> getDummy(String lang) {
-        if (lang.equals("korService")){
+        if (lang.equals("KorService")){
             return DummyListDTO.getKorService();
         }
         else if (lang.equals("JpnService")){
