@@ -22,7 +22,7 @@ public class LocationOpenApiItemDto {
     private Long contentid; //2736707
     private int contenttypeid; //39
     private Long createdtime; //20210826111710
-    private Long dist; //4027
+    private Double dist; //4067.233320154766
     private String firstimage; //http://tong.visitkorea.or.kr/cms/resource/90/2750690_image2_1.png
     private String firstimage2; //http://tong.visitkorea.or.kr/cms/resource/90/2750690_image2_1.png
     private Double mapx; //127.2066280793

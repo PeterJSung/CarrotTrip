@@ -14,8 +14,12 @@ on:
       - ".github/**"
       - "!backend/**"
 
+defaults:
+  run:
+    working-directory: frontend
+
 jobs:
-  autodeploy:
+  buildndeploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -24,27 +28,21 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.14.x
-      - name: Generate random number
-        id: random
-        run: echo "::set-output name=value::$(echo $RANDOM)"
       - name: Run Install & build pacakge
         run: |
-          cd frontend
-          npm install
-          npm run build:linux
-          cd ..
-          rm -rf ./backend/src/main/resources/static/*
-          cp -r ./frontend/build/* ./backend/src/main/resources/static
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+          npm i -g pnpm
+          pnpm install
+          pnpm run build:linux
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          token: ${{ secrets.CARROT_TRIP_PAT }}
-          commit-message: Update report
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch: build-auto-merge-${{ steps.random.outputs.value }}
-          delete-branch: true
-          title: "Frontend Binary Auto update"
-          body: |
-            Frontend Binary Auto update.
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: ap-northeast-2
+      - name: upload build directory to s3
+        run: |
+          aws s3 sync build/ s3://${{ secrets.S3_UPLOAD_REACT_BUCKET_NAME }}/ --exclude "*.js" --delete
+          aws s3 sync build/ s3://${{ secrets.S3_UPLOAD_REACT_BUCKET_NAME }}/ --include "*.js" --content-type "application/javascript"
+          aws cloudfront create-invalidation \
+              --distribution-id ${{ secrets.AWS_CLOUDFRONT_SERVICE_ID }}\
+              --paths "/*"
