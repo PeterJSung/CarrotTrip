@@ -7,6 +7,7 @@ import { bookMarkSelector } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
 import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getSuggestionListArr } from 'redux/tourlistarea';
+import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 
 const PlaceDetailSheet = styled(BottomSheet)`
@@ -29,6 +30,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const totalDataArr = useSelector(getSuggestionListArr);
     const bookMarks = useSelector(bookMarkSelector);
     const typeTwo = useSelector(getTypeTwoData);
+    const userName = useSelector(getUserName);
 
     const [renderData, setRenderData] = useState<DetailPlaceProps>();
 
@@ -46,9 +48,11 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
                 const data = await retrievePlaceDetail(item.contentId);
                 console.log(`Bottom Sheet Enable ${JSON.stringify(data)}`);
                 setRenderData({
+                    userName,
                     address: item.addr,
                     description: data.overview,
                     mbtiArr: [],
+                    comments: data.commentList,
                     moodArr: data.tasteList,
                     name: item.title,
                     src: item.src ? item.src : 'https://picsum.photos/800',
@@ -58,7 +62,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
             }
         };
         setup();
-    }, [typeTwo, bookMarks, totalDataArr]);
+    }, [userName, typeTwo, bookMarks, totalDataArr]);
 
     return (
         <>

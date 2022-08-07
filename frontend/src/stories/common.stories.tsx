@@ -10,7 +10,7 @@ import UserInfo, { UserInfoState } from 'redux/userInfo';
 
 import { CombinedStateType } from 'redux/rootReducer';
 import SignupInfo, { getDefaultSignupInfoDisp, SignupOnboardState } from 'redux/signupInfo';
-import { PlaceBasicInformation, PlaceDetailInformation } from 'vo/placeInfo';
+import { PlaceBasicInformation, PlaceDetailInformation, PlaceReviewDataset } from 'vo/placeInfo';
 
 import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
@@ -25,6 +25,7 @@ import MockApiResPlaceDetail from './apimock/placedetail.json';
 import MockApiResTourlist from './apimock/tourlist.json';
 import MockDataItemList from './datamock/itemList.json';
 import MockDataRecommandList from './datamock/recommandlist.json';
+import MockDataReviewList from './datamock/reviewitems.json';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
@@ -169,6 +170,19 @@ export const mockGetTourlist = {
 
 export const mockGetDataRecommandList = MockDataRecommandList;
 export const mockGetDataItemList = MockDataItemList;
+export const mockGetReviewList = MockDataReviewList;
+export const mockGetReviewSingle: PlaceReviewDataset = {
+    id: 1,
+    apiId: 2,
+    regDt: '2022-07-26 22: 17: 08',
+    comments: `이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n\
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. `,
+    score: 4,
+    memberNickname: '유저이름',
+};
 
 export {
     genDummyStore,

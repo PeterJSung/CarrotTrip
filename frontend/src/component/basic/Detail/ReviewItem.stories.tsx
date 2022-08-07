@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
 
 import ReviewItem, { ReviewItemProps } from './ReviewItem';
@@ -19,5 +20,5 @@ const sampleProps: ReviewItemProps = {
     userName: '유저이름',
 };
 
-export const myReviewItem = () => <ReviewItem isMyReview={true} {...sampleProps} />;
+export const myReviewItem = () => <ReviewItem onPopupCallback={action('Callback Click')} {...sampleProps} />;
 export const nonMyReviewItem = () => <ReviewItem {...sampleProps} />;

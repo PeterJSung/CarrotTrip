@@ -5,10 +5,12 @@ import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { PlaceBookmarkInfo } from 'vo/placeInfo';
+import { PlaceBookmarkInfo, PlaceReviewDataset } from 'vo/placeInfo';
 import { contentIdMapper } from 'vo/travelInfo';
+import PlaceDetailReviewList from './PlaceDetailReviewList';
 
 export interface DetailPlaceProps {
+    userName: string;
     src: string;
     type: number;
     name: string;
@@ -16,6 +18,7 @@ export interface DetailPlaceProps {
     address: string;
     moodArr: string[];
     mbtiArr: PlaceBookmarkInfo[];
+    comments: PlaceReviewDataset[];
 }
 
 const ImgTag = styled.img`
@@ -37,9 +40,26 @@ const ItemContainer = styled(Box)`
     }
 `;
 
+type ExtractorCommentType = { myComment?: PlaceReviewDataset; remainComment: PlaceReviewDataset[] };
+
+const extractorMyComment = (comments: PlaceReviewDataset[], userName: string): ExtractorCommentType => {
+    const ret: ExtractorCommentType = {
+        remainComment: [],
+    };
+    comments.forEach((d) => {
+        if (d.memberNickname === userName) {
+            ret.myComment = d;
+        } else {
+            ret.remainComment.push(d);
+        }
+    });
+    return ret;
+};
+
 const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
     const { t } = useTranslation();
     console.log(`AAA ${props.moodArr}`);
+    const { myComment, remainComment } = extractorMyComment(props.comments, props.userName);
     return (
         <Box>
             <Box height="11rem">
@@ -58,7 +78,7 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 <Divider />
                 <DetailMBTI mbtiArr={props.mbtiArr} />
                 <Divider />
-                <div>reviewCOntainer</div>
+                <PlaceDetailReviewList placeName={props.name} myComment={myComment} remainComment={remainComment} />
             </ItemContainer>
         </Box>
     );
