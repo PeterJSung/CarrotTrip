@@ -34,9 +34,6 @@ public class TouristAttractionController {
         return openAPIService.openAPICall(x, y, nickname, lang);
     }
 
-    //openAPIDetailCall
-
-
     @GetMapping("/touristAttraction/pearsons/test")
     public String pearsonsTest() {
         List lx = Arrays.asList(1,2,3);

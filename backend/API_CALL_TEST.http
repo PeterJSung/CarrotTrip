@@ -110,10 +110,10 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTR
 }
 
 ### 공공 데이터 API 테스트 (시크릿키는 담당개발자에게 문의하시오)
-GET http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey={secretKey}&mapX=127.1625892&mapY=37.4587305&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=당근여행&_type=json&numOfRows=2&pageNo=1
+GET https://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey={secretKey}&mapX=127.1625892&mapY=37.4587305&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1
 
 ### 공공 데이터 API 테스트
-GET http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey={secretKey}&MobileOS=ETC&MobileApp=carrotTravel&_type=json&contentId=2736707&overviewYN=Y
+GET https://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey={secretKey}&MobileOS=ETC&MobileApp=carrotTravel&_type=json&contentId=2736707&overviewYN=Y
 
 ### 피어슨 상관계수 테스트
 GET http://localhost:8080/api/touristAttraction/pearsons/test
