@@ -48,6 +48,55 @@ public class DummyListDTO {
                 .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image2_1.jpg")
                 .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/73/1924973_image3_1.jpg")
                 .build());
+        dummyList.add(DummyDTO.builder()
+                .name("서울 북촌 한옥마을")
+                .address("서울특별시 종로구 계동길 37")
+                .contentId(126537L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/06/2512006_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/06/2512006_image3_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("서울 광화문")
+                .address("서울특별시 성북구 보국문로 262")
+                .contentId(127220L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/45/2526645_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/45/2526645_image2_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("부산 해운대 해수욕장")
+                .address("부산광역시 해운대구 해운대해변로 264")
+                .contentId(126081L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("부산 광안리 해수욕장")
+                .address("부산광역시 수영구 광안해변로 219")
+                .contentId(126078L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/75/2648975_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/75/2648975_image3_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("광주 무등산 국립공원")
+                .address("광주광역시 동구 동산길 29")
+                .contentId(127575L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/82/2716382_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/82/2716382_image3_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("울산 간절곶 등대")
+                .address("울산광역시 울주군 서생면 간절곶1길 39-2")
+                .contentId(128022L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/94/2648694_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/94/2648694_image3_1.jpg")
+                .build());
+        dummyList.add(DummyDTO.builder()
+                .name("제주 성산일출봉")
+                .address("제주특별자치도 서귀포시 성산읍 일출로 284-12")
+                .contentId(126435L)
+                .thumbnail1("http://tong.visitkorea.or.kr/cms/resource/00/2613500_image2_1.jpg")
+                .thumbnail2("http://tong.visitkorea.or.kr/cms/resource/00/2613500_image3_1.jpg")
+                .build());
 
         return dummyList;
     }
