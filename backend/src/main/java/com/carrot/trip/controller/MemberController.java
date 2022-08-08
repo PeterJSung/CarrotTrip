@@ -61,6 +61,7 @@ public class MemberController {
                 .token(jwtTokenProvider.createToken(member.getUserNickname(), Collections.singletonList("ROLE_USER")))
                 .mbti(member.getMbti())
                 .nickname(member.getNickname())
+                .tasteList(memberService.getMemberTastes(member.getUserNickname()))
                 .build();
     }
 

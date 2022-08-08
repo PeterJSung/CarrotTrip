@@ -46,9 +46,21 @@ data가 false면 현재 서버에 아이디가 존재하지 않는 것이므로 
 #### Response
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU4MTU2NzMxLCJleHAiOjE2NTgyNDMxMzF9.SULPcJiK9HpoDth52a2fHE2qumo_2_JIGCLqqMXupmE",
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtg5ztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU5OTU2NTMyLCJleHAiOjE2NjAwNDI5MzJ9.JEEseP2jta1tuR6pAEQY2BR7IyL5G6d4kyCquHjbyRc",
   "nickname": "태호",
-  "mbti": "INTJ"
+  "mbti": "INTJ",
+  "tasteList": [
+    {
+      "id": 1,
+      "memberNickname": "태호",
+      "tasteCode": "2"
+    },
+    {
+      "id": 2,
+      "memberNickname": "태호",
+      "tasteCode": "3"
+    }
+  ]
 }
 ```
 응답으로 토큰을 발급 받은 뒤에는 헤더에 JWT 토큰을 포함하여 통신하면 된다.

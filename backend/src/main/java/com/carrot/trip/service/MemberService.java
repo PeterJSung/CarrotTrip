@@ -3,8 +3,10 @@ package com.carrot.trip.service;
 import com.carrot.trip.dto.MemberDTO;
 import com.carrot.trip.dto.SignUpDTO;
 import com.carrot.trip.entity.Member;
+import com.carrot.trip.entity.MemberTaste;
 import com.carrot.trip.exception.CustomException;
 import com.carrot.trip.repository.MemberRepository;
+import com.carrot.trip.repository.MemberTasteRepository;
 import com.carrot.trip.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final MemberTasteRepository memberTasteRepository;
 
     public Map<String, String> createMember(Map<String, String> user) throws IOException {
         if (isExistUserByNickname(user.get("nickname"))) {
@@ -38,6 +41,10 @@ public class MemberService {
                 .build());
 
         return user;
+    }
+
+    public ArrayList<MemberTaste> getMemberTastes(String userNickname) {
+        return memberTasteRepository.findByMemberNickname(userNickname);
     }
 
     public boolean isExistUserByNickname(String nickname) {
