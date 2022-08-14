@@ -3,9 +3,15 @@ import CommonRating from 'component/basic/common/CommonRating';
 import PlaceInfoChip from 'component/basic/common/PlaceInfoChip';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { getPlaceBasicInfo } from 'redux/placeInfo';
 import styled from 'styled-components';
+
+export interface ReviewLayoutProps {
+    placeName: string;
+    placeType: string;
+    rating: number;
+    reviewText: string;
+    src?: string;
+}
 
 const PlaceName = styled(Typography)`
     font-family: 'Noto Sans KR';
@@ -63,10 +69,9 @@ const WarningText = styled(Typography)`
     margin-bottom: 1.25rem;
 `;
 
-const ReviewLayout = (): JSX.Element => {
-    const [rating, setRating] = useState<number>(0);
-    const [reviewText, setReviewText] = useState<string>('');
-    const placeBasicInfo = useSelector(getPlaceBasicInfo);
+const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
+    const [rating, setRating] = useState<number>(props.rating);
+    const [reviewText, setReviewText] = useState<string>(props.reviewText);
 
     const { t } = useTranslation();
     const reviewChange = (event: any) => {
@@ -78,11 +83,11 @@ const ReviewLayout = (): JSX.Element => {
         <>
             <Box height="7rem" display="flex" px="1.25rem" pb="1.5rem" pt="0.5rem" justifyContent="space-between">
                 <Box flex="1" maxWidth="100%" maxHeight="100%" mr="0.75rem">
-                    <ImgTag src="https://picsum.photos/800" />
+                    <ImgTag src={props.src} />
                 </Box>
                 <Box flex="1.3" flexDirection="column">
-                    <PlaceName>{placeBasicInfo.placename}</PlaceName>
-                    <PlaceInfoChip label={placeBasicInfo.placeType} />
+                    <PlaceName>{props.placeName}</PlaceName>
+                    <PlaceInfoChip label={props.placeType} />
                 </Box>
             </Box>
 

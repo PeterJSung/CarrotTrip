@@ -1,5 +1,7 @@
 import { Box, Button } from '@mui/material';
+import { PATH_REVIEW_PAGE } from 'component/page/common';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlaceReviewDataset } from 'vo/placeInfo';
 import ReviewItem from './ReviewItem';
@@ -56,16 +58,22 @@ const PopupContainer = (props: { placeName: string; onClick: () => void }) => {
     return (
         <Box px="1.25rem" py="1rem" borderRadius="0.5rem" boxShadow="0px 12px 30px rgba(0, 0, 0, 0.12)" mb="2.5rem">
             <GuideTopy>{t('review.createguide', { name: props.placeName })}</GuideTopy>
-            <ReveiwButton onClick={props.onClick}>리뷰 작성하기</ReveiwButton>
+            <ReveiwButton onClick={props.onClick}>{t('review.genreviewbtn')}</ReveiwButton>
         </Box>
     );
 };
 
 const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element => {
     const { t } = useTranslation();
+    const navigateCB = useNavigate();
+
+    const onClick = () => {
+        navigateCB(PATH_REVIEW_PAGE);
+    };
+
     return (
         <Box px="1.25rem" pt="2.5rem">
-            {props.myComment ? <></> : <PopupContainer placeName={props.placeName} onClick={console.log} />}
+            {props.myComment ? <></> : <PopupContainer placeName={props.placeName} onClick={onClick} />}
             <ReviewTitle>{t('review.title')}</ReviewTitle>
             <ListContainer>
                 {props.myComment && (

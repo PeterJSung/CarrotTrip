@@ -22,6 +22,7 @@
     "signup.onboard.four.lowertext": "수집한 정보는 여행지 추천에 사용될 예정이에요.",
     "signup.onboard.five.uppertext": "MBTI를 알려주세요",
     "signup.onboard.five.lowertext": "모른다면 넘어가주세요.",
+    "review.genreviewbtn": "리뷰 작성하기",
     "review.createguide": "{{ name }}에 다녀오셨나요?",
     "review.title": "리뷰",
     "review.modify": "수정하기",

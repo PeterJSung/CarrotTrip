@@ -49,7 +49,6 @@ const RenderList = (data: Interaction2Type) => {
                         tabIdx: 100,
                     });
                 }}
-                onTourAreaClick={console.log}
                 selectedIdx={data.selectedData?.id}
             />
         );
