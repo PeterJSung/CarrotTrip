@@ -8,6 +8,18 @@ import SignupInfo, { SignupOnboardState } from './signupInfo';
 import TourlistArea, { TourlistAreaState } from './tourlistarea';
 import UserInfo, { UserInfoState } from './userInfo';
 
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+    key: 'root',
+    // localStorage에 저장합니다.
+    storage,
+    // auth, board, studio 3개의 reducer 중에 auth reducer만 localstorage에 저장합니다.
+    whitelist: ['userInfo', 'tourlistArea', 'placeInfo', 'mapDispStack'],
+    // blacklist -> 그것만 제외합니다
+};
+
 export type CombinedStateType = ReducersMapObject<
     {
         gps: GpsState;
@@ -33,4 +45,4 @@ const reducers = combineReducers<CombinedStateType>({
 
 export type RootState = ReturnType<typeof reducers>;
 
-export default reducers;
+export default persistReducer(persistConfig, reducers);

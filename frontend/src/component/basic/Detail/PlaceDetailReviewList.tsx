@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { PlaceReviewDataset } from 'vo/placeInfo';
@@ -36,11 +36,27 @@ const GuideTopy = styled.div`
     color: #111313;
 `;
 
+const ReveiwButton = styled(Button)`
+    margin-top: 2rem !important;
+    border-radius: 0.5rem !important;
+    background-color: #191919 !important;
+    color: #ffffff !important;
+    font-family: Noto Sans KR !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    line-height: 17px !important;
+    text-align: center !important;
+    width: 9.3125rem;
+    height: 2.625rem;
+`;
+
 const PopupContainer = (props: { placeName: string; onClick: () => void }) => {
     const { t } = useTranslation();
     return (
         <Box px="1.25rem" py="1rem" borderRadius="0.5rem" boxShadow="0px 12px 30px rgba(0, 0, 0, 0.12)" mb="2.5rem">
             <GuideTopy>{t('review.createguide', { name: props.placeName })}</GuideTopy>
+            <ReveiwButton onClick={props.onClick}>리뷰 작성하기</ReveiwButton>
         </Box>
     );
 };
@@ -58,12 +74,10 @@ const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element =
                         reviewText={props.myComment.comments}
                         score={props.myComment.score}
                         userName={props.myComment.memberNickname}
-                        key={`${props.myComment.memberNickname}-${props.myComment.regDt}`}
                         onPopupCallback={console.log}
                     />
                 )}
                 {props.remainComment.map((d) => {
-                    console.log(d);
                     return (
                         <ReviewItem
                             date={d.regDt.split(' ')[0]}

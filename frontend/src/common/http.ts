@@ -1,7 +1,7 @@
 // react를 기준으로 작성
 import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 const http = Axios.create({
-    timeout: 3000,
+    timeout: 100000,
     headers: {
         'Content-Type': 'application/json',
     },
