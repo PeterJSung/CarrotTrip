@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
 import { generateReducer } from 'redux/placeInfo';
 import { dummyPlaceStore, getDummyStateWithMock } from 'stories/common.stories';
@@ -15,4 +16,13 @@ export default {
     ],
 } as ComponentMeta<typeof ReviewLayout>;
 
-export const reviewLayout = () => <ReviewLayout />;
+export const reviewLayout = () => (
+    <ReviewLayout
+        contentTypeId={12}
+        onRatingChange={action('Rating Change')}
+        onTextChange={action('Text Change')}
+        placeName={'Name'}
+        rating={0}
+        reviewText={'Review Text'}
+    />
+);

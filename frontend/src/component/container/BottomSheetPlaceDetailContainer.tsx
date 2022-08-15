@@ -3,7 +3,6 @@ import DetailPlace, { DetailPlaceProps } from 'component/basic/Detail/DetailPlac
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
-import { bookMarkSelector } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
 import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getSuggestionListArr } from 'redux/tourlistarea';
@@ -28,7 +27,6 @@ const PlaceDetailSheet = styled(BottomSheet)`
 const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const interactionType = useSelector(getCurrentInteractionType);
     const totalDataArr = useSelector(getSuggestionListArr);
-    const bookMarks = useSelector(bookMarkSelector);
     const typeTwo = useSelector(getTypeTwoData);
     const userName = useSelector(getUserName);
 
@@ -46,7 +44,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
             if (typeTwo) {
                 const item = totalDataArr[typeTwo.eventTypeId][typeTwo.idx];
                 const data = await retrievePlaceDetail(item.contentId);
-                console.log(`Bottom Sheet Enable ${JSON.stringify(data)}`);
+                console.log(item);
                 setRenderData({
                     userName,
                     address: item.addr,
@@ -55,14 +53,14 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
                     comments: data.commentList,
                     moodArr: data.tasteList,
                     name: item.title,
-                    src: item.src ? item.src : 'https://picsum.photos/800',
+                    src: item.src,
                     type: item.contentTypeId,
                 });
-                //setRenderData()
             }
         };
         setup();
-    }, [userName, typeTwo, bookMarks, totalDataArr]);
+        console.log(2222222222);
+    }, [typeTwo]);
 
     return (
         <>

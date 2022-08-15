@@ -1,28 +1,23 @@
-import { produce } from 'immer';
+import produce from 'immer';
+import { cloneDeep } from 'lodash';
+import { SyncState } from 'redux/common';
 import { ActionType, createReducer } from 'typesafe-actions';
-import { SessionInterface } from 'vo/signin';
+import { UpdateReviewVO } from 'vo/review';
 import * as actions from './actions';
 
-export type UserInfoAction = ActionType<typeof actions>;
+export type ReviewInfoAction = ActionType<typeof actions>;
 
-export type UserInfoState = SessionInterface;
+export type ReviewInfoState = SyncState<UpdateReviewVO | undefined>;
 
-const initialState: UserInfoState = {
-    data: {
-        isLogin: false,
-        name: '',
-    },
+const initialState: ReviewInfoState = {
+    data: undefined,
 };
 
-export const generateReducer = (firstState: UserInfoState = initialState) => {
-    return createReducer<UserInfoState, UserInfoAction>(firstState, {
-        [actions.UserInfoActions.UPDATE_USERINFO]: (state, action) =>
+export const generateReducer = (firstState: ReviewInfoState = initialState) => {
+    return createReducer<ReviewInfoState, ReviewInfoAction>(firstState, {
+        [actions.ReviewActions.UPDATE_REVIEWDATA]: (state, action) =>
             produce(state, (draft) => {
-                draft.data = action.payload;
-            }),
-        [actions.UserInfoActions.UPDATE_FAILED_USERINFO]: (state, action) =>
-            produce(state, (draft) => {
-                draft.data = action.payload;
+                draft.data = cloneDeep(action.payload);
             }),
     });
 };

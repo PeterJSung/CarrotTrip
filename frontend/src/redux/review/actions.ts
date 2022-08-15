@@ -1,8 +1,8 @@
 import { createAction } from 'typesafe-actions';
-import { SigninInSignupInfo } from 'vo/signup';
+import { UpdateReviewVO } from 'vo/review';
 
 export enum ReviewActions {
     UPDATE_REVIEWDATA = 'USERINFO/UPDATE_REVIEWDATA',
 }
 
-export const updateReview = createAction(ReviewActions.UPDATE_REVIEWDATA)<SigninInSignupInfo>();
+export const updateReviewInfoAction = createAction(ReviewActions.UPDATE_REVIEWDATA)<UpdateReviewVO>();

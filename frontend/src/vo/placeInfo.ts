@@ -38,17 +38,11 @@ export interface PlaceUpdateScoreNCommentInfoReqRes {
     comments?: string;
 }
 
+export type TotalPlaceInfo = PlaceBasicInformation & PlaceDetailInformation;
+
 export interface PlaceBasicInformation {
     placename: string;
     placeType: string;
-}
-
-export interface PlaceDetailInformation {
-    description: string;
-    adress: string;
-    moodArr: number[];
-    mbtiArr: PlaceBookmarkInfo[];
-    reviewArr: PlaceReviewRetiriveInfo[];
 }
 
 export interface PlaceDetailInformation {

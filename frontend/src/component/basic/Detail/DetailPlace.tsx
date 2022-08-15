@@ -3,7 +3,11 @@ import DetailBubbleChart from 'component/basic/Detail/DetailBubbleChart';
 import DetailMBTI from 'component/basic/Detail/DetailMBTI';
 import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
+import { PATH_REVIEW_PAGE } from 'component/page/common';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useThunk } from 'redux/common';
+import { updateReviewThunk } from 'redux/review';
 import styled from 'styled-components';
 import { PlaceBookmarkInfo, PlaceReviewDataset } from 'vo/placeInfo';
 import { contentIdMapper } from 'vo/travelInfo';
@@ -11,7 +15,7 @@ import PlaceDetailReviewList from './PlaceDetailReviewList';
 
 export interface DetailPlaceProps {
     userName: string;
-    src: string;
+    src?: string;
     type: number;
     name: string;
     description: string;
@@ -58,19 +62,34 @@ const extractorMyComment = (comments: PlaceReviewDataset[], userName: string): E
 
 const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
     const { t } = useTranslation();
-    console.log(`AAA ${props.moodArr}`);
+    const updateReviewInfo = useThunk(updateReviewThunk);
+    const navigateCB = useNavigate();
     const { myComment, remainComment } = extractorMyComment(props.comments, props.userName);
+
+    const type = t(contentIdMapper[props.type].translateKey);
+
+    const onReviewCreate = () => {
+        updateReviewInfo({
+            placeName: props.name,
+            contentTypeId: props.type,
+            reviewText: myComment ? myComment.comments : '',
+            rating: myComment ? myComment.score : 0,
+            src: props.src,
+        });
+        navigateCB(PATH_REVIEW_PAGE);
+    };
+
     return (
         <Box>
-            <Box height="11rem">
-                <ImgTag src={props.src} />
-            </Box>
+            {props.src ? (
+                <Box height="11rem">
+                    <ImgTag src={props.src} />
+                </Box>
+            ) : (
+                <></>
+            )}
             <ItemContainer>
-                <PlaceDescriptionDetail
-                    placeType={t(contentIdMapper[props.type].translateKey)}
-                    placeName={props.name}
-                    placeDesc={props.description}
-                />
+                <PlaceDescriptionDetail placeType={type} placeName={props.name} placeDesc={props.description} />
                 <Divider />
                 <PlaceAdressDetail address={props.address} />
                 <Divider />
@@ -78,7 +97,12 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 <Divider />
                 <DetailMBTI mbtiArr={props.mbtiArr} />
                 <Divider />
-                <PlaceDetailReviewList placeName={props.name} myComment={myComment} remainComment={remainComment} />
+                <PlaceDetailReviewList
+                    onReveiwCreate={onReviewCreate}
+                    placeName={props.name}
+                    myComment={myComment}
+                    remainComment={remainComment}
+                />
             </ItemContainer>
         </Box>
     );

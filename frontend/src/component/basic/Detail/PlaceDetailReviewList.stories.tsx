@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
 import { mockGetReviewList, mockGetReviewSingle } from 'stories/common.stories';
 import PlaceDetailReviewList from './PlaceDetailReviewList';
@@ -8,7 +9,18 @@ export default {
 } as ComponentMeta<typeof PlaceDetailReviewList>;
 
 export const myComment = () => (
-    <PlaceDetailReviewList placeName="Place Name" myComment={mockGetReviewSingle} remainComment={mockGetReviewList} />
+    <PlaceDetailReviewList
+        onReveiwCreate={action('Reveiw Create')}
+        placeName="Place Name"
+        myComment={mockGetReviewSingle}
+        remainComment={mockGetReviewList}
+    />
 );
 
-export const nonMyComment = () => <PlaceDetailReviewList placeName="Place Name" remainComment={mockGetReviewList} />;
+export const nonMyComment = () => (
+    <PlaceDetailReviewList
+        onReveiwCreate={action('Reveiw Create')}
+        placeName="Place Name"
+        remainComment={mockGetReviewList}
+    />
+);

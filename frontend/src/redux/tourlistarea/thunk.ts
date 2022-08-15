@@ -3,7 +3,7 @@ import { retriveTourareaAPI } from 'api/tourlistInfo';
 import { calculateLatLngDistance } from 'common/util';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
-import { KakaoNaviAPIRes, MyLocationGps, NaviPoint } from 'vo/gps';
+import { KakaoNaviAPIRes, NaviPoint } from 'vo/gps';
 import { getTourlistAreaAction } from './actions';
 import { TourlistAreaAction } from './reducer';
 
@@ -39,16 +39,17 @@ const orderingDistanceRoutingPath = (currentGps: NaviPoint, routeInfo: NaviPoint
 };
 
 export const retriveTourlistArea = (
-    myLocationInfo: MyLocationGps,
+    lat: number,
+    lng: number,
     name: string,
     locale: string,
     mbti?: string,
 ): ThunkAction<void, RootState, null, TourlistAreaAction> => {
     return async (dispatch) => {
-        const res = await retriveTourareaAPI(myLocationInfo.lng, myLocationInfo.lat, name, locale);
+        const res = await retriveTourareaAPI(lng, lat, name, locale);
         const myPos: NaviPoint = {
-            y: myLocationInfo.lat,
-            x: myLocationInfo.lng,
+            y: lat,
+            x: lng,
         };
         const recommand = res.response.body.items.recommendCourseItem;
         const total = res.response.body.items.item;
@@ -66,7 +67,6 @@ export const retriveTourlistArea = (
 
         await dispatch(
             getTourlistAreaAction({
-                myLocationInfo,
                 name,
                 mbti,
                 naviPoints: orderedRoute,

@@ -32,6 +32,7 @@ const getHighlightInfo = (
     },
 ): LocationInfo | undefined => {
     if (dataTwo) {
+        console.log('Data Two from');
         const item = totalTourlistSet[dataTwo.eventTypeId][dataTwo.idx];
         return {
             lat: item.lat,
@@ -39,6 +40,7 @@ const getHighlightInfo = (
             zoom: HIGHLIGHT_MAP_LEVEL,
         };
     } else if (dataOne && dataOne.selectedData?.pos) {
+        console.log('Data One from');
         return dataOne.selectedData.pos;
     } else {
         return undefined;
@@ -71,34 +73,22 @@ const KakaoMapContainer = (): JSX.Element => {
     const mapRef = useRef<kakao.maps.Map>(null);
 
     useEffect(() => {
-        if (!currentGpsInfo.isDefault && typeof userInfo !== 'string') {
-            retriveTourThunk(currentGpsInfo, userInfo.name, i18n.language, userInfo.mbti);
-        }
-    }, [currentGpsInfo]);
-
-    useEffect(() => {
         typeof userInfo !== 'string' && getAllBookMarks(userInfo.name);
     }, [userInfo]);
 
     const isPlaceDetail = interactionType === 'PLACEDETAIL';
     const highLightPos = getHighlightInfo(dataOne, dataTwo, totalDataSet);
+
     const centerPos: LocationInfo = {
-        lat: highLightPos ? highLightPos.lat - DEFAULT_HIGHLIGHT_OFFSET_LAT : currentGpsInfo.lat,
+        lat: highLightPos ? highLightPos.lat : currentGpsInfo.lat,
         lng: highLightPos ? highLightPos.lng : currentGpsInfo.lng,
         zoom: highLightPos ? highLightPos.zoom : DEFAULT_MAP_LEVEL,
     };
 
     useEffect(() => {
-        const map = mapRef.current;
-        if (map) {
-            map.setCenter(new kakao.maps.LatLng(currentGpsInfo.lat, currentGpsInfo.lng));
-            map.setLevel(DEFAULT_MAP_LEVEL);
-        }
-    }, [mapRef, currentGpsInfo]);
-
-    useEffect(() => {
         getGeoLocationInfo(async (lat: number, lng: number) => {
             const res = await getC2RData(lat, lng);
+            typeof userInfo !== 'string' && retriveTourThunk(lat, lng, userInfo.name, i18n.language, userInfo.mbti);
             updateGpsState(lat, lng, parserRegionStr(res));
         });
     }, []);
@@ -111,7 +101,7 @@ const KakaoMapContainer = (): JSX.Element => {
                 disableDoubleClick={true}
                 zoomable={!isPlaceDetail}
                 draggable={!isPlaceDetail}
-                center={{ lat: centerPos.lat, lng: centerPos.lng }}
+                center={{ lat: centerPos.lat - (highLightPos ? DEFAULT_HIGHLIGHT_OFFSET_LAT : 0), lng: centerPos.lng }}
                 style={{ flexGrow: 1 }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />

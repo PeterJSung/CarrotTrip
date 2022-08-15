@@ -1,7 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { PATH_REVIEW_PAGE } from 'component/page/common';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlaceReviewDataset } from 'vo/placeInfo';
 import ReviewItem from './ReviewItem';
@@ -10,6 +8,7 @@ interface PlaceDetailReviewListProps {
     placeName: string;
     myComment?: PlaceReviewDataset;
     remainComment: PlaceReviewDataset[];
+    onReveiwCreate: () => void;
 }
 
 const ReviewTitle = styled.div`
@@ -65,15 +64,10 @@ const PopupContainer = (props: { placeName: string; onClick: () => void }) => {
 
 const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element => {
     const { t } = useTranslation();
-    const navigateCB = useNavigate();
-
-    const onClick = () => {
-        navigateCB(PATH_REVIEW_PAGE);
-    };
 
     return (
         <Box px="1.25rem" pt="2.5rem">
-            {props.myComment ? <></> : <PopupContainer placeName={props.placeName} onClick={onClick} />}
+            {props.myComment ? <></> : <PopupContainer placeName={props.placeName} onClick={props.onReveiwCreate} />}
             <ReviewTitle>{t('review.title')}</ReviewTitle>
             <ListContainer>
                 {props.myComment && (
