@@ -1,7 +1,5 @@
 import { RootState } from 'redux/rootReducer';
 
-const getPlaceBasicInfo = (state: RootState) => state.placeInfo.data.basicInfo;
-const getPlaceDetailInfo = (state: RootState) => state.placeInfo.data.detailInfo;
-const getWritedReviewInfo = (state: RootState) => state.placeInfo.data.writedReviewInfo;
+const placeDetailInfoSelector = (state: RootState) => state.placeInfo.data.detailInfo;
 
-export { getPlaceBasicInfo, getPlaceDetailInfo, getWritedReviewInfo };
+export { placeDetailInfoSelector };

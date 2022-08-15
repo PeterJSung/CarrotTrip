@@ -5,12 +5,13 @@ import BookMarkInfo from 'redux/bookmark';
 import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
+import ReviewInfo from 'redux/review';
 import TourlistArea from 'redux/tourlistarea';
 import UserInfo, { UserInfoState } from 'redux/userInfo';
 
 import { CombinedStateType } from 'redux/rootReducer';
 import SignupInfo, { getDefaultSignupInfoDisp, SignupOnboardState } from 'redux/signupInfo';
-import { PlaceBasicInformation, PlaceDetailInformation } from 'vo/placeInfo';
+import { PlaceBasicInformation, PlaceDetailInformation, PlaceReviewDataset, TotalPlaceInfo } from 'vo/placeInfo';
 
 import { ID_EVALUATION_AREA_URL } from 'api/evaluationAreaRetrieve';
 import { ID_EXIST_URL } from 'api/idretrieve';
@@ -25,6 +26,7 @@ import MockApiResPlaceDetail from './apimock/placedetail.json';
 import MockApiResTourlist from './apimock/tourlist.json';
 import MockDataItemList from './datamock/itemList.json';
 import MockDataRecommandList from './datamock/recommandlist.json';
+import MockDataReviewList from './datamock/reviewitems.json';
 
 const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
     return configureStore({
@@ -40,6 +42,7 @@ const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
                 : MapInteractionStack,
             tourlistArea: nextStore ? (nextStore.tourlistArea ? nextStore.tourlistArea : TourlistArea) : TourlistArea,
             bookMarkInfo: nextStore ? (nextStore.bookMarkInfo ? nextStore.bookMarkInfo : BookMarkInfo) : BookMarkInfo,
+            reviewInfo: nextStore ? (nextStore.reviewInfo ? nextStore.reviewInfo : ReviewInfo) : ReviewInfo,
         }),
     });
 };
@@ -57,6 +60,16 @@ const dummyRouter = (storyRet: JSX.Element): JSX.Element => (
     </BrowserRouter>
 );
 
+const getDummyPlaceDetailInfo: TotalPlaceInfo = {
+    placename: 'Test Place Name',
+    placeType: 'Type',
+    adress: 'Test Address Info',
+    description: 'Test Description Info. Lorem Ipsume blabla',
+    mbtiArr: [],
+    moodArr: [1, 3, 4, 5, 6, 7, 8, 9, 10],
+    reviewArr: [],
+};
+
 const getDummyPlaceBasic: PlaceBasicInformation = {
     placename: 'Test Place Name',
     placeType: 'Type',
@@ -72,9 +85,7 @@ const getDummyPlaceDetail: PlaceDetailInformation = {
 
 const dummyPlaceStore: PlaceInfoState = {
     data: {
-        basicInfo: getDummyPlaceBasic,
-        detailInfo: getDummyPlaceDetail,
-        writedReviewInfo: { rating: 0, reviewText: '' },
+        detailInfo: getDummyPlaceDetailInfo,
     },
 };
 
@@ -169,6 +180,19 @@ export const mockGetTourlist = {
 
 export const mockGetDataRecommandList = MockDataRecommandList;
 export const mockGetDataItemList = MockDataItemList;
+export const mockGetReviewList = MockDataReviewList;
+export const mockGetReviewSingle: PlaceReviewDataset = {
+    id: 1,
+    apiId: 2,
+    regDt: '2022-07-26 22: 17: 08',
+    comments: `이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n\
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. 이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. \n \
+    이것은 리뷰텍스트입니다 리뷰 리뷰 리뷰 리뷰입니다. `,
+    score: 4,
+    memberNickname: '유저이름',
+};
 
 export {
     genDummyStore,

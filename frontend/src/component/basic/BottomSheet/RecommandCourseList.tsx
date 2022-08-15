@@ -13,7 +13,6 @@ export interface RecommandCourseListProps {
     dataSet: TourlistRecommandTotalSet;
     onListClick: (idx: number) => void;
     onResetClick: () => void;
-    onTourAreaClick: (code: number) => void;
 }
 
 const ListWapper = styled(List)`

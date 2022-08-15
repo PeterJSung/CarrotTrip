@@ -75,6 +75,13 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                     draft.data.item[convId].push(convertedData);
                     mapper[convertedData.contentId] = convertedData;
                 });
+
+                for (const key in draft.data.item) {
+                    draft.data.item[key] = draft.data.item[key].sort((a, b) => {
+                        return b.aveScore - a.aveScore;
+                    });
+                }
+
                 let prevData: undefined | TourlistDataset;
 
                 const routeResult = action.payload.navigationResult.routes[0];
@@ -106,7 +113,6 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                 avgRating /= routeResult.sections.length;
                 draft.data.recommand.avgRating = parseFloat(avgRating.toFixed(2));
                 draft.data.recommand.name = action.payload.name;
-                console.log(JSON.stringify(draft.data.recommand));
             }),
     });
 };

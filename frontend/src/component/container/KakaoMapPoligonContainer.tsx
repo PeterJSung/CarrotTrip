@@ -11,7 +11,6 @@ const KakaoMapPoligonContainer = (): JSX.Element => {
     const tourListArr = useSelector(getToutlistArr);
     useEffect(() => {}, []);
 
-    console.log(data);
     return (
         <>
             {type === 'COURSE' &&

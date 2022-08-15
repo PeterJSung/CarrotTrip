@@ -71,17 +71,17 @@ const SigninPage = (): JSX.Element => {
 
     const disabled = data.nickName === '' || data.pw === '';
 
-    const nivagate = useNavigate();
+    const navigateCB = useNavigate();
     const onClickLogin = () => {
         signIn(data.nickName, data.pw);
     };
 
     useEffect(() => {
-        login && nivagate(PATH_HOME_PAGE);
+        login && navigateCB(PATH_HOME_PAGE);
     }, [login]);
 
     const onClickBack = () => {
-        nivagate(-1);
+        navigateCB(-1);
     };
 
     const nickNameChange = debounce(async (e: any) => {

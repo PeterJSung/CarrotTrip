@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { contentIdMapper } from 'vo/travelInfo';
+import NonSrcIcon from '../common/NonSrcIcon';
 import PlaceInfoChip from '../common/PlaceInfoChip';
 import BannerStarIcon from './BannerStarIcon';
 import CommonSheetBanner from './CommonSheetBanner';
@@ -14,12 +15,13 @@ export interface BannerSuggestionItemProps {
     description: string;
 }
 
-const DEFAULT_ISZE = 5;
+const DEFAULT_SIZE = 4.7;
 
 const ImgButton = styled.div`
-    width: ${DEFAULT_ISZE}rem !important;
-    height: ${DEFAULT_ISZE}rem !important;
+    width: ${DEFAULT_SIZE}rem !important;
+    height: ${DEFAULT_SIZE}rem !important;
     border-radius: 0.5rem !important;
+    border: 0.5px solid black;
     overflow: hidden;
 `;
 
@@ -76,7 +78,7 @@ const BannerSuggestionItem = (props: BannerSuggestionItemProps): JSX.Element => 
             <Box display="flex">
                 <Box mr="0.75rem">
                     <ImgButton>
-                        <ImgDisplay src={props.src} />
+                        {props.src ? <ImgDisplay src={props.src} /> : <NonSrcIcon contentId={props.contentTypeId} />}
                     </ImgButton>
                 </Box>
                 <Box flexGrow="1" display="flex" flexDirection="column" justifyContent="space-between">

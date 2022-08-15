@@ -2,10 +2,13 @@ import { Box, Typography } from '@mui/material';
 import BackArrowBtn from 'component/basic/common/BackArrowBtn';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import ReviewLayout from 'component/layout/ReviewLayout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { reviewInfoSelector } from 'redux/review';
 import styled from 'styled-components';
+import { UpdateReviewVO } from 'vo/review';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const WarningText = styled(Typography)`
@@ -19,12 +22,57 @@ const WarningText = styled(Typography)`
     margin-bottom: 1.25rem;
 `;
 
+type ReqParams = 'placeName' | 'contentTypeId' | 'src';
+
+type ReqSet = Pick<UpdateReviewVO, ReqParams>;
+type ChangeSet = Omit<UpdateReviewVO, ReqParams>;
+
 const ReviewPage = (): JSX.Element => {
     const { t } = useTranslation();
+    const reviewInfoData = useSelector(reviewInfoSelector);
     const nivagate = useNavigate();
-    const [rating, setRating] = useState<number>(0);
+
+    const [reqData, setReqData] = useState<ReqSet>({
+        placeName: '',
+        contentTypeId: 0,
+    });
+
+    const [changeData, setChangeData] = useState<ChangeSet>({
+        rating: 1,
+        reviewText: '',
+    });
+
+    useEffect(() => {
+        if (reviewInfoData) {
+            setReqData({
+                placeName: reviewInfoData.placeName,
+                contentTypeId: reviewInfoData.contentTypeId,
+                src: reviewInfoData.src,
+            });
+
+            setChangeData({
+                rating: reviewInfoData.rating,
+                reviewText: reviewInfoData.reviewText,
+            });
+        }
+    }, [reviewInfoData]);
+
     const onClickBackBtn = () => {
         nivagate(-1);
+    };
+
+    const onRatingChange = (rating: number) => {
+        setChangeData({
+            ...changeData,
+            rating,
+        });
+    };
+
+    const onReviewChange = (reviewText: string) => {
+        setChangeData({
+            ...changeData,
+            reviewText,
+        });
     };
 
     return (
@@ -33,7 +81,12 @@ const ReviewPage = (): JSX.Element => {
                 <BackArrowBtn onClick={onClickBackBtn} />
             </Box>
             <Box flexGrow="1">
-                <ReviewLayout />
+                <ReviewLayout
+                    onRatingChange={onRatingChange}
+                    onTextChange={onReviewChange}
+                    {...reqData}
+                    {...changeData}
+                />
             </Box>
             <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
                 <WarningText>{t('reviewpage.warning')}</WarningText>

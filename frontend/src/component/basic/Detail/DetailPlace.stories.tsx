@@ -1,4 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
+import { mockGetReviewList } from 'stories/common.stories';
 import DetailPlace from './DetailPlace';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -9,7 +10,9 @@ export default {
 
 export const detailPlace = () => (
     <DetailPlace
+        userName="정민"
         src="https://picsum.photos/800"
+        comments={mockGetReviewList}
         address="testAddress"
         description="testDesc"
         mbtiArr={[]}

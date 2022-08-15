@@ -6,21 +6,25 @@ import 'i18n';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from 'redux/rootStore';
+import store, { persistor } from 'redux/rootStore';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import reportWebVitals from './reportWebVitals';
 import './static/bottomsheet/style.css';
 import './static/fonts/font.css';
 
+import { PersistGate } from 'redux-persist/integration/react';
+
 ReactDOM.render(
     <Provider store={store}>
-        <ThemeProvider theme={globalTheme}>
-            <GlobalStyles />
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={globalTheme}>
+                <GlobalStyles />
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </ThemeProvider>
+        </PersistGate>
     </Provider>,
     document.getElementById('root'),
 );

@@ -4,9 +4,22 @@ import BookMarkInfo, { BookMarkInfoState } from './bookmark';
 import MyLocationGps, { GpsState } from './gps';
 import MapInteractionStack, { MapInteractionStackState } from './mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from './placeInfo';
+import ReviewInfo, { ReviewInfoState } from './review';
 import SignupInfo, { SignupOnboardState } from './signupInfo';
 import TourlistArea, { TourlistAreaState } from './tourlistarea';
 import UserInfo, { UserInfoState } from './userInfo';
+
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+    key: 'root',
+    // localStorage에 저장합니다.
+    storage,
+    // auth, board, studio 3개의 reducer 중에 auth reducer만 localstorage에 저장합니다.
+    whitelist: ['userInfo'],
+    // blacklist -> 그것만 제외합니다
+};
 
 export type CombinedStateType = ReducersMapObject<
     {
@@ -17,6 +30,7 @@ export type CombinedStateType = ReducersMapObject<
         mapDispStack: MapInteractionStackState;
         tourlistArea: TourlistAreaState;
         bookMarkInfo: BookMarkInfoState;
+        reviewInfo: ReviewInfoState;
     },
     any
 >;
@@ -29,8 +43,9 @@ const reducers = combineReducers<CombinedStateType>({
     mapDispStack: MapInteractionStack,
     tourlistArea: TourlistArea,
     bookMarkInfo: BookMarkInfo,
+    reviewInfo: ReviewInfo,
 });
 
 export type RootState = ReturnType<typeof reducers>;
 
-export default reducers;
+export default persistReducer(persistConfig, reducers);

@@ -12,7 +12,7 @@ import Marker, { MarkerProps } from 'component/basic/KakaoMap/Marker';
 import { MarkerClusterer } from 'react-kakao-maps-sdk';
 import { useThunk } from 'redux/common';
 import { getToutlistArr } from 'redux/tourlistarea';
-import { Interaction2Type } from 'vo/mapInteraction';
+import { Interaction2Type, Interaction3Type } from 'vo/mapInteraction';
 import { getTargetCodeFromTourlist } from 'vo/travelInfo';
 type RenderPropsType = Omit<MarkerProps, 'onClick'>;
 
@@ -48,7 +48,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                             tourlistAreaSelector.recommand.sections.filter((d) => d.data.contentId === eachD.contentId)
                                 .length === 0;
 
-                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined;
+                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined && interactionType === 'COURSE';
                         if (isRecommandSelectIdx !== undefined) {
                             tourlistAreaSelector.recommand.sections.forEach((d, idx2) => {
                                 if (d.data.contentId === eachD.contentId) {
@@ -120,6 +120,13 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
             ) {
                 // if already marker Clicked and current is same to
                 updateInteraction();
+            } else if (interactionType === 'COURSE') {
+                const markerInfo: Interaction3Type = {
+                    type: 'Interaction3',
+                    eventTypeId: nextIdx,
+                    idx,
+                };
+                updateInteraction(markerInfo);
             } else {
                 const markerInfo: Interaction2Type = {
                     type: 'Interaction2',

@@ -50,6 +50,7 @@ specifiers:
   react-scripts: 5.0.1
   react-slick: ^0.29.0
   react-spring-bottom-sheet: ^3.4.1
+  redux-persist: ^6.0.0
   redux-promise: ^0.6.0
   redux-thunk: ^2.4.1
   slick-carousel: ^1.8.1
@@ -85,6 +86,7 @@ dependencies:
   react-scripts: 5.0.1_s7dhm7uhgnhsqh75wuilf3r4wi
   react-slick: 0.29.0_sfoxds7t5ydpegc3knd667wn6m
   react-spring-bottom-sheet: 3.4.1_4dt2r24i4v24wrx5gqs2w2gty4
+  redux-persist: 6.0.0_react@17.0.2
   redux-promise: 0.6.0
   redux-thunk: 2.4.1
   slick-carousel: 1.8.1
@@ -14749,6 +14751,18 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
+
+  /redux-persist/6.0.0_react@17.0.2:
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      react: '>=16'
+      redux: '>4.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /redux-promise/0.6.0:
     resolution: {integrity: sha512-R2mGxJbPFgXyCNbFDE6LjTZhCEuACF54g1bxld3nqBhnRMX0OsUyWk77moF7UMGkUdl5WOAwc4BC5jOd1dunqQ==}

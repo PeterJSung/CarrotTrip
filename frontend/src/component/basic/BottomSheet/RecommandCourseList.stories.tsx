@@ -17,6 +17,5 @@ export const recommandCourseList = () => (
         dataSet={mockGetDataRecommandList}
         onListClick={action('List Click')}
         onResetClick={action('Reset Click')}
-        onTourAreaClick={action('Area Click')}
     />
 );
