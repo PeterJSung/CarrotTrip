@@ -63,7 +63,7 @@ public class OpenAPIService {
 
         String url = "https://api.visitkorea.or.kr/openapi/service/rest/" + lang + "/locationBasedList?ServiceKey=" + secretKey + "&mapX=" + x + "&mapY=" + y + "&radius=5000&listYN=Y&arrange=A&MobileOS=ETC&MobileApp=carrotTravel&_type=json&numOfRows=100&pageNo=1";//x: 127.1625892, y:37.4587305, 5km
         URI uri = new URI(url);
-        System.out.println("uri = " + uri);
+
         HttpEntity<String> response = restTemplate.getForEntity(uri, String.class);
         System.out.println(response.getBody());
         // Response Body 파싱
