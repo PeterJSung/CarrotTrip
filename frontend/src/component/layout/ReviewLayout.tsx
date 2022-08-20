@@ -88,9 +88,11 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
                     value={props.reviewText}
                     minRows={10}
                     placeholder={t('review.placeholder')}
-                    onChange={(e) => props.onTextChange(e.target.value.trim())}
+                    onChange={(e) => props.onTextChange(e.target.value)}
                 />
-                <ReviewIndicatorText>{t('review.limit', { length: props.reviewText.length })}</ReviewIndicatorText>
+                <ReviewIndicatorText>
+                    {t('review.limit', { length: props.reviewText.trim().length })}
+                </ReviewIndicatorText>
             </Box>
         </>
     );

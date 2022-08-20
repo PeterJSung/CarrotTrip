@@ -8,6 +8,7 @@ import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } fro
 import { getSuggestionListArr } from 'redux/tourlistarea';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
+import { Interaction3Type } from 'vo/mapInteraction';
 
 const PlaceDetailSheet = styled(BottomSheet)`
     & > div {
@@ -30,7 +31,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const typeTwo = useSelector(getTypeTwoData);
     const userName = useSelector(getUserName);
 
-    const [renderData, setRenderData] = useState<DetailPlaceProps>();
+    const [renderData, setRenderData] = useState<Omit<DetailPlaceProps, 'onReset'>>();
 
     const updateThunk = useThunk(updateInetractionStack);
     const isOpen = interactionType === 'PLACEDETAIL';
@@ -40,27 +41,30 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     };
 
     useEffect(() => {
-        const setup = async () => {
-            if (typeTwo) {
-                const item = totalDataArr[typeTwo.eventTypeId][typeTwo.idx];
-                const data = await retrievePlaceDetail(item.contentId);
-                console.log(item);
-                setRenderData({
-                    contentId: item.contentId,
-                    userName,
-                    address: item.addr,
-                    description: data.overview,
-                    mbtiArr: [],
-                    comments: data.commentList,
-                    moodArr: data.tasteList,
-                    name: item.title,
-                    src: item.src,
-                    type: item.contentTypeId,
-                });
-            }
-        };
-        setup();
+        onReset();
     }, [typeTwo]);
+
+    const loadData = async (typeTwoData: Interaction3Type) => {
+        const idx = totalDataArr[typeTwoData.eventTypeId].findIndex((d) => d.contentId === typeTwoData.id);
+        const item = totalDataArr[typeTwoData.eventTypeId][idx];
+        const data = await retrievePlaceDetail(item.contentId);
+        setRenderData({
+            contentId: item.contentId,
+            userName,
+            address: item.addr,
+            description: data.overview,
+            mbtiArr: [],
+            comments: data.commentList.filter((d) => d.comments !== undefined),
+            moodArr: data.tasteList,
+            name: item.title,
+            src: item.src,
+            type: item.contentTypeId,
+        });
+    };
+
+    const onReset = () => {
+        typeTwo && loadData(typeTwo);
+    };
 
     return (
         <>
@@ -72,7 +76,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
                     blocking={false}
                     snapPoints={({ maxHeight }) => [maxHeight * 0.8]}
                 >
-                    <DetailPlace {...renderData} />
+                    <DetailPlace {...renderData} onReset={onReset} />
                 </PlaceDetailSheet>
             )}
         </>

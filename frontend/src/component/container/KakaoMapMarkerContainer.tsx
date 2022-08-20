@@ -31,9 +31,8 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
             const newRenderData: RenderPropsType[] = [];
             if (interactionType !== 'PLACEDETAIL') {
                 const currentSelectType = typeOne?.tabIdx;
-                const currentSelectIdx = typeOne?.selectedData?.id;
-                const isRecommandSelectIdx = typeOne?.selectedData?.id;
-                console.log(`Recommand Selected Idx ${isRecommandSelectIdx}`);
+                const currentSelectId = typeOne?.selectedData?.id;
+                const isRecommandSelectId = typeOne?.selectedData?.id;
                 // default 화면 보여주기
                 itemKeys.forEach((eachKey) => {
                     const isSkipCauseFilter =
@@ -48,8 +47,10 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                             tourlistAreaSelector.recommand.sections.filter((d) => d.data.contentId === eachD.contentId)
                                 .length === 0;
 
-                        let isSkipRecommandSelect = isRecommandSelectIdx !== undefined && interactionType === 'COURSE';
-                        if (isRecommandSelectIdx !== undefined) {
+                        let isSkipRecommandSelect = isRecommandSelectId !== undefined && interactionType === 'COURSE';
+
+                        if (isRecommandSelectId !== undefined) {
+                            const isRecommandSelectIdx = isRecommandSelectId;
                             tourlistAreaSelector.recommand.sections.forEach((d, idx2) => {
                                 if (d.data.contentId === eachD.contentId) {
                                     if (isRecommandSelectIdx === -1) {
@@ -83,7 +84,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                         const newData: RenderPropsType = {
                             contentId: eachD.contentId,
                             eventTypeId: eachD.eventTypeId,
-                            isSelect: eachD.eventTypeId === currentSelectType && currentSelectIdx === idx,
+                            isSelect: eachD.eventTypeId === currentSelectType && currentSelectId === eachD.contentId,
                             lat: eachD.lat,
                             lng: eachD.lng,
                         };
@@ -92,9 +93,10 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                     });
                 });
             } else if (interactionType === 'PLACEDETAIL' && typeTwo) {
-                const highlightIdx = typeTwo.idx;
+                const highLightId = typeTwo.id;
                 const highlightTypeId = typeTwo.eventTypeId;
-                const item = tourlistAreaSelector.item[highlightTypeId][highlightIdx];
+                const idx = tourlistAreaSelector.item[highlightTypeId].findIndex((d) => d.contentId === highLightId);
+                const item = tourlistAreaSelector.item[highlightTypeId][idx];
                 const newData: RenderPropsType = {
                     contentId: item.contentId,
                     eventTypeId: highlightTypeId,
@@ -110,13 +112,13 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
 
     const markerClick = (id: number, typeId: number) => {
         const nextIdx = getTargetCodeFromTourlist(typeId);
-        const idx = tourlistAreaSelector.item[nextIdx].findIndex((d) => d.contentId === id);
+
         if (interactionType !== 'PLACEDETAIL') {
             if (
                 interactionType !== 'NONE' &&
                 typeOne &&
                 typeOne.tabIdx === nextIdx &&
-                typeOne.selectedData?.id === idx
+                typeOne.selectedData?.id === id
             ) {
                 // if already marker Clicked and current is same to
                 updateInteraction();
@@ -124,7 +126,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                 const markerInfo: Interaction3Type = {
                     type: 'Interaction3',
                     eventTypeId: nextIdx,
-                    idx,
+                    id,
                 };
                 updateInteraction(markerInfo);
             } else {
@@ -132,7 +134,7 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                     type: 'Interaction2',
                     tabIdx: nextIdx,
                     selectedData: {
-                        id: idx,
+                        id,
                         pos: typeOne?.selectedData?.pos,
                     },
                 };

@@ -9,6 +9,7 @@ interface PlaceDetailReviewListProps {
     myComment?: PlaceReviewDataset;
     remainComment: PlaceReviewDataset[];
     onReveiwCreate: () => void;
+    onReveiwDelete: () => void;
 }
 
 const ReviewTitle = styled.div`
@@ -64,13 +65,13 @@ const PopupContainer = (props: { placeName: string; onClick: () => void }) => {
 
 const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element => {
     const { t } = useTranslation();
-
-    const onPopupAction = (actionType: 'modify' | 'delete') => {
+    const onPopupAction = async (actionType: 'modify' | 'delete') => {
         switch (actionType) {
             case 'modify':
                 props.onReveiwCreate();
                 break;
             case 'delete':
+                props.onReveiwDelete();
                 break;
         }
     };

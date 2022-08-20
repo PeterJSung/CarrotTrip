@@ -10,6 +10,7 @@ export default {
 
 export const myComment = () => (
     <PlaceDetailReviewList
+        onReveiwDelete={action('Review Delete')}
         onReveiwCreate={action('Reveiw Create')}
         placeName="Place Name"
         myComment={mockGetReviewSingle}
@@ -19,6 +20,7 @@ export const myComment = () => (
 
 export const nonMyComment = () => (
     <PlaceDetailReviewList
+        onReveiwDelete={action('Review Delete')}
         onReveiwCreate={action('Reveiw Create')}
         placeName="Place Name"
         remainComment={mockGetReviewList}

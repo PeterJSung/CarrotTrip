@@ -32,15 +32,14 @@ const getHighlightInfo = (
     },
 ): LocationInfo | undefined => {
     if (dataTwo) {
-        console.log('Data Two from');
-        const item = totalTourlistSet[dataTwo.eventTypeId][dataTwo.idx];
+        const idx = totalTourlistSet[dataTwo.eventTypeId].findIndex((d) => d.contentId === dataTwo.id);
+        const item = totalTourlistSet[dataTwo.eventTypeId][idx];
         return {
             lat: item.lat,
             lng: item.lng,
             zoom: HIGHLIGHT_MAP_LEVEL,
         };
     } else if (dataOne && dataOne.selectedData?.pos) {
-        console.log('Data One from');
         return dataOne.selectedData.pos;
     } else {
         return undefined;
@@ -92,6 +91,9 @@ const KakaoMapContainer = (): JSX.Element => {
             updateGpsState(lat, lng, parserRegionStr(res));
         });
     }, []);
+    console.log(`Main Render`);
+    console.log(dataOne);
+    console.log(dataTwo);
 
     const DIFF = DIFF_OFFSET * document.documentElement.clientHeight;
 

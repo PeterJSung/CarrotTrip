@@ -91,7 +91,7 @@ const ReviewPage = (): JSX.Element => {
     };
 
     const onReviewSubmit = async () => {
-        if (changeData.rating !== 0 && changeData.reviewText.length >= 20) {
+        if (changeData.rating !== 0 && changeData.reviewText.trim().length >= 20) {
             await registerReview(userName, changeData.reviewText, changeData.rating, reqData.contentId);
             onClickBackBtn();
         } else {
