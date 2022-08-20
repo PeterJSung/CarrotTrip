@@ -41,10 +41,10 @@ const ImgTag = styled.img`
 
 const ItemContainer = styled(Box)`
     & > :not(hr):first-child {
-        padding: 1.25rem 1.25rem 2.5rem;
+        padding: 1.25rem 1.25rem 1.5rem;
     }
     & > :not(hr):not(:first-child) {
-        padding: 2.5rem 1.25rem 2.5rem;
+        padding: 1.5rem 1.25rem 1.5rem;
     }
 `;
 
