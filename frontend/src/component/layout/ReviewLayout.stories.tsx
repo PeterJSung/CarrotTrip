@@ -18,6 +18,7 @@ export default {
 
 export const reviewLayout = () => (
     <ReviewLayout
+        contentId={100}
         contentTypeId={12}
         onRatingChange={action('Rating Change')}
         onTextChange={action('Text Change')}

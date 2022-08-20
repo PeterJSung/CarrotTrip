@@ -15,6 +15,7 @@ import PlaceDetailReviewList from './PlaceDetailReviewList';
 
 export interface DetailPlaceProps {
     userName: string;
+    contentId: number;
     src?: string;
     type: number;
     name: string;
@@ -70,6 +71,7 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
 
     const onReviewCreate = () => {
         updateReviewInfo({
+            contentId: props.contentId,
             placeName: props.name,
             contentTypeId: props.type,
             reviewText: myComment ? myComment.comments : '',
