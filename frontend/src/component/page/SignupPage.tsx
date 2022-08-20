@@ -37,6 +37,8 @@ const SignupPageBtn = styled(CommonBtn)`
 `;
 
 const OnBoardingBox = styled(Box)`
+    height: 85vh;
+    overflow-y: auto;
     & > div {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -110,16 +112,18 @@ const SignupPage = (): JSX.Element => {
 
     return (
         <DefaultPageContainer>
-            <LinearProgress
-                style={{
-                    backgroundColor: 'rgba(1,1,1,0)',
-                }}
-                color="secondary"
-                variant="determinate"
-                value={(100 * (idx + 1)) / SEQ_COUNT}
-            />
-            <SignupPageHeader onClick={onNextClick} isSkip={forceSkip} onSkipClick={skipBtnClick} />
-            <Box flexGrow="1">
+            <Box height="5vh">
+                <LinearProgress
+                    style={{
+                        backgroundColor: 'rgba(1,1,1,0)',
+                    }}
+                    color="secondary"
+                    variant="determinate"
+                    value={(100 * (idx + 1)) / SEQ_COUNT}
+                />
+                <SignupPageHeader onClick={onNextClick} isSkip={forceSkip} onSkipClick={skipBtnClick} />
+            </Box>
+            <Box>
                 <Slider ref={sliderRef} {...sliderSetting}>
                     <OnBoardingBox>
                         <SignupOnBoard1Layout />
@@ -135,7 +139,7 @@ const SignupPage = (): JSX.Element => {
                     </OnBoardingBox>
                 </Slider>
             </Box>
-            <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">
+            <Box height="5vh" padding="0rem 1.5rem 0.5rem">
                 <SignupPageBtn isBlack={true} disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
                 </SignupPageBtn>

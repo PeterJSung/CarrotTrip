@@ -29,6 +29,7 @@
     "review.delete": "삭제하기",
     "review.myreview": "내가쓴글",
     "common.start": "출발",
+    "signin.failed": "로그인 실패 하였습니다. 아이디와 비밀번호를 확인해주세요.",
     "loginpage.signin": "로그인",
     "loginpage.signup": "회원가입",
     "loginpage.uppertext": "환영합니다! :)",

@@ -38,7 +38,7 @@ const ReviewPage = (): JSX.Element => {
     });
 
     const [changeData, setChangeData] = useState<ChangeSet>({
-        rating: 1,
+        rating: 0,
         reviewText: '',
     });
 
@@ -75,6 +75,12 @@ const ReviewPage = (): JSX.Element => {
         });
     };
 
+    const onReviewSubmit = () => {
+        if (changeData.rating !== 0 && changeData.reviewText.length >= 20) {
+            console.log('reveiw write');
+        }
+    };
+
     return (
         <DefaultPageContainer>
             <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -95,7 +101,7 @@ const ReviewPage = (): JSX.Element => {
                         height: '3rem',
                     }}
                     isBlack={true}
-                    onClick={console.log}
+                    onClick={onReviewSubmit}
                 >
                     {t('common.confirm')}
                 </CommonBtn>

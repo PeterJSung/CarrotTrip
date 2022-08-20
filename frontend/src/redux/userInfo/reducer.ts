@@ -9,6 +9,7 @@ export type UserInfoState = SessionInterface;
 
 const initialState: UserInfoState = {
     data: {
+        tasteCodes: [],
         isLogin: false,
         name: '',
     },
@@ -22,7 +23,12 @@ export const generateReducer = (firstState: UserInfoState = initialState) => {
             }),
         [actions.UserInfoActions.UPDATE_FAILED_USERINFO]: (state, action) =>
             produce(state, (draft) => {
-                draft.data = action.payload;
+                draft.data = {
+                    tasteCodes: [],
+                    errMsg: action.payload,
+                    isLogin: false,
+                    name: '',
+                };
             }),
     });
 };

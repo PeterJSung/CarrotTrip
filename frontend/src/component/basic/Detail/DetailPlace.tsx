@@ -93,10 +93,23 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 <Divider />
                 <PlaceAdressDetail address={props.address} />
                 <Divider />
-                <DetailBubbleChart moodArr={props.moodArr} />
-                <Divider />
-                <DetailMBTI mbtiArr={props.mbtiArr} />
-                <Divider />
+                {props.moodArr.length > 0 ? (
+                    <>
+                        <DetailBubbleChart moodArr={props.moodArr} />
+                        <Divider />
+                    </>
+                ) : (
+                    <></>
+                )}
+                {props.mbtiArr.length > 0 ? (
+                    <>
+                        <DetailMBTI mbtiArr={props.mbtiArr} />
+                        <Divider />
+                    </>
+                ) : (
+                    <></>
+                )}
+
                 <PlaceDetailReviewList
                     onReveiwCreate={onReviewCreate}
                     placeName={props.name}
