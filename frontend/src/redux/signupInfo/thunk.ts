@@ -1,5 +1,6 @@
 import { updateEvaluationAttract, updateEvaluationScoreNComment } from 'api/evaluationAreaUpdate';
-import { postRegistUserAttraction, postSignup } from 'api/signup';
+import { postSignin } from 'api/signin';
+import { postRegistUserTaste, postSignup } from 'api/signup';
 import { cloneDeep } from 'lodash';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
@@ -109,15 +110,26 @@ export const signupSeqence = (): ThunkAction<void, RootState, null, SignupOnboar
             nickname: idInfo.userInfo.nickName,
             password: idInfo.userInfo.pw,
         });
-        await dispatch(sessionInThunk(signupResult.nickname, signupResult.mbti));
+
+        await postRegistUserTaste({
+            memberNickname: signupResult.nickname,
+            tasteCodes: attractionInfo.userInfo ?? [],
+        });
+
+        const signinResult = await postSignin({
+            nickname: idInfo.userInfo.nickName,
+            password: idInfo.userInfo.pw,
+        });
+
         // signup 과정 및 세션 lockin 완료.
-        const allPromiseArr: Array<Promise<any>> = [];
-        allPromiseArr.push(
-            postRegistUserAttraction({
-                memberNickname: signupResult.nickname,
-                categoryCodes: attractionInfo.userInfo ?? [],
-            }),
+        await dispatch(
+            sessionInThunk(
+                signinResult.nickname,
+                signinResult.tasteList.map((d) => Number(d.tasteCode)),
+                signinResult.mbti,
+            ),
         );
+        const allPromiseArr: Array<Promise<any>> = [];
 
         const signupInfo2 = getState().signupInfo.data.signupInfo2;
 

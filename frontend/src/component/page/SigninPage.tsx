@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
-import { getErrorMsg, getIsLogin, signinThunk } from 'redux/userInfo';
+import { getIsErrorMSG, getIsLogin, signinThunk } from 'redux/userInfo';
 import styled from 'styled-components';
 import { SignupInfo1Data } from 'vo/signup';
 import { PATH_HOME_PAGE } from './common';
@@ -61,7 +61,7 @@ const ErrorTypo = styled(Typography)`
 const SigninPage = (): JSX.Element => {
     const { t } = useTranslation();
     const signIn = useThunk(signinThunk);
-    const loginErrorMsg = useSelector(getErrorMsg);
+    const errMsg = useSelector(getIsErrorMSG);
     const login = useSelector(getIsLogin);
 
     const [data, setData] = useState<InputLayoutType>({
@@ -93,6 +93,8 @@ const SigninPage = (): JSX.Element => {
         setData({ ...data, pw: e.target.value });
     }, DEFAULT_DEBOUNCE_TEXT);
 
+    console.log(errMsg);
+
     return (
         <DefaultPageContainer>
             <Box position="relative" display="flex" flexDirection="row" justifyContent="space-between">
@@ -110,7 +112,7 @@ const SigninPage = (): JSX.Element => {
                             onChange={passwordChange}
                         />
                     </TextFiledWrapper>
-                    {loginErrorMsg ? <ErrorTypo>{loginErrorMsg}</ErrorTypo> : <></>}
+                    {errMsg ? <ErrorTypo>{t(errMsg)}</ErrorTypo> : <></>}
                 </SignupCommonLayout>
             </Box>
             <Box height="3.25rem" padding="0rem 1.5rem 1.5rem">

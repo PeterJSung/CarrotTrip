@@ -92,6 +92,7 @@ const dummyPlaceStore: PlaceInfoState = {
 const dummyUserInfoStore: UserInfoState = {
     data: {
         isLogin: false,
+        tasteCodes: [1, 3, 5, 7],
         mbti: 'ITNJ',
         name: '테스트 아이디',
     },

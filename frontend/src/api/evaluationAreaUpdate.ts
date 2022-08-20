@@ -26,12 +26,12 @@ export const updateEvaluationScoreNComment = async (
 export const updateEvaluationAttract = async (
     memberNickname: string,
     apiId: number,
-    attractionArr: number[],
+    tasteArr: number[],
 ): Promise<PlaceUpdateAttractInfoReqRes> => {
     const response = await restPost<PlaceUpdateAttractInfoReqRes, PlaceUpdateAttractInfoReqRes>(ATTRACT_AREA_URL, {
         memberNickname,
         apiId,
-        tasteCodes: attractionArr,
+        tasteCodes: tasteArr,
     });
     return response.data;
 };

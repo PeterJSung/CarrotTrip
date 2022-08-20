@@ -46,6 +46,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
                 const data = await retrievePlaceDetail(item.contentId);
                 console.log(item);
                 setRenderData({
+                    contentId: item.contentId,
                     userName,
                     address: item.addr,
                     description: data.overview,
@@ -59,7 +60,6 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
             }
         };
         setup();
-        console.log(2222222222);
     }, [typeTwo]);
 
     return (

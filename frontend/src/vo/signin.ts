@@ -7,9 +7,16 @@ export interface SigninBodyReq {
 
 export interface SigninBodyRes {
     nickname: string;
+    tasteList: TasteAPIBody[];
     mbti?: string;
 }
 
 export interface SessionInterface {
-    data: SigninInSignupInfo | string;
+    data: SigninInSignupInfo;
+}
+
+export interface TasteAPIBody {
+    id: number;
+    memberNickname: string;
+    tasteCode: string;
 }

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Alert, Box, Snackbar, Typography } from '@mui/material';
 import BackArrowBtn from 'component/basic/common/BackArrowBtn';
 import CommonBtn from 'component/basic/common/CommonBtn';
 import ReviewLayout from 'component/layout/ReviewLayout';
@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reviewInfoSelector } from 'redux/review';
+import { useThunk } from 'redux/common';
+import { registerReviewThunk, reviewInfoSelector } from 'redux/review';
+import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 import { UpdateReviewVO } from 'vo/review';
+import { PATH_HOME_PAGE } from './common';
 import DefaultPageContainer from './DefaultPageContainer';
 
 const WarningText = styled(Typography)`
@@ -22,7 +25,7 @@ const WarningText = styled(Typography)`
     margin-bottom: 1.25rem;
 `;
 
-type ReqParams = 'placeName' | 'contentTypeId' | 'src';
+type ReqParams = 'placeName' | 'contentTypeId' | 'src' | 'contentId';
 
 type ReqSet = Pick<UpdateReviewVO, ReqParams>;
 type ChangeSet = Omit<UpdateReviewVO, ReqParams>;
@@ -30,21 +33,27 @@ type ChangeSet = Omit<UpdateReviewVO, ReqParams>;
 const ReviewPage = (): JSX.Element => {
     const { t } = useTranslation();
     const reviewInfoData = useSelector(reviewInfoSelector);
-    const nivagate = useNavigate();
+    const userName = useSelector(getUserName);
+    const navigate = useNavigate();
+    const registerReview = useThunk(registerReviewThunk);
+
+    const [snakOpen, setSnakOpen] = useState<boolean>(false);
 
     const [reqData, setReqData] = useState<ReqSet>({
+        contentId: 0,
         placeName: '',
         contentTypeId: 0,
     });
 
     const [changeData, setChangeData] = useState<ChangeSet>({
-        rating: 1,
+        rating: 0,
         reviewText: '',
     });
 
     useEffect(() => {
         if (reviewInfoData) {
             setReqData({
+                contentId: reviewInfoData.contentId,
                 placeName: reviewInfoData.placeName,
                 contentTypeId: reviewInfoData.contentTypeId,
                 src: reviewInfoData.src,
@@ -54,11 +63,13 @@ const ReviewPage = (): JSX.Element => {
                 rating: reviewInfoData.rating,
                 reviewText: reviewInfoData.reviewText,
             });
+        } else {
+            navigate(PATH_HOME_PAGE);
         }
     }, [reviewInfoData]);
 
     const onClickBackBtn = () => {
-        nivagate(-1);
+        navigate(-1);
     };
 
     const onRatingChange = (rating: number) => {
@@ -73,6 +84,19 @@ const ReviewPage = (): JSX.Element => {
             ...changeData,
             reviewText,
         });
+    };
+
+    const handleClose = () => {
+        setSnakOpen(false);
+    };
+
+    const onReviewSubmit = async () => {
+        if (changeData.rating !== 0 && changeData.reviewText.length >= 20) {
+            await registerReview(userName, changeData.reviewText, changeData.rating, reqData.contentId);
+            onClickBackBtn();
+        } else {
+            setSnakOpen(true);
+        }
     };
 
     return (
@@ -95,11 +119,16 @@ const ReviewPage = (): JSX.Element => {
                         height: '3rem',
                     }}
                     isBlack={true}
-                    onClick={console.log}
+                    onClick={onReviewSubmit}
                 >
                     {t('common.confirm')}
                 </CommonBtn>
             </Box>
+            <Snackbar open={snakOpen} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {t('review.requireerror')}
+                </Alert>
+            </Snackbar>
         </DefaultPageContainer>
     );
 };

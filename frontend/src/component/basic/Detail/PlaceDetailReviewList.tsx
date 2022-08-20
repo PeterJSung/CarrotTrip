@@ -65,6 +65,16 @@ const PopupContainer = (props: { placeName: string; onClick: () => void }) => {
 const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element => {
     const { t } = useTranslation();
 
+    const onPopupAction = (actionType: 'modify' | 'delete') => {
+        switch (actionType) {
+            case 'modify':
+                props.onReveiwCreate();
+                break;
+            case 'delete':
+                break;
+        }
+    };
+
     return (
         <Box px="1.25rem" pt="2.5rem">
             {props.myComment ? <></> : <PopupContainer placeName={props.placeName} onClick={props.onReveiwCreate} />}
@@ -76,7 +86,7 @@ const PlaceDetailReviewList = (props: PlaceDetailReviewListProps): JSX.Element =
                         reviewText={props.myComment.comments}
                         score={props.myComment.score}
                         userName={props.myComment.memberNickname}
-                        onPopupCallback={console.log}
+                        onPopupCallback={onPopupAction}
                     />
                 )}
                 {props.remainComment.map((d) => {

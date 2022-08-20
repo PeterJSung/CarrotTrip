@@ -10,6 +10,7 @@ export default {
 
 export const detailPlace = () => (
     <DetailPlace
+        contentId={100}
         userName="정민"
         src="https://picsum.photos/800"
         comments={mockGetReviewList}

@@ -47,7 +47,7 @@ const getHighlightInfo = (
     }
 };
 
-const DEFAULT_HIGHLIGHT_OFFSET_LAT = 0.0027;
+const DIFF_OFFSET = 3.44 * Math.pow(10, -6);
 
 const KakaoMapContainer = (): JSX.Element => {
     const { i18n } = useTranslation();
@@ -93,6 +93,8 @@ const KakaoMapContainer = (): JSX.Element => {
         });
     }, []);
 
+    const DIFF = DIFF_OFFSET * document.documentElement.clientHeight;
+
     return (
         <Box width="100%" height="100%" position="relative" display="flex">
             <Map
@@ -101,7 +103,7 @@ const KakaoMapContainer = (): JSX.Element => {
                 disableDoubleClick={true}
                 zoomable={!isPlaceDetail}
                 draggable={!isPlaceDetail}
-                center={{ lat: centerPos.lat - (highLightPos ? DEFAULT_HIGHLIGHT_OFFSET_LAT : 0), lng: centerPos.lng }}
+                center={{ lat: centerPos.lat - (highLightPos ? DIFF : 0), lng: centerPos.lng }}
                 style={{ flexGrow: 1 }}
             >
                 <MyLocationMarker lat={currentGpsInfo.lat} lng={currentGpsInfo.lng} />

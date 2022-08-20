@@ -1,6 +1,7 @@
 import { ComponentMeta } from '@storybook/react';
 import { generateReducer } from 'redux/userInfo';
 import {
+    dummyUserInfoStore,
     getDummyStateWithMock,
     mockGetBookmarkList,
     mockGetPlaceDetail,
@@ -15,13 +16,7 @@ export default {
     decorators: [
         (story) =>
             getDummyStateWithMock(story(), {
-                userInfo: generateReducer({
-                    data: {
-                        isLogin: true,
-                        mbti: 'ITNJ',
-                        name: 'test',
-                    },
-                }),
+                userInfo: generateReducer(dummyUserInfoStore),
             }),
         WithMock,
     ],

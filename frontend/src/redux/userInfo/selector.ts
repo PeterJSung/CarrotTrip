@@ -1,10 +1,8 @@
 import { RootState } from 'redux/rootReducer';
 const getUserInfo = (state: RootState) => state.userInfo.data;
-const getUserName = (state: RootState) => (typeof state.userInfo.data === 'string' ? '' : state.userInfo.data.name);
-const getUserMbti = (state: RootState) =>
-    typeof state.userInfo.data === 'string' ? undefined : state.userInfo.data.mbti;
-const getIsLogin = (state: RootState) =>
-    typeof state.userInfo.data === 'string' ? false : state.userInfo.data.isLogin;
-const getErrorMsg = (state: RootState) => (typeof state.userInfo.data === 'string' ? state.userInfo.data : undefined);
+const getUserName = (state: RootState) => state.userInfo.data.name ?? '';
+const getUserMbti = (state: RootState) => state.userInfo.data.mbti;
+const getIsLogin = (state: RootState) => state.userInfo.data.isLogin;
+const getIsErrorMSG = (state: RootState) => state.userInfo.data.errMsg;
 
-export { getUserInfo, getIsLogin, getErrorMsg, getUserName, getUserMbti };
+export { getUserInfo, getIsLogin, getUserName, getUserMbti, getIsErrorMSG };
