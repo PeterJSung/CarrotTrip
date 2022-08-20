@@ -1,5 +1,6 @@
 import { Box, TextField, Typography } from '@mui/material';
 import CommonRating from 'component/basic/common/CommonRating';
+import NonSrcIcon from 'component/basic/common/NonSrcIcon';
 import PlaceInfoChip from 'component/basic/common/PlaceInfoChip';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -62,8 +63,18 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
     return (
         <>
             <Box height="7rem" display="flex" px="1.25rem" pb="1.5rem" pt="0.5rem" justifyContent="space-between">
-                <Box flex="1" maxWidth="100%" maxHeight="100%" mr="0.75rem">
-                    <ImgTag src={props.src} />
+                <Box
+                    borderRadius="0.5rem"
+                    flex="1"
+                    maxWidth="100%"
+                    maxHeight="100%"
+                    mr="0.75rem"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    border={props.src ? 'unset' : '1px solid black'}
+                >
+                    {props.src ? <ImgTag src={props.src} /> : <NonSrcIcon contentId={props.contentTypeId} />}
                 </Box>
                 <Box flex="1.3" flexDirection="column">
                     <PlaceName>{props.placeName}</PlaceName>
@@ -74,6 +85,7 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
             <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
                 <RatingTitle>{t('review.rating')}</RatingTitle>
                 <RatingComponent
+                    isBig={true}
                     value={props.rating}
                     onChange={(event, newValue) => {
                         props.onRatingChange(newValue ?? 0);
@@ -88,9 +100,11 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
                     value={props.reviewText}
                     minRows={10}
                     placeholder={t('review.placeholder')}
-                    onChange={(e) => props.onTextChange(e.target.value.trim())}
+                    onChange={(e) => props.onTextChange(e.target.value)}
                 />
-                <ReviewIndicatorText>{t('review.limit', { length: props.reviewText.length })}</ReviewIndicatorText>
+                <ReviewIndicatorText>
+                    {t('review.limit', { length: props.reviewText.trim().length })}
+                </ReviewIndicatorText>
             </Box>
         </>
     );

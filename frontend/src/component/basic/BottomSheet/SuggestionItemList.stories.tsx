@@ -10,5 +10,5 @@ export default {
 } as ComponentMeta<typeof SuggestionItemList>;
 
 export const suggestionItemList = () => (
-    <SuggestionItemList selectedIdx={18} dataSet={mockGetDataItemList[12] as any} onListClick={action('List Click')} />
+    <SuggestionItemList selectedId={100} dataSet={mockGetDataItemList[12] as any} onListClick={action('List Click')} />
 );

@@ -2,8 +2,8 @@ import { Box, Chip, Divider, IconButton, Popover } from '@mui/material';
 import { MouseEvent, useState } from 'react';
 import ClampLines from 'react-clamp-lines';
 import { useTranslation } from 'react-i18next';
-
 import styled from 'styled-components';
+import CommonRating from '../common/CommonRating';
 // this code is based from https://github.com/EliEladElrom/react-tutorials/blob/master/bubble-chart/src/components/BubbleChart/BubbleChart.tsx
 export interface ReviewItemProps {
     onPopupCallback?: (actionType: 'modify' | 'delete') => void;
@@ -36,7 +36,7 @@ const UserNameTypo = styled.span`
     margin-bottom: auto;
     font-family: Noto Sans KR;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 13px;
     line-height: 19px;
     letter-spacing: -0.05em;
@@ -83,11 +83,14 @@ const ScoreTypo = styled.span`
     font-size: 12px;
     line-height: 14px;
     color: #8e9095;
+    margin-left: 0.25rem;
 `;
 
-const VerticalDivider = styled.div`
-    display: inline-block;
-    border: 1px solid rgba(234, 234, 234, 1);
+const InformDivider = styled(Divider)`
+    margin-left: 0.375rem !important;
+    margin-right: 0.5rem !important;
+    margin-top: 0.15rem !important;
+    margin-top: 0.15rem !important;
 `;
 
 const DotIcon = () => (
@@ -188,55 +191,69 @@ const ReviewItem = (props: ReviewItemProps): JSX.Element => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
     return (
-        <Box display="flex" flexDirection="column">
-            <Box display="flex" mb="0.5rem">
-                <Box display="flex" flexGrow="1" flexDirection="column">
-                    <Box display="flex" mb="0.25rem">
-                        {isMyReview && <MyChip style={{ marginRight: '0.25rem' }} label={t('review.myreview')} />}
-                        <UserNameTypo>{props.userName}</UserNameTypo>
-                    </Box>
-                    <Box>
-                        <DateTypo>{props.date}</DateTypo>
-                        <VerticalDivider />
-                        <ScoreTypo>{props.score}</ScoreTypo>
-                    </Box>
-                </Box>
-                {isMyReview && (
-                    <Box display="flex" alignItems="center">
-                        <IconButton onClick={handleClick}>
-                            <DotIcon />
-                        </IconButton>
-                    </Box>
-                )}
-            </Box>
+        <Box display="flex">
+            <Box
+                mr="1rem"
+                width="3rem"
+                height="3rem"
+                borderRadius="50%"
+                style={{
+                    objectFit: 'cover',
+                    backgroundImage: 'url(https://wildcard.codestuff.io/r/250/250)',
+                }}
+            />
 
-            <ReviewClampLine id={`${props.userName}-${props.date}`} text={props.reviewText} lines={3} />
-            <Popover
-                id={id}
-                anchorEl={anchorEl}
-                onClose={() => handleClose()}
-                open={open}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-            >
-                <Box display="flex" flexDirection="column" minWidth="7.375rem">
-                    <ListWrapper onClick={() => props.onPopupCallback?.('modify')}>
-                        <EditIcon />
-                        <PopupTextTypo>{t('review.modify')}</PopupTextTypo>
-                    </ListWrapper>
-                    <Divider />
-                    <ListWrapper onClick={() => props.onPopupCallback?.('delete')}>
-                        <DeleteIcon />
-                        <PopupTextTypo>{t('review.delete')}</PopupTextTypo>
-                    </ListWrapper>
+            <Box display="flex" flexDirection="column" flexGrow="1">
+                <Box display="flex" mb="0.5rem">
+                    <Box display="flex" flexGrow="1" flexDirection="column">
+                        <Box display="flex" mb="0.25rem">
+                            {isMyReview && <MyChip style={{ marginRight: '0.25rem' }} label={t('review.myreview')} />}
+                            <UserNameTypo>{props.userName}</UserNameTypo>
+                        </Box>
+                        <Box display="flex" alignItems="center">
+                            <DateTypo>{props.date}</DateTypo>
+                            <InformDivider orientation="vertical" flexItem />
+                            <CommonRating isBig={false} value={props.score} />
+                            <ScoreTypo>{props.score}</ScoreTypo>
+                        </Box>
+                    </Box>
+                    {isMyReview && (
+                        <Box display="flex" alignItems="center">
+                            <IconButton onClick={handleClick}>
+                                <DotIcon />
+                            </IconButton>
+                        </Box>
+                    )}
                 </Box>
-            </Popover>
+
+                <ReviewClampLine id={`${props.userName}-${props.date}`} text={props.reviewText} lines={3} />
+                <Popover
+                    id={id}
+                    anchorEl={anchorEl}
+                    onClose={() => handleClose()}
+                    open={open}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <Box display="flex" flexDirection="column" minWidth="7.375rem">
+                        <ListWrapper onClick={() => props.onPopupCallback?.('modify')}>
+                            <EditIcon />
+                            <PopupTextTypo>{t('review.modify')}</PopupTextTypo>
+                        </ListWrapper>
+                        <Divider />
+                        <ListWrapper onClick={() => props.onPopupCallback?.('delete')}>
+                            <DeleteIcon />
+                            <PopupTextTypo>{t('review.delete')}</PopupTextTypo>
+                        </ListWrapper>
+                    </Box>
+                </Popover>
+            </Box>
         </Box>
     );
 };

@@ -5,9 +5,11 @@ import PlaceAdressDetail from 'component/basic/Detail/PlaceAdressDetail';
 import PlaceDescriptionDetail from 'component/basic/Detail/PlaceDescriptionDetail';
 import { PATH_REVIEW_PAGE } from 'component/page/common';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
-import { updateReviewThunk } from 'redux/review';
+import { registerReviewThunk, updateReviewThunk } from 'redux/review';
+import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 import { PlaceBookmarkInfo, PlaceReviewDataset } from 'vo/placeInfo';
 import { contentIdMapper } from 'vo/travelInfo';
@@ -24,6 +26,7 @@ export interface DetailPlaceProps {
     moodArr: string[];
     mbtiArr: PlaceBookmarkInfo[];
     comments: PlaceReviewDataset[];
+    onReset: () => void;
 }
 
 const ImgTag = styled.img`
@@ -38,10 +41,10 @@ const ImgTag = styled.img`
 
 const ItemContainer = styled(Box)`
     & > :not(hr):first-child {
-        padding: 1.25rem 1.25rem 2.5rem;
+        padding: 1.25rem 1.25rem 1.5rem;
     }
     & > :not(hr):not(:first-child) {
-        padding: 2.5rem 1.25rem 2.5rem;
+        padding: 1.5rem 1.25rem 1.5rem;
     }
 `;
 
@@ -64,6 +67,8 @@ const extractorMyComment = (comments: PlaceReviewDataset[], userName: string): E
 const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
     const { t } = useTranslation();
     const updateReviewInfo = useThunk(updateReviewThunk);
+    const userName = useSelector(getUserName);
+    const registerReview = useThunk(registerReviewThunk);
     const navigateCB = useNavigate();
     const { myComment, remainComment } = extractorMyComment(props.comments, props.userName);
 
@@ -79,6 +84,11 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
             src: props.src,
         });
         navigateCB(PATH_REVIEW_PAGE);
+    };
+
+    const onReviewDelete = async () => {
+        myComment && (await registerReview(userName, '', myComment.score, myComment.apiId));
+        props.onReset();
     };
 
     return (
@@ -113,6 +123,7 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 )}
 
                 <PlaceDetailReviewList
+                    onReveiwDelete={onReviewDelete}
                     onReveiwCreate={onReviewCreate}
                     placeName={props.name}
                     myComment={myComment}

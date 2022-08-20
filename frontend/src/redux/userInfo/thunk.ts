@@ -19,7 +19,6 @@ export const signinThunk = (name: string, pw: string): ThunkAction<void, RootSta
                 ),
             );
         } catch (e: any) {
-            console.log(e);
             await dispatch(signinFailedAction('signin.failed'));
         }
     };

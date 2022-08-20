@@ -30,6 +30,7 @@ export const deleteBookMarkAPI = async (
             memberNickname,
             apiId,
         },
+        withCredentials: true,
     });
     return response.data;
 };

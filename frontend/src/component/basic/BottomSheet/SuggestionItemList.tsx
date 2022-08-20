@@ -4,9 +4,9 @@ import { TourlistDataset } from 'vo/travelInfo';
 import BannerSuggestionItem from './BannerSuggestionItem';
 
 export interface SuggestionItemListProps {
-    selectedIdx?: number;
+    selectedId?: number;
     dataSet: TourlistDataset[];
-    onListClick: (idx: number) => void;
+    onListClick: (id: number) => void;
 }
 
 const ListWapper = styled(List)`
@@ -24,11 +24,11 @@ const ListItemWapper = styled(ListItemButton)`
 const SuggestionItemList = (props: SuggestionItemListProps): JSX.Element => {
     return (
         <ListWapper>
-            {props.dataSet.map((d, idx) => {
-                const isSelected = idx === props.selectedIdx;
+            {props.dataSet.map((d) => {
+                const isSelected = d.contentId === props.selectedId;
                 return (
                     <ListItemWapper
-                        onClick={() => props.onListClick(idx)}
+                        onClick={() => props.onListClick(d.contentId)}
                         style={{
                             border: isSelected ? '1px solid #191919' : '1px solid rgba(219, 219, 219, 1)',
                         }}

@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
 import { mockGetReviewList } from 'stories/common.stories';
 import DetailPlace from './DetailPlace';
@@ -20,5 +21,6 @@ export const detailPlace = () => (
         moodArr={['1', '4', '6', '8', '9', '13']}
         name="testName"
         type={12}
+        onReset={action('On Reset')}
     />
 );

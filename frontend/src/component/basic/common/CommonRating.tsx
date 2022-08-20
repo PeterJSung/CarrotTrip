@@ -1,15 +1,49 @@
 import { Rating, RatingProps } from '@mui/material';
-import { YELLOW_COLOR } from 'globaltheme';
-import styled from 'styled-components';
 
-const YellowColorRating = styled(Rating)`
-    & .MuiRating-iconFilled {
-        color: ${YELLOW_COLOR} !important;
-    }
-`;
+const FillBig = () => (
+    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M13.072 1.31085C13.4079 0.474379 14.5921 0.47438 14.928 1.31085L17.9041 8.72193C18.0471 9.07813 18.3814 9.32102 18.7644 9.34699L26.7324 9.88727C27.6317 9.94825 27.9976 11.0744 27.3059 11.6524L21.1772 16.7729C20.8827 17.0191 20.755 17.4121 20.8486 17.7843L22.797 25.5293C23.0169 26.4035 22.059 27.0995 21.2955 26.6202L14.5317 22.3738C14.2066 22.1697 13.7934 22.1697 13.4683 22.3738L6.70446 26.6202C5.94105 27.0995 4.98306 26.4035 5.20297 25.5293L7.15139 17.7843C7.24504 17.4121 7.11735 17.0191 6.82278 16.7729L0.694084 11.6524C0.00235367 11.0744 0.368274 9.94824 1.2676 9.88727L9.23562 9.34699C9.61859 9.32102 9.9529 9.07813 10.0959 8.72193L13.072 1.31085Z"
+            fill="#FEF32F"
+        />
+    </svg>
+);
 
-const CommonRating = (props: RatingProps): JSX.Element => {
-    return <YellowColorRating {...props} />;
+const EmptyBig = () => (
+    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M13.072 1.31085C13.4079 0.474379 14.5921 0.47438 14.928 1.31085L17.9041 8.72193C18.0471 9.07813 18.3814 9.32102 18.7644 9.34699L26.7324 9.88727C27.6317 9.94825 27.9976 11.0744 27.3059 11.6524L21.1772 16.7729C20.8827 17.0191 20.755 17.4121 20.8486 17.7843L22.797 25.5293C23.0169 26.4035 22.059 27.0995 21.2955 26.6202L14.5317 22.3738C14.2066 22.1697 13.7934 22.1697 13.4683 22.3738L6.70446 26.6202C5.94105 27.0995 4.98306 26.4035 5.20297 25.5293L7.15139 17.7843C7.24504 17.4121 7.11735 17.0191 6.82278 16.7729L0.694084 11.6524C0.00235367 11.0744 0.368274 9.94824 1.2676 9.88727L9.23562 9.34699C9.61859 9.32102 9.9529 9.07813 10.0959 8.72193L13.072 1.31085Z"
+            fill="#DBDBDB"
+        />
+    </svg>
+);
+
+const FillSmall = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M8 0L10.2571 4.89337L15.6085 5.52786L11.6521 9.18663L12.7023 14.4721L8 11.84L3.29772 14.4721L4.34794 9.18663L0.391548 5.52786L5.7429 4.89337L8 0Z"
+            fill="#FEF32F"
+        />
+    </svg>
+);
+
+const EmptySmall = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M8 0L10.2571 4.89337L15.6085 5.52786L11.6521 9.18663L12.7023 14.4721L8 11.84L3.29772 14.4721L4.34794 9.18663L0.391548 5.52786L5.7429 4.89337L8 0Z"
+            fill="#D9D9D9"
+        />
+    </svg>
+);
+
+const CommonRating = (props: RatingProps & { isBig: boolean }): JSX.Element => {
+    return (
+        <Rating
+            {...props}
+            icon={props.isBig ? <FillBig /> : <FillSmall />}
+            emptyIcon={props.isBig ? <EmptyBig /> : <EmptySmall />}
+        />
+    );
 };
 
 export default CommonRating;

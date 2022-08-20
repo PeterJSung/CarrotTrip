@@ -17,12 +17,11 @@ export interface BannerSuggestionItemProps {
 
 const DEFAULT_SIZE = 4.7;
 
-const ImgButton = styled.div`
+const ImgButton = styled(Box)`
     width: ${DEFAULT_SIZE}rem !important;
     height: ${DEFAULT_SIZE}rem !important;
     border-radius: 0.5rem !important;
-    border: 0.5px solid black;
-    overflow: hidden;
+    overflow: hidden !important;
 `;
 
 const ImgDisplay = styled.img`
@@ -77,7 +76,7 @@ const BannerSuggestionItem = (props: BannerSuggestionItemProps): JSX.Element => 
         <CommonSheetBanner>
             <Box display="flex">
                 <Box mr="0.75rem">
-                    <ImgButton>
+                    <ImgButton border={props.src ? 'unset' : '0.1px solid black'}>
                         {props.src ? <ImgDisplay src={props.src} /> : <NonSrcIcon contentId={props.contentTypeId} />}
                     </ImgButton>
                 </Box>

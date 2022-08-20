@@ -29,6 +29,7 @@ const RenderList = (data: Interaction2Type) => {
     const tourlistInfo = useSelector(getToutlistArr);
     const currentGpsInfo = useSelector(currentGps);
     const updateInteraction = useThunk(updateInetractionStack);
+    console.log(data.tabIdx);
     if (data.tabIdx === 100) {
         return (
             <RecommandCourseList
@@ -56,13 +57,15 @@ const RenderList = (data: Interaction2Type) => {
         return (
             <SuggestionItemList
                 dataSet={tourlistInfo.item[data.tabIdx]}
-                selectedIdx={data.selectedData?.id}
-                onListClick={async (idx: number) => {
+                selectedId={data.selectedData?.id}
+                onListClick={async (id: number) => {
+                    const idx = tourlistInfo.item[data.tabIdx].findIndex((d) => d.contentId === id);
+
                     await updateInteraction({
                         type: 'Interaction2',
                         tabIdx: data.tabIdx,
                         selectedData: {
-                            id: idx,
+                            id,
                             pos: {
                                 lat: tourlistInfo.item[data.tabIdx][idx].lat,
                                 lng: tourlistInfo.item[data.tabIdx][idx].lng,
@@ -72,7 +75,7 @@ const RenderList = (data: Interaction2Type) => {
                     });
                     await updateInteraction({
                         type: 'Interaction3',
-                        idx,
+                        id,
                         eventTypeId: data.tabIdx,
                     });
                 }}

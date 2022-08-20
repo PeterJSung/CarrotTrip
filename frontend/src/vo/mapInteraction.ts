@@ -24,7 +24,7 @@ interface Interaction2 {
 interface Interaction3 {
     type: 'Interaction3';
     eventTypeId: number;
-    idx: number;
+    id: number;
 }
 
 export type Interaction2Type = Interaction2;
