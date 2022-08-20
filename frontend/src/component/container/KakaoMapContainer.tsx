@@ -91,9 +91,6 @@ const KakaoMapContainer = (): JSX.Element => {
             updateGpsState(lat, lng, parserRegionStr(res));
         });
     }, []);
-    console.log(`Main Render`);
-    console.log(dataOne);
-    console.log(dataTwo);
 
     const DIFF = DIFF_OFFSET * document.documentElement.clientHeight;
 

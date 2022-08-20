@@ -29,6 +29,7 @@ const RenderList = (data: Interaction2Type) => {
     const tourlistInfo = useSelector(getToutlistArr);
     const currentGpsInfo = useSelector(currentGps);
     const updateInteraction = useThunk(updateInetractionStack);
+    console.log(data.tabIdx);
     if (data.tabIdx === 100) {
         return (
             <RecommandCourseList
