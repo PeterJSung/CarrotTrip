@@ -1,4 +1,5 @@
 {
+    "common.dosave": "저장하기",
     "bottomsheet.totalcourse": "전체 코스보기",
     "bottomsheet.avg": "평균",
     "placeinfo.mood": "분위기",
@@ -22,6 +23,7 @@
     "signup.onboard.four.lowertext": "수집한 정보는 여행지 추천에 사용될 예정이에요.",
     "signup.onboard.five.uppertext": "MBTI를 알려주세요",
     "signup.onboard.five.lowertext": "모른다면 넘어가주세요.",
+    "mbtiedit.title": "MBTI 입력",
     "review.requireerror": "별점과 리뷰를 20자 이상 작성해주세요.",
     "review.genreviewbtn": "리뷰 작성하기",
     "review.createguide": "{{ name }}에 다녀오셨나요?",

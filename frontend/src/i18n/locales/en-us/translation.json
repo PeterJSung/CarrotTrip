@@ -1,4 +1,5 @@
 {
+    "common.dosave": "Save",
     "bottomsheet.totalcourse": "View full course",
     "bottomsheet.avg": "average",
     "placeinfo.mood": "atmosphere",
@@ -22,6 +23,7 @@
     "signup.onboard.four.lowertext": "The collected information will be used to recommend travel destination.",
     "signup.onboard.five.uppertext": "Answer aboout your MBTI.",
     "signup.onboard.five.lowertext": "If you don't know, please skip.",
+    "mbtiedit.title": "Insert MBTI",
     "review.requireerror": "Please rate the place and write the comment in more than 20 characters",
     "review.genreviewbtn": "Comment",
     "review.createguide": "Have you ever been to {{ name }}",
