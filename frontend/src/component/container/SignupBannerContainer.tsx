@@ -112,7 +112,7 @@ const SignupBannerContainer = (props: EvaluationAreaRes): JSX.Element => {
                     </span>
                 </MenuTypo>
                 <CommonRating
-                    isBig={true}
+                    ratingsize="big"
                     value={rating}
                     onChange={(event, newValue) => {
                         setRating(newValue ?? 0);

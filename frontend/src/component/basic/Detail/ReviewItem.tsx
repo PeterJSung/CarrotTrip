@@ -213,7 +213,7 @@ const ReviewItem = (props: ReviewItemProps): JSX.Element => {
                         <Box display="flex" alignItems="center">
                             <DateTypo>{props.date}</DateTypo>
                             <InformDivider orientation="vertical" flexItem />
-                            <CommonRating isBig={false} value={props.score} />
+                            <CommonRating ratingsize="small" value={props.score} />
                             <ScoreTypo>{props.score}</ScoreTypo>
                         </Box>
                     </Box>

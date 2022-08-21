@@ -85,7 +85,7 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
             <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
                 <RatingTitle>{t('review.rating')}</RatingTitle>
                 <RatingComponent
-                    isBig={true}
+                    ratingsize="big"
                     value={props.rating}
                     onChange={(event, newValue) => {
                         props.onRatingChange(newValue ?? 0);

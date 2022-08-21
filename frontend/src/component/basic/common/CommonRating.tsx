@@ -36,12 +36,12 @@ const EmptySmall = () => (
     </svg>
 );
 
-const CommonRating = (props: RatingProps & { isBig: boolean }): JSX.Element => {
+const CommonRating = (props: RatingProps & { ratingsize: 'big' | 'small' }): JSX.Element => {
     return (
         <Rating
             {...props}
-            icon={props.isBig ? <FillBig /> : <FillSmall />}
-            emptyIcon={props.isBig ? <EmptyBig /> : <EmptySmall />}
+            icon={props.ratingsize === 'big' ? <FillBig /> : <FillSmall />}
+            emptyIcon={props.ratingsize === 'big' ? <EmptyBig /> : <EmptySmall />}
         />
     );
 };
