@@ -221,7 +221,7 @@ X-AUTH-TOKEN: {JWT TOKEN}
 
 ###  3.3 사용자의 등록 코멘트 조회
 #### URI
-``POST`` ``/api/member/태호/comments``
+``GET`` ``/api/member/태호/comments``
 #### Header
 Content-Type: application/json
 
