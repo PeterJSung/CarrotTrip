@@ -66,7 +66,7 @@ const getDummyPlaceDetailInfo: TotalPlaceInfo = {
     adress: 'Test Address Info',
     description: 'Test Description Info. Lorem Ipsume blabla',
     mbtiArr: [],
-    moodArr: [1, 3, 4, 5, 6, 7, 8, 9, 10],
+    tasteList: [1, 3, 4, 5, 6, 7, 8, 9, 10],
     reviewArr: [],
 };
 
@@ -79,7 +79,7 @@ const getDummyPlaceDetail: PlaceDetailInformation = {
     adress: 'Test Address Info',
     description: 'Test Description Info. Lorem Ipsume blabla',
     mbtiArr: [],
-    moodArr: [1, 3, 4, 5, 6, 7, 8, 9, 10],
+    tasteList: [1, 3, 4, 5, 6, 7, 8, 9, 10],
     reviewArr: [],
 };
 

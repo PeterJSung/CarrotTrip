@@ -18,6 +18,7 @@ export type TourlistAreaState = SyncState<{
     recommand: TourlistRecommandTotalSet;
     item: { [key: string]: TourlistDataset[] };
     mbti: TourlistDataset[];
+    taste: TourlistDataset[];
 }>;
 
 const initialState: TourlistAreaState = {
@@ -25,6 +26,7 @@ const initialState: TourlistAreaState = {
         recommand: { sections: [], totalDistance: 0, name: '', avgRating: 0 },
         item: {},
         mbti: [],
+        taste: [],
     },
 };
 
@@ -59,8 +61,6 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
         [actions.TourlistAreaActions.UPDATE_AREA]: (state, action) =>
             produce(state, (draft) => {
                 const mapper: { [key: number]: TourlistDataset } = {};
-
-                draft.data.mbti = [];
                 draft.data.item = {};
                 action.payload.total.forEach((d) => {
                     const convId = convertContentTypeId(d.contenttypeid);
@@ -69,9 +69,7 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                         draft.data.item[convId] = [];
                     }
                     const convertedData = convertDatasetFromAPI(d);
-                    if (convertedData.mbti === action.payload.mbti) {
-                        draft.data.mbti.push(convertedData);
-                    }
+
                     draft.data.item[convId].push(convertedData);
                     mapper[convertedData.contentId] = convertedData;
                 });
@@ -113,6 +111,39 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                 avgRating /= routeResult.sections.length;
                 draft.data.recommand.avgRating = parseFloat(avgRating.toFixed(2));
                 draft.data.recommand.name = action.payload.name;
+            }),
+        [actions.TourlistAreaActions.UPDATE_MBTIDATA]: (state, action) =>
+            produce(state, (draft) => {
+                const unorderData: TourlistDataset[] = [];
+                for (const key in state.data.item) {
+                    const eachData = state.data.item[key];
+                    eachData.forEach((info) => {
+                        if (info.mbti.toLowerCase() === action.payload.mbti.toLocaleLowerCase()) {
+                            unorderData.push(info);
+                        }
+                    });
+                }
+                draft.data.mbti = unorderData.sort((a, b) => b.aveScore - a.aveScore);
+            }),
+        [actions.TourlistAreaActions.UPDATE_TASTEDATA]: (state, action) =>
+            produce(state, (draft) => {
+                const unorderData: TourlistDataset[] = [];
+                for (const key in state.data.item) {
+                    const eachData = state.data.item[key];
+                    eachData.forEach((info) => {
+                        let isDuplication = false;
+                        for (let i = 0; i < info.tasteList.length && !isDuplication; i++) {
+                            const currentData = info.tasteList[i];
+                            if (action.payload.tasteList.includes(Number(currentData))) {
+                                isDuplication = true;
+                            }
+                        }
+                        if (isDuplication) {
+                            unorderData.push(info);
+                        }
+                    });
+                }
+                draft.data.taste = unorderData.sort((a, b) => b.aveScore - a.aveScore);
             }),
     });
 };

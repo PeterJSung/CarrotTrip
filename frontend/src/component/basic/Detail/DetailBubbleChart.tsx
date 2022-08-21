@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 const MINIMUM_HEIGHT = 20;
 
 export interface DetailBubbleChartProps {
-    moodArr: string[];
+    tasteList: string[];
 }
 
 const DetailBubbleChart = (props: DetailBubbleChartProps): JSX.Element => {
@@ -17,7 +17,7 @@ const DetailBubbleChart = (props: DetailBubbleChartProps): JSX.Element => {
         w: 0,
     });
     const { t } = useTranslation();
-    const dat = getImpressionSpecificData(t, props.moodArr);
+    const dat = getImpressionSpecificData(t, props.tasteList);
 
     useEffect(() => {
         if (ref.current) {

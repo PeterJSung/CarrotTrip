@@ -20,9 +20,6 @@ const IndicatorDetailPlace = (): JSX.Element => {
         interactionThunk();
     };
 
-    console.log(dataTwo);
-    console.log(bookMarkInfo);
-
     if (!dataTwo) {
         return <></>;
     }
@@ -31,8 +28,6 @@ const IndicatorDetailPlace = (): JSX.Element => {
 
     const onBookmarkClick = () => {
         // setIsMakred(!isMakred);
-        console.log('Book Mark Click');
-        console.log(dataTwo);
         if (isBookMarked) {
             deleteBookMarkThunk(userName, dataTwo.id);
         } else {

@@ -11,7 +11,7 @@ import { useThunk } from 'redux/common';
 import { registerReviewThunk, updateReviewThunk } from 'redux/review';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
-import { PlaceBookmarkInfo, PlaceReviewDataset } from 'vo/placeInfo';
+import { PlaceMBTIInfo, PlaceReviewDataset } from 'vo/placeInfo';
 import { contentIdMapper } from 'vo/travelInfo';
 import PlaceDetailReviewList from './PlaceDetailReviewList';
 
@@ -23,8 +23,8 @@ export interface DetailPlaceProps {
     name: string;
     description: string;
     address: string;
-    moodArr: string[];
-    mbtiArr: PlaceBookmarkInfo[];
+    tasteList: string[];
+    mbtiArr: PlaceMBTIInfo[];
     comments: PlaceReviewDataset[];
     onReset: () => void;
 }
@@ -105,9 +105,9 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 <Divider />
                 <PlaceAdressDetail address={props.address} />
                 <Divider />
-                {props.moodArr.length > 0 ? (
+                {props.tasteList.length > 0 ? (
                     <>
-                        <DetailBubbleChart moodArr={props.moodArr} />
+                        <DetailBubbleChart tasteList={props.tasteList} />
                         <Divider />
                     </>
                 ) : (

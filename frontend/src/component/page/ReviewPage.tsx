@@ -1,6 +1,4 @@
-import { Alert, Box, Snackbar, Typography } from '@mui/material';
-import BackArrowBtn from 'component/basic/common/BackArrowBtn';
-import CommonBtn from 'component/basic/common/CommonBtn';
+import { Alert, Snackbar } from '@mui/material';
 import ReviewLayout from 'component/layout/ReviewLayout';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,21 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
 import { registerReviewThunk, reviewInfoSelector } from 'redux/review';
 import { getUserName } from 'redux/userInfo';
-import styled from 'styled-components';
 import { UpdateReviewVO } from 'vo/review';
 import { PATH_HOME_PAGE } from './common';
-import DefaultPageContainer from './DefaultPageContainer';
-
-const WarningText = styled(Typography)`
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 19px;
-    letter-spacing: -0.05em;
-    color: #dc3a37;
-    margin-bottom: 1.25rem;
-`;
+import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 type ReqParams = 'placeName' | 'contentTypeId' | 'src' | 'contentId';
 
@@ -68,7 +54,7 @@ const ReviewPage = (): JSX.Element => {
         }
     }, [reviewInfoData]);
 
-    const onClickBackBtn = () => {
+    const onBackButtonClick = () => {
         navigate(-1);
     };
 
@@ -90,46 +76,29 @@ const ReviewPage = (): JSX.Element => {
         setSnakOpen(false);
     };
 
-    const onReviewSubmit = async () => {
+    const onBottomButtonClick = async () => {
         if (changeData.rating !== 0 && changeData.reviewText.trim().length >= 20) {
             await registerReview(userName, changeData.reviewText, changeData.rating, reqData.contentId);
-            onClickBackBtn();
+            onBackButtonClick();
         } else {
             setSnakOpen(true);
         }
     };
 
     return (
-        <DefaultPageContainer>
-            <Box display="flex" flexDirection="row" justifyContent="space-between">
-                <BackArrowBtn onClick={onClickBackBtn} />
-            </Box>
-            <Box flexGrow="1">
-                <ReviewLayout
-                    onRatingChange={onRatingChange}
-                    onTextChange={onReviewChange}
-                    {...reqData}
-                    {...changeData}
-                />
-            </Box>
-            <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
-                <WarningText>{t('reviewpage.warning')}</WarningText>
-                <CommonBtn
-                    style={{
-                        height: '3rem',
-                    }}
-                    isBlack={true}
-                    onClick={onReviewSubmit}
-                >
-                    {t('common.confirm')}
-                </CommonBtn>
-            </Box>
+        <CommonHeaderFooterComponent
+            buttonText={t('review.genreviewbtn')}
+            titleText={t('reviewedit.title')}
+            onBackButtonClick={onBackButtonClick}
+            onBottomButtonClick={onBottomButtonClick}
+        >
+            <ReviewLayout onRatingChange={onRatingChange} onTextChange={onReviewChange} {...reqData} {...changeData} />
             <Snackbar open={snakOpen} autoHideDuration={2000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                     {t('review.requireerror')}
                 </Alert>
             </Snackbar>
-        </DefaultPageContainer>
+        </CommonHeaderFooterComponent>
     );
 };
 

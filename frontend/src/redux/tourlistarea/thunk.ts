@@ -4,7 +4,8 @@ import { calculateLatLngDistance } from 'common/util';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
 import { KakaoNaviAPIRes, NaviPoint } from 'vo/gps';
-import { getTourlistAreaAction } from './actions';
+import { SigninInSignupInfo } from 'vo/signup';
+import { getMbtiDataUpdate, getTasteDataUpdate, getTourlistAreaAction } from './actions';
 import { TourlistAreaAction } from './reducer';
 
 const orderingDistanceRoutingPath = (currentGps: NaviPoint, routeInfo: NaviPoint[]): NaviPoint[] => {
@@ -41,12 +42,11 @@ const orderingDistanceRoutingPath = (currentGps: NaviPoint, routeInfo: NaviPoint
 export const retriveTourlistArea = (
     lat: number,
     lng: number,
-    name: string,
+    userInfo: SigninInSignupInfo,
     locale: string,
-    mbti?: string,
 ): ThunkAction<void, RootState, null, TourlistAreaAction> => {
     return async (dispatch) => {
-        const res = await retriveTourareaAPI(lng, lat, name, locale);
+        const res = await retriveTourareaAPI(lng, lat, userInfo.name, locale);
         const myPos: NaviPoint = {
             y: lat,
             x: lng,
@@ -67,11 +67,21 @@ export const retriveTourlistArea = (
 
         await dispatch(
             getTourlistAreaAction({
-                name,
-                mbti,
+                name: userInfo.name,
                 naviPoints: orderedRoute,
                 navigationResult,
                 total,
+            }),
+        );
+        userInfo.mbti &&
+            dispatch(
+                getMbtiDataUpdate({
+                    mbti: userInfo.mbti,
+                }),
+            );
+        dispatch(
+            getTasteDataUpdate({
+                tasteList: userInfo.tasteCodes,
             }),
         );
     };

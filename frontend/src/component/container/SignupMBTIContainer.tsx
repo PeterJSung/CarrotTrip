@@ -11,21 +11,22 @@ import {
     M_TWO_TYPE,
     M_TWO_VALUES,
 } from 'component/basic/Signup/signupconstants';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
 const includeTarget = <T extends MBTI_TYPE>(origin: T[], cmp: MBTI_TYPE): boolean => {
     return origin.includes(cmp as unknown as T);
 };
 
 export interface SignupMBTIContainerProps {
+    firstValue?: string;
     onMBTIChange: (result: string) => void;
 }
 
-const SignupMBTIContainer = ({ onMBTIChange }: SignupMBTIContainerProps): JSX.Element => {
-    const [first, setFirst] = useState<M_ONE_TYPE>();
-    const [second, setSecond] = useState<M_TWO_TYPE>();
-    const [third, setThird] = useState<M_THR_TYPE>();
-    const [four, setFour] = useState<M_FOR_TYPE>();
+const SignupMBTIContainer = ({ firstValue, onMBTIChange }: SignupMBTIContainerProps): JSX.Element => {
+    const [first, setFirst] = useState<M_ONE_TYPE>(firstValue?.[0] as any);
+    const [second, setSecond] = useState<M_TWO_TYPE>(firstValue?.[1] as any);
+    const [third, setThird] = useState<M_THR_TYPE>(firstValue?.[2] as any);
+    const [four, setFour] = useState<M_FOR_TYPE>(firstValue?.[3] as any);
 
     const onClick = useCallback((mbtiType: MBTI_TYPE) => {
         if (includeTarget(M_ONE_VALUES, mbtiType)) {
@@ -54,4 +55,4 @@ const SignupMBTIContainer = ({ onMBTIChange }: SignupMBTIContainerProps): JSX.El
     );
 };
 
-export default SignupMBTIContainer;
+export default memo(SignupMBTIContainer);
