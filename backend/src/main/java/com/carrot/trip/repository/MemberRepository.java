@@ -27,9 +27,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     ArrayList<Member> findByOrderByPointDesc();
 
-//    @Transactional
-//    @Modifying(clearAutomatically = true)
-//    @Query("UPDATE Member m set m.accountMoney = ?2, m.point = ?3 where m.nickname = ?1")
-//    int updateAccountMoneyAndPoint(@Param("usrNickname") String usrNickname, @Param("usrAccountMoney") Integer usrAccountMoney, @Param("usrPoint") Integer usrPoint);
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE Member m set m.mbti = ?2 where m.nickname = ?1")
+    int updateMbti(@Param("nickname") String nickname, @Param("mbti") String mbti);
 
 }
