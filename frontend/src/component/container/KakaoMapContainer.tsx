@@ -87,7 +87,9 @@ const KakaoMapContainer = (): JSX.Element => {
     useEffect(() => {
         getGeoLocationInfo(async (lat: number, lng: number) => {
             const res = await getC2RData(lat, lng);
-            typeof userInfo !== 'string' && retriveTourThunk(lat, lng, userInfo.name, i18n.language, userInfo.mbti);
+            if (userInfo.isLogin) {
+                retriveTourThunk(lat, lng, userInfo, i18n.language);
+            }
             updateGpsState(lat, lng, parserRegionStr(res));
         });
     }, []);

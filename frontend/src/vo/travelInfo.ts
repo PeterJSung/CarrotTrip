@@ -120,7 +120,7 @@ interface PlaceRefInfo {
     src: string;
 }
 
-export type Suggestion_Event_Type = 'NONE' | 'PLACEDETAIL' | 'COURSE' | 'MBTI' | 'ETC' | 'FILTER'; // filter 일때만 관광지 음식점 이런 기준정보로 보여줌
+export type Suggestion_Event_Type = 'NONE' | 'PLACEDETAIL' | 'COURSE' | 'MBTI' | 'TENDENCY' | 'ETC' | 'FILTER'; // filter 일때만 관광지 음식점 이런 기준정보로 보여줌
 
 interface SuggestionTabInfo {
     type: Suggestion_Event_Type;
@@ -142,6 +142,7 @@ export enum CONTENT_ID_TRANSLATION {
     // below Key is customization
     RECOMMAND = 'travelinfo.suggestion.recommend', // 관광지
     MBTI = 'travelinfo.suggestion.mbti',
+    TENDENCY = 'travelinfo.suggestion.tendency',
     ETC = 'travelinfo.suggestion.etc',
 }
 
@@ -189,6 +190,7 @@ export const i18n_SUGGESTION_REF: SuggestionTabInfo[] = [
     { type: 'FILTER', dataset: contentIdMapper[39] },
     { type: 'FILTER', dataset: contentIdMapper[38] },
     { type: 'MBTI', dataset: { targetCode: 200, translateKey: CONTENT_ID_TRANSLATION.MBTI } },
+    { type: 'TENDENCY', dataset: { targetCode: 400, translateKey: CONTENT_ID_TRANSLATION.TENDENCY } },
     { type: 'ETC', dataset: { targetCode: 300, translateKey: CONTENT_ID_TRANSLATION.ETC } },
 ];
 

@@ -8,7 +8,7 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
 import { currentGps } from 'redux/gps';
 import { getCurrentInteractionType, getTypeOneData, updateInetractionStack } from 'redux/mapinteractionstack';
-import { getToutlistArr } from 'redux/tourlistarea';
+import { getMbtiInfoArr, getTasteInfoArr, getToutlistArr } from 'redux/tourlistarea';
 import { getUserMbti } from 'redux/userInfo';
 import styled from 'styled-components';
 import { Interaction2Type } from 'vo/mapInteraction';
@@ -28,8 +28,10 @@ const SuggestionSheet = styled(BottomSheet)`
 const RenderList = (data: Interaction2Type) => {
     const tourlistInfo = useSelector(getToutlistArr);
     const currentGpsInfo = useSelector(currentGps);
+    const mbtiArr = useSelector(getMbtiInfoArr);
+    const tasteArr = useSelector(getTasteInfoArr);
     const updateInteraction = useThunk(updateInetractionStack);
-    console.log(data.tabIdx);
+
     if (data.tabIdx === 100) {
         return (
             <RecommandCourseList
@@ -81,8 +83,69 @@ const RenderList = (data: Interaction2Type) => {
                 }}
             />
         );
+    } else if (data.tabIdx === 200) {
+        return (
+            <SuggestionItemList
+                dataSet={mbtiArr}
+                selectedId={data.selectedData?.id}
+                onListClick={async (id: number) => {
+                    /**
+                    const idx = mbtiArr.findIndex((d) => d.contentId === id);
+
+                    await updateInteraction({
+                        type: 'Interaction2',
+                        tabIdx: data.tabIdx,
+                        selectedData: {
+                            id,
+                            pos: {
+                                lat: mbtiArr[idx].lat,
+                                lng: mbtiArr[idx].lng,
+                                zoom: DEFAULT_MAP_LEVEL,
+                            },
+                        },
+                    });
+                    await updateInteraction({
+                        type: 'Interaction3',
+                        id,
+                        eventTypeId: data.tabIdx,
+                    });
+                     */
+                }}
+            />
+        );
+    } else if (data.tabIdx === 400) {
+        return (
+            <SuggestionItemList
+                dataSet={tasteArr}
+                selectedId={data.selectedData?.id}
+                onListClick={async (id: number) => {
+                    /**
+                    const idx = tasteArr.findIndex((d) => d.contentId === id);
+
+                    await updateInteraction({
+                        type: 'Interaction2',
+                        tabIdx: data.tabIdx,
+                        selectedData: {
+                            id,
+                            pos: {
+                                lat: tasteArr[idx].lat,
+                                lng: tasteArr[idx].lng,
+                                zoom: DEFAULT_MAP_LEVEL,
+                            },
+                        },
+                    });
+                    await updateInteraction({
+                        type: 'Interaction3',
+                        id,
+                        eventTypeId: data.tabIdx,
+                    });
+                     */
+                }}
+            />
+        );
     } else {
-        return <div>A</div>;
+        console.error(`Tab index not defined please check ${data.tabIdx}`);
+        return null;
     }
 };
 

@@ -14,6 +14,8 @@ const getCurrentInteractionType = (state: RootState): Suggestion_Event_Type => {
             return 'MBTI';
         } else if (interactionStack[0].tabIdx === 100) {
             return 'COURSE';
+        } else if (interactionStack[0].tabIdx === 400) {
+            return 'TENDENCY';
         }
     } else if (interactionStack.length === 2 && interactionStack[1]) {
         return 'PLACEDETAIL';

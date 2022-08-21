@@ -49,7 +49,7 @@ export interface PlaceDetailInformation {
     description: string;
     adress: string;
     tasteList: number[];
-    mbtiArr: PlaceBookmarkInfo[];
+    mbtiArr: PlaceMBTIInfo[];
     reviewArr: PlaceReviewRetiriveInfo[];
 }
 
@@ -58,7 +58,7 @@ export interface WritedReviewInfo {
     reviewText: string;
 }
 
-export interface PlaceBookmarkInfo {
+export interface PlaceMBTIInfo {
     mbtiStr: string;
     percentage: number;
 }

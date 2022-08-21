@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import { smallHeadText } from 'component/basic/Detail/detailCommon';
 import { useTranslation } from 'react-i18next';
-import { PlaceBookmarkInfo } from 'vo/placeInfo';
+import { PlaceMBTIInfo } from 'vo/placeInfo';
 
 export interface DetailMBTIProps {
-    mbtiArr: PlaceBookmarkInfo[];
+    mbtiArr: PlaceMBTIInfo[];
 }
 
 const DetailMBTI = (props: DetailMBTIProps): JSX.Element => {

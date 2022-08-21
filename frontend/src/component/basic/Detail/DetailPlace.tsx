@@ -11,7 +11,7 @@ import { useThunk } from 'redux/common';
 import { registerReviewThunk, updateReviewThunk } from 'redux/review';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
-import { PlaceBookmarkInfo, PlaceReviewDataset } from 'vo/placeInfo';
+import { PlaceMBTIInfo, PlaceReviewDataset } from 'vo/placeInfo';
 import { contentIdMapper } from 'vo/travelInfo';
 import PlaceDetailReviewList from './PlaceDetailReviewList';
 
@@ -24,7 +24,7 @@ export interface DetailPlaceProps {
     description: string;
     address: string;
     tasteList: string[];
-    mbtiArr: PlaceBookmarkInfo[];
+    mbtiArr: PlaceMBTIInfo[];
     comments: PlaceReviewDataset[];
     onReset: () => void;
 }
