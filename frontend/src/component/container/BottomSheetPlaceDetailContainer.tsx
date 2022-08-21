@@ -55,7 +55,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
             description: data.overview,
             mbtiArr: [],
             comments: data.commentList.filter((d) => d.comments !== undefined),
-            moodArr: data.tasteList,
+            tasteList: data.tasteList,
             name: item.title,
             src: item.src,
             type: item.contentTypeId,

@@ -19,7 +19,7 @@ const initialState: PlaceInfoState = {
             adress: '',
             description: '',
             mbtiArr: [],
-            moodArr: [],
+            tasteList: [],
             reviewArr: [],
         },
     },

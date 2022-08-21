@@ -48,7 +48,7 @@ export interface PlaceBasicInformation {
 export interface PlaceDetailInformation {
     description: string;
     adress: string;
-    moodArr: number[];
+    tasteList: number[];
     mbtiArr: PlaceBookmarkInfo[];
     reviewArr: PlaceReviewRetiriveInfo[];
 }

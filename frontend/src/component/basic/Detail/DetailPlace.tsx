@@ -23,7 +23,7 @@ export interface DetailPlaceProps {
     name: string;
     description: string;
     address: string;
-    moodArr: string[];
+    tasteList: string[];
     mbtiArr: PlaceBookmarkInfo[];
     comments: PlaceReviewDataset[];
     onReset: () => void;
@@ -105,9 +105,9 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
                 <Divider />
                 <PlaceAdressDetail address={props.address} />
                 <Divider />
-                {props.moodArr.length > 0 ? (
+                {props.tasteList.length > 0 ? (
                     <>
-                        <DetailBubbleChart moodArr={props.moodArr} />
+                        <DetailBubbleChart tasteList={props.tasteList} />
                         <Divider />
                     </>
                 ) : (

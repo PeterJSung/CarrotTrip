@@ -18,7 +18,7 @@ export const detailPlace = () => (
         address="testAddress"
         description="testDesc"
         mbtiArr={[]}
-        moodArr={['1', '4', '6', '8', '9', '13']}
+        tasteList={['1', '4', '6', '8', '9', '13']}
         name="testName"
         type={12}
         onReset={action('On Reset')}
