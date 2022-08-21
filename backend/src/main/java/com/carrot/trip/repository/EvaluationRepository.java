@@ -15,6 +15,8 @@ public interface EvaluationRepository  extends JpaRepository<Evaluation, Long> {
 
     ArrayList<Evaluation> findByMemberNickname(String memberNickname);
 
+    ArrayList<Evaluation> findByMemberNicknameOrderByRegDtDesc(String memberNickname);
+
     Evaluation findByMemberNicknameAndApiId(String memberNickname, Long apiIds);
 
     ArrayList<Evaluation> findByMemberNicknameAndApiIdIn(String memberNickname, ArrayList<Long> apiIds);
