@@ -51,6 +51,17 @@ const ReviewIndicatorText = styled(Typography)`
     text-align: right;
 `;
 
+const WarningText = styled(Typography)`
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+    letter-spacing: -0.05em;
+    color: #dc3a37;
+    margin-bottom: 1.25rem;
+`;
+
 const ImgTag = styled.img`
     border-radius: 0.5rem;
     width: 100%;
@@ -61,8 +72,8 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
     const { t } = useTranslation();
     const label = contentIdMapper[props.contentTypeId] ? t(contentIdMapper[props.contentTypeId].translateKey) : '';
     return (
-        <>
-            <Box height="7rem" display="flex" px="1.25rem" pb="1.5rem" pt="0.5rem" justifyContent="space-between">
+        <Box px="1.25rem">
+            <Box height="7rem" display="flex" pb="1.5rem" pt="0.5rem" justifyContent="space-between">
                 <Box
                     borderRadius="0.5rem"
                     flex="1"
@@ -82,7 +93,7 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
                 </Box>
             </Box>
 
-            <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
+            <Box display="flex" py="1.5rem" flexDirection="column">
                 <RatingTitle>{t('review.rating')}</RatingTitle>
                 <RatingComponent
                     ratingsize="big"
@@ -93,7 +104,7 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
                 />
             </Box>
 
-            <Box display="flex" px="1.25rem" py="1.5rem" flexDirection="column">
+            <Box display="flex" py="1.5rem" flexDirection="column">
                 <RatingTitle>{t('review.write')}</RatingTitle>
                 <ReviewTextField
                     multiline
@@ -106,7 +117,8 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
                     {t('review.limit', { length: props.reviewText.trim().length })}
                 </ReviewIndicatorText>
             </Box>
-        </>
+            <WarningText>{t('reviewpage.warning')}</WarningText>
+        </Box>
     );
 };
 

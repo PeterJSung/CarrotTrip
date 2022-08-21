@@ -50,7 +50,9 @@ const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooter
                     <TitleTypo>{props.titleText}</TitleTypo>
                 </Box>
             </Box>
-            <Box flexGrow="1">{props.children}</Box>
+            <Box flexGrow="1" marginLeft="1rem" marginRight="1rem">
+                {props.children}
+            </Box>
             <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
                 <CommonBtn
                     style={{
