@@ -2,9 +2,11 @@ package com.carrot.trip.service;
 
 import com.carrot.trip.dto.MemberDTO;
 import com.carrot.trip.dto.SignUpDTO;
+import com.carrot.trip.entity.Evaluation;
 import com.carrot.trip.entity.Member;
 import com.carrot.trip.entity.MemberTaste;
 import com.carrot.trip.exception.CustomException;
+import com.carrot.trip.repository.EvaluationRepository;
 import com.carrot.trip.repository.MemberRepository;
 import com.carrot.trip.repository.MemberTasteRepository;
 import com.carrot.trip.type.ErrorCode;
@@ -25,6 +27,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final MemberTasteRepository memberTasteRepository;
+    private final EvaluationRepository evaluationRepository;
 
     public Map<String, String> createMember(Map<String, String> user) throws IOException {
         if (isExistUserByNickname(user.get("nickname"))) {
@@ -49,6 +52,14 @@ public class MemberService {
 
     public boolean isExistUserByNickname(String nickname) {
         return memberRepository.existsByNickname(nickname);
+    }
+
+    public int updateMbti(String nickname, String mbti) {
+        return memberRepository.updateMbti(nickname, mbti);
+    }
+
+    public ArrayList<Evaluation> getMyCommentsList(String nickname) {
+        return evaluationRepository.findByMemberNicknameOrderByRegDtDesc(nickname);
     }
 
 }

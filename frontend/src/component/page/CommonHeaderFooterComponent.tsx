@@ -28,6 +28,7 @@ const TitleTypo = styled.span`
 
 const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooterComponentProps>): JSX.Element => {
     const margin = props.isNonMargin ? 0 : 1;
+
     return (
         <DefaultPageContainer>
             <Box position="relative">

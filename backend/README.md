@@ -196,6 +196,75 @@ X-AUTH-TOKEN: {JWT TOKEN}
 ```
 코드 별 코드네임은 CategoryCode.java 참조
 
+###  3.2 사용자의 MBTI 수정
+#### URI
+``POST`` ``/api/member/mbti``
+#### Header
+Content-Type: application/json
+
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Request
+```json
+{
+  "nickname": "태호",
+  "mbti": "ENTP"
+}
+```
+#### Response
+```json
+{
+  "statusCode": "OK",
+  "message": "SUCCESS",
+  "data": 1
+}
+```
+
+###  3.3 사용자의 등록 코멘트 조회
+#### URI
+``GET`` ``/api/member/태호/comments``
+#### Header
+Content-Type: application/json
+
+X-AUTH-TOKEN: {JWT TOKEN}
+#### Response
+```json
+[
+  {
+    "id": 412,
+    "memberNickname": "태호",
+    "apiId": 1753572,
+    "score": 4.0,
+    "comments": "좋아요~! 4",
+    "regDt": "2022-08-21 14:43:49"
+  },
+  {
+    "id": 364,
+    "memberNickname": "태호",
+    "apiId": 2660539,
+    "score": 5.0,
+    "comments": "좋아요~! 5",
+    "regDt": "2022-08-21 14:43:49"
+  },
+  {
+    "id": 368,
+    "memberNickname": "태호",
+    "apiId": 1954262,
+    "score": 5.0,
+    "comments": "좋아요~! 5",
+    "regDt": "2022-08-21 14:43:49"
+  },
+  {
+    "id": 372,
+    "memberNickname": "태호",
+    "apiId": 2744513,
+    "score": 1.0,
+    "comments": "좋아요~! 1",
+    "regDt": "2022-08-21 14:43:49"
+  }
+]
+```
+
+
 ## 4. 특정 사용자 대한 성향 등록 페이지 (Onboarding_05)
 ###  4.1 특정 사용자 대한 성향 등록 (조용한 / 차분한 / 활기있는 / 열정적인 / 모험적인 / 재미있는 / 친근한 / 온화한 / 즉흥적인 / 엉뚱한 / 소심한 / 내성적인 / 복잡한 / 계획적인 / 자연친화적)
 #### URI

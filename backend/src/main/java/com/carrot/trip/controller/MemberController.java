@@ -6,6 +6,7 @@ import com.carrot.trip.config.JwtTokenProvider;
 import com.carrot.trip.dto.MemberDTO;
 import com.carrot.trip.dto.SignUpDTO;
 import com.carrot.trip.dto.TokenDTO;
+import com.carrot.trip.entity.Evaluation;
 import com.carrot.trip.entity.Member;
 import com.carrot.trip.repository.MemberRepository;
 import com.carrot.trip.service.MemberService;
@@ -85,5 +86,14 @@ public class MemberController {
         }
     }
 
+    @PostMapping("/member/mbti")
+    public Response<Integer> updateMbti(@RequestBody MemberDTO member) {
+        return Response.ok(memberService.updateMbti(member.getNickname(), member.getMbti()));
+    }
+
+    @GetMapping("/member/{nickname}/comments")
+    public ArrayList<Evaluation> getComments(@PathVariable("nickname") String nickname) {
+        return memberService.getMyCommentsList(nickname);
+    }
 
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class MemberDTO implements Serializable {
     private String name;
     private String nickname;
+    private String mbti;
     private Long id;
     private String phoneNumber;
     private String accountNumber;

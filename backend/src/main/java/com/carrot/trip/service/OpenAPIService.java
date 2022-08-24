@@ -257,7 +257,8 @@ public class OpenAPIService {
 
             ArrayList<Evaluation> partiUsers = evaluationRepository.findByApiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
             for(int j = 0; j < partiUsers.size(); j++){
-                Member partiMBTI = memberRepository.findByNickname(partiUsers.get(j).getMemberNickname()).orElseThrow(() -> new IllegalArgumentException("가입되지 않은 닉네임 입니다."));
+                String pivotNickname = partiUsers.get(j).getMemberNickname();
+                Member partiMBTI = memberRepository.findByNickname(partiUsers.get(j).getMemberNickname()).orElseThrow(() -> new IllegalArgumentException("가입되지 않은 닉네임 입니다 : " + pivotNickname));
                 Evaluation partiScore = evaluationRepository.findByMemberNicknameAndApiId(partiUsers.get(j).getMemberNickname(), dto.getResponse().getBody().getItems().getItem().get(i).getContentid());
 
                 if (scoreSumByMBTI.get(partiMBTI.getMbti()) == null){
