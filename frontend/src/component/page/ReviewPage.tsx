@@ -87,10 +87,14 @@ const ReviewPage = (): JSX.Element => {
 
     return (
         <CommonHeaderFooterComponent
-            buttonText={t('review.genreviewbtn')}
-            titleText={t('reviewedit.title')}
-            onBackButtonClick={onBackButtonClick}
-            onBottomButtonClick={onBottomButtonClick}
+            title={{
+                text: t('reviewedit.title'),
+                callBack: onBackButtonClick,
+            }}
+            bottom={{
+                text: t('review.genreviewbtn'),
+                callBack: onBottomButtonClick,
+            }}
         >
             <ReviewLayout onRatingChange={onRatingChange} onTextChange={onReviewChange} {...reqData} {...changeData} />
             <Snackbar open={snakOpen} autoHideDuration={2000} onClose={handleClose}>

@@ -5,11 +5,15 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import DefaultPageContainer from './DefaultPageContainer';
 
+interface Info {
+    text: string;
+    callBack: () => void;
+}
+
 interface CommonHeaderFooterComponentProps {
-    titleText: string;
-    onBackButtonClick: () => void;
-    buttonText: string;
-    onBottomButtonClick: () => void;
+    title: Info;
+    bottom?: Info;
+    isNonMargin?: boolean;
 }
 
 const TitleTypo = styled.span`
@@ -23,6 +27,8 @@ const TitleTypo = styled.span`
 `;
 
 const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooterComponentProps>): JSX.Element => {
+    const margin = props.isNonMargin ? 0 : 1;
+
     return (
         <DefaultPageContainer>
             <Box position="relative">
@@ -33,7 +39,7 @@ const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooter
                         float: 'left',
                     }}
                 >
-                    <BackArrowBtn onClick={props.onBackButtonClick} />
+                    <BackArrowBtn onClick={props.title.callBack} />
                 </Box>
 
                 <Box
@@ -47,23 +53,25 @@ const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooter
                     top="0"
                     bottom="0"
                 >
-                    <TitleTypo>{props.titleText}</TitleTypo>
+                    <TitleTypo>{props.title.text}</TitleTypo>
                 </Box>
             </Box>
-            <Box flexGrow="1" marginLeft="1rem" marginRight="1rem">
+            <Box display="flex" flexDirection="column" flexGrow="1" mx={`${margin}rem`}>
                 {props.children}
             </Box>
-            <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
-                <CommonBtn
-                    style={{
-                        height: '3rem',
-                    }}
-                    isBlack={true}
-                    onClick={props.onBottomButtonClick}
-                >
-                    {props.buttonText}
-                </CommonBtn>
-            </Box>
+            {props.bottom && (
+                <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
+                    <CommonBtn
+                        style={{
+                            height: '3rem',
+                        }}
+                        isBlack={true}
+                        onClick={props.bottom.callBack}
+                    >
+                        {props.bottom.text}
+                    </CommonBtn>
+                </Box>
+            )}
         </DefaultPageContainer>
     );
 };

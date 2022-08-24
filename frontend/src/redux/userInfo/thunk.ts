@@ -48,7 +48,7 @@ export const sessionOutThunk = (): ThunkAction<void, RootState, null, UserInfoAc
                 mbti: '',
                 name: '',
                 tasteCodes: [],
-                isLogin: true,
+                isLogin: false,
             }),
         );
     };

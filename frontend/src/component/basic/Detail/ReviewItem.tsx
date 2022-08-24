@@ -3,6 +3,7 @@ import { MouseEvent, useState } from 'react';
 import ClampLines from 'react-clamp-lines';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import AvartarGenerator from '../common/AvartarGenerator';
 import CommonRating from '../common/CommonRating';
 // this code is based from https://github.com/EliEladElrom/react-tutorials/blob/master/bubble-chart/src/components/BubbleChart/BubbleChart.tsx
 export interface ReviewItemProps {
@@ -192,16 +193,9 @@ const ReviewItem = (props: ReviewItemProps): JSX.Element => {
     const id = open ? 'simple-popover' : undefined;
     return (
         <Box display="flex">
-            <Box
-                mr="1rem"
-                width="3rem"
-                height="3rem"
-                borderRadius="50%"
-                style={{
-                    objectFit: 'cover',
-                    backgroundImage: 'url(https://wildcard.codestuff.io/r/250/250)',
-                }}
-            />
+            <Box mr="1rem">
+                <AvartarGenerator sz={3} id={props.userName} />
+            </Box>
 
             <Box display="flex" flexDirection="column" flexGrow="1">
                 <Box display="flex" mb="0.5rem">
