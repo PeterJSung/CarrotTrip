@@ -4,13 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getUserMbti } from 'redux/userInfo';
-import { UpdateReviewVO } from 'vo/review';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
-
-type ReqParams = 'placeName' | 'contentTypeId' | 'src' | 'contentId';
-
-type ReqSet = Pick<UpdateReviewVO, ReqParams>;
-type ChangeSet = Omit<UpdateReviewVO, ReqParams>;
 
 const EditMbtiPage = (): JSX.Element => {
     const { t } = useTranslation();
@@ -28,10 +22,14 @@ const EditMbtiPage = (): JSX.Element => {
 
     return (
         <CommonHeaderFooterComponent
-            buttonText={t('common.dosave')}
-            titleText={t('mbtiedit.title')}
-            onBackButtonClick={onBackButtonClick}
-            onBottomButtonClick={onBottomButtonClick}
+            bottom={{
+                text: t('common.dosave'),
+                callBack: onBottomButtonClick,
+            }}
+            title={{
+                text: t('mbtiedit.title'),
+                callBack: onBackButtonClick,
+            }}
         >
             <SignupMBTIContainer firstValue={initialValue} onMBTIChange={setMBTIStr} />
         </CommonHeaderFooterComponent>

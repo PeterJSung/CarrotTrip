@@ -6,6 +6,7 @@ import { getIsLogin } from 'redux/userInfo';
 import {
     PATH_HOME_PAGE,
     PATH_LANDING_PAGE,
+    PATH_MYPROFILE_PAGE,
     PATH_REVIEW_PAGE,
     PATH_SIGNIN_PAGE,
     PATH_SIGNUP_LOADING_PAGE,
@@ -13,6 +14,7 @@ import {
 } from './page/common';
 import HomePage from './page/HomePage';
 import LandingPage from './page/LandingPage';
+import MyProfilePage from './page/MyProfilePage';
 import ReviewPage from './page/ReviewPage';
 import SigninPage from './page/SigninPage';
 import SignupLoadingPage from './page/SignupLoadingPage';
@@ -30,6 +32,7 @@ const App = (): JSX.Element => {
             <Route element={<RouterGuard redirectPath={PATH_LANDING_PAGE} isAllowed={isLogin} />}>
                 <Route path={PATH_HOME_PAGE} element={<HomePage />} />
                 <Route path={PATH_REVIEW_PAGE} element={<ReviewPage />} />
+                <Route path={PATH_MYPROFILE_PAGE} element={<MyProfilePage />} />
             </Route>
             <Route element={<RouterGuard redirectPath={PATH_HOME_PAGE} isAllowed={!isLogin} />}>
                 <Route path={PATH_LANDING_PAGE} element={<LandingPage />} />
