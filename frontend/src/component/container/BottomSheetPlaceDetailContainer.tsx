@@ -9,6 +9,7 @@ import { getSuggestionListArr } from 'redux/tourlistarea';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 import { Interaction3Type } from 'vo/mapInteraction';
+import { PlaceMBTIInfo } from 'vo/placeInfo';
 
 const PlaceDetailSheet = styled(BottomSheet)`
     & > div {
@@ -48,6 +49,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
         const idx = totalDataArr[typeTwoData.eventTypeId].findIndex((d) => d.contentId === typeTwoData.id);
         const item = totalDataArr[typeTwoData.eventTypeId][idx];
         const data = await retrievePlaceDetail(item.contentId);
+        const mbtiArr: PlaceMBTIInfo[] = [];
         setRenderData({
             contentId: item.contentId,
             userName,
