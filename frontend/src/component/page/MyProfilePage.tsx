@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
 import { getUserName, sessionOutThunk } from 'redux/userInfo';
 import styled from 'styled-components';
+import { PATH_EDITLANGUAGE_PAGE, PATH_EDITMBTI_PAGE, PATH_EDITTASTE_PAGE } from './common';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 type DialogType = 'signout' | 'concession';
@@ -52,10 +53,10 @@ const MyProfilePage = (): JSX.Element => {
     };
 
     const dataRender = [
-        (/**내여행성향 */) => navigate('/'),
-        (/**내MBTI */) => navigate('/'),
+        (/**내여행성향 */) => navigate(PATH_EDITTASTE_PAGE),
+        (/**내MBTI */) => navigate(PATH_EDITMBTI_PAGE),
         (/**나의리뷰관리 */) => navigate('/'),
-        (/**언어 */) => navigate('/'),
+        (/**언어 */) => navigate(PATH_EDITLANGUAGE_PAGE),
         (/**signout */) => {
             setDialogInfo({
                 open: true,
@@ -98,7 +99,11 @@ const MyProfilePage = (): JSX.Element => {
                     <UserInfoTypo>{t('myprofile.lowertext', { name: userName })}</UserInfoTypo>
                 </Box>
             </Box>
-            <List>
+            <List
+                style={{
+                    padding: 0,
+                }}
+            >
                 {dataRender.map((cb, idx) => (
                     <Fragment key={idx}>
                         <Divider />

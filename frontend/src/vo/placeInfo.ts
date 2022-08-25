@@ -60,7 +60,7 @@ export interface WritedReviewInfo {
 
 export interface PlaceMBTIInfo {
     mbtiStr: string;
-    percentage: number;
+    score: number;
 }
 
 export type PlaceReviewRetiriveInfo = {

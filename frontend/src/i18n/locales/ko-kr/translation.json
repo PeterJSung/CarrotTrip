@@ -3,7 +3,7 @@
     "bottomsheet.totalcourse": "전체 코스보기",
     "bottomsheet.avg": "평균",
     "placeinfo.mood": "분위기",
-    "placeinfo.mookmarktext": "{{ mbti }} {{ percent }}%가 북마크한 장소에요.",
+    "placeinfo.mookmarktext": "이 장소에 대한 MBTI 선호도에요.",
     "placeinfo.address": "주소",
     "signup.onboard.banner.satisfymenu": "얼마나 만족스러웠나요?",
     "signup.onboard.banner.require": "필수입력",

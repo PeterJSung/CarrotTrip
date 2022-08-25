@@ -42,14 +42,22 @@ const BadgeIcon = (props: { color: string }): JSX.Element => (
 );
 
 const MBTIWrapper = styled(Chip)`
-    width: 8.43rem !important;
+    width: 100%;
     height: 2.62rem !important;
     border-radius: 0.5rem !important;
     font-family: Lato !important;
     font-style: normal !important;
     font-weight: 700 !important;
-    font-size: 15px !important;
+    font-size: 0.7rem !important;
     line-height: 18px !important;
+    & svg {
+        margin-left: 0.5rem;
+        margin-right: 0.4rem;
+    }
+    & span {
+        padding: 0 !important;
+        flex-grow: 1;
+    }
 `;
 
 const MBTIChip = (props: MBTIChipProps): JSX.Element => {
@@ -60,7 +68,7 @@ const MBTIChip = (props: MBTIChipProps): JSX.Element => {
                 backgroundColor: colorInfo.bg,
                 color: colorInfo.main,
             }}
-            label="test"
+            label={`${props.type} • ${props.score}`}
             icon={<BadgeIcon color={colorInfo.main} />}
         />
     );

@@ -20,6 +20,7 @@ const PlaceDetailSheet = styled(BottomSheet)`
         position: absolute;
         width: 100%;
         box-shadow: unset !important;
+        height: 1rem;
     }
     & [data-rsbs-overlay] {
         overflow: hidden;
@@ -49,13 +50,22 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
         const idx = totalDataArr[typeTwoData.eventTypeId].findIndex((d) => d.contentId === typeTwoData.id);
         const item = totalDataArr[typeTwoData.eventTypeId][idx];
         const data = await retrievePlaceDetail(item.contentId);
-        const mbtiArr: PlaceMBTIInfo[] = [];
+        console.log(data);
+        let mbtiArr: PlaceMBTIInfo[] = [];
+        for (const idxKey in data.mbtiRanking) {
+            mbtiArr.push({
+                mbtiStr: idxKey,
+                score: data.mbtiRanking[idxKey],
+            });
+        }
+
+        mbtiArr = mbtiArr.sort((b, a) => a.score - b.score);
         setRenderData({
             contentId: item.contentId,
             userName,
             address: item.addr,
             description: data.overview,
-            mbtiArr: [],
+            mbtiArr,
             comments: data.commentList.filter((d) => d.comments !== undefined),
             tasteList: data.tasteList,
             name: item.title,

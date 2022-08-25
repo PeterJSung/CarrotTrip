@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { getC2RData } from 'api/coord2region';
-import { getGeoLocationInfo, parserRegionStr } from 'common/util';
+import { getGeoLocationInfo, getRandomArbitrary, parserRegionStr } from 'common/util';
 import AvartarGenerator from 'component/basic/common/AvartarGenerator';
 import { PATH_MYPROFILE_PAGE } from 'component/page/common';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,8 @@ import MyLocationBtn from '../basic/KakaoMap/MyLocationBtn';
 import RegionDiscription from '../basic/KakaoMap/RegionDiscription';
 import CommonIndicator from './CommonIndicator';
 
+const DIFF = 1000000000;
+
 const IndicatorMapRegion = (): JSX.Element => {
     const navigation = useNavigate();
     const currentGpsInfo = useSelector(currentGps);
@@ -20,9 +22,10 @@ const IndicatorMapRegion = (): JSX.Element => {
 
     const myLocationBtnClick = () => {
         getGeoLocationInfo(async (lat: number, lng: number) => {
+            const ranLat = getRandomArbitrary(0, 9) / DIFF;
+            const ranLng = getRandomArbitrary(0, 9) / DIFF;
             const res = await getC2RData(lat, lng);
-            updateGpsState(lat, lng, parserRegionStr(res));
-            //updateGpsState(lat, lng, DEFAULT_MAP_LEVEL, parserRegionStr(res));
+            updateGpsState(lat + ranLat, lng + ranLng, parserRegionStr(res));
         });
     };
 
