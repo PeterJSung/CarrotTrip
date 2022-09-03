@@ -1,9 +1,11 @@
+import { Alert, Snackbar } from '@mui/material';
 import SignupMBTIContainer from 'component/container/SignupMBTIContainer';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserMbti } from 'redux/userInfo';
+import { useThunk } from 'redux/common';
+import { getUserMbti, updateMBTIThunk } from 'redux/userInfo';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 const EditMbtiPage = (): JSX.Element => {
@@ -11,13 +13,23 @@ const EditMbtiPage = (): JSX.Element => {
     const initialValue = useSelector(getUserMbti);
     const [mbtiStr, setMBTIStr] = useState<string | undefined>(initialValue);
     const navigate = useNavigate();
+    const updateMBTI = useThunk(updateMBTIThunk);
+
+    const [open, setOpen] = useState<boolean>(false);
 
     const onBackButtonClick = () => {
         navigate(-1);
     };
 
-    const onBottomButtonClick = () => {
-        console.log('BottomClick');
+    const onBottomButtonClick = async () => {
+        if (mbtiStr) {
+            await updateMBTI(mbtiStr);
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -32,6 +44,11 @@ const EditMbtiPage = (): JSX.Element => {
             }}
         >
             <SignupMBTIContainer firstValue={initialValue} onMBTIChange={setMBTIStr} />
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    {t('myprofile.mbtichange', { mbti: mbtiStr })}
+                </Alert>
+            </Snackbar>
         </CommonHeaderFooterComponent>
     );
 };

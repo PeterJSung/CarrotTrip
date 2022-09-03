@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
-import { getUserName, sessionOutThunk } from 'redux/userInfo';
+import { deleteUserThunk, signoutThunk } from 'redux/signoutsession';
+import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 import { PATH_EDITLANGUAGE_PAGE, PATH_EDITMBTI_PAGE, PATH_EDITTASTE_PAGE } from './common';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
@@ -37,7 +38,9 @@ const MyProfilePage = (): JSX.Element => {
         open: false,
         type: 'concession',
     });
-    const signoutFn = useThunk(sessionOutThunk);
+    //const signoutFn = useThunk(sessionOutThunk);
+    const signoutFn = useThunk(signoutThunk);
+    const deleteUserFn = useThunk(deleteUserThunk);
     const userName = useSelector(getUserName);
     const navigate = useNavigate();
 
@@ -75,6 +78,7 @@ const MyProfilePage = (): JSX.Element => {
     const onClick = (type: DialogType) => {
         switch (type) {
             case 'concession':
+                deleteUserFn();
                 break;
             case 'signout':
                 signoutFn();
@@ -118,7 +122,7 @@ const MyProfilePage = (): JSX.Element => {
                 <Divider />
             </List>
             <Box display="flex" justifyContent="center" flexGrow="1" alignItems="flex-end" mb="2rem">
-                <SignoutTypo onClick={onClickConCession}>회원탈퇴</SignoutTypo>
+                <SignoutTypo onClick={onClickConCession}>{t('myprofile.bottommenu')}</SignoutTypo>
             </Box>
 
             <Dialog open={dialogInfo.open} onClose={onClose}>

@@ -1,10 +1,12 @@
+import { Alert, Snackbar } from '@mui/material';
 import SelectChipDisplay from 'component/basic/Signup/SelectChipDisplay';
 import { getImpressionAllData, SelectChipVO } from 'component/basic/Signup/signupconstants';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserTasteCodes } from 'redux/userInfo';
+import { useThunk } from 'redux/common';
+import { getUserTasteCodes, updateTasteThunk } from 'redux/userInfo';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 const EditTastePage = (): JSX.Element => {
@@ -12,6 +14,8 @@ const EditTastePage = (): JSX.Element => {
     const [chipArr, setChipArr] = useState<SelectChipVO[]>(getImpressionAllData(t));
     const userTastedCode = useSelector(getUserTasteCodes);
     const navigator = useNavigate();
+    const [open, setOpen] = useState<boolean>(false);
+    const updateTaste = useThunk(updateTasteThunk);
 
     useEffect(() => {
         if (userTastedCode && userTastedCode.length > 0) {
@@ -30,7 +34,9 @@ const EditTastePage = (): JSX.Element => {
     const onBackButtonClick = () => {
         navigator(-1);
     };
-    const onBottomButtonClick = () => {};
+    const onBottomButtonClick = async () => {
+        await updateTaste(chipArr.filter((d) => d.checked).map((d) => d.code));
+    };
 
     const onClick = (id: number) => {
         setChipArr(
@@ -42,6 +48,10 @@ const EditTastePage = (): JSX.Element => {
                 return newData;
             }),
         );
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -56,6 +66,11 @@ const EditTastePage = (): JSX.Element => {
             }}
         >
             <SelectChipDisplay data={chipArr} onClick={onClick} />
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    {t('myprofile.tastechange')}
+                </Alert>
+            </Snackbar>
         </CommonHeaderFooterComponent>
     );
 };

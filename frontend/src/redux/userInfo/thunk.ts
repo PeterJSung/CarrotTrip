@@ -1,7 +1,8 @@
+import { registUserTaste, updateMBTI } from 'api/editUserInfo';
 import { postSignin } from 'api/signin';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
-import { signinAction, signinFailedAction } from './actions';
+import { signinAction, signinFailedAction, signinMBTIAction, signinTastAction } from './actions';
 import { UserInfoAction } from './reducer';
 
 export const signinThunk = (name: string, pw: string): ThunkAction<void, RootState, null, UserInfoAction> => {
@@ -51,5 +52,24 @@ export const sessionOutThunk = (): ThunkAction<void, RootState, null, UserInfoAc
                 isLogin: false,
             }),
         );
+    };
+};
+
+export const updateMBTIThunk = (newMBTI: string): ThunkAction<void, RootState, null, UserInfoAction> => {
+    return async (dispatch, getState) => {
+        const nickname = getState().userInfo.data.name;
+        await updateMBTI(nickname, newMBTI);
+        await dispatch(signinMBTIAction(newMBTI));
+    };
+};
+
+export const updateTasteThunk = (tasteCodes: number[]): ThunkAction<void, RootState, null, UserInfoAction> => {
+    return async (dispatch, getState) => {
+        const nickname = getState().userInfo.data.name;
+        await registUserTaste({
+            memberNickname: nickname,
+            tasteCodes,
+        });
+        await dispatch(signinTastAction(tasteCodes));
     };
 };

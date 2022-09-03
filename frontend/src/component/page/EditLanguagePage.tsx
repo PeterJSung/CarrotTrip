@@ -24,6 +24,7 @@ const EditLanguagePage = (): JSX.Element => {
     const onBottomButtonClick = async () => {
         if (i18n.language !== lang) {
             // 다를경우만 요청
+            i18n.changeLanguage(lang);
         }
         // 언어 다를경우 처음부터 재로그인해야하나? 이런거도 세팅필요
     };

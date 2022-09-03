@@ -1,4 +1,5 @@
 import { produce } from 'immer';
+import { cloneDeep } from 'lodash';
 import { ActionType, createReducer } from 'typesafe-actions';
 import { SessionInterface } from 'vo/signin';
 import * as actions from './actions';
@@ -20,6 +21,20 @@ export const generateReducer = (firstState: UserInfoState = initialState) => {
         [actions.UserInfoActions.UPDATE_USERINFO]: (state, action) =>
             produce(state, (draft) => {
                 draft.data = action.payload;
+            }),
+        [actions.UserInfoActions.UPDATE_MBTI]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data = {
+                    ...draft.data,
+                    mbti: action.payload,
+                };
+            }),
+        [actions.UserInfoActions.UPDATE_TASTE]: (state, action) =>
+            produce(state, (draft) => {
+                draft.data = {
+                    ...draft.data,
+                    tasteCodes: cloneDeep(action.payload),
+                };
             }),
         [actions.UserInfoActions.UPDATE_FAILED_USERINFO]: (state, action) =>
             produce(state, (draft) => {

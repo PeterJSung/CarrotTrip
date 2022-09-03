@@ -1,5 +1,5 @@
 // 타입이똑같음
-export interface SignupRegisterTaste {
+export interface RegisterTaste {
     memberNickname: string;
     tasteCodes: number[];
 }

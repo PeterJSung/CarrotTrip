@@ -1,4 +1,10 @@
-import { combineReducers, ReducersMapObject } from '@reduxjs/toolkit';
+import {
+    ActionFromReducersMapObject,
+    CombinedState,
+    combineReducers,
+    ReducersMapObject,
+    StateFromReducersMapObject,
+} from '@reduxjs/toolkit';
 
 import BookMarkInfo, { BookMarkInfoState } from './bookmark';
 import MyLocationGps, { GpsState } from './gps';
@@ -11,6 +17,7 @@ import UserInfo, { UserInfoState } from './userInfo';
 
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { SignoutSessionActions } from './signoutsession';
 
 const persistConfig = {
     key: 'root',
@@ -35,7 +42,7 @@ export type CombinedStateType = ReducersMapObject<
     any
 >;
 
-const reducers = combineReducers<CombinedStateType>({
+const appReducer = combineReducers<CombinedStateType>({
     gps: MyLocationGps,
     signupInfo: SignupInfo,
     userInfo: UserInfo,
@@ -46,6 +53,21 @@ const reducers = combineReducers<CombinedStateType>({
     reviewInfo: ReviewInfo,
 });
 
-export type RootState = ReturnType<typeof reducers>;
+const rootReducer = (
+    state: CombinedState<StateFromReducersMapObject<CombinedStateType>>,
+    action: ActionFromReducersMapObject<CombinedStateType>,
+) => {
+    if (action.type === SignoutSessionActions.SIGNOUT || action.type === SignoutSessionActions.DELETE_USER) {
+        // for all keys defined in your persistConfig(s)
+        storage.removeItem('persist:root');
+        // storage.removeItem('persist:otherKey')
 
-export default persistReducer(persistConfig, reducers);
+        return appReducer(undefined, action);
+    }
+    return appReducer(state, action);
+};
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default persistReducer(persistConfig, (state: any, action: any) => {
+    return rootReducer(state, action);
+});

@@ -1,6 +1,7 @@
+import { registUserTaste } from 'api/editUserInfo';
 import { updateEvaluationAttract, updateEvaluationScoreNComment } from 'api/evaluationAreaUpdate';
 import { postSignin } from 'api/signin';
-import { postRegistUserTaste, postSignup } from 'api/signup';
+import { postSignup } from 'api/signup';
 import { cloneDeep } from 'lodash';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'redux/rootReducer';
@@ -111,7 +112,7 @@ export const signupSeqence = (): ThunkAction<void, RootState, null, SignupOnboar
             password: idInfo.userInfo.pw,
         });
 
-        await postRegistUserTaste({
+        await registUserTaste({
             memberNickname: signupResult.nickname,
             tasteCodes: attractionInfo.userInfo ?? [],
         });
