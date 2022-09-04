@@ -81,18 +81,72 @@ public class OpenAPIService {
     }
 
     public void supporter(LocationOpenApiResponseDTO dto) {
+        final String[] SAMPLE_POSITIVE_COMMENTS =
+                {"좋은 시간 보냈습니다~",
+                "가족들이랑 가기 좋아요",
+                "힐링하고 왔습니다",
+                "재방문의사 있어요 나쁘지 않습니다",
+                "좋았습니다",
+                "최고였어요~!!!",
+                "당근여행 예상별점이랑 잘 맞네요 :)",
+                "여자친구랑 갔는데 나쁘지 않았어요~",
+                "근처라서 다녀왔는데 생각보다 좋네요",
+                "회사 출장온김에 잠깐 들러본 곳인데 굉장히 좋네요 ㅋㅋ", //10
+                "이 근처에 맛집이 많은 것 같아요 추천합니다",
+                "제 취향이랑 비슷한 것 같습니다",
+                "즐거운 시간 보냈습니다",
+                "좋아요♥",
+                "남자친구도 좋아하네요~",
+                "여행 온 겸 들러보았는데 의외로 좋았습니다 !",
+                "깔끔하고 좋네요",
+                "힐링 많이 하고가요 :D",
+                "친구들이랑 재밌게 시간 보내다 갑니다 ㅋㅋ",
+                "가을에 가기 딱인 곳이에요", //20
+                "날씨도 좋고 재밌게 놀다가요!",
+                "대중교통이 편리해서 좋았습니다",
+                "접근성이 나쁘지 않았습니다",
+                "자차로 가기에 편리하네요",
+                "사람들도 다들 친절하고 좋은 곳인것 같아요",
+                "좋은 추억 많이 쌓아가요!",
+                "당근여행보고 갔는데 행복한 추억 많이 만들어갑니다 ㅎㅎ",
+                "바쁜시간 쪼개서 갔던 곳인데 나쁘진 않았습니다 잘먹고잘보고 즐기다가요",
+                "동네 근처에 뭐가있나 당근여행으로 알아보다가 가보았는데 좋았습니다 !!",
+                "좋았어요", //30
+                "굳굳",
+                "재홍이행님 함께.. 즐거운 시간 보내다갑니다",
+                "엄마랑 잠깐 갔다왔는데 엄마도 좋아하시네요 굳굳 ㅋㅋ",
+                "부모님이랑 같이 다녀왔는데 좋은 것 같아요~",
+                "이런곳도 있다니 좋네여...",
+                "근처 살면서 몰랐던 곳인데 자주와야겠어요 ㅋㅋ",
+                "일때매 왔다가 알게된 곳.. 좋습니다...",
+                "MBTI 추천이 높아서 갔다왔는데 저랑 딱이네여",
+                "취향 태그가 저랑 많이 비슷해서 갔다왔어요 ㅋㅋ 역시 대만족입니다",
+                "차타고 다녀왔는데 좋았슴다~~~", //40
+                "모두가 다 여기 와봤으면 좋겠어요",
+                "인심 좋은 곳입니다 강추",
+                "즉흥적으로 가보았는데 기분좋게 놀다왓어요~",
+                "그럭저럭 좋았습니다",
+                "저는 그럭저럭이었는데 같이간 사람들이 너무 좋아하네요",
+                "추억많이 가져가요~",
+                "자주자주 와야겠어요 너무 좋았습니다",
+                "접근성이 좋은곳",
+                "기분전환 제대로 하고갑니다~",
+                "스트레스 확 풀고가요 ㅋㅋ", //50
+                "좋았습니다~"};
+
         Random random = new Random();
         for(int i = 0; i < dto.getResponse().getBody().getItems().getItem().size(); i++) { // 조회된 관광지 아이템들 순회
             Integer ran1 = random.nextInt((5 - 1) + 1) + 1;
             Integer ran2 = random.nextInt((5 - 1) + 1) + 1;
             Integer ran3 = random.nextInt((5 - 1) + 1) + 1;
             Integer ran4 = random.nextInt((5 - 1) + 1) + 1;
+            //random.nextInt((50 - 1) + 1) //0~49까지
 
             evaluationService.createEvaluationForSupporter(EvaluationDTO.builder()
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("태호")
                     .score(ran1)
-                    .comments("좋아요~! " + ran1)
+                    .comments(SAMPLE_POSITIVE_COMMENTS[random.nextInt((50 - 1) + 1)])
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 태호 : " + ran1);
 
@@ -100,7 +154,7 @@ public class OpenAPIService {
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("가현")
                     .score(ran2)
-                    .comments("좋아요~! " + ran2)
+                    .comments(SAMPLE_POSITIVE_COMMENTS[random.nextInt((50 - 1) + 1)])
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 가현 : " + ran2);
 
@@ -108,7 +162,7 @@ public class OpenAPIService {
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("영현")
                     .score(ran3)
-                    .comments("좋아요~! " + ran3)
+                    .comments(SAMPLE_POSITIVE_COMMENTS[random.nextInt((50 - 1) + 1)])
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 영현 : " + ran3);
 
@@ -116,7 +170,7 @@ public class OpenAPIService {
                     .apiId(dto.getResponse().getBody().getItems().getItem().get(i).getContentid())
                     .memberNickname("정민")
                     .score(ran4)
-                    .comments("좋아요~! " + ran4)
+                    .comments(SAMPLE_POSITIVE_COMMENTS[random.nextInt((50 - 1) + 1)])
                     .build());
             System.out.println("[SUPPORTER] " + dto.getResponse().getBody().getItems().getItem().get(i).getContentid() + " 정민 : " + ran4);
 
