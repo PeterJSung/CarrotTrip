@@ -13,4 +13,6 @@ public interface TouristAttractionTasteRepository extends JpaRepository<TouristA
     ArrayList<TouristAttractionTaste> findByApiId(Long apiId);
 
     ArrayList<TouristAttractionTaste> findByApiIdAndTasteCodeIn(Long apiId, ArrayList<String> tasteCode);
+
+    int deleteTouristAttractionTastesByMemberNickname(String nickname);
 }

@@ -21,7 +21,7 @@ public class BookmarkService {
 
     @Transactional
     public Bookmark createBookmark(BookmarkDTO bookmarkDTO) {
-        bookmarkRepository.deleteEvaluationsByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
+        bookmarkRepository.deleteBookmarksByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
         bookmarkRepository.save(Bookmark.builder()
                 .memberNickname(bookmarkDTO.getMemberNickname())
                 .apiId(bookmarkDTO.getApiId())
@@ -33,7 +33,7 @@ public class BookmarkService {
 
     @Transactional
     public BookmarkDTO deleteBookmark(BookmarkDTO bookmarkDTO) {
-        bookmarkRepository.deleteEvaluationsByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
+        bookmarkRepository.deleteBookmarksByMemberNicknameAndApiId(bookmarkDTO.getMemberNickname(), bookmarkDTO.getApiId());
         return bookmarkDTO;
     }
 

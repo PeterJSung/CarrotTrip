@@ -10,5 +10,5 @@ import java.util.ArrayList;
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long>{
     ArrayList<Bookmark> findByMemberNickname(String memberNickname);
     Bookmark findByMemberNicknameAndApiId(String memberNickname, Long apiId);
-    int deleteEvaluationsByMemberNicknameAndApiId(String memberNickname, Long apiId);
+    int deleteBookmarksByMemberNicknameAndApiId(String memberNickname, Long apiId);
 }

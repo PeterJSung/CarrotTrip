@@ -71,7 +71,9 @@ public class EvaluationService {
         return evaluationDTO;
     }
 
+    @Transactional
     public TouristAttractionTastesDTO createTouristAttractionTastes(TouristAttractionTastesDTO touristAttractionTastesDTO) {
+        touristAttractionTasteRepository.deleteTouristAttractionTastesByMemberNickname(touristAttractionTastesDTO.getMemberNickname());
         for(int i = 0; i < touristAttractionTastesDTO.getTasteCodes().size(); i ++) {
             touristAttractionTasteRepository.save(TouristAttractionTaste.builder()
                     .apiId(touristAttractionTastesDTO.getApiId())
