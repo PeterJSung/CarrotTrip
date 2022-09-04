@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 //Slick import
 import { getIsLogin } from 'redux/userInfo';
 import {
+    PATH_BOOKMARK_PAGE,
     PATH_EDITLANGUAGE_PAGE,
     PATH_EDITMBTI_PAGE,
     PATH_EDITTASTE_PAGE,
@@ -22,6 +23,7 @@ import HomePage from './page/HomePage';
 import LandingPage from './page/LandingPage';
 import MyProfilePage from './page/MyProfilePage';
 import ReviewPage from './page/ReviewPage';
+import ShowBookMarkPage from './page/ShowBookMarkPage';
 import SigninPage from './page/SigninPage';
 import SignupLoadingPage from './page/SignupLoadingPage';
 import SignupPage from './page/SignupPage';
@@ -42,6 +44,7 @@ const App = (): JSX.Element => {
                 <Route path={PATH_EDITTASTE_PAGE} element={<EditTastePage />} />
                 <Route path={PATH_EDITMBTI_PAGE} element={<EditMbtiPage />} />
                 <Route path={PATH_EDITLANGUAGE_PAGE} element={<EditLanguagePage />} />
+                <Route path={PATH_BOOKMARK_PAGE} element={<ShowBookMarkPage />} />
             </Route>
             <Route element={<RouterGuard redirectPath={PATH_HOME_PAGE} isAllowed={!isLogin} />}>
                 <Route path={PATH_LANDING_PAGE} element={<LandingPage />} />

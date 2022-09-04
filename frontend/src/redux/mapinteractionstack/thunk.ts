@@ -35,3 +35,20 @@ export const updateInetractionStack = (
         await dispatch(mapUpdateStackeAction(newRet));
     };
 };
+
+export const updateRedirectPage = (redirect?: string[]): ThunkAction<void, RootState, null, MapDispStackAction> => {
+    return async (dispatch, getState) => {
+        const currentDispStack = getState().mapDispStack;
+        const newRet = cloneDeep(currentDispStack.data);
+
+        if (newRet.length > 0 && newRet[0]) {
+            if (redirect) {
+                newRet[0].goToPage = redirect;
+            } else {
+                newRet[0].goToPage = undefined;
+            }
+        }
+
+        await dispatch(mapUpdateStackeAction(newRet));
+    };
+};

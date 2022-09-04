@@ -15,6 +15,7 @@ import { LocationInfo } from './gps';
 interface Interaction2 {
     type: 'Interaction2';
     tabIdx: number;
+    goToPage?: string[];
     selectedData?: {
         id: number;
         pos?: LocationInfo;

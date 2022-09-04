@@ -10,7 +10,7 @@ import { useThunk } from 'redux/common';
 import { deleteUserThunk, signoutThunk } from 'redux/signoutsession';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
-import { PATH_EDITLANGUAGE_PAGE, PATH_EDITMBTI_PAGE, PATH_EDITTASTE_PAGE } from './common';
+import { PATH_BOOKMARK_PAGE, PATH_EDITLANGUAGE_PAGE, PATH_EDITMBTI_PAGE, PATH_EDITTASTE_PAGE } from './common';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 type DialogType = 'signout' | 'concession';
@@ -59,6 +59,7 @@ const MyProfilePage = (): JSX.Element => {
         (/**내여행성향 */) => navigate(PATH_EDITTASTE_PAGE),
         (/**내MBTI */) => navigate(PATH_EDITMBTI_PAGE),
         (/**나의리뷰관리 */) => navigate('/'),
+        (/**북마크 */) => navigate(PATH_BOOKMARK_PAGE),
         (/**언어 */) => navigate(PATH_EDITLANGUAGE_PAGE),
         (/**signout */) => {
             setDialogInfo({
