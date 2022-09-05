@@ -120,7 +120,7 @@ interface PlaceRefInfo {
     src: string;
 }
 
-export type Suggestion_Event_Type = 'NONE' | 'PLACEDETAIL' | 'COURSE' | 'MBTI' | 'TENDENCY' | 'ETC' | 'FILTER'; // filter 일때만 관광지 음식점 이런 기준정보로 보여줌
+export type Suggestion_Event_Type = 'COURSE' | 'MBTI' | 'TENDENCY' | 'ETC' | 'FILTER'; // filter 일때만 관광지 음식점 이런 기준정보로 보여줌
 
 interface SuggestionTabInfo {
     type: Suggestion_Event_Type;

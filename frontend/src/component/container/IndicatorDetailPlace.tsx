@@ -4,7 +4,7 @@ import DetailBookMarkBtn from 'component/basic/KakaoMap/DetailBookMarkBtn';
 import { useSelector } from 'react-redux';
 import { bookMarkSelector, createBookMark, deleteBookMark } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
-import { getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
+import { getPlaceDetailData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getUserName } from 'redux/userInfo';
 import CommonIndicator from './CommonIndicator';
 
@@ -12,12 +12,12 @@ const IndicatorDetailPlace = (): JSX.Element => {
     const interactionThunk = useThunk(updateInetractionStack);
     const userName = useSelector(getUserName);
     const bookMarkInfo = useSelector(bookMarkSelector);
-    const dataTwo = useSelector(getTypeTwoData);
+    const dataTwo = useSelector(getPlaceDetailData);
     const createBookMarkThunk = useThunk(createBookMark);
     const deleteBookMarkThunk = useThunk(deleteBookMark);
 
     const onBackClick = () => {
-        interactionThunk();
+        interactionThunk('pop');
     };
 
     if (!dataTwo) {

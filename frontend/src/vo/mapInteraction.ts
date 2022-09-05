@@ -12,23 +12,24 @@ import { LocationInfo } from './gps';
 // 3depth 시
 // 관광지 id 정보가 기본 (이정보로 다른정보 다 가져올수 있나???) 이건 추후 논의
 
-interface Interaction2 {
-    type: 'Interaction2';
+export type StackType = 'Redirect' | 'PlaceDetail' | 'Suggestion';
+
+export interface PlaceDetailInfo {
+    eventTypeId: number;
+    id: number;
+}
+
+export interface SuggestionInfo {
     tabIdx: number;
-    goToPage?: string[];
     selectedData?: {
         id: number;
         pos?: LocationInfo;
     };
 }
 
-interface Interaction3 {
-    type: 'Interaction3';
-    eventTypeId: number;
-    id: number;
+export interface StackInfo {
+    type: StackType;
+    data: PlaceDetailInfo | SuggestionInfo;
 }
 
-export type Interaction2Type = Interaction2;
-export type Interaction3Type = Interaction3;
-
-export type MapInteractionStackType = [Interaction2Type?, Interaction3Type?];
+export type MapInteractionStackType = StackInfo[];

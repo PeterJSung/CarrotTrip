@@ -1,21 +1,24 @@
-import { useEffect } from 'react';
+import { getCurrentInteractionType } from 'common/util';
 import { Polyline } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
-import { getCurrentInteractionType, getTypeOneData } from 'redux/mapinteractionstack';
+import { getSuggestionData } from 'redux/mapinteractionstack';
 import { getToutlistArr } from 'redux/tourlistarea';
 
 const KakaoMapPoligonContainer = (): JSX.Element => {
-    const type = useSelector(getCurrentInteractionType);
-    const data = useSelector(getTypeOneData);
-
+    const suggestionDataInfo = useSelector(getSuggestionData);
     const tourListArr = useSelector(getToutlistArr);
-    useEffect(() => {}, []);
+
+    if (!suggestionDataInfo) {
+        return <></>;
+    }
+
+    const type = getCurrentInteractionType(suggestionDataInfo.tabIdx);
 
     return (
         <>
             {type === 'COURSE' &&
                 tourListArr.recommand.sections.map((eachD, idx) => {
-                    const selectedData = data?.selectedData?.id;
+                    const selectedData = suggestionDataInfo.selectedData?.id;
                     if (
                         selectedData === undefined ||
                         selectedData + 1 === idx ||

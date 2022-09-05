@@ -5,10 +5,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { bookMarkSelector } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
-import { getTypeOneData, updateInetractionStack, updateRedirectPage } from 'redux/mapinteractionstack';
+import { updateInetractionStack } from 'redux/mapinteractionstack';
 import { getSuggestionListArr } from 'redux/tourlistarea';
 import { TourlistDataset } from 'vo/travelInfo';
-import { PATH_BOOKMARK_PAGE, PATH_MYPROFILE_PAGE } from './common';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 const Checker = () => (
@@ -21,9 +20,9 @@ const ShowBookMarkPage = (): JSX.Element => {
     const { t } = useTranslation();
     const bookMakrs = useSelector(bookMarkSelector);
     const originDatas = useSelector(getSuggestionListArr);
-    const updateRedirect = useThunk(updateRedirectPage);
+    //const updateRedirect = useThunk(updateRedirectPage);
     const updateStack = useThunk(updateInetractionStack);
-    const oneData = useSelector(getTypeOneData);
+    //const oneData = useSelector(getTypeOneData);
 
     const [data, setData] = useState<TourlistDataset[]>([]);
 
@@ -34,12 +33,16 @@ const ShowBookMarkPage = (): JSX.Element => {
     };
 
     const onListClick = async (id: number) => {
-        await updateRedirect([PATH_MYPROFILE_PAGE, PATH_BOOKMARK_PAGE]);
-        await updateStack({
-            type: 'Interaction3',
-            eventTypeId: oneData ? oneData.tabIdx : 0,
-            id,
+        //await updateRedirect([PATH_MYPROFILE_PAGE, PATH_BOOKMARK_PAGE]);
+        /*
+        await updateStack('push', {
+            type: 'PlaceDetail',
+            data: {
+                eventTypeId: oneData ? oneData.tabIdx : 0,
+                id,
+            },
         });
+        */
         navigator(-2);
     };
 

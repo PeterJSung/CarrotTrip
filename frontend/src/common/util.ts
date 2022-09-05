@@ -1,4 +1,5 @@
 import { KakaoRegionAPIRes } from 'vo/gps';
+import { specializeContentId, Suggestion_Event_Type } from 'vo/travelInfo';
 
 export const pause = (ms: number): Promise<void> => {
     return new Promise((resolve) => {
@@ -51,6 +52,22 @@ export const getGeoLocationInfo = (cb: (lat: number, lng: number) => void) => {
 
 export const getRandomArbitrary = (min: number, max: number) => {
     return Math.random() * (max - min) + min;
+};
+
+export const getCurrentInteractionType = (tabIdx: number): Suggestion_Event_Type => {
+    if (specializeContentId.includes(tabIdx)) {
+        return 'FILTER';
+    } else if (tabIdx === 300) {
+        return 'ETC';
+    } else if (tabIdx === 200) {
+        return 'MBTI';
+    } else if (tabIdx === 100) {
+        return 'COURSE';
+    } else if (tabIdx === 400) {
+        return 'TENDENCY';
+    } else {
+        throw Error('Error not included tab idx');
+    }
 };
 
 export const genHashFromStr = (str: string) => {

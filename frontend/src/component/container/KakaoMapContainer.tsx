@@ -6,8 +6,7 @@ import { Map } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
 import { currentGps, updateCurrentGpsThunk } from 'redux/gps';
-import { getCurrentInteractionType, getTypeOneData, getTypeTwoData } from 'redux/mapinteractionstack';
-import { Interaction2Type, Interaction3Type } from 'vo/mapInteraction';
+
 import BottomSheetSuggestionContainer from './BottomSheetSuggestionContainer';
 import IndicatorDetailPlace from './IndicatorDetailPlace';
 import IndicatorMapRegion from './IndicatorMapRegion';
@@ -16,31 +15,33 @@ import { getC2RData } from 'api/coord2region';
 import { getGeoLocationInfo, parserRegionStr } from 'common/util';
 import { useTranslation } from 'react-i18next';
 import { retrieveAllBookMark } from 'redux/bookmark';
+import { getPlaceDetailData, getSuggestionData, isPlaceDetailSelector } from 'redux/mapinteractionstack';
 import { getSuggestionListArr, retriveTourlistArea } from 'redux/tourlistarea';
 import { getUserInfo } from 'redux/userInfo';
 import { LocationInfo } from 'vo/gps';
+import { PlaceDetailInfo, SuggestionInfo } from 'vo/mapInteraction';
 import { TourlistDataset } from 'vo/travelInfo';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
 import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
 import KakaoMapPoligonContainer from './KakaoMapPoligonContainer';
 
 const getHighlightInfo = (
-    dataOne: Interaction2Type | undefined,
-    dataTwo: Interaction3Type | undefined,
+    suggestionInfo: SuggestionInfo | undefined,
+    placeDetailInfo: PlaceDetailInfo | undefined,
     totalTourlistSet: {
         [key: string]: TourlistDataset[];
     },
 ): LocationInfo | undefined => {
-    if (dataTwo) {
-        const idx = totalTourlistSet[dataTwo.eventTypeId].findIndex((d) => d.contentId === dataTwo.id);
-        const item = totalTourlistSet[dataTwo.eventTypeId][idx];
+    if (placeDetailInfo) {
+        const idx = totalTourlistSet[placeDetailInfo.eventTypeId].findIndex((d) => d.contentId === placeDetailInfo.id);
+        const item = totalTourlistSet[placeDetailInfo.eventTypeId][idx];
         return {
             lat: item.lat,
             lng: item.lng,
             zoom: HIGHLIGHT_MAP_LEVEL,
         };
-    } else if (dataOne && dataOne.selectedData?.pos) {
-        return dataOne.selectedData.pos;
+    } else if (suggestionInfo && suggestionInfo.selectedData?.pos) {
+        return suggestionInfo.selectedData.pos;
     } else {
         return undefined;
     }
@@ -62,9 +63,9 @@ const KakaoMapContainer = (): JSX.Element => {
 
     const currentGpsInfo = useSelector(currentGps);
     const totalDataSet = useSelector(getSuggestionListArr);
-    const interactionType = useSelector(getCurrentInteractionType);
-    const dataOne = useSelector(getTypeOneData);
-    const dataTwo = useSelector(getTypeTwoData);
+    const isPlaceDetail = useSelector(isPlaceDetailSelector);
+    const suggestionDataInfo = useSelector(getSuggestionData);
+    const placeDetailInfo = useSelector(getPlaceDetailData);
     const userInfo = useSelector(getUserInfo);
     const getAllBookMarks = useThunk(retrieveAllBookMark);
     const updateGpsState = useThunk(updateCurrentGpsThunk);
@@ -75,8 +76,7 @@ const KakaoMapContainer = (): JSX.Element => {
         typeof userInfo !== 'string' && getAllBookMarks(userInfo.name);
     }, [userInfo]);
 
-    const isPlaceDetail = interactionType === 'PLACEDETAIL';
-    const highLightPos = getHighlightInfo(dataOne, dataTwo, totalDataSet);
+    const highLightPos = getHighlightInfo(suggestionDataInfo, placeDetailInfo, totalDataSet);
 
     const centerPos: LocationInfo = {
         lat: highLightPos ? highLightPos.lat : currentGpsInfo.lat,
