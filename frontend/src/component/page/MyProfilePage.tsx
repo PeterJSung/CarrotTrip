@@ -58,7 +58,6 @@ const MyProfilePage = (): JSX.Element => {
     const dataRender = [
         (/**내여행성향 */) => navigate(PATH_EDITTASTE_PAGE),
         (/**내MBTI */) => navigate(PATH_EDITMBTI_PAGE),
-        (/**나의리뷰관리 */) => navigate('/'),
         (/**북마크 */) => navigate(PATH_BOOKMARK_PAGE),
         (/**언어 */) => navigate(PATH_EDITLANGUAGE_PAGE),
         (/**signout */) => {

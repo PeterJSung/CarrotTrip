@@ -186,11 +186,11 @@ export const contentIdMapper: ContentIdMapper = {
 
 export const i18n_SUGGESTION_REF: SuggestionTabInfo[] = [
     { type: 'COURSE', dataset: { targetCode: 100, translateKey: CONTENT_ID_TRANSLATION.RECOMMAND } },
+    { type: 'MBTI', dataset: { targetCode: 200, translateKey: CONTENT_ID_TRANSLATION.MBTI } },
+    { type: 'TENDENCY', dataset: { targetCode: 400, translateKey: CONTENT_ID_TRANSLATION.TENDENCY } },
     { type: 'FILTER', dataset: contentIdMapper[12] },
     { type: 'FILTER', dataset: contentIdMapper[39] },
     { type: 'FILTER', dataset: contentIdMapper[38] },
-    { type: 'MBTI', dataset: { targetCode: 200, translateKey: CONTENT_ID_TRANSLATION.MBTI } },
-    { type: 'TENDENCY', dataset: { targetCode: 400, translateKey: CONTENT_ID_TRANSLATION.TENDENCY } },
     { type: 'ETC', dataset: { targetCode: 300, translateKey: CONTENT_ID_TRANSLATION.ETC } },
 ];
 

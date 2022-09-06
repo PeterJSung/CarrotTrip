@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useThunk } from 'redux/common';
-import { getSignupInfo2Banner, updateInfo2 } from 'redux/signupInfo';
+import { getSignupInfo2Banner, getSingupInfo1, updateInfo2 } from 'redux/signupInfo';
 import styled from 'styled-components';
 import { LocaleCode } from 'vo/locale';
 import { EvaluationAreaRes, SignupBanner2Data, SignupInfo2Data } from 'vo/signup';
@@ -20,15 +20,12 @@ const SignupOnBoard2Layout = (): JSX.Element => {
     const [renderData, setRenderData] = useState<EvaluationAreaRes[]>([]);
     const { i18n, t } = useTranslation();
     const updateSignupInfo = useThunk(updateInfo2);
+    const info1 = useSelector(getSingupInfo1);
     const signupInfo2Banner: SignupBanner2Data = useSelector(getSignupInfo2Banner);
 
     const totalDataCount = renderData.length;
     const remainCount = Object.keys(signupInfo2Banner).length;
-    const remain = totalDataCount - remainCount;
-    const lowerText =
-        remain > 0
-            ? t('signup.onboard.two.lowertext.remainselect', { remain })
-            : t('signup.onboard.two.lowertext.normain');
+    const lowerText = t('signup.onboard.two.lowertext.remainselect', { name: info1.userInfo?.nickName });
 
     useEffect(() => {
         updateSignupInfo({

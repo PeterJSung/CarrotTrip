@@ -45,8 +45,6 @@ const getSuggestionInfo = (t: TFunction, isNonMbti: boolean): ChipDispInfo[] => 
     return ret;
 };
 
-const seletedColor = () => {};
-
 const MainSheetSlider = (props: MainSheetSliderProps): JSX.Element => {
     const { t } = useTranslation();
     const standardData = getSuggestionInfo(t, props.isNonMbti);

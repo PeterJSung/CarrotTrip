@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { bookMarkSelector } from 'redux/bookmark';
 import { useThunk } from 'redux/common';
 import { updateInetractionStack } from 'redux/mapinteractionstack';
-import { getSuggestionListArr } from 'redux/tourlistarea';
+import { getSuggestionListArr, getToutlistArr } from 'redux/tourlistarea';
 import { TourlistDataset } from 'vo/travelInfo';
+import { PATH_BOOKMARK_PAGE, PATH_MYPROFILE_PAGE } from './common';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
 
 const Checker = () => (
@@ -20,6 +21,7 @@ const ShowBookMarkPage = (): JSX.Element => {
     const { t } = useTranslation();
     const bookMakrs = useSelector(bookMarkSelector);
     const originDatas = useSelector(getSuggestionListArr);
+    const tourData = useSelector(getToutlistArr);
     //const updateRedirect = useThunk(updateRedirectPage);
     const updateStack = useThunk(updateInetractionStack);
     //const oneData = useSelector(getTypeOneData);
@@ -33,16 +35,32 @@ const ShowBookMarkPage = (): JSX.Element => {
     };
 
     const onListClick = async (id: number) => {
-        //await updateRedirect([PATH_MYPROFILE_PAGE, PATH_BOOKMARK_PAGE]);
-        /*
+        await updateStack('push', {
+            type: 'Redirect',
+            data: {
+                pathArr: [PATH_MYPROFILE_PAGE, PATH_BOOKMARK_PAGE],
+            },
+        });
+
+        let eventTypeId = 0;
+
+        const itemKeys = Object.keys(tourData.item);
+
+        itemKeys.forEach((eachKey) => {
+            tourData.item[eachKey].forEach((eachD, idx) => {
+                if (eachD.contentId === id) {
+                    eventTypeId = eachD.eventTypeId;
+                }
+            });
+        });
+
         await updateStack('push', {
             type: 'PlaceDetail',
             data: {
-                eventTypeId: oneData ? oneData.tabIdx : 0,
+                eventTypeId,
                 id,
             },
         });
-        */
         navigator(-2);
     };
 

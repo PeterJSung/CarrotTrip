@@ -10,6 +10,7 @@ export enum TourlistAreaActions {
 
 export const getTourlistAreaAction = createAction(TourlistAreaActions.UPDATE_AREA)<{
     name: string;
+    loadTime: number;
     navigationResult: KakaoNaviAPIRes;
     naviPoints: NaviPoint[];
     total: TourlistInfo[];

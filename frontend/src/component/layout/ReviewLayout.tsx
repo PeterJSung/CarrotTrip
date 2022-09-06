@@ -73,7 +73,7 @@ const ReviewLayout = (props: ReviewLayoutProps): JSX.Element => {
     const label = contentIdMapper[props.contentTypeId] ? t(contentIdMapper[props.contentTypeId].translateKey) : '';
     return (
         <Box px="1.25rem">
-            <Box height="7rem" display="flex" pb="1.5rem" pt="0.5rem" justifyContent="space-between">
+            <Box height="7rem" display="flex" pb="1.5rem" pt="0.5rem">
                 <Box
                     borderRadius="0.5rem"
                     flex="1"

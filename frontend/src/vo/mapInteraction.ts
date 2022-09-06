@@ -27,9 +27,13 @@ export interface SuggestionInfo {
     };
 }
 
+export interface RedirectInfo {
+    pathArr: string[];
+}
+
 export interface StackInfo {
     type: StackType;
-    data: PlaceDetailInfo | SuggestionInfo;
+    data: PlaceDetailInfo | SuggestionInfo | RedirectInfo;
 }
 
 export type MapInteractionStackType = StackInfo[];

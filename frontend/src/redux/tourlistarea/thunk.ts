@@ -39,13 +39,24 @@ const orderingDistanceRoutingPath = (currentGps: NaviPoint, routeInfo: NaviPoint
     return ret;
 };
 
+const DEBOUNCE_CALL = 1000 * 60 * 60;
+
 export const retriveTourlistArea = (
     lat: number,
     lng: number,
     userInfo: SigninInSignupInfo,
     locale: string,
 ): ThunkAction<void, RootState, null, TourlistAreaAction> => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const time = getState().tourlistArea.data.loadTime;
+        const currentTime = Date.now();
+        console.log(`Lodae`);
+        console.log(time);
+        console.log(currentTime);
+        if (currentTime < time + DEBOUNCE_CALL) {
+            return;
+        }
+
         const res = await retriveTourareaAPI(lng, lat, userInfo.name, locale);
         const myPos: NaviPoint = {
             y: lat,
@@ -67,6 +78,7 @@ export const retriveTourlistArea = (
 
         await dispatch(
             getTourlistAreaAction({
+                loadTime: currentTime,
                 name: userInfo.name,
                 naviPoints: orderedRoute,
                 navigationResult,

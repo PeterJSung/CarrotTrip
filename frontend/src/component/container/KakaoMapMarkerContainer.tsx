@@ -4,6 +4,7 @@ import {
     getStackData,
     getSuggestionData,
     isPlaceDetailSelector,
+    isRedirectSelector,
     isSuggestionSelector,
     updateInetractionStack,
 } from 'redux/mapinteractionstack';
@@ -11,10 +12,12 @@ import {
 import { DEFAULT_MAP_LEVEL } from 'common/constants';
 import { getCurrentInteractionType } from 'common/util';
 import Marker, { MarkerProps } from 'component/basic/KakaoMap/Marker';
+import { cloneDeep } from 'lodash';
 import { MarkerClusterer } from 'react-kakao-maps-sdk';
+import { useNavigate } from 'react-router-dom';
 import { useThunk } from 'redux/common';
 import { getToutlistArr } from 'redux/tourlistarea';
-import { PlaceDetailInfo, SuggestionInfo } from 'vo/mapInteraction';
+import { PlaceDetailInfo, RedirectInfo, SuggestionInfo } from 'vo/mapInteraction';
 import { getTargetCodeFromTourlist } from 'vo/travelInfo';
 
 type RenderPropsType = Omit<MarkerProps, 'onClick'>;
@@ -23,7 +26,9 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
     const isSuggestion = useSelector(isSuggestionSelector);
     const suggestionDataInfo = useSelector(getSuggestionData);
     const isPlaceDetail = useSelector(isPlaceDetailSelector);
+    const isRedirect = useSelector(isRedirectSelector);
     const mapData = useSelector(getStackData);
+    const navigator = useNavigate();
     const tourlistAreaSelector = useSelector(getToutlistArr);
     const updateInteraction = useThunk(updateInetractionStack);
 
@@ -111,6 +116,13 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                     lng: item.lng,
                 };
                 newRenderData.push(newData);
+            } else if (isRedirect) {
+                const data = mapData[mapData.length - 1].data as RedirectInfo;
+                const pathArr = cloneDeep(data.pathArr);
+                updateInteraction('pop');
+                pathArr.forEach((d) => {
+                    navigator(d);
+                });
             } else {
                 itemKeys.forEach((eachKey) => {
                     tourlistAreaSelector.item[eachKey].forEach((eachD, idx) => {
@@ -130,9 +142,6 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
 
     const markerClick = (id: number, typeId: number) => {
         const nextIdx = getTargetCodeFromTourlist(typeId);
-        console.log('Clicked');
-        console.log(typeId);
-        console.log(id);
 
         if (suggestionDataInfo) {
             const type = getCurrentInteractionType(suggestionDataInfo.tabIdx);
@@ -157,11 +166,22 @@ const KakaoMapMarkerContainer = (): JSX.Element => {
                 });
             }
         } else {
+            const data: SuggestionInfo = {
+                tabIdx: nextIdx,
+            };
+
+            if (tourlistAreaSelector.item[nextIdx]) {
+                const items = tourlistAreaSelector.item[nextIdx].find((d) => d.contentId === id);
+                if (items) {
+                    data.selectedData = {
+                        id,
+                    };
+                }
+            }
+
             updateInteraction('push', {
                 type: 'Suggestion',
-                data: {
-                    tabIdx: nextIdx,
-                } as SuggestionInfo,
+                data,
             });
         }
     };

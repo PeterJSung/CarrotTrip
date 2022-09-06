@@ -26,9 +26,11 @@ const sliderSetting: Settings = {
     lazyLoad: 'ondemand',
     slidesToShow: 1,
     slidesToScroll: 1,
+    adaptiveHeight: true,
     speed: PAGEING_TIME,
     swipe: false,
     draggable: false,
+    arrows: false,
 };
 
 const SignupPageBtn = styled(CommonBtn)`
@@ -139,7 +141,7 @@ const SignupPage = (): JSX.Element => {
                     </OnBoardingBox>
                 </Slider>
             </Box>
-            <Box height="5vh" padding="0rem 1.5rem 0.5rem">
+            <Box height="3.25rem" padding="0rem 1.5rem 0.5rem">
                 <SignupPageBtn isBlack={true} disabled={disp.isDisable} onClick={() => onNextClick(true)}>
                     {btnText}
                 </SignupPageBtn>

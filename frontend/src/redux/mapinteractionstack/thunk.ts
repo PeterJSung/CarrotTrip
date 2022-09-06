@@ -15,7 +15,7 @@ export const updateInetractionStack = (
         switch (type) {
             case 'push':
                 if (stackInfo) {
-                    if (newRet.length > 0 && newRet[newRet.length - 1].type == stackInfo.type) {
+                    if (newRet.length > 0 && newRet[newRet.length - 1].type === stackInfo.type) {
                         newRet.pop();
                     }
                     newRet.push(stackInfo);
