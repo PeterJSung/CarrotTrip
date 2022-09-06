@@ -28,7 +28,7 @@ const TitleTypo = styled.span`
 
 const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooterComponentProps>): JSX.Element => {
     const margin = props.isNonMargin ? 0 : 1;
-
+    console.log(props.bottom);
     return (
         <DefaultPageContainer>
             <Box position="relative">
@@ -56,7 +56,7 @@ const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooter
                     <TitleTypo>{props.title.text}</TitleTypo>
                 </Box>
             </Box>
-            <Box display="flex" flexDirection="column" flexGrow="1" mx={`${margin}rem`}>
+            <Box overflow="auto" display="flex" flexDirection="column" flexGrow="1" mx={`${margin}rem`}>
                 {props.children}
             </Box>
             {props.bottom && (

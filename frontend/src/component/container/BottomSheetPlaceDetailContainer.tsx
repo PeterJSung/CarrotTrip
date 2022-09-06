@@ -1,14 +1,15 @@
 import { retrievePlaceDetail } from 'api/placedetail';
 import DetailPlace, { DetailPlaceProps } from 'component/basic/Detail/DetailPlace';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
-import { getCurrentInteractionType, getTypeTwoData, updateInetractionStack } from 'redux/mapinteractionstack';
+import { getPlaceDetailData, getStackData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getSuggestionListArr } from 'redux/tourlistarea';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
-import { Interaction3Type } from 'vo/mapInteraction';
+import { PlaceDetailInfo } from 'vo/mapInteraction';
 import { PlaceMBTIInfo } from 'vo/placeInfo';
 
 const PlaceDetailSheet = styled(BottomSheet)`
@@ -28,28 +29,29 @@ const PlaceDetailSheet = styled(BottomSheet)`
 `;
 
 const BottomSheetPlaceDetailContainer = (): JSX.Element => {
-    const interactionType = useSelector(getCurrentInteractionType);
+    const placeDeatilInfo = useSelector(getPlaceDetailData);
     const totalDataArr = useSelector(getSuggestionListArr);
-    const typeTwo = useSelector(getTypeTwoData);
+    const { i18n } = useTranslation();
+
+    const mapStack = useSelector(getStackData);
     const userName = useSelector(getUserName);
 
     const [renderData, setRenderData] = useState<Omit<DetailPlaceProps, 'onReset'>>();
 
     const updateThunk = useThunk(updateInetractionStack);
-    const isOpen = interactionType === 'PLACEDETAIL';
 
     const onBackClick = () => {
-        updateThunk();
+        updateThunk('pop');
     };
 
     useEffect(() => {
         onReset();
-    }, [typeTwo]);
+    }, [placeDeatilInfo, mapStack]);
 
-    const loadData = async (typeTwoData: Interaction3Type) => {
-        const idx = totalDataArr[typeTwoData.eventTypeId].findIndex((d) => d.contentId === typeTwoData.id);
-        const item = totalDataArr[typeTwoData.eventTypeId][idx];
-        const data = await retrievePlaceDetail(item.contentId);
+    const loadData = async (detailData: PlaceDetailInfo) => {
+        const idx = totalDataArr[detailData.eventTypeId].findIndex((d) => d.contentId === detailData.id);
+        const item = totalDataArr[detailData.eventTypeId][idx];
+        const data = await retrievePlaceDetail(item.contentId, i18n.language);
         console.log(data);
         let mbtiArr: PlaceMBTIInfo[] = [];
         for (const idxKey in data.mbtiRanking) {
@@ -75,14 +77,14 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     };
 
     const onReset = () => {
-        typeTwo && loadData(typeTwo);
+        placeDeatilInfo && loadData(placeDeatilInfo);
     };
 
     return (
         <>
             {renderData && (
                 <PlaceDetailSheet
-                    open={isOpen}
+                    open={!!placeDeatilInfo}
                     onDismiss={onBackClick}
                     // onDismiss={() => props.setOpen(true)}
                     blocking={false}

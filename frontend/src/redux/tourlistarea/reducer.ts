@@ -19,10 +19,12 @@ export type TourlistAreaState = SyncState<{
     item: { [key: string]: TourlistDataset[] };
     mbti: TourlistDataset[];
     taste: TourlistDataset[];
+    loadTime: number;
 }>;
 
 const initialState: TourlistAreaState = {
     data: {
+        loadTime: 0,
         recommand: { sections: [], totalDistance: 0, name: '', avgRating: 0 },
         item: {},
         mbti: [],
@@ -61,6 +63,7 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
         [actions.TourlistAreaActions.UPDATE_AREA]: (state, action) =>
             produce(state, (draft) => {
                 const mapper: { [key: number]: TourlistDataset } = {};
+                draft.data.loadTime = action.payload.loadTime;
                 draft.data.item = {};
                 action.payload.total.forEach((d) => {
                     const convId = convertContentTypeId(d.contenttypeid);

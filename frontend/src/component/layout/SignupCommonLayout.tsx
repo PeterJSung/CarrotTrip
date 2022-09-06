@@ -35,7 +35,7 @@ const SignupCommonLayout = (props: PropsWithChildren<SignupCommonLayoutProps>): 
     return (
         <Wrapper>
             <UpperTextTypo>{props.upperText}</UpperTextTypo>
-            <LowerTextTypo>{props.lowerText}</LowerTextTypo>
+            <LowerTextTypo dangerouslySetInnerHTML={{ __html: props.lowerText }} />
             {props.children}
         </Wrapper>
     );

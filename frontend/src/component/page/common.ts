@@ -6,5 +6,6 @@ export const PATH_MYPROFILE_PAGE = '/myprofile';
 export const PATH_EDITTASTE_PAGE = '/edit-taste';
 export const PATH_EDITMBTI_PAGE = '/edit-mbti';
 export const PATH_EDITLANGUAGE_PAGE = '/edit-language';
+export const PATH_BOOKMARK_PAGE = '/bookmark';
 export const PATH_LANDING_PAGE = '/landing';
 export const PATH_SIGNUP_LOADING_PAGE = '/signuploading';
