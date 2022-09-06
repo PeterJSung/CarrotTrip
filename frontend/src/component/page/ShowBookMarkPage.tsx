@@ -83,7 +83,7 @@ const ShowBookMarkPage = (): JSX.Element => {
     return (
         <CommonHeaderFooterComponent
             title={{
-                text: t('myprofile.menu4'),
+                text: t('myprofile.menu3'),
                 callBack: onBackButtonClick,
             }}
         >
