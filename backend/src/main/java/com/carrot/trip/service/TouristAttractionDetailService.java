@@ -33,12 +33,12 @@ public class TouristAttractionDetailService {
 
     private final OpenAPIService openAPIService;
 
-    public TouristAttractionDetailDTO getDetail(Long apiId) throws URISyntaxException, JsonProcessingException {
+    public TouristAttractionDetailDTO getDetail(Long apiId, String lang) throws URISyntaxException, JsonProcessingException {
         TouristAttractionDetailDTO touristAttractionDetailDTO = new TouristAttractionDetailDTO();
         touristAttractionDetailDTO.setCommentList(getCommentList(apiId));
         touristAttractionDetailDTO.setMbtiRanking(getTouristAttractionMBTIRankingList(apiId));
         touristAttractionDetailDTO.setTasteList(getTouristAttractionTasteList(apiId));
-        touristAttractionDetailDTO.setOverview(openAPIService.openAPIDetailCall(apiId).getResponse().getBody().getItems().getItem().get(0).getOverview());
+        touristAttractionDetailDTO.setOverview(openAPIService.openAPIDetailCall(apiId, lang).getResponse().getBody().getItems().getItem().get(0).getOverview());
         return touristAttractionDetailDTO;
     }
 

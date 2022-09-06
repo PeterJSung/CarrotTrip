@@ -55,14 +55,14 @@ public class TouristAttractionController {
         return "" + res;
     }
 
-    @GetMapping("/touristAttraction/detail/{contentId}")
-    public TouristAttractionDetailDTO getDetail(@PathVariable("contentId") Long contentId) throws URISyntaxException, JsonProcessingException {
-        return touristAttractionDetailService.getDetail(contentId);
+    @GetMapping("/touristAttraction/detail/{contentId}/lang/{lang}")
+    public TouristAttractionDetailDTO getDetail(@PathVariable("contentId") Long contentId, @PathVariable("lang") String lang) throws URISyntaxException, JsonProcessingException {
+        return touristAttractionDetailService.getDetail(contentId, lang);
     }
 
     @GetMapping("/test/detail/{contentId}")
     public DetailOpenApiResponseDTO getDetail22(@PathVariable("contentId") Long contentId) throws URISyntaxException, JsonProcessingException {
-        return openAPIService.openAPIDetailCall(contentId);
+        return openAPIService.openAPIDetailCall(contentId, "KorService");
     }
 
 }

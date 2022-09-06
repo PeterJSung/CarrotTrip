@@ -419,7 +419,7 @@ recommendCourseItem은 추천코스 탭을 위한 데이터를 추려낸 아이�
 
 ###  5.2 관광지 상세페이지
 #### URI
-``GET`` ``/api/touristAttraction/detail/{contentId}``
+``GET`` ``/api/touristAttraction/detail/{contentId}/lang/{lang}``
 #### Header
 X-AUTH-TOKEN: {JWT TOKEN}
 #### Response
