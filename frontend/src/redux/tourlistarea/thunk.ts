@@ -2,11 +2,11 @@ import { getTourNaviInfo } from 'api/navigation';
 import { retriveTourareaAPI } from 'api/tourlistInfo';
 import { calculateLatLngDistance } from 'common/util';
 import { ThunkAction } from 'redux-thunk';
+import { updateLoaderAction } from 'redux/globalloader';
 import { RootState } from 'redux/rootReducer';
 import { KakaoNaviAPIRes, NaviPoint } from 'vo/gps';
 import { SigninInSignupInfo } from 'vo/signup';
 import { getMbtiDataUpdate, getTasteDataUpdate, getTourlistAreaAction } from './actions';
-import { TourlistAreaAction } from './reducer';
 
 const orderingDistanceRoutingPath = (currentGps: NaviPoint, routeInfo: NaviPoint[]): NaviPoint[] => {
     const totalCount = routeInfo.length;
@@ -46,16 +46,16 @@ export const retriveTourlistArea = (
     lng: number,
     userInfo: SigninInSignupInfo,
     locale: string,
-): ThunkAction<void, RootState, null, TourlistAreaAction> => {
+): ThunkAction<void, RootState, null, any> => {
     return async (dispatch, getState) => {
         const time = getState().tourlistArea.data.loadTime;
         const currentTime = Date.now();
-        console.log(`Lodae`);
-        console.log(time);
-        console.log(currentTime);
+
         if (currentTime < time + DEBOUNCE_CALL) {
             return;
         }
+
+        dispatch(updateLoaderAction(true));
 
         const res = await retriveTourareaAPI(lng, lat, userInfo.name, locale);
         const myPos: NaviPoint = {
@@ -96,5 +96,6 @@ export const retriveTourlistArea = (
                 tasteList: userInfo.tasteCodes,
             }),
         );
+        dispatch(updateLoaderAction(false));
     };
 };

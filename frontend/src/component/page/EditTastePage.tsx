@@ -22,9 +22,7 @@ const EditTastePage = (): JSX.Element => {
             setChipArr(
                 chipArr.map((eachData) => {
                     const newData = { ...eachData };
-                    if (userTastedCode.includes(newData.code)) {
-                        newData.checked = !newData.checked;
-                    }
+                    newData.checked = userTastedCode.includes(newData.code);
                     return newData;
                 }),
             );
@@ -36,6 +34,7 @@ const EditTastePage = (): JSX.Element => {
     };
     const onBottomButtonClick = async () => {
         await updateTaste(chipArr.filter((d) => d.checked).map((d) => d.code));
+        setOpen(true);
     };
 
     const onClick = (id: number) => {
@@ -64,6 +63,7 @@ const EditTastePage = (): JSX.Element => {
                 text: t('tasteedit.title'),
                 callBack: onBackButtonClick,
             }}
+            disable={chipArr.filter((d) => d.checked).length === 0}
         >
             <SelectChipDisplay data={chipArr} onClick={onClick} />
             <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
