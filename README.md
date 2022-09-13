@@ -6,8 +6,8 @@
 
 - Storybook(UX Interaction) : https://storybook.carrottrip.com/
 - Figma(UX Guidline) : https://www.figma.com/file/ZjmPBqXmRoQDjkkdceg5eP/%5B%EA%B3%B5%EB%AA%A8%EC%A0%84%5D-%EB%8B%B9%EA%B7%BC%EC%97%AC%ED%96%89_share
-- FE : https://service.carrottrip.com (아직 셋업안됨)
-- BE : ??? (아직 셋업 안됨)
+- FE : https://www.carrottrip.com
+- BE : https://api.carrottrip.com
 
 ## frontend
 
