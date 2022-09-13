@@ -14,6 +14,7 @@ interface CommonHeaderFooterComponentProps {
     title: Info;
     bottom?: Info;
     isNonMargin?: boolean;
+    disable?: boolean;
 }
 
 const TitleTypo = styled.span`
@@ -28,7 +29,6 @@ const TitleTypo = styled.span`
 
 const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooterComponentProps>): JSX.Element => {
     const margin = props.isNonMargin ? 0 : 1;
-    console.log(props.bottom);
     return (
         <DefaultPageContainer>
             <Box position="relative">
@@ -62,6 +62,7 @@ const CommonHeaderFooterComponent = (props: PropsWithChildren<CommonHeaderFooter
             {props.bottom && (
                 <Box display="flex" m="1.25rem 1.25rem 1.625rem" flexDirection="column">
                     <CommonBtn
+                        disabled={props.disable}
                         style={{
                             height: '3rem',
                         }}

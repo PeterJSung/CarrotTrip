@@ -2,15 +2,17 @@ import { retrievePlaceDetail } from 'api/placedetail';
 import DetailPlace, { DetailPlaceProps } from 'component/basic/Detail/DetailPlace';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useThunk } from 'redux/common';
+import { updateLoaderAction } from 'redux/globalloader';
 import { getPlaceDetailData, getStackData, updateInetractionStack } from 'redux/mapinteractionstack';
 import { getSuggestionListArr } from 'redux/tourlistarea';
 import { getUserName } from 'redux/userInfo';
 import styled from 'styled-components';
 import { PlaceDetailInfo } from 'vo/mapInteraction';
 import { PlaceMBTIInfo } from 'vo/placeInfo';
+import GlobalLoaderContainer from './GlobalLoaderContainer';
 
 const PlaceDetailSheet = styled(BottomSheet)`
     & > div {
@@ -33,6 +35,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const totalDataArr = useSelector(getSuggestionListArr);
     const { i18n } = useTranslation();
 
+    const diapatch = useDispatch();
     const mapStack = useSelector(getStackData);
     const userName = useSelector(getUserName);
 
@@ -51,8 +54,9 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
     const loadData = async (detailData: PlaceDetailInfo) => {
         const idx = totalDataArr[detailData.eventTypeId].findIndex((d) => d.contentId === detailData.id);
         const item = totalDataArr[detailData.eventTypeId][idx];
+        diapatch(updateLoaderAction(true));
         const data = await retrievePlaceDetail(item.contentId, i18n.language);
-        console.log(data);
+        diapatch(updateLoaderAction(false));
         let mbtiArr: PlaceMBTIInfo[] = [];
         for (const idxKey in data.mbtiRanking) {
             mbtiArr.push({
@@ -82,6 +86,7 @@ const BottomSheetPlaceDetailContainer = (): JSX.Element => {
 
     return (
         <>
+            <GlobalLoaderContainer />
             {renderData && (
                 <PlaceDetailSheet
                     open={!!placeDeatilInfo}

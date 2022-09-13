@@ -22,6 +22,7 @@ import { LocationInfo } from 'vo/gps';
 import { PlaceDetailInfo, SuggestionInfo } from 'vo/mapInteraction';
 import { TourlistDataset } from 'vo/travelInfo';
 import BottomSheetPlaceDetailContainer from './BottomSheetPlaceDetailContainer';
+import GlobalLoaderContainer from './GlobalLoaderContainer';
 import KakaoMapMarkerContainer from './KakaoMapMarkerContainer';
 import KakaoMapPoligonContainer from './KakaoMapPoligonContainer';
 
@@ -98,6 +99,7 @@ const KakaoMapContainer = (): JSX.Element => {
 
     return (
         <Box width="100%" height="100%" position="relative" display="flex">
+            <GlobalLoaderContainer />
             <Map
                 ref={mapRef}
                 level={centerPos.zoom}

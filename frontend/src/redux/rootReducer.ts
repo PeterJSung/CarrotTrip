@@ -7,6 +7,7 @@ import {
 } from '@reduxjs/toolkit';
 
 import BookMarkInfo, { BookMarkInfoState } from './bookmark';
+import GlobalLoader, { GlobalLoaderState } from './globalloader';
 import MyLocationGps, { GpsState } from './gps';
 import MapInteractionStack, { MapInteractionStackState } from './mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from './placeInfo';
@@ -38,6 +39,7 @@ export type CombinedStateType = ReducersMapObject<
         tourlistArea: TourlistAreaState;
         bookMarkInfo: BookMarkInfoState;
         reviewInfo: ReviewInfoState;
+        globalloader: GlobalLoaderState;
     },
     any
 >;
@@ -51,6 +53,7 @@ const appReducer = combineReducers<CombinedStateType>({
     tourlistArea: TourlistArea,
     bookMarkInfo: BookMarkInfo,
     reviewInfo: ReviewInfo,
+    globalloader: GlobalLoader,
 });
 
 const rootReducer = (

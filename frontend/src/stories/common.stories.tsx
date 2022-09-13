@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import BookMarkInfo from 'redux/bookmark';
+import GlobalLoader from 'redux/globalloader';
 import MyLocationGps from 'redux/gps';
 import MapInteractionStack from 'redux/mapinteractionstack';
 import PlaceInfo, { PlaceInfoState } from 'redux/placeInfo';
@@ -43,6 +44,7 @@ const genDummyStore = (nextStore?: Partial<CombinedStateType>) => {
             tourlistArea: nextStore ? (nextStore.tourlistArea ? nextStore.tourlistArea : TourlistArea) : TourlistArea,
             bookMarkInfo: nextStore ? (nextStore.bookMarkInfo ? nextStore.bookMarkInfo : BookMarkInfo) : BookMarkInfo,
             reviewInfo: nextStore ? (nextStore.reviewInfo ? nextStore.reviewInfo : ReviewInfo) : ReviewInfo,
+            globalloader: nextStore ? (nextStore.globalloader ? nextStore.globalloader : GlobalLoader) : GlobalLoader,
         }),
     });
 };
