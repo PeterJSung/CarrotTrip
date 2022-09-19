@@ -91,8 +91,6 @@ const DetailPlace = (props: DetailPlaceProps): JSX.Element => {
         props.onReset();
     };
 
-    console.log(props.mbtiArr);
-
     return (
         <Box>
             {props.src ? (

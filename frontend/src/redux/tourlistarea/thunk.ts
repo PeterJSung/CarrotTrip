@@ -46,12 +46,13 @@ export const retriveTourlistArea = (
     lng: number,
     userInfo: SigninInSignupInfo,
     locale: string,
+    force?: boolean,
 ): ThunkAction<void, RootState, null, any> => {
     return async (dispatch, getState) => {
         const time = getState().tourlistArea.data.loadTime;
         const currentTime = Date.now();
 
-        if (currentTime < time + DEBOUNCE_CALL) {
+        if (currentTime < time + DEBOUNCE_CALL && !force) {
             return;
         }
 

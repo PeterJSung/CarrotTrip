@@ -13,6 +13,7 @@ import { getUserMbti } from 'redux/userInfo';
 import styled from 'styled-components';
 import { PlaceDetailInfo, SuggestionInfo } from 'vo/mapInteraction';
 import { specializeContentId } from 'vo/travelInfo';
+import NodataContainer from './NodataContainer';
 
 const SuggestionSheet = styled(BottomSheet)`
     & > div {
@@ -33,6 +34,9 @@ const RenderList = (data: SuggestionInfo) => {
     const updateInteraction = useThunk(updateInetractionStack);
 
     if (data.tabIdx === 100) {
+        if (!tourlistInfo.recommand) {
+            return <NodataContainer />;
+        }
         return (
             <RecommandCourseList
                 addressText={currentGpsInfo.regionStrFull}
@@ -60,6 +64,9 @@ const RenderList = (data: SuggestionInfo) => {
             />
         );
     } else if (specializeContentId.includes(data.tabIdx) || data.tabIdx === 300) {
+        if (!tourlistInfo.item[data.tabIdx]) {
+            return <NodataContainer />;
+        }
         return (
             <SuggestionItemList
                 dataSet={tourlistInfo.item[data.tabIdx]}
@@ -91,62 +98,52 @@ const RenderList = (data: SuggestionInfo) => {
             />
         );
     } else if (data.tabIdx === 200) {
+        if (!mbtiArr) {
+            return <NodataContainer />;
+        }
         return (
             <SuggestionItemList
                 dataSet={mbtiArr}
                 selectedId={data.selectedData?.id}
                 onListClick={async (id: number) => {
-                    /**
-                    const idx = mbtiArr.findIndex((d) => d.contentId === id);
-
-                    await updateInteraction({
-                        type: 'Interaction2',
-                        tabIdx: data.tabIdx,
-                        selectedData: {
-                            id,
-                            pos: {
-                                lat: mbtiArr[idx].lat,
-                                lng: mbtiArr[idx].lng,
-                                zoom: DEFAULT_MAP_LEVEL,
-                            },
-                        },
-                    });
-                    await updateInteraction({
-                        type: 'Interaction3',
-                        id,
-                        eventTypeId: data.tabIdx,
-                    });
-                     */
+                    for (const key in tourlistInfo.item) {
+                        for (const data of tourlistInfo.item[key]) {
+                            if (data.contentId === id) {
+                                await updateInteraction('push', {
+                                    type: 'PlaceDetail',
+                                    data: {
+                                        id,
+                                        eventTypeId: data.eventTypeId,
+                                    } as PlaceDetailInfo,
+                                });
+                            }
+                        }
+                    }
                 }}
             />
         );
     } else if (data.tabIdx === 400) {
+        if (!tasteArr) {
+            return <NodataContainer />;
+        }
         return (
             <SuggestionItemList
                 dataSet={tasteArr}
                 selectedId={data.selectedData?.id}
                 onListClick={async (id: number) => {
-                    /**
-                    const idx = tasteArr.findIndex((d) => d.contentId === id);
-
-                    await updateInteraction({
-                        type: 'Interaction2',
-                        tabIdx: data.tabIdx,
-                        selectedData: {
-                            id,
-                            pos: {
-                                lat: tasteArr[idx].lat,
-                                lng: tasteArr[idx].lng,
-                                zoom: DEFAULT_MAP_LEVEL,
-                            },
-                        },
-                    });
-                    await updateInteraction({
-                        type: 'Interaction3',
-                        id,
-                        eventTypeId: data.tabIdx,
-                    });
-                     */
+                    for (const key in tourlistInfo.item) {
+                        for (const data of tourlistInfo.item[key]) {
+                            if (data.contentId === id) {
+                                await updateInteraction('push', {
+                                    type: 'PlaceDetail',
+                                    data: {
+                                        id,
+                                        eventTypeId: data.eventTypeId,
+                                    } as PlaceDetailInfo,
+                                });
+                            }
+                        }
+                    }
                 }}
             />
         );

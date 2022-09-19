@@ -88,7 +88,14 @@ export const generateReducer = (firstState: TourlistAreaState = initialState) =>
                 const routeResult = action.payload.navigationResult.routes[0];
                 const naviPoints = action.payload.naviPoints;
                 let avgRating: number = 0;
+                draft.data.recommand = {
+                    avgRating: 0,
+                    name: '',
+                    sections: [],
+                    totalDistance: 0,
+                };
                 draft.data.recommand.totalDistance = routeResult.summary.distance;
+                console.log(routeResult);
                 routeResult.sections.forEach((eachSection, sectionIdx) => {
                     const vertexes: PosInfo[] = [];
                     eachSection.roads.forEach((eachRoads) => {

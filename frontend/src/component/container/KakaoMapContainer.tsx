@@ -89,7 +89,11 @@ const KakaoMapContainer = (): JSX.Element => {
         getGeoLocationInfo(async (lat: number, lng: number) => {
             const res = await getC2RData(lat, lng);
             if (userInfo.isLogin) {
-                retriveTourThunk(lat, lng, userInfo, i18n.language);
+                try {
+                    retriveTourThunk(lat, lng, userInfo, i18n.language);
+                } catch (e) {
+                    console.log(e);
+                }
             }
             updateGpsState(lat, lng, parserRegionStr(res));
         });
