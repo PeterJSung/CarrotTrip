@@ -1,7 +1,12 @@
 import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { getGeoLocationInfo } from 'common/util';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useThunk } from 'redux/common';
+import { retriveTourlistArea } from 'redux/tourlistarea';
+import { getUserInfo } from 'redux/userInfo';
 import styled from 'styled-components';
 import { LocaleCode, LocaleStandardText } from 'vo/locale';
 import CommonHeaderFooterComponent from './CommonHeaderFooterComponent';
@@ -14,6 +19,8 @@ const Checker = () => (
 
 const EditLanguagePage = (): JSX.Element => {
     const { t, i18n } = useTranslation();
+    const userInfo = useSelector(getUserInfo);
+    const retriveTourThunk = useThunk(retriveTourlistArea);
     const [lang, setLang] = useState<string>(i18n.language);
 
     const navigator = useNavigate();
@@ -25,6 +32,10 @@ const EditLanguagePage = (): JSX.Element => {
         if (i18n.language !== lang) {
             // 다를경우만 요청
             i18n.changeLanguage(lang);
+            getGeoLocationInfo(async (lat: number, lng: number) => {
+                retriveTourThunk(lat, lng, userInfo, lang, true);
+            });
+            window.localStorage.setItem('SET_LOCALE', lang);
         }
         // 언어 다를경우 처음부터 재로그인해야하나? 이런거도 세팅필요
     };

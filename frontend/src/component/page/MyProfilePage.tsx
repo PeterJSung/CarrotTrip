@@ -76,6 +76,7 @@ const MyProfilePage = (): JSX.Element => {
     };
 
     const onClick = (type: DialogType) => {
+        window.localStorage.removeItem('SET_LOCALE');
         switch (type) {
             case 'concession':
                 deleteUserFn();

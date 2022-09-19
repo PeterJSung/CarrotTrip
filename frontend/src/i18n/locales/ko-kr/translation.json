@@ -29,6 +29,7 @@
     "myprofile.popup.uppertext.secession": "회원을 탈퇴 하시겠습니까?",
     "myprofile.popup.lowertext.secession": "회원탈퇴 시 나와 모든 정보가 삭제됩니다.",
     "myprofile.uppertext": "안녕하세요.:)",
+    "nodata": "데이터가 없습니다.",
     "myprofile.lowertext": "{{ name }}님",
     "myprofile.menu1": "나의 여행 성향 설정",
     "myprofile.menu2": "나의 MBTI 설정",
