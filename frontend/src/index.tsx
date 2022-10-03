@@ -20,7 +20,7 @@ ReactDOM.render(
         <PersistGate loading={null} persistor={persistor}>
             <ThemeProvider theme={globalTheme}>
                 <GlobalStyles />
-                <BrowserRouter>
+                <BrowserRouter basename="/carrot">
                     <App />
                 </BrowserRouter>
             </ThemeProvider>
